@@ -1,3 +1,11 @@
-<app-web-header> </app-web-header>
-<router-outlet></router-outlet>
-<app-web-footer></app-web-footer>
+<div class="page-wrapper">
+    <main class="page-content">
+        <app-web-header> </app-web-header>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+        <footer>
+            <app-web-footer></app-web-footer>
+        </footer>
+    </main>
+</div>
