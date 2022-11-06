@@ -49,14 +49,14 @@
          border-radius:1px;
          }
   }
-  .home-wrapper .home-heading .btn-main
+  /* .home-wrapper .home-heading .btn-main
   {
     width: 185px;
     height: 50px;
     color: #FFFFFF;
     border-radius: 0px;
     background-color: #020B20;
-  }
+  } */
   .home-wrapper .home-content
    {
    background-color: #010204;
