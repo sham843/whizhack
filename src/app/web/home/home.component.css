@@ -7,6 +7,7 @@
 .home-wrapper .home-heading .banner-text
 {
   width: 750px;
+  display: inline-block;
   text-align: center;
   padding-bottom: 23px;
 }
@@ -75,3 +76,9 @@
   {
     border-radius: 25px !important;
   }
+
+.home-wrapper .home-content .image-profile
+{
+  max-width: 55px;
+  border-radius: 50%;
+}
