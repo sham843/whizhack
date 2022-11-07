@@ -11,14 +11,14 @@
 {
     background-color: #010204;
 }
-.about-us-wrapper .about-us-banner .milestons-icon {
+/* .about-us-wrapper .about-us-banner .milestons-icon {
     font-size: 3rem !important;
     color: #ffff;
     background-color: #1D2636;
     padding: 10px 15px;
     margin-bottom: 40px;
     border-radius: 11px;
-}
+} */
 .about-us-wrapper .about-us-banner .card-founders
 {
     background-color: unset;
@@ -53,4 +53,34 @@
     text-align: center;
     font-size: 4rem;
     font-weight: 100;
-    }
+}
+.about-us-wrapper .about-us-banner .image-strategic
+ {
+    max-width: 575px;
+    height: 367px;
+    display: block;
+ }
+
+ .about-us-wrapper .about-us-banner .carousel-control-next-icon {
+    max-width: 32px;
+    background-color: ingo;
+    /* padding: 10px 15px; */
+    position: absolute;
+    top: -30px;
+    left: -42px;
+ }
+ .carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block;
+    max-width: 30px;
+    width: 2px;
+    min-width: -28px;
+    height: 65px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 76% 60%;
+    background-color: primary;
+    background-color: rgb(14, 21, 38);
+    padding: 10px 38px;
+    border-radius: 11px;
+    position: relative;
+}
