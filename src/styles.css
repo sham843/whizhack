@@ -71,3 +71,12 @@ body
   /* background-color: var(--bs-nav-pills-link-active-bg); */
   background: #2CF21147 0% 0% no-repeat padding-box;
 }
+.breadcrumb {
+  padding-block: 100px;
+  background-size: cover!important;
+  background-position: center;
+  background-repeat: no-repeat!important;
+}
+.breadcrumb.breadcrumb-products {
+  background: url(../../../assets/image/products/productbg.png);
+}
