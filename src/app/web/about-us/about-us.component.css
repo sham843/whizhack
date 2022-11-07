@@ -61,7 +61,7 @@
     display: block;
  }
 
- .about-us-wrapper .about-us-banner .carousel-control-next-icon {
+.about-us-wrapper .about-us-banner .carousel-control-next-icon {
     max-width: 32px;
     background-color: ingo;
     /* padding: 10px 15px; */
@@ -69,7 +69,7 @@
     top: -30px;
     left: -42px;
  }
- .carousel-control-next-icon, .carousel-control-prev-icon {
+.carousel-control-next-icon, .carousel-control-prev-icon {
     display: inline-block;
     max-width: 30px;
     width: 2px;
