@@ -3,150 +3,62 @@
     width: 100%;
     line-height: 45px;
 }
-/* .navbar .material-symbols-outlined {
-    border-radius: 50%;
-    width: 57px;
-    height: 57px;
-    padding: 1;
-    padding-top: 15px;
-    text-align: center;
-    background: #111D4F 0% 0% no-repeat padding-box;
-    opacity: 1;
-} */
-.input-check {
-	display: none;
+.logo{
+	width: 90px;
 }
-.icon-bar {
-    position: relative;;
-    top: 5px;
-    width: 57px;
-    height: 57px;
-    right: 55px;
-    border-radius: 50%;
-    background-color: #111D4F;
-    z-index: 300;
-    cursor: pointer;
-}
-
-/*  .full-chk:checked + .full-cntr {
-	border-color: #ffffff;
-}
-	@media (min-width: 550px) {
-		.full-cntr {
-			top: 8px;
-		}
-	} */
-
-.full-span {
-    position: absolute;
-    left: 2px;
-    margin: 14px;
-    width: 27px;
-    height: 2px;
-    background-color: #FFFFFF;
-    z-index: 300;
-    transform: rotate(0deg);
-	transform-origin: left center;
-	transition:transform 0.2s ease-out 0s,
-		       width 0.2s ease-out 0s,
-		       left 0.2s ease-out 0s;
-}
-
-/* .full-chk:checked + .full-cntr > .full-span 
-{
-	background-color: #ffffff;
-} */
-
-.full-span:nth-child(1)
-{
-	top: 4px;
-}
-.input-check:checked + .icon-bar > .full-span:nth-child(1) 
-{
-	transform: rotate(45deg);
-	width: 23px;
-	left: 7px;
-}
-
-.full-span:nth-child(2) 
-{
-	top: 12px;
-}
-.input-check:checked + .icon-bar > .full-span:nth-child(2) {
-	opacity: 0;
-	width: 30px;
-	transition: opacity 0.1s ease-out 0s;
-}
-
-.full-span:nth-child(3) 
-{
-	top: 20px;
-}
-.input-check:checked + .icon-bar > .full-span:nth-child(3) {
-	transform: rotate(-45deg);
-	width: 23px;
-	left: 7px;
-}
-
-
-/* style for a nav element, the full-screen menu  */
-.Menu-item {
-	position: fixed;
-	top: 0%;
-	bottom: 0%;
-	left: 0%;
-	right: 0%;
-	background-color:#010204;
-	opacity: 0;
-	z-index: -1;
-	transition: opacity 0.3s ease-out 0s,
-		z-index 0s ease-out 0.3s;
-}
-
-.input-check:checked ~ .Menu-item {
-	opacity: 1;
-	z-index: 200;
-	transition: opacity 0.3s ease-out 0s;
-}
-
-.full-nav-ul {
-/* 	position: relative; */
+.overlay {
 	height: 100%;
-	margin: 0px auto 0px auto;
-	padding: 0px;
-	list-style-type: none;
-}
-.full-nav-cntr {
-	position: absolute;
-	top: 48%;
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	transform: translate(0%, -50%);
-}
-.full-nav-hltd {
-	padding: 5px 10px 5px 10px;
-}
-.full-nav-hltd:hover {
-	background-color: #08737b;
-}
-.full-nav-a, 
-.full-nav-a:visited, 
-.full-nav-a:active 
-{
+	width: 0;
+	position: fixed; 
+	z-index: 1;
+	left: 0;
+	top: 0;
+	background-color: rgb(0,0,0); 
+	background-color: rgba(0,0,0, 0.9); 
+	overflow-x: hidden; 
+	transition: 0.5s; 
+  }
+  .overlay-content {
+	position: relative;
+	top: 15%; /* 25% from the top */
+	width: 100%; /* 100% width */
+	text-align: center; /* Centered text/links */
+	margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+  }
+  .overlay a {
+	padding: 8px;
 	text-decoration: none;
-	color: #ffffff;
-}
-.full-nav-p {
-	margin: 10px 0px 10px 0px;
-	padding: 5px 0px 5px 0px;
-	font-family: 'Helvetica', 'Arial', sans-serif;
-	font-size: 14px;
-	text-align: center;
-}
-
-	@media (min-width: 700px) and (min-height: 450px) {
-		.full-nav-p {
-			font-size: 26px;
-		}
+	font-size: 36px;
+	color: #818181;
+	display: block; /* Display block instead of inline */
+	transition: 0.3s; /* Transition effects on hover (color) */
+  }
+  .overlay a:hover, .overlay a:focus {
+	color: #f1f1f1;
+  }
+  .overlay .closebtn {
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 60px;
+  }
+  @media screen and (max-height: 450px) {
+	.overlay a {font-size: 20px}
+	.overlay .closebtn {
+	  font-size: 40px;
+	  top: 15px;
+	  right: 35px;
 	}
+  }
+  .menubar{
+	background: #111D4F;
+	color: #fff;
+	font-size: 1.1rem;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	border: none;
+  }
+  .navbar-bg{
+	background-color: #000;
+  }

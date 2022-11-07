@@ -14,9 +14,7 @@ body
     --main-color: rgba(0, 171, 226);
     --main-dark-color: rgb(0, 119, 158);
     --main-light-color: rgb(229, 246, 252);
-}
-.container {
-  max-width: 1200px;
+    --gradient-color:linear-gradient(90deg, rgba(2,11,32,1) 0%, rgba(45,246,17,1) 100%)
 }
 #heading-h1
 {
@@ -57,7 +55,6 @@ body
 .plain-card .card-body
  {
   color: #FFFFFF;
-  font-size: 0.85rem;
   border-bottom-left-radius: 0.5rem !important;
   border-bottom-right-radius: 0.5rem !important;
 }
