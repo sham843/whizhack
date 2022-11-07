@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    background-color: #010204;
 }
 
 body
@@ -76,7 +77,28 @@ body
   background-size: cover!important;
   background-position: center;
   background-repeat: no-repeat!important;
+  margin-bottom: 0;
 }
 .breadcrumb.breadcrumb-products {
-  background: url(../../../assets/image/products/productbg.png);
+  background: url(assets/image/products/productbg.png);
+}
+ul.ulGreen {
+  list-style: none;
+    margin-block: 50px;
+    max-width: 1000px;
+}
+ul.ulGreen li {
+  position: relative;
+  font-size: 19px;
+  color: #fff;
+}
+ul.ulGreen li::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #2CF211;
+  border-radius: 50%;
+  top: 6px;
+  left: -28px;
 }
