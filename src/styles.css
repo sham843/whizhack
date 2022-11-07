@@ -16,6 +16,11 @@ body
     --main-light-color: rgb(229, 246, 252);
     --gradient-color:linear-gradient(90deg, rgba(2,11,32,1) 0%, rgba(45,246,17,1) 100%)
 }
+.btn-main-outline{
+  border:solid 1px #2CF211;
+  color: #2CF211;
+  background-color:transparent;
+}
 #heading-h1
 {
     color: rgb(241, 233, 233);

@@ -4,6 +4,10 @@
 .about-us-wrapper .about-us-banner
 {
     background-color: #010204;
+    background-image: url(../../../assets/image/About-Us/Circuit-PNG-Background.png);
+    background-position: -700%;
+    background-size: 95%;
+    background-repeat: no-repeat;
 }
 /* .about-us-wrapper .about-us-banner .milestons-icon {
     font-size: 3rem !important;
