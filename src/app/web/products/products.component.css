@@ -64,11 +64,13 @@
 }
 .d-flex.blog-media-object {
     font-size: .8rem;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: justify;
 }
 .blog-media-object img{
     width: 80px;
     height: 60px;
+    margin-top: 5px
 }
 .blogs-filter .card-body{
     background:#0E1526;
