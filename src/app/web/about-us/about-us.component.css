@@ -1,0 +1,54 @@
+.about-us-wrapper .about-us-heading
+{   
+    width: 100%;
+    padding: 170px 73px;
+    background: linear-gradient(90deg, #0A0544 45%, #243BDC 85%, #4F28EC 100%);
+}
+
+.about-us-wrapper .about-us-banner
+{
+    background-color: #010204;
+}
+.about-us-wrapper .about-us-banner .milestons-icon {
+    font-size: 3rem !important;
+    color: #ffff;
+    background-color: #1D2636;
+    padding: 10px 15px;
+    margin-bottom: 40px;
+    border-radius: 11px;
+}
+.about-us-wrapper .about-us-banner .card-founders
+{
+    background-color: unset;
+    color: white;
+    font-weight: 100;
+    font-size: 13px;
+    border: 1px solid #2CF211;
+    border-top: 0px;
+    border-radius: 11px;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+}
+.about-us-wrapper .about-us-banner .image-profile {
+    max-width: 55px;
+    border-radius: 50%;
+  }
+.about-us-wrapper .about-us-banner .nav-link
+{
+    color: #2CF211;
+    font-size: 0.85rem;
+    font-weight: 100;
+    margin-bottom: 0px;
+}
+.about-us-wrapper .about-us-banner .vision-icon
+{
+    color: #ffffff;
+    background-color: #0E1526;
+    width: 92px;
+    height: 92px;
+    padding: auto;
+    padding: 12px;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 100;
+    }

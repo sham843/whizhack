@@ -3,12 +3,12 @@ body {
     height: 100%;
 }
 
-body {
+body
+ {
     margin: 0;
     font-family: "Rubik", sans-serif !important;
     /* background-color: #eee; */
 }
-
 :root {
     --main-color: rgba(0, 171, 226);
     --main-dark-color: rgb(0, 119, 158);
@@ -17,8 +17,31 @@ body {
 .container {
   max-width: 1200px;
 }
+#heading-h1
+{
+    color: rgb(241, 233, 233);
+    font-size: 6rem !important;
+    font-weight: 400;
+    text-transform:uppercase;
+    letter-spacing: 2px;
+    width: 0;
+    max-width: max-content;
+    white-space: nowrap; 
+    margin: 0;
+}
+.heading-p
+{
+  display: inline-block;
+  max-width: 810px;
+  font-size: 2rem;
+  font: normal normal 600 40px/50px;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+}
 .head-text
   {
+    display: inline-block;
     color: #FFFFFF;
     font-size: 2.4rem;
     font-weight: 400;
@@ -30,9 +53,21 @@ body {
     border-radius: 0.375rem !important;
     background-color: #0E1526;
 }
-.plain-card .card-body {
+.plain-card .card-body
+ {
   color: #FFFFFF;
   font-size: 0.85rem;
   border-bottom-left-radius: 0.5rem !important;
   border-bottom-right-radius: 0.5rem !important;
+}
+.home-h5
+{
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  font-weight: 100;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  /* color: var(--bs-nav-pills-link-active-color); */
+  /* background-color: var(--bs-nav-pills-link-active-bg); */
+  background: #2CF21147 0% 0% no-repeat padding-box;
 }

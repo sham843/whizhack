@@ -1,84 +1,128 @@
-.home-wrapper .home-heading
-{   
-    width: 100%;
-    padding: 170px 73px;
-    background: linear-gradient(90deg, #0A0544 45%, #243BDC 85%, #4F28EC 100%);
+.home-wrapper .home-heading {
+  width: 100%;
+  padding: 170px 73px;
+  background: linear-gradient(90deg, #0A0544 45%, #243BDC 85%, #4F28EC 100%);
 }
-.home-wrapper .home-heading .banner-text
-{
+
+.home-wrapper .home-heading .banner-text {
   width: 750px;
   display: inline-block;
   text-align: center;
   padding-bottom: 23px;
 }
-.home-wrapper .home-heading .banner-text h1
-{
-    color: rgb(241, 233, 233);
-    font-size: 6rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    width: 0;
-    max-width: max-content;
-    overflow: hidden; 
-    border-right: .05em solid #FFFFFF; 
-    white-space: nowrap; 
-    margin: 0;
+
+.home-wrapper .home-heading .banner-text h1 {
+  color: rgb(241, 233, 233);
+  font-size: 6rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  width: 0;
+  max-width: max-content;
+  overflow: hidden;
+  border-right: .05em solid #FFFFFF;
+  white-space: nowrap;
+  margin: 0;
 }
+
 .typing-erase {
-    animation: 
-      4s typing-erase 0s steps(50, end) infinite,
-      blink-caret .7s step-end infinite;
+  animation:
+    4s typing-erase 0s steps(50, end) infinite,
+    blink-caret .7s step-end infinite;
+}
+
+@keyframes typing-erase {
+  0% {
+    width: 0
   }
 
-  @keyframes typing-erase {
-    0% {
-         width: 0 
-        }
-    80% { 
-        width: 100% 
-    }
-    90%, 100% { 
-              width: 0 
-             }
-  }
-  @keyframes blink-caret {
-    from, to { 
-         border-color: transparent ;
-    }
-    50% {
-         border-color: #FFFFFF;
-         border-radius:1px;
-         }
-  }
-  .home-wrapper .home-heading .btn-main
-  {
-    width: 185px;
-    height: 50px;
-    color: #FFFFFF;
-    border-radius: 0px;
-    background-color: #020B20;
-  }
-  .home-wrapper .home-content
-   {
-   background-color: #010204;
-   }
-  .home-wrapper .home-content h5 i 
-  {
-    color: #2CF211;
-  }
-.home-wrapper .home-content .image-whizhack
- {
-    width: 542px;
-    height: 395px;
-    border-radius: 11px;
- }
- .home-wrapper .home-content .card-img-top
-  {
-    border-radius: 25px !important;
+  80% {
+    width: 100%
   }
 
-.home-wrapper .home-content .image-profile
-{
+  90%,
+  100% {
+    width: 0
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: #FFFFFF;
+    border-radius: 1px;
+  }
+}
+
+.home-wrapper .home-heading .btn-main {
+  width: 185px;
+  height: 50px;
+  color: #FFFFFF;
+  border-radius: 0px;
+  background-color: #020B20;
+}
+
+.home-wrapper .home-banner {
+  background-color: #010204;
+}
+
+.home-wrapper .home-banner h5 i {
+  color: #2CF211;
+}
+
+.home-wrapper .home-banner .image-whizhack {
+  width: 542px;
+  height: 395px;
+  border-radius: 11px;
+}
+
+.home-wrapper .home-banner .card-img-top {
+  border-radius: 25px !important;
+}
+
+.home-wrapper .home-banner .image-profile {
   max-width: 55px;
   border-radius: 50%;
 }
+
+.home-wrapper .home-banner .rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.home-wrapper .home-banner .rating>input {
+  display: none
+}
+
+.home-wrapper .home-banner .rating>label {
+  position: relative;
+  width: 1em;
+  font-size: 30px;
+  font-weight: 300;
+  color: #FFD600;
+  cursor: pointer
+}
+
+.home-wrapper .home-banner .rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+}
+
+.home-wrapper .home-banner .rating>label:hover:before,
+.home-wrapper .home-banner .rating>label:hover~label:before {
+  opacity: 1 !important
+}
+
+.home-wrapper .home-banner .rating>input:checked~label:before {
+  opacity: 1
+}
+
+/* .rating:hover>input:checked~label:before {
+  opacity: 0.4
+} */
