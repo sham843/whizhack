@@ -1,12 +1,6 @@
-/* .about-us-wrapper .about-us-heading
-{   
-    width: 100%;
-    padding: 170px 73px;
-    /* background: linear-gradient(90deg, #0A0544 45%, #243BDC 85%, #4F28EC 100%);
-    background-image: url("../../../assets/image/About-Us/background-image.png");
-    
-} */
-
+.about-us-wrapper{
+    margin-top: 6rem;
+}
 .about-us-wrapper .about-us-banner
 {
     background-color: #010204;
@@ -83,4 +77,10 @@
     padding: 10px 38px;
     border-radius: 11px;
     position: relative;
+}
+.milestone{
+    border-bottom:solid 4px ;
+}
+.milestone:hover{
+    border-bottom: solid 4px #2CF211;
 }

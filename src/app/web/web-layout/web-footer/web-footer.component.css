@@ -12,6 +12,7 @@
 .footer h6
 {
     position: relative;
+    margin-bottom: 35px;
 }
 .footer h6::after
 {
