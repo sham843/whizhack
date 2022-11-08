@@ -10,7 +10,40 @@ body
     font-family: 'Lato', sans-serif;
 }
 :root {
-    --main-color: rgba(0, 171, 226);
-    --main-dark-color: rgb(0, 119, 158);
-    --main-light-color: rgb(229, 246, 252);
+    --main-color: #2DF611;
+    --main-dark-color: #149a02;
+    --main-light-color: #e7ffe4;
+
+    --secondary-color:#020B20;
+}
+.text-main{
+  color: var(--main-color);
+}
+.text-second{
+  color: var(--secondary-color);
+}
+.bg-main{
+  background-color:var(--main-color);
+}
+.btn-main{
+  background-color:var(--main-color);
+  color: #fff;
+  border: 1px solid var(--main-color);
+}
+.btn-main:active,
+.btn-main:focus,
+.btn-main:hover{
+  background-color:var(--main-dark-color);
+  color: #fff;
+  border: 1px solid var(--main-dark-color);
+}
+.btn-main-outline{
+  background-color:transparent;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+}
+.btn-main-outline:hover{
+  background-color:var(--main-color);
+  color: #fff;
+  border: 1px solid var(--main-color);
 }

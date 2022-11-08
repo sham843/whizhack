@@ -1,0 +1,55 @@
+header{
+    background-image: url('../../../assets/image/home/home-banner.png');
+    height:100vh;
+    background-size: cover;
+    display:flex;
+    align-items: center;
+}
+
+.line-1{
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 6rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fff;
+    text-transform: uppercase;   
+    font-weight: 700;
+}
+
+.typing-erase {
+    animation: 10s typing-erase 0s steps(50, end) infinite, blink-caret 1s step-end infinite
+}
+
+@keyframes typing-erase {
+    0% {
+        width: 0
+    }
+
+    80% {
+        width: 100%
+    }
+
+    90%,
+    to {
+        width: 0
+    }
+}
+
+@keyframes blink-caret {
+
+    0%,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: #fff;
+        border-radius: 1px
+    }
+}
+.btn-home{
+    background-color: var(--second-color);
+    text-transform: uppercase;
+    color: #fff;
+}
