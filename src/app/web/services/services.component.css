@@ -1,0 +1,44 @@
+section{
+    padding-block: 4rem;
+    color: #fff;
+}
+#services h4{
+    margin-bottom: 20px;
+}
+#services p{
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+}
+.accordion-item{
+    background-color: transparent !important;
+    border-bottom: none;
+}
+.accordion-button{
+    background-color: transparent;
+    box-shadow: none;
+    font-weight: 700;
+    color: var(--main-color);
+}
+.accordion-body{
+    padding-left: 53px;
+    padding-top: 0;
+    color: #fff;
+    font-size: 0.9rem;
+}
+.accordion-button span{
+    background-color: var(--main-color);
+   border-radius: 50%;
+   height: 24px;
+   line-height: 24px;
+   width: 24px;
+    color: #fff;
+    text-align: center;
+    margin-right: 10px;
+}
+.accordion-button::after{
+    filter:invert(1);
+}
+#process .card-body{
+    background-color: #0B1425;
+}
