@@ -47,3 +47,20 @@ body
   color: #fff;
   border: 1px solid var(--main-color);
 }
+.products .card{
+  padding: 15px;
+  border-radius: 20px;
+  background-color: #0E1526;
+  text-decoration: none;
+  color: #fff;
+}
+.products .card .card-body{
+  padding: 15px 0 0 0px;
+}
+.products .card .card-title{
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+.products .card .card-text{
+  font-size: 0.9rem;
+}

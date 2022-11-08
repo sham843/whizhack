@@ -80,3 +80,15 @@ header{
     bottom: 50px;
     right: -3px;
 }
+section{
+    padding-block: 2rem;
+    color: #fff;
+}
+.about-text{
+    line-height: 2.3rem;
+    font-weight: 300;
+}
+.services-icon{
+    width: 70px;
+    margin-bottom: 2rem;
+}

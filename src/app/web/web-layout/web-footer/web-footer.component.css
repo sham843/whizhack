@@ -26,5 +26,6 @@
     color: var(--main-color);
 }
 .media{
+    font-size: 0.9rem;
     font-weight: 300;
 }
