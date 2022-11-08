@@ -64,3 +64,26 @@ body
 .products .card .card-text{
   font-size: 0.9rem;
 }
+.testimonal .card{
+  background-color: #0E1526;
+  color: #fff;
+}
+.testimonal img{
+  width: 60px;
+}
+.testimonal h6{
+  margin-bottom: 0px;
+}
+.testimonal small{
+ font-size: 0.8rem;
+ font-weight: 200;
+}
+.testimonal p{
+ font-size: 0.85rem;
+ font-weight: 300;
+ margin-bottom: 5px;
+}
+.testimonal .star-rating i{
+ color: #DDB32A;
+ margin-right: 3px;
+}
