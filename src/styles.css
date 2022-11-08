@@ -18,6 +18,10 @@ body
 }
 .text-main{
   color: var(--main-color);
+  text-decoration: none;
+}
+a.text-main:hover{
+  color: var(--main-dark-color);
 }
 .text-second{
   color: var(--secondary-color);
@@ -44,7 +48,7 @@ body
 }
 .btn-main-outline:hover{
   background-color:var(--main-color);
-  color: #fff;
+  color: #000;
   border: 1px solid var(--main-color);
 }
 .products .card{
@@ -86,4 +90,16 @@ body
 .testimonal .star-rating i{
  color: #DDB32A;
  margin-right: 3px;
+}
+.page-header{
+  background-image: url('/assets/image/Comman-Banner.png');
+  height: 60vh;
+  margin-top: 87px;
+  color: #fff;
+  display:flex;
+  align-items: center;
+  background-size: cover;
+}
+.page-header h1{
+  font-size: 4rem;
 }

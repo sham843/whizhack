@@ -1,0 +1,87 @@
+section{
+    padding-block: 4rem;
+    color: #fff;
+}
+#board-members .card,
+#founders .card,
+#milestones .card,
+#whoweare .card{
+    background-color: #0B1425;
+    color: #fff;
+}
+.about-text{
+    line-height: 2.3rem;
+    font-weight: 300;
+}
+#milestones h3{
+    margin-top:1rem;
+    margin-bottom:0.35rem;
+}
+#founders .card{
+    border-radius: 20px;
+    border: 1px solid var(--main-color);
+}
+#founders .card p{
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+.carousel-control-prev, 
+.carousel-control-next {
+    position: relative;
+    background-color: #aaa;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    margin-right: 15px;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: var(--main-color);
+}
+#board-members img{
+    width: 70px;
+}
+#board-members small{
+    font-size: 0.8rem;
+}
+#board-members p{
+    font-size: 0.85rem;
+    margin-top: 15px;
+}
+#board-members a{
+    font-size: 0.85rem;
+}
+#advisor img{
+    width: 70px;
+    margin-bottom: 15px;
+}
+#advisor #myTab-Advisors{
+    border-bottom: none;
+}
+#advisor .nav-link{
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 4px rgba(255, 255, 255, 0.4);
+    color: #fff;
+}
+#advisor .nav-link.active{
+    background-color: rgba(43, 242, 17, 0.3);
+    border-bottom: solid 4px var(--main-color);
+}
+#advisor .tab-pane{
+    background-color: #0E1526;
+    padding: 40px;
+}
+#media-converage .card{
+    background-color:transparent;
+}
+#media-converage p{
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-top: 15px;
+}
+#media-converage a{
+    font-size: 0.85rem;
+}
