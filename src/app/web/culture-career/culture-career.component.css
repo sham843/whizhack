@@ -1,0 +1,20 @@
+section {
+    padding-block: 4rem;
+}
+#jobs .card .card-header {
+    background-color: transparent;
+}
+#jobs .card .card-header p{
+    margin-bottom: 0;
+}
+#jobs .card a{
+    font-size: 0.85rem;
+}
+.pagination .page-link{
+    background-color:#0E1526;
+    border-radius: 0.375rem;
+    margin-right: 5px;
+    color: #fff;
+    border: none;
+    font-size:0.85rem
+}
