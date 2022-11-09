@@ -9,7 +9,6 @@ header{
 .line-1{
     border-right: 2px solid rgba(255,255,255,.75);
     font-size: 6rem;
-    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     color: #fff;
