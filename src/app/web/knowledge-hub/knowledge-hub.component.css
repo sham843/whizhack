@@ -1,0 +1,83 @@
+section {
+    padding-block: 4rem;
+    color: #fff;
+}
+#blog-pills-tab .nav-link,
+.case-studies .nav-link {
+    color: #fff;
+}
+#blog-pills-tab .nav-link.active,
+.case-studies .nav-link.active {
+    background-color: transparent;
+    color: var(--main-color);
+}
+#pills-tabContent .card{
+    position: relative;
+    border-radius: 15px;
+    border: none;
+}
+#pills-tabContent .card:hover .card-overlay{
+    opacity: 1;
+    transition: all .3s ease-in-out 0s;
+}
+#pills-tabContent .card-overlay{
+    background: linear-gradient(to bottom,#ffffff00 2%,#ffffff9e 43%,#ffffffc7 61%,#ffffff 100%);
+    color: #000;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+    opacity: 0;
+    transition: all .4s ease-in-out 0s;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+#blog-pills-tabContent .blogs-all{
+    background-color: #0E1526;
+}
+.input-group{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.375rem;
+}
+.input-group .form-control{
+    padding: 10px 15px;
+}
+.input-group .btn,
+.input-group .form-control{
+    background-color:transparent;
+    box-shadow: none;
+    border:none;
+    color: #fff;
+    font-size: 0.85rem;
+}
+.blog{
+    margin-bottom: 15px;
+}
+.blog img{
+    width: 100px;
+    border-radius: 0.375rem;
+}
+.blog p{
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+.blog small{
+    font-size: 0.7rem;
+}
+.blog-list{
+    height: 90vh;
+    overflow-y: auto;
+}
+#social-media .card{
+    border-radius: 15px;
+    border: none;
+}
+#social-media img{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#social-media p{
+    font-size: 0.85rem;
+}
