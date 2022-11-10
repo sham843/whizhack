@@ -6,3 +6,21 @@ section {
     box-shadow: 20px 20px 0px 7px #0e1526;
     border-radius: 15px;
 }
+.social-icon{
+    margin-right: 10px;
+    background-color:var(--main-color);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+.social-icon a{
+    color: #0E1526;
+}
+.social-icon:hover{
+    background-color: #0E1526;
+}
+.social-icon:hover a{
+    color: var(--main-color);
+}
