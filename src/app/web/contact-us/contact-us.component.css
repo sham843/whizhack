@@ -24,3 +24,10 @@ section {
 .social-icon:hover a{
     color: var(--main-color);
 }
+.contact{
+    color: var(--main-color);
+    text-decoration: none;
+}
+.contact:hover{
+    color: #fff;
+}
