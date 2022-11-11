@@ -2,11 +2,15 @@ section{
     padding-block: 4rem;
     color: #fff;
 }
+#service-text .card{
+    border: solid 1px var(--main-color);
+    background-color: transparent;
+}
 #services h4{
     margin-bottom: 20px;
 }
 #services p{
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 300;
 }
@@ -41,4 +45,25 @@ section{
 }
 #process .card-body{
     background-color: #0B1425;
+}
+.two-column-list{
+    columns: 2;
+    font-size: 1rem;
+    font-weight: 300;
+}
+.two-column-list li{
+    line-height:1.8rem;
+}
+#testing-categories .card{
+    background-color: #0B1425;
+    color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+}
+#testing-categories .card img{
+    border-radius: 20px;
+    margin-bottom:1rem ;
+}
+#testing-categories .card p{
+    margin-bottom: 0;
 }
