@@ -3,8 +3,13 @@ section {
     color: #fff;
 }
 #statistics .card-body {
-    padding-block: 50px;
+    padding: 50px;
     color: #000;
+}
+#statistics .card-body img{
+    width: 100px;
+    margin:0 auto;
+    margin-bottom: 2rem;
 }
 .about-text {
     line-height: 2.3rem;
