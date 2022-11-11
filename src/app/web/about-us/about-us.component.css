@@ -25,6 +25,15 @@ section{
     margin-top: 15px;
     font-size: 0.85rem;
 }
+#founders .card .card-footer a{
+    background-color:var(--main-color);
+    color: #000;
+    width:100%;
+    padding: 0.5rem;
+    display:block;
+    border-radius: 10px;
+    text-align: center;
+}
 .carousel-control-prev, 
 .carousel-control-next {
     position: relative;
@@ -84,4 +93,12 @@ section{
 }
 #media-converage a{
     font-size: 0.85rem;
+}
+#stategic-alliances .card{
+    border: none;
+    border-radius: 20px;
+    color: #000;
+}
+#stategic-alliances .card img{
+    width: 180px;
 }
