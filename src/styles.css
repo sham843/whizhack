@@ -31,7 +31,7 @@ a.text-main:hover{
 }
 .btn-main{
   background-color:var(--main-color);
-  color: #fff;
+  color: #000;
   border: 1px solid var(--main-color);
 }
 .btn-main:active,

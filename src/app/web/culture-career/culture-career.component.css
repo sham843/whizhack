@@ -1,5 +1,9 @@
 section {
     padding-block: 4rem;
+    color: #fff;
+}
+#jobs .card{
+    color: #111;
 }
 #jobs .card .card-header {
     background-color: transparent;
@@ -17,4 +21,28 @@ section {
     color: #fff;
     border: none;
     font-size:0.85rem
+}
+#culture h1{
+    font-weight: 300;
+}
+#culture img{
+    width: 100%;
+}
+#values .card{
+    background-color: #0B1425;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    border: solid 1px #0B1425;
+}
+#values .card:hover{
+    border: solid 1px var(--main-color);
+}
+#values .card img{
+    width: 80px;
+    margin:0 auto;
+    margin-bottom:1rem
+}
+#values .card p{
+    margin-bottom:0rem
 }
