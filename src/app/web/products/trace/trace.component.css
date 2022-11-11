@@ -37,3 +37,38 @@ section {
 .carousel-control-prev:hover, .carousel-control-next:hover {
     background-color: var(--main-color);
 }
+#application .card{
+    border-radius: 20px;
+    border: none;
+}
+.text-overlay{
+    padding: 15px 25px;    
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background:  linear-gradient(180deg, #FFFFFF29 0%, #FFFFFF2B 50%, #FFFFFF 100%);
+}
+.text-overlay h5{
+    font-size: 1rem;
+}
+.text-overlay p{
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+.text-overlay p a{
+    color: #000;
+    text-decoration: none;
+}
+#statistics .card-body {
+    padding: 50px;
+    color: #000;
+}
+#statistics .card-body img{
+    width: 100px;
+    margin:0 auto;
+    margin-bottom: 2rem;
+}
