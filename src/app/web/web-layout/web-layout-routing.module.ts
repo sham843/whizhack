@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'services', loadChildren: () => import('../../web/services/services.module').then(m => m.ServicesModule), data: { breadcrumb: [{ title: 'Services', active: true }] } },
   { path: 'training', loadChildren: () => import('../../web/training/training.module').then(m => m.TrainingModule), data: { breadcrumb: [{ title: 'Training', active: true }] } },
   { path: 'whizteens', loadChildren: () => import('../../web/training/whizteens/whizteens.module').then(m => m.WhizteensModule), data: { breadcrumb: [{ title: 'Whizteens', active: true }] } },
-  { path: 'bootcampt', loadChildren: () => import('../../web/training/bootcampt/bootcampt.module').then(m => m.BootcamptModule), data: { breadcrumb: [{ title: 'Bootcampt', active: true }] } },
+  { path: 'bootcamp', loadChildren: () => import('../../web/training/bootcampt/bootcampt.module').then(m => m.BootcamptModule), data: { breadcrumb: [{ title: 'Bootcampt', active: true }] } },
   { path: 'energy-professionals', loadChildren: () => import('../../web/training/energy-professionals/energy-professionals.module').then(m => m.EnergyProfessionalsModule), data: { breadcrumb: [{ title: 'Energy Professionals', active: true }] } },
   { path: 'knowledge-hub', loadChildren: () => import('../../web/knowledge-hub/knowledge-hub.module').then(m => m.KnowledgeHubModule), data: { breadcrumb: [{ title: 'Knowledge Hub', active: true }] } },
   { path: 'contact-us', loadChildren: () => import('../../web/contact-us/contact-us.module').then(m => m.ContactUsModule), data: { breadcrumb: [{ title: 'Contact Us', active: true }] } },
