@@ -12,6 +12,11 @@ section {
     padding-block: 50px;
     color: #000;
 }
+#statistics .card-body img{
+    width: 120px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
 
 .usp-list {
     list-style: none;
