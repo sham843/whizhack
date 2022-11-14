@@ -34,7 +34,7 @@ section {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
-#blog-pills-tabContent .blogs-all{
+.blogs-all{
     background-color: #0E1526;
 }
 .input-group{
