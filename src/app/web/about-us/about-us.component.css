@@ -18,6 +18,13 @@ section{
     border-radius: 20px;
     border: 1px solid var(--main-color);
 }
+#founders .card img{
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
 #founders .card p{
     margin-top: 15px;
     font-size: 0.85rem;
