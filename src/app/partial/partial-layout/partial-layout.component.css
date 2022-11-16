@@ -42,7 +42,7 @@
     letter-spacing: 1px;
 }
 .main-content {
-    padding: 20px 5px;
+    padding: 20px;
     height: calc(100vh - 68px);
     overflow-y: auto;
 }
@@ -53,4 +53,8 @@ footer {
     width: 100%;
     padding: 10px;
     font-size: 0.8rem;
+}
+#main-card{
+    background-color:var(--card-bg-color);
+    color: #fff;
 }
