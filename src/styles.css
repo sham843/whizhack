@@ -187,3 +187,8 @@ a.text-main:hover{
   color: var(--main-color);
   padding-inline: 15px;
 }
+.courses .btn-more:hover{
+  background-color: var(--main-color);
+  border: solid 1px var(--main-color);
+  color: #000;
+}
