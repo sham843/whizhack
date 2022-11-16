@@ -13,8 +13,7 @@ body
     --main-color: #2DF611;
     --main-dark-color: #149a02;
     --main-light-color: #e7ffe4;
-
-    --secondary-color:#020B20;
+    --card-bg-color:#0E1526;
 }
 .text-main{
   color: var(--main-color);
@@ -22,9 +21,6 @@ body
 }
 a.text-main:hover{
   color: var(--main-dark-color);
-}
-.text-second{
-  color: var(--secondary-color);
 }
 .bg-main{
   background-color:var(--main-color);
@@ -58,7 +54,7 @@ a.text-main:hover{
 .products .card{
   padding: 15px;
   border-radius: 20px;
-  background-color: #0E1526;
+  background-color: var(--card-bg-color);
   text-decoration: none;
   color: #fff;
 }
@@ -73,7 +69,7 @@ a.text-main:hover{
   font-size: 0.9rem;
 }
 .testimonal .card{
-  background-color: #0E1526;
+  background-color: var(--card-bg-color);
   color: #fff;
 }
 .testimonal img{
@@ -114,7 +110,7 @@ a.text-main:hover{
 #blog .main-blog-body{
   border-radius: 15px;
   top: -30px;
-  background-color: #0E1526;
+  background-color: var(--card-bg-color)
 }
 #blog .main-blog-body .btn,
 #blog .main-blog-body p{

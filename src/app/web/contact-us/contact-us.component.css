@@ -19,7 +19,7 @@ section {
     color: #0E1526;
 }
 .social-icon:hover{
-    background-color: #0E1526;
+    background-color: var(--card-bg-color);
 }
 .social-icon:hover a{
     color: var(--main-color);

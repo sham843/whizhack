@@ -35,7 +35,7 @@ section {
     border-bottom-right-radius: 15px;
 }
 .blogs-all{
-    background-color: #0E1526;
+    background-color: var(--card-bg-color);
 }
 .input-group{
     background-color: rgba(255, 255, 255, 0.2);

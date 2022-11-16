@@ -29,7 +29,7 @@ section {
     width: 100%;
 }
 #values .card{
-    background-color: #0B1425;
+    background-color: var(--card-bg-color);
     padding: 20px;
     text-align: center;
     border-radius: 20px;
