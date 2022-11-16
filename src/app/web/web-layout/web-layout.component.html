@@ -1,11 +1,11 @@
 <div class="page-wrapper">
     <main class="page-content">
-        <app-web-header> </app-web-header>
+        <app-web-header *ngIf="hideHeaderFooter"> </app-web-header>
         <div class="main-content">
             <router-outlet></router-outlet>
         </div>
         <footer>
-            <app-web-footer></app-web-footer>
+            <app-web-footer *ngIf="hideHeaderFooter"></app-web-footer>
         </footer>
     </main>
 </div>
