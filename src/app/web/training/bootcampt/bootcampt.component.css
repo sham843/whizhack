@@ -37,7 +37,7 @@ section{
     margin-right: 10px;
 }
 .accordion-item{
-    margin-bottom: 15px;
+    margin-bottom: 11px;
 }
 .accordion-item:last-of-type .accordion-button.collapsed,
 .accordion-item:first-of-type .accordion-button{
