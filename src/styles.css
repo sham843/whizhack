@@ -45,7 +45,7 @@ a.text-main:hover{
   font-family: 'Lato', sans-serif !important;
   background-color:transparent;
   color: var(--main-color);
-  border: 1px solid var(--main-color);
+  border: 1px solid var(--main-color) !important;
 }
 .btn-main-outline:hover{
   background-color:var(--main-color);
@@ -233,4 +233,12 @@ a.text-main:hover{
 .dashboard-table tr.mat-row,
 .dashboard-table tr.mat-header-row{
   height: 40px;
+}
+.form-container .form-label{
+  font-size:0.85rem;
+  color: #cbcbcb;
+}
+.form-container .form-data{
+  font-size:0.85rem;
+  color: #fff;
 }
