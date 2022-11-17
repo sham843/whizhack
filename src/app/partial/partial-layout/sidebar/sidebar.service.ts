@@ -13,31 +13,38 @@ export class SidebarService {
     },
     {
       title: 'Dashboard',
-      icon: 'fa fa-book',
+      icon: 'fa-solid fa-chart-column',
       active: false,
       type: 'simple',
       url:'./dashboard'
     },
     {
-      title: 'Item Master',
-      icon: 'fa fa-tachometer-alt',
+      title: 'Blog Master',
+      icon: 'fa-solid fa-blog',
       active: false,
-      type: 'dropdown',
-      submenus: [
-        {
-          title: 'Group Master',
-          url:'group-master'
-        },
-        {
-          title: 'Category Master',
-          url:'category-master'
-        },
-        {
-          title: 'Parameter Master',
-          url:'parameter-master'
-        }
-      ]
+      type: 'simple',
+      url:'./blog-master'
     },
+    // {
+    //   title: 'Masters',
+    //   icon: 'fa fa-tachometer-alt',
+    //   active: false,
+    //   type: 'dropdown',
+    //   submenus: [
+    //     {
+    //       title: 'Group Master',
+    //       url:'group-master'
+    //     },
+    //     {
+    //       title: 'Category Master',
+    //       url:'category-master'
+    //     },
+    //     {
+    //       title: 'Parameter Master',
+    //       url:'parameter-master'
+    //     }
+    //   ]
+    // },
   ];
   constructor() { }
 
