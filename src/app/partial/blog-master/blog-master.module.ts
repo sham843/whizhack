@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { BlogMasterRoutingModule } from './blog-master-routing.module';
 import { BlogMasterComponent } from './blog-master.component';
+import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { BlogMasterComponent } from './blog-master.component';
   ],
   imports: [
     CommonModule,
-    BlogMasterRoutingModule
+    BlogMasterRoutingModule,
+    MaterialModule
   ]
 })
 export class BlogMasterModule { }

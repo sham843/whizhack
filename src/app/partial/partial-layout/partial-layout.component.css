@@ -54,7 +54,3 @@ footer {
     padding: 10px;
     font-size: 0.8rem;
 }
-#main-card{
-    background-color:var(--card-bg-color);
-    color: #fff;
-}

@@ -29,6 +29,7 @@ a.text-main:hover{
   background-color:var(--main-color);
 }
 .btn-main{
+  font-family: 'Lato', sans-serif !important;
   background-color:var(--main-color);
   color: #000;
   border: 1px solid var(--main-color);
@@ -41,6 +42,7 @@ a.text-main:hover{
   border: 1px solid var(--main-dark-color);
 }
 .btn-main-outline{
+  font-family: 'Lato', sans-serif !important;
   background-color:transparent;
   color: var(--main-color);
   border: 1px solid var(--main-color);
@@ -191,4 +193,44 @@ a.text-main:hover{
   background-color: var(--main-color);
   border: solid 1px var(--main-color);
   color: #000;
+}
+.form-card{
+  background-color:var(--card-bg-color);
+  color: #fff;
+  border: none;
+}
+#fileupload-button {
+  padding:5px 10px;
+  font-size: 0.85rem;
+  color: #000;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#fileupload-button:hover {
+  background-color: var(--main-dark-color);
+}
+.dashboard-table{
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+}
+.dashboard-table th{
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: #111;
+}
+.dashboard-table td{
+  font-size: 0.85rem;
+  background-color: var(--card-bg-color);
+}
+.dashboard-table .srno{
+  width: 90px;
+}
+.dashboard-table .material-symbols-outlined{
+  font-size:16px !important;
+}
+.dashboard-table tr.mat-row,
+.dashboard-table tr.mat-header-row{
+  height: 40px;
 }
