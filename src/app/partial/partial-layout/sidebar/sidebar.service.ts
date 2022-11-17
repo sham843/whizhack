@@ -25,6 +25,13 @@ export class SidebarService {
       type: 'simple',
       url:'./blog-master'
     },
+    {
+      title: 'Enquiries',
+      icon: 'fa-solid fa-envelope',
+      active: false,
+      type: 'simple',
+      url:'./enquiries'
+    },
     // {
     //   title: 'Masters',
     //   icon: 'fa fa-tachometer-alt',
