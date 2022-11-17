@@ -42,7 +42,7 @@
     letter-spacing: 1px;
 }
 .main-content {
-    padding: 20px;
+    padding: 20px 14px 20px 20px;
     height: calc(100vh - 68px);
     overflow-y: auto;
 }

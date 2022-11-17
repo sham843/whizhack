@@ -1,7 +1,7 @@
 <div class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
-    <app-header></app-header>
     <app-sidebar></app-sidebar>
     <main class="page-content">
+        <app-header></app-header>
         <div class="main-content scrollbar">
             <div class="card card-body" id="main-card">
                 <router-outlet></router-outlet>
