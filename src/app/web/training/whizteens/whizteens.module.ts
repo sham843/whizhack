@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { WhizteensRoutingModule } from './whizteens-routing.module';
 import { WhizteensComponent } from './whizteens.component';
-import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 
 
 @NgModule({
@@ -12,8 +11,7 @@ import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.mo
   ],
   imports: [
     CommonModule,
-    WhizteensRoutingModule,
-    MaterialModule
+    WhizteensRoutingModule
   ]
 })
 export class WhizteensModule { }

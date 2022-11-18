@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-now',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterNowComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>) { }
 
   ngOnInit(): void {
   }

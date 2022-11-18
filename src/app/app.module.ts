@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterNowComponent } from './dialogs/register-now/register-now.component';
+import { MaterialModule } from './shared/angularMaterialModule/material.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RegisterNowComponent } from './dialogs/register-now/register-now.compon
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
