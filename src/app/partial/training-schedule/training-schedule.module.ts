@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TrainingScheduleRoutingModule } from './training-schedule-routing.module';
 import { TrainingScheduleComponent } from './training-schedule.component';
+import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TrainingScheduleComponent } from './training-schedule.component';
   ],
   imports: [
     CommonModule,
-    TrainingScheduleRoutingModule
+    TrainingScheduleRoutingModule,
+    MaterialModule
   ]
 })
 export class TrainingScheduleModule { }
