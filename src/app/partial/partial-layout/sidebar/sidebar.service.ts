@@ -32,6 +32,13 @@ export class SidebarService {
       type: 'simple',
       url:'./enquiries'
     },
+    {
+      title: 'Training Schedule',
+      icon: 'fa-solid fa-chalkboard-user',
+      active: false,
+      type: 'simple',
+      url:'./training-schedule'
+    },
     // {
     //   title: 'Masters',
     //   icon: 'fa fa-tachometer-alt',
