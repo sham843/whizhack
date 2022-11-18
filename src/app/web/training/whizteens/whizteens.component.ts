@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { RegisterNowComponent } from 'src/app/dialogs/register-now/register-now.component';
 
 @Component({
   selector: 'app-whizteens',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WhizteensComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(RegisterNowComponent,{
+      width: '500px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+  }
 
   ngOnInit(): void {
   }
