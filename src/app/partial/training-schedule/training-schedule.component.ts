@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
 export interface PeriodicElement {
   srno: number;
   image: string;
@@ -27,7 +29,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class TrainingScheduleComponent implements OnInit {
   displayedColumns: string[] = ['srno', 'image', 'title', 'price','action'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
+      width: '450px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit(): void {
   }
