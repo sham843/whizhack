@@ -33,7 +33,7 @@ export class TrainingScheduleComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
-      width: '450px',
+      width: '750px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
