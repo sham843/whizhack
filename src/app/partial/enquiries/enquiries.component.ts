@@ -35,7 +35,7 @@ export class EnquiriesComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(ViewEnquiriesComponent, {
-      width: '600px'
+      width: '1024px'
     });
   }
 
