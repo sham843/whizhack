@@ -63,11 +63,14 @@ section {
     font-size: 0.85rem;
     margin-bottom: 0;
 }
+.blogs-all{
+    background-color: var(--card-bg-color);
+}
 .blog small{
     font-size: 0.7rem;
 }
 .blog-list{
-    height: 90vh;
+    height: 89vh;
     overflow-y: auto;
 }
 #social-media .card{
