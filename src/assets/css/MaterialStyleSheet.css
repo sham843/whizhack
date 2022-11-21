@@ -6,16 +6,19 @@ button.mat-menu-item,
 .mat-option-text,
 textarea.mat-input-element,
 .mat-radio-label,
-.mat-tab-label-content{
-  font-family: 'Lato', sans-serif !important;
-  font-size: 0.85rem;
+.mat-tab-label-content {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 0.85rem;
 }
-.mat-form-field-flex{
-    height:40px;
+
+.mat-form-field-flex {
+    height: 40px;
 }
-.mat-form-field-appearance-outline .mat-form-field-label{
+
+.mat-form-field-appearance-outline .mat-form-field-label {
     margin-top: -1.1rem;
 }
+
 input.mat-input-element {
     margin-top: -6.142857em;
     height: 50px;
@@ -23,56 +26,77 @@ input.mat-input-element {
     margin-top: -83px;
     color: #fff;
 }
-.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label{
-transform: translateY(-1em) scale(.75);
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
+    transform: translateY(-1em) scale(.75);
     width: 133.3333533333%;
 }
+
 .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 1em 0 0em 0;
 }
-.mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix {
+
+.mat-form-field-appearance-outline .mat-form-field-prefix,
+.mat-form-field-appearance-outline .mat-form-field-suffix {
     top: -0.7em !important;
     right: -0.5em !important;
 }
+
 .mat-form-field-wrapper {
     padding-bottom: 0em;
 }
-.mat-form-field-appearance-outline .mat-form-field-wrapper{
-    margin:0 !important;
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
 }
+
 .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
     transform: translateY(0%) !important;
 }
-.mat-select-trigger{
+
+.mat-select-trigger {
     top: -15px;
 }
-.mat-dialog-container{
-    padding:0 !important;
+
+.mat-dialog-container {
+    padding: 0 !important;
     background-color: var(--card-bg-color);
 }
-.mat-dialog-container .dialog-header{
-    padding:15px 25px !important;
-    display:flex;
+
+.mat-dialog-container .dialog-header {
+    padding: 15px 25px !important;
+    display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
     font-weight: 600;
 }
-.mat-dialog-container .dialog-body{
-    padding:5px 25px 5px 25px !important;
+
+.mat-dialog-container .dialog-body {
+    padding: 5px 25px 5px 25px !important;
 }
-.mat-form-field button{
+
+.mat-form-field button {
     top: -7px;
     color: #fff;
 }
+
+mat-datepicker-toggle .mat-icon-button {
+    top: -12px !important;
+    position: absolute !important;
+    right: -11px !important;
+}
+
 .mat-icon {
     height: inherit !important;
     width: inherit !important;
 }
-.mat-row:nth-child(even){
-    background-color:#F2F2F2 ;
+
+.mat-row:nth-child(even) {
+    background-color: #F2F2F2;
 }
-        
-.mat-row:nth-child(odd){
-    background-color:#fff ;
+
+.mat-row:nth-child(odd) {
+    background-color: #fff;
 }
