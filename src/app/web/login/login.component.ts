@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor() { }
+  constructor( private commonMethodService: CommonMethodService) { }
 
   ngOnInit(): void {
+    this.captcha();
+  }
+
+  captcha() {
+    this.commonMethodService.createCaptchaCarrerPage();
   }
 
 }
