@@ -39,6 +39,13 @@ export class SidebarService {
       type: 'simple',
       url:'./training-schedule'
     },
+    {
+      title: 'Post Job',
+      icon: 'fa-solid fa-briefcase',
+      active: false,
+      type: 'simple',
+      url:'./post-job'
+    },
     // {
     //   title: 'Masters',
     //   icon: 'fa fa-tachometer-alt',
