@@ -2,82 +2,84 @@
     <div class="col-sm-4">
         <div class="card form-card">
             <div class="card-header">Course Manage</div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Page Name</mat-label>
-                        <mat-select>
-                            <mat-option value="option">WhizTeens</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Course Title</mat-label>
-                        <input matInput placeholder="Course Title">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Course Caption</mat-label>
-                        <input matInput placeholder="Course Caption">
-                    </mat-form-field>
-                </div>
-                <div class="mb-1">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Course Duration</mat-label>
-                        <input matInput placeholder="Course Duration">
-                    </mat-form-field>
-                </div>
-                <div class="mb-1">
-                    <mat-form-field appearance="legacy" class="w-100">
-                        <mat-label>Course Description</mat-label>
-                        <textarea matInput placeholder="Course Description" rows="4"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="mb-1">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <input type="file" id="real-file" hidden="hidden" />
-                            <button type="button" id="fileupload-button">Upload Course Image</button>
-                        </div>
-                        <div>
-                            <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2">
-                                <span class="material-symbols-outlined">
-                                    description
-                                </span>
-                            </button>
-                            <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
+            <form [formGroup]="manageCoForm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Page Name</mat-label>
+                            <mat-select formControlName="pageName">
+                                <mat-option value="option">WhizTeens</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Course Title</mat-label>
+                            <input matInput placeholder="Course Title" formControlName="coTitle">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Course Caption</mat-label>
+                            <input matInput placeholder="Course Caption" formControlName="coCaption">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Course Duration</mat-label>
+                            <input matInput placeholder="Course Duration" formControlName="coDuration">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Course Description</mat-label>
+                            <textarea matInput placeholder="Course Description" rows="4" formControlName="coDescription"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-1">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden" #uploadDocument/>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Course Image</button>
+                            </div>
+                            <div>
+                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2" (click)="onClickView()">
+                                    <span class="material-symbols-outlined">
+                                        description
+                                    </span>
+                                </button>
+                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
+                    <div class="mb-1">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Syllabus Summary</mat-label>
+                            <textarea matInput placeholder="Syllabus Summary" rows="4" formControlName="syllSummary"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Price</mat-label>
+                            <input matInput placeholder="Price" formControlName="price">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Price Terms</mat-label>
+                            <input matInput placeholder="Terms" formControlName="priceTerms">
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button mat-stroked-button class="btn-main-outline">Cancel</button>
+                        <button type="button" mat-stroked-button (click)="onClickSubmit()" class="btn-main">Submit</button>
+                    </div>
                 </div>
-                <div class="mb-1">
-                    <mat-form-field appearance="legacy" class="w-100">
-                        <mat-label>Syllabus Summary</mat-label>
-                        <textarea matInput placeholder="Syllabus Summary" rows="4"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Price</mat-label>
-                        <input matInput placeholder="Price">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Price Terms</mat-label>
-                        <input matInput placeholder="Terms">
-                    </mat-form-field>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button mat-stroked-button class="btn-main">Submit</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="col-sm-8">

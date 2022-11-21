@@ -5,6 +5,8 @@ import { TrainingScheduleRoutingModule } from './training-schedule-routing.modul
 import { TrainingScheduleComponent } from './training-schedule.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import { ViewTrainingScheduleComponent } from './view-training-schedule/view-tra
   imports: [
     CommonModule,
     TrainingScheduleRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TrainingScheduleModule { }
