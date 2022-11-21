@@ -62,9 +62,8 @@ transform: translateY(-1em) scale(.75);
     padding:5px 25px 5px 25px !important;
 }
 .mat-form-field button{
-    top: -12px;
-    position: absolute;
-    right: -12px;
+    top: -7px;
+    color: #fff;
 }
 .mat-icon {
     height: inherit !important;
