@@ -243,6 +243,7 @@ a.text-main:hover{
 .form-container .form-label{
   font-size:0.85rem;
   color: #cbcbcb;
+  margin-bottom: 3px;
 }
 .form-container .form-data{
   font-size:0.85rem;
