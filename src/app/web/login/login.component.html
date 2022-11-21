@@ -27,15 +27,15 @@
                         </div>
                         <div class="mb-3">
                             <div class="row gx-1 align-items-center">
-                                <div class="col-sm">
+                                <div class="col-sm-4">
                                     <div id="captcha" class="mb-2">
                                     </div>
                                 </div>
                                 <div class="col-sm-auto">
-                                    <button class="mb-2" type="button" mat-icon-button (click)="captcha()"><i
+                                    <button class="text-white mb-2" type="button" mat-icon-button (click)="captcha()"><i
                                             class="fa fa-sync"></i></button>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-6">
                                     <mat-form-field appearance="outline" class="w-100">
                                         <input matInput placeholder="Enter Captcha"
                                             (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="4"

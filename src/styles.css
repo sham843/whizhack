@@ -109,6 +109,13 @@ a.text-main:hover{
   font-size: 4rem;
   text-transform: uppercase;
 }
+#blog a{
+  color: #fff;
+  text-decoration: none;
+}
+#blog a:hover{
+  color: var(--main-color);
+}
 #blog .main-blog-img{
   border-radius: 15px;
 }
