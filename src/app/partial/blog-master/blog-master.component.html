@@ -16,6 +16,17 @@
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Blog Category</mat-label>
+                        <mat-select>
+                          <mat-option value="volvo">Volvo</mat-option>
+                          <mat-option value="saab">Saab</mat-option>
+                          <mat-option value="mercedes">Mercedes</mat-option>
+                          <mat-option value="audi">Audi</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="mb-3">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <input type="file" id="real-file" hidden="hidden" />
@@ -82,7 +93,7 @@
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button>
+                            <button mat-icon-button (click)="openDialog()">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>

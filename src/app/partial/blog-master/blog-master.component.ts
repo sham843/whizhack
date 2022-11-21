@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
 
 export interface PeriodicElement {
   name: string;
@@ -25,7 +27,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class BlogMasterComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'symbol'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+
+  constructor(public dialog: MatDialog) { }
+
+  openDialog(): void {
+    this.dialog.open(BlogDetailsComponent,{
+      width: '1024px',
+    });
+  }
 
   ngOnInit(): void {
   }
