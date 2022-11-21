@@ -1,1 +1,69 @@
-<p>post-job works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card form-card">
+            <div class="card-header">Post New Job</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4 border-end">
+                        <div class="mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Job Title</mat-label>
+                                <input matInput placeholder="Job Title">
+                            </mat-form-field>
+                        </div>
+                        <div class="mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Job Location</mat-label>
+                                <input matInput placeholder="Job Location">
+                            </mat-form-field>
+                        </div>
+                        <div class="mb-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Date Of Posting</mat-label>
+                                <input matInput [matDatepicker]="picker">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="mb-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Last Date of Application</mat-label>
+                                <input matInput [matDatepicker]="picker1">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="mb-3">
+                            <mat-form-field appearance="legacy" class="w-100">
+                                <mat-label>Job Description</mat-label>
+                                <textarea matInput placeholder="Job Description" rows="5"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row gy-3">
+                            <div class="col-sm-6">
+                                <div class="form-label">Roles & Responsibility</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label">Experience</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label">Qualification</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label">Skills Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex align-items-center justify-content-between">
+                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
+                    <button mat-stroked-button class="btn-main">Submit Job Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
