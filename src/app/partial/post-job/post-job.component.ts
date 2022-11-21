@@ -37,7 +37,7 @@ export class PostJobComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(JobDetailsComponent,{
-      width: '1024px',
+      width: '750px',
     });
   }
 
