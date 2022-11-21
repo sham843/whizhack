@@ -1,0 +1,4 @@
+.job-height{
+    max-height: 75vh;
+    overflow-y: auto;
+}
