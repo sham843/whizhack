@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GalleryMasterRoutingModule } from './gallery-master-routing.module';
 import { GalleryMasterComponent } from './gallery-master.component';
+import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { GalleryMasterComponent } from './gallery-master.component';
   ],
   imports: [
     CommonModule,
-    GalleryMasterRoutingModule
+    GalleryMasterRoutingModule,
+    MaterialModule
   ]
 })
 export class GalleryMasterModule { }
