@@ -19,11 +19,14 @@ export interface PeriodicElement {
 })
 export class EnquiriesComponent implements OnInit {
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
-  dataSource=new Array();
-  constructor(public dialog: MatDialog, private service: ApiService) { }
+  dataSource = new Array();
+  totalCount!:number;
+  currentPage:number=0;
+  constructor(public dialog: MatDialog, private service: ApiService,) { }
 
-  openDialog(): void {
+  openDialog(ele?:any): void {
     this.dialog.open(ViewEnquiriesComponent, {
+      data: ele,
       width: '1024px'
     });
   }
@@ -34,19 +37,41 @@ export class EnquiriesComponent implements OnInit {
 
 
   getTableData() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno='+this.currentPage+'&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          this.dataSource =res.responseData.responseData;
-          console.log('data',this.dataSource);
+          this.dataSource = res.responseData.responseData;
+          this.totalCount=res.responseData.responseData1.pageCount;
         }
       }),
     })
   }
 
-  deleteUser(event?:any){
-    console.log(event);
+  deleteUser(event?: any) {
+    let obj;
+    obj = {
+      "createdBy": 0,
+      "modifiedBy": 0,
+      "createdDate": "2022-11-22T09:13:43.573Z",
+      "modifiedDate": "2022-11-22T09:13:43.573Z",
+      "isDeleted": true,
+      "id":event.srNo
+    }
+    this.service.setHttp('put', 'whizhack_cms/register/Delete', false, obj, false, 'whizhackService');
+    this.service.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode == '200') {
+          console.log('data', this.dataSource);
+          this.getTableData();
+        }
+      }),
+    })
+  }
+
+ pageChanged(event?:any){
+    this.currentPage=event.pageIndex;
+    this.getTableData();
   }
 }
 
