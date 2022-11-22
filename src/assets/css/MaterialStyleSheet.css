@@ -96,7 +96,13 @@ mat-datepicker-toggle .mat-icon-button {
 .mat-row:nth-child(even) {
     background-color: #F2F2F2;
 }
-
 .mat-row:nth-child(odd) {
     background-color: #fff;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
 }
