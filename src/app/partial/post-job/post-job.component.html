@@ -44,30 +44,30 @@
                         <div class="row gy-3 form-container">
                             <div class="col-sm-6">
                                 <div class="form-label">Roles & Responsibility</div>
-                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                <ngx-editor [editor]="editorRoles" formControlName="editorContent">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Experience</div>
-                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                <ngx-editor-menu [editor]="editorExperience" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                <ngx-editor [editor]="editorExperience" formControlName="editorContent">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Qualification</div>
-                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                <ngx-editor-menu [editor]="editorQualification" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                <ngx-editor [editor]="editorQualification" formControlName="editorContent">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Skills Required</div>
-                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                <ngx-editor [editor]="editorSkills" formControlName="editorContent">
                                 </ngx-editor>
                             </div>
                         </div>

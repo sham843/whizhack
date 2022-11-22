@@ -36,7 +36,10 @@ export class PostJobComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   constructor(public dialog: MatDialog) { }
 
-  editor!: Editor;
+  editorRoles!: Editor;
+  editorExperience!: Editor;
+  editorQualification!: Editor;
+  editorSkills!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -51,7 +54,10 @@ export class PostJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editor = new Editor();
+    this.editorRoles = new Editor();
+    this.editorExperience = new Editor();
+    this.editorQualification = new Editor();
+    this.editorSkills = new Editor();
   }
 
 }
