@@ -286,7 +286,7 @@ a.text-main:hover{
   height: 30vh;
   overflow-y: auto;
   font-size: 0.85rem;
-
+}
 .snack-warning {
   background: #fff !important;
   color: black !important;
