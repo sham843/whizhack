@@ -6,19 +6,20 @@ import { BlogDetailsComponent } from './blog-details/blog-details.component';
 export interface PeriodicElement {
   name: string;
   position: number;
+  type: string;
   symbol: string;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Cyber Attacks You Should Know About: Caution Time!',  symbol: 'H'},
-  {position: 2, name: 'Cybersecurity As A Career Option In India: Skills & Scope',  symbol: 'He'},
-  {position: 3, name: 'Future and Present of Hacking', symbol: 'Li'},
-  {position: 4, name: 'AI and the Evolving Threat Landscape',symbol: 'Be'},
-  {position: 5, name: 'Is Absolute Cybersecurity an Utopian Dream?',  symbol: 'B'},
-  {position: 6, name: 'Top Reasons To Join IIT Jodhpur TISC Advanced Certificate Program on Cyber Defense',  symbol: 'C'},
-  {position: 7, name: 'How To Select The Best Place To Learn Cyber Security', symbol: 'N'},
-  {position: 8, name: 'Cyber Security Courses for Beginners to Build a Successful Career in Cyber Security', symbol: 'O'},
-  {position: 9, name: 'Why Cyber Security Training Programs and Certifications are Worth It', symbol: 'F'},
-  {position: 10, name: 'Top Career Prospects After Completing Cyber Security Courses Online',symbol: 'Ne'},
+  {position: 1, name: 'Cyber Attacks You Should Know About: Caution Time!',type: 'Blog',  symbol: 'H'},
+  {position: 2, name: 'Cybersecurity As A Career Option In India: Skills & Scope',type: 'Case Study',  symbol: 'He'},
+  {position: 3, name: 'Future and Present of Hacking',type: 'White Paper', symbol: 'Li'},
+  {position: 4, name: 'AI and the Evolving Threat Landscape',type: 'Blog',symbol: 'Be'},
+  {position: 5, name: 'Is Absolute Cybersecurity an Utopian Dream?',type: 'Case Study',  symbol: 'B'},
+  {position: 6, name: 'Top Reasons To Join IIT Jodhpur TISC',type: 'Case Study',  symbol: 'C'},
+  {position: 7, name: 'How To Select The Best Place To Learn Cyber Security',type: 'White Paper', symbol: 'N'},
+  {position: 8, name: 'Cyber Security Courses for Beginners to Build a Successful Caree',type: 'Blog', symbol: 'O'},
+  {position: 9, name: 'Why Cyber Security Training Programs and Certifications are Worth It',type: 'Blog', symbol: 'F'},
+  {position: 10, name: 'Top Career Prospects After Completing Cyber Security Courses Online',type: 'Case Study', symbol: 'Ne'},
 ];
 @Component({
   selector: 'app-blog-master',
@@ -26,7 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./blog-master.component.css']
 })
 export class BlogMasterComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'symbol'];
+  displayedColumns: string[] = ['position', 'name','type', 'symbol'];
   dataSource = ELEMENT_DATA;
   frm!:FormGroup;
   items!:FormArray;
