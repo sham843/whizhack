@@ -23,6 +23,7 @@ export class TrainingScheduleComponent implements OnInit {
   totalCount: number = 0;
   currentPage: number = 0;
   imgSrc: string = '';
+  editFlag: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -47,12 +48,20 @@ export class TrainingScheduleComponent implements OnInit {
     this.getAllCourseList();
   }
 
+ 
+
   courseManageFormData() {
     this.courseManageForm = this.fb.group({
+      createdBy: 0,
+      modifiedBy: 0,
+      createdDate: "2022-11-22T12:17:01.881Z",
+      modifiedDate: "2022-11-22T12:17:01.881Z",
+      isDeleted: true,
+      id: 0,
       pageId: ['', Validators.required],
       course_Title: ['', Validators.required],
       course_Caption: ['', Validators.required],
-      courseDuration: ['', Validators.required],
+      duration: ['', Validators.required],
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
       price: ['', Validators.required],
@@ -61,12 +70,13 @@ export class TrainingScheduleComponent implements OnInit {
     })
   }
 
+  get formControls() { return this.courseManageForm.controls }
+
 
   getPageName() {
     this.api.setHttp('get', 'whizhack_cms/course/getPageList', false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
-        console.log('res',res);
         if (res.statusCode === '200') {
           this.pageNameArray = res.responseData;
         }
@@ -79,26 +89,25 @@ export class TrainingScheduleComponent implements OnInit {
 
   fileUpload(event: any) {
     console.log(event);
-    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg').subscribe((res: any) => {
-      console.log('res',res);
+    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
+      console.log('res', res);
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData
-      }else{
+      } else {
         this.imgSrc = '';
-        this.file.nativeElement.value=''
+        this.file.nativeElement.value = ''
       }
 
     })
   }
 
   getAllCourseList() {
-    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
           this.dataSource = res.responseData
           this.totalCount = res.responseData1.pageCount
-
         }
       }),
       error: (error: any) => {
@@ -108,19 +117,21 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   editCourse(obj: any) {
-    console.log(obj);
-
+    this.editFlag = true;
     this.courseManageForm.patchValue({
+      id: obj.courseId,
       pageId: obj.pageId,
       course_Title: obj.course_Title,
       course_Caption: obj.course_Caption,
-      courseDuration: obj.price_Terms.split(' ').slice(1, 3).join(' '),
+      duration: obj.duration,
       course_Description: obj.course_Description,
       syllabus_Summary: obj.syllabus_Summary,
       price: obj.price,
-      price_Terms: obj.price_Terms
-      // uploadDocument: obj.uploadDocument
+      price_Terms: obj.price_Terms,
+      imagePath:obj?.imagePath
     })
+    this.imgSrc = obj.imagePath;
+    // this.file.nativeElement.value =  obj?.imagePath;
   }
 
   pageChanged(event: any) {
@@ -128,22 +139,56 @@ export class TrainingScheduleComponent implements OnInit {
     this.getAllCourseList();
   }
 
-  onClickSubmit() {
-    let submitObj = this.courseManageForm.value;
-    submitObj.imagePath = this.imgSrc;
-    console.log(submitObj);
+  deleteCourse(id: any) {
+    let deleteObj = {
+      "id": id,
+      "modifiedBy": 0,
+    }
 
-    this.api.setHttp('post', 'whizhack_cms/course/Insert', false, submitObj, false, 'whizhackService');
+    this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-         this.getAllCourseList();
+          this.getAllCourseList();
         }
       }),
       error: (error: any) => {
         console.log(error);
       }
     })
+  }
+
+  clearForm() {
+    this.courseManageForm.reset();
+    this.imgSrc = '';
+    this.file.nativeElement.value = '';
+    this.editFlag = false;
+    this.courseManageFormData()
+  }
+
+  onClickSubmit() {
+  if(this.courseManageForm.invalid){
+   return;
+  }else{
+    let submitObj = this.courseManageForm.value;
+    submitObj.imagePath = this.imgSrc;
+    console.log(submitObj);
+    let url 
+    this.editFlag ? url = 'whizhack_cms/course/Update' : url = 'whizhack_cms/course/Insert'
+
+    this.api.setHttp( this.editFlag ? 'put':'post', url, false, submitObj, false, 'whizhackService');
+    this.api.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode === '200') {
+          this.getAllCourseList();
+          this.clearForm();
+        }
+      }),
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
 
   }
 
