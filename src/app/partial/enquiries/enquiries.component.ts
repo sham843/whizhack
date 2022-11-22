@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEnquiriesComponent } from './view-enquiries/view-enquiries.component';
 import { ApiService } from 'src/app/core/services/api.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -19,10 +23,13 @@ export interface PeriodicElement {
 })
 export class EnquiriesComponent implements OnInit {
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
-  dataSource = new Array();
+  dataSource:any;
   totalCount!:number;
   currentPage:number=0;
-  constructor(public dialog: MatDialog, private service: ApiService,) { }
+  @ViewChild(MatSort) sortheader!: MatSort;
+  
+
+  constructor(public dialog: MatDialog, private service: ApiService,private errorSer:ErrorHandlerService) { }
 
   openDialog(ele?:any): void {
     this.dialog.open(ViewEnquiriesComponent, {
@@ -41,22 +48,23 @@ export class EnquiriesComponent implements OnInit {
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          this.dataSource = res.responseData.responseData;
+          // this.dataSource = new MatTableDataSource(res.responseData.responseData1);
+          this.dataSource = new MatTableDataSource (res.responseData.responseData);
+          this.dataSource.sort = this.sortheader;
+          console.log("11",this.sortheader);
           this.totalCount=res.responseData.responseData1.pageCount;
         }
-      }),
+      }),error: (error: any) => {
+        this.errorSer.handelError(error.status);
+      }
     })
   }
 
   deleteUser(event?: any) {
     let obj;
     obj = {
-      "createdBy": 0,
-      "modifiedBy": 0,
-      "createdDate": "2022-11-22T09:13:43.573Z",
-      "modifiedDate": "2022-11-22T09:13:43.573Z",
-      "isDeleted": true,
-      "id":event.srNo
+      "registerId":event.registerId,
+      "modifiedBy": 0
     }
     this.service.setHttp('put', 'whizhack_cms/register/Delete', false, obj, false, 'whizhackService');
     this.service.getHttp().subscribe({
@@ -65,7 +73,9 @@ export class EnquiriesComponent implements OnInit {
           console.log('data', this.dataSource);
           this.getTableData();
         }
-      }),
+      }),error: (error: any) => {
+        this.errorSer.handelError(error.status);
+      }
     })
   }
 
