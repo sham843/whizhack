@@ -13,19 +13,19 @@
             </a> -->
             
             <div class="ms-auto d-flex align-items-center" role="search">
-                <input type="search" class="form-control me-2" placeholder="Search..">                
+                <!-- <input type="search" class="form-control me-2" placeholder="Search..">                
                 <button class="btn">
                     <i class="fa-regular fa-bell"></i>
-                </button>
+                </button> -->
                 <div class="dropdown">
                     <button class="btn shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fa-regular fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" routerLink="#">My Profile</a></li>
+                        <li><a class="dropdown-item" (click)="openDialog()">Change Password</a></li>
+                        <li><a class="dropdown-item" routerLink="#">Logout</a></li>
                     </ul>
                 </div>
             </div>

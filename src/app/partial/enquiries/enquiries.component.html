@@ -22,7 +22,8 @@
                     </ng-container>
                     <ng-container matColumnDef="courseId">
                         <th mat-header-cell *matHeaderCellDef> Course Selected </th>
-                        <td mat-cell *matCellDef="let element"> {{element.courseId == 1 ? 'Cyber Ninja' : element.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.courseId == 1 ? 'Cyber Ninja' :
+                            element.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="pageName">
                         <th mat-header-cell *matHeaderCellDef> Page </th>
@@ -31,13 +32,13 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog()">
+                            <button mat-icon-button (click)="openDialog(element)">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
                             </button>
                             <button mat-icon-button class="text-danger">
-                                <span class="material-symbols-outlined" (click)="deleteUser($event)">
+                                <span class="material-symbols-outlined" (click)="deleteUser(element)">
                                     delete
                                 </span>
                             </button>
@@ -46,6 +47,13 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+            </div>
+        </div>
+        <div>
+            <div *ngIf="dataSource.length>=10">
+                <mat-paginator [pageSize]="10" [length]="totalCount" [pageIndex]="currentPage"
+                    (page)="pageChanged($event)" showFirstLastButtons aria-label="Select page of periodic elements">
+                </mat-paginator>
             </div>
         </div>
     </div>
