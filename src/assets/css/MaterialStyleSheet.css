@@ -65,7 +65,7 @@ input.mat-input-element {
 }
 
 .mat-dialog-container .dialog-header {
-    padding: 15px 25px !important;
+    padding: 15px !important;
     display: flex;
     align-items: center;
     width: 100%;
@@ -74,12 +74,15 @@ input.mat-input-element {
 }
 
 .mat-dialog-container .dialog-body {
-    padding: 5px 25px 5px 25px !important;
+    padding: 5px 15px !important;
 }
 
 .mat-form-field button {
     top: -7px;
     color: #fff;
+}
+.mat-form-field button .material-symbols-outlined{
+    font-size: 20px;
 }
 
 mat-datepicker-toggle .mat-icon-button {
