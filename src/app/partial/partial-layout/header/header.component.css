@@ -7,8 +7,11 @@
     font-size: 0.85rem;
     color: #fff;
 }
+.navbar .btn{
+    border: none;
+}
 .navbar button:focus:not(:focus-visible){
-    border:solid 1px var(--card-bg-color);
+    border:none;
 }
 .navbar .form-control{
     background-color: var(--main-color);
@@ -28,4 +31,18 @@
 .navbar .dropdown-menu .dropdown-item{
     padding: 10px 15px;
     border-radius: 5px;
+}
+.btn.show{
+    border: none;
+}
+.dropdown-menu{
+    background-color: var(--card-bg-color);
+}
+.dropdown-menu .dropdown-item{
+    color: #fff;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color: var(--main-color);
+    color: #000 !important;
+    cursor: pointer;
 }
