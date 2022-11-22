@@ -5,6 +5,13 @@
             <form [formGroup]="frm">
                 <div class="card-body">
                     <div class="mb-3">
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button value="Blog" class="me-3">Blog</mat-radio-button>
+                            <mat-radio-button value="White Paper" class="me-3">White Paper</mat-radio-button>
+                            <mat-radio-button value="Case Study">Case Study</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Title</mat-label>
                             <input matInput placeholder="Blog Title" formControlName="blogTitle">
@@ -13,19 +20,20 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
-                            <textarea matInput placeholder="Blog Description" rows="5" formControlName="blogDesc"></textarea>
+                            <textarea matInput placeholder="Blog Description" rows="5"
+                                formControlName="blogDesc"></textarea>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
                             <mat-select formControlName="blogCategory">
-                              <mat-option value="volvo">Volvo</mat-option>
-                              <mat-option value="saab">Saab</mat-option>
-                              <mat-option value="mercedes">Mercedes</mat-option>
-                              <mat-option value="audi">Audi</mat-option>
+                                <mat-option value="volvo">Volvo</mat-option>
+                                <mat-option value="saab">Saab</mat-option>
+                                <mat-option value="mercedes">Mercedes</mat-option>
+                                <mat-option value="audi">Audi</mat-option>
                             </mat-select>
-                          </mat-form-field>
+                        </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -56,23 +64,25 @@
                     <div class="mb-3">
                         <div class="card card-body form-card border">
                             <div formArrayName="items" *ngFor="let item of itemsForm.controls; let i = index;">
-                               <div [formGroupName]="i">
-                                <div class="mb-3">
-                                    <mat-form-field appearance="outline" class="w-100">
-                                        <mat-label>Blog Sub-Title</mat-label>
-                                        <input matInput placeholder="Blog Sub-Title" formControlName="subTitle">
-                                    </mat-form-field>
+                                <div [formGroupName]="i">
+                                    <div class="mb-3">
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <mat-label>Blog Sub-Title</mat-label>
+                                            <input matInput placeholder="Blog Sub-Title" formControlName="subTitle">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="mb-3">
+                                        <mat-form-field appearance="legacy" class="w-100">
+                                            <mat-label>Blog Sub-Description</mat-label>
+                                            <textarea matInput placeholder="Blog Sub-Description" rows="5"
+                                                formControlName="subDescription"></textarea>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <mat-form-field appearance="legacy" class="w-100">
-                                        <mat-label>Blog Sub-Description</mat-label>
-                                        <textarea matInput placeholder="Blog Sub-Description" rows="5" formControlName="subDescription"></textarea>
-                                    </mat-form-field>
-                                </div>
-                               </div>
                             </div>
                             <div class="text-end mb-2">
-                                <button mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
+                                <button mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success"
+                                    (click)="addItem()">
                                     <span class="material-symbols-outlined">
                                         add
                                     </span>
@@ -80,10 +90,11 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>   
                     <div class="d-flex align-items-center justify-content-between">
                         <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                        <button type="button" mat-stroked-button class="btn-main" (click)="onClickSubmit()">Submit</button>
+                        <button type="button" mat-stroked-button class="btn-main"
+                            (click)="onClickSubmit()">Submit</button>
                     </div>
                 </div>
             </form>
@@ -91,7 +102,23 @@
     </div>
     <div class="col-sm-8">
         <div class="card form-card">
-            <div class="card-header">Blogs List</div>
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-sm-3">
+                        <span>Blogs List</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Type</mat-label>
+                            <mat-select formControlName="blogCategory">
+                                <mat-option value="Blog">Blog</mat-option>
+                                <mat-option value="Case Study">Case Study</mat-option>
+                                <mat-option value="White Paper">White Paper</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
                     <ng-container matColumnDef="position">
@@ -101,6 +128,10 @@
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Blog Title </th>
                         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef> Type </th>
+                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>

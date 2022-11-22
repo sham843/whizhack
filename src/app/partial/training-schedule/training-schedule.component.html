@@ -2,53 +2,58 @@
     <div class="col-sm-4">
         <div class="card form-card">
             <div class="card-header">Course Manage</div>
-            <form [formGroup]="manageCoForm">
+            <form [formGroup]="courseManageForm">
                 <div class="card-body">
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Page Name</mat-label>
-                            <mat-select formControlName="pageName">
-                                <mat-option value="option">WhizTeens</mat-option>
+                            <mat-select formControlName="pageId">
+                                <mat-option *ngFor="let ele of pageNameArray" [value]="ele.id">{{ele.pageName}}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
-                            <input matInput placeholder="Course Title" formControlName="coTitle">
+                            <input matInput placeholder="Course Title" formControlName="course_Title">
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
-                            <input matInput placeholder="Course Caption" formControlName="coCaption">
+                            <input matInput placeholder="Course Caption" formControlName="course_Caption">
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
-                            <input matInput placeholder="Course Duration" formControlName="coDuration">
+                            <input matInput placeholder="Course Duration" formControlName="courseDuration">
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Course Description</mat-label>
-                            <textarea matInput placeholder="Course Description" rows="4" formControlName="coDescription"></textarea>
+                            <textarea matInput placeholder="Course Description" rows="4"
+                                formControlName="course_Description"></textarea>
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden" #uploadDocument/>
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Course Image</button>
+                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
+                                    #uploadDocument />
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
+                                    Course Image</button>
                             </div>
-                            <div>
-                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2" (click)="onClickView()">
+                            <div *ngIf="uploadDocument.value">
+                                <button type="button" mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2"
+                                    (click)="onClickViewImage()">
                                     <span class="material-symbols-outlined">
                                         description
                                     </span>
                                 </button>
-                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
+                                <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
+                                (click)="deleteImage()">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -59,7 +64,8 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Syllabus Summary" rows="4" formControlName="syllSummary"></textarea>
+                            <textarea matInput placeholder="Syllabus Summary" rows="4"
+                                formControlName="syllabus_Summary"></textarea>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -71,12 +77,13 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
-                            <input matInput placeholder="Terms" formControlName="priceTerms">
+                            <input matInput placeholder="Terms" formControlName="price_Terms">
                         </mat-form-field>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                        <button type="button" mat-stroked-button (click)="onClickSubmit()" class="btn-main">Submit</button>
+                        <button type="button" mat-stroked-button (click)="onClickSubmit()"
+                            class="btn-main">Submit</button>
                     </div>
                 </div>
             </form>
@@ -89,21 +96,22 @@
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
                     <ng-container matColumnDef="srno">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
-                        <td mat-cell *matCellDef="let element" class="srno"> {{element.srno}} </td>
+                        <td mat-cell *matCellDef="let element" class="srno"> {{element.srNo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="image">
                         <th mat-header-cell *matHeaderCellDef class="srno"></th>
-                        <td mat-cell *matCellDef="let element" class="srno"> 
+                        <td mat-cell *matCellDef="let element" class="srno">
                             <img src="assets/image/home/Product1.png" class="table-img">
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef> Course Title </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.course_Title}} </td>
                     </ng-container>
                     <ng-container matColumnDef="duration">
                         <th mat-header-cell *matHeaderCellDef> Course Duration </th>
-                        <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.price_Terms.split(' ').slice(1,3).join(' ')}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="price">
                         <th mat-header-cell *matHeaderCellDef> Price </th>
@@ -111,13 +119,13 @@
                     </ng-container>
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
-                        <td mat-cell *matCellDef="let element"> 
-                            <button mat-icon-button (click)="openDialog()">
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button (click)="openDialog(element.courseId)">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-warning">
+                            <button type="button" mat-icon-button class="text-warning" (click)="editCourse(element)">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
@@ -126,12 +134,16 @@
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
-                            </button>    
+                            </button>
                         </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <ng-container *ngIf="totalCount > 10">
+                    <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
+                        (page)="pageChanged($event)" aria-label="Select page of GitHub search results"></mat-paginator>
+                </ng-container>
             </div>
         </div>
     </div>

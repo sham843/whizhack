@@ -67,6 +67,7 @@ section {
     font-size: 0.7rem;
 }
 .blog-list{
-    height: 90vh;
+    height: 81vh;
     overflow-y: auto;
+    line-height: 1.8;
 }
