@@ -17,11 +17,12 @@ export class LoginComponent implements OnInit {
     public validation: FormValidationService, private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.captcha();
     this.controlLoginForm();
+    this.captcha();
   }
 
   captcha() {
+    this.loginForm.controls['captcha'].setValue('');
     this.commonMethodService.createCaptchaCarrerPage();
   }
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      captcha: ['']
+      captcha: ['',Validators.required]
     })
   }
 
@@ -42,7 +43,6 @@ export class LoginComponent implements OnInit {
     let userId = this.loginForm.value.username;
     let userPassword = this.loginForm.value.password;
     if (this.loginForm.invalid) {
-      this.commonMethodService.matSnackBar('Please Enter Required Credentials', 1);
       return;
     }
     else {
