@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-view-enquiries',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewEnquiriesComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  newArray=[this.data]
   ngOnInit(): void {
+    console.log('gggg',this.newArray);
   }
 
 }

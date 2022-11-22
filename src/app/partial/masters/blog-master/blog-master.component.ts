@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import { ApiService } from 'src/app/core/services/api.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { FileUploadService } from 'src/app/core/services/file-upload.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 
 export interface PeriodicElement {
@@ -9,35 +13,46 @@ export interface PeriodicElement {
   type: string;
   symbol: string;
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Cyber Attacks You Should Know About: Caution Time!',type: 'Blog',  symbol: 'H'},
-  {position: 2, name: 'Cybersecurity As A Career Option In India: Skills & Scope',type: 'Case Study',  symbol: 'He'},
-  {position: 3, name: 'Future and Present of Hacking',type: 'White Paper', symbol: 'Li'},
-  {position: 4, name: 'AI and the Evolving Threat Landscape',type: 'Blog',symbol: 'Be'},
-  {position: 5, name: 'Is Absolute Cybersecurity an Utopian Dream?',type: 'Case Study',  symbol: 'B'},
-  {position: 6, name: 'Top Reasons To Join IIT Jodhpur TISC',type: 'Case Study',  symbol: 'C'},
-  {position: 7, name: 'How To Select The Best Place To Learn Cyber Security',type: 'White Paper', symbol: 'N'},
-  {position: 8, name: 'Cyber Security Courses for Beginners to Build a Successful Caree',type: 'Blog', symbol: 'O'},
-  {position: 9, name: 'Why Cyber Security Training Programs and Certifications are Worth It',type: 'Blog', symbol: 'F'},
-  {position: 10, name: 'Top Career Prospects After Completing Cyber Security Courses Online',type: 'Case Study', symbol: 'Ne'},
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {position: 1, name: 'Cyber Attacks You Should Know About: Caution Time!',type: 'Blog',  symbol: 'H'},
+//   {position: 2, name: 'Cybersecurity As A Career Option In India: Skills & Scope',type: 'Case Study',  symbol: 'He'},
+//   {position: 3, name: 'Future and Present of Hacking',type: 'White Paper', symbol: 'Li'},
+//   {position: 4, name: 'AI and the Evolving Threat Landscape',type: 'Blog',symbol: 'Be'},
+//   {position: 5, name: 'Is Absolute Cybersecurity an Utopian Dream?',type: 'Case Study',  symbol: 'B'},
+//   {position: 6, name: 'Top Reasons To Join IIT Jodhpur TISC',type: 'Case Study',  symbol: 'C'},
+//   {position: 7, name: 'How To Select The Best Place To Learn Cyber Security',type: 'White Paper', symbol: 'N'},
+//   {position: 8, name: 'Cyber Security Courses for Beginners to Build a Successful Caree',type: 'Blog', symbol: 'O'},
+//   {position: 9, name: 'Why Cyber Security Training Programs and Certifications are Worth It',type: 'Blog', symbol: 'F'},
+//   {position: 10, name: 'Top Career Prospects After Completing Cyber Security Courses Online',type: 'Case Study', symbol: 'Ne'},
+// ];
 @Component({
   selector: 'app-blog-master',
   templateUrl: './blog-master.component.html',
   styleUrls: ['./blog-master.component.css']
 })
 export class BlogMasterComponent implements OnInit {
+  @ViewChild('uploadDocument') file!: ElementRef;
   displayedColumns: string[] = ['position', 'name','type', 'symbol'];
   dataSource = ELEMENT_DATA;
+  imgSrc: string = '';
   frm!:FormGroup;
   items!:FormArray;
   isSubBlogAdd:boolean=true;
+  totalCount: number = 0;
+  currentPage: number = 0;
+  optionsArray:any[]=[{id:1,blogType:'Blog'},{id:2,blogType:'White Paper'},{id:3,blogType:'Case Study'}];
+  blogCategoryArray = new Array();
   get f() { return this.frm.controls }
   get itemsForm(): FormArray{
     return this.frm.get('items') as FormArray;
   }
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(public dialog: MatDialog, 
+              private fb: FormBuilder,
+              private service: ApiService, 
+              private errorHandler : ErrorHandlerService,
+              private fileUpl: FileUploadService,
+              public validation: FormValidationService) { }
 
   openDialog(): void {
     this.dialog.open(BlogDetailsComponent,{
@@ -46,15 +61,19 @@ export class BlogMasterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCategory();
     this.controlForm();
+    this.displayData();
   }
 
   controlForm() {
     this.frm = this.fb.group({
+      optionType:['',Validators.required],
       blogTitle: ['', Validators.required],
       blogDesc: ['', Validators.required],
       blogCategory: ['', Validators.required],
       blogAuthor: ['', Validators.required],
+      imagePath: ['', Validators.required],
       items: this.fb.array([
         this.fb.group({
           subTitle: ['', Validators.required],
@@ -62,6 +81,18 @@ export class BlogMasterComponent implements OnInit {
         })
       ])
     })
+  }
+
+  getCategory(){
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/getCategory', false, false, false, 'whizhackService');
+        this.service.getHttp().subscribe({
+          next: (res: any) => {
+            console.log(res);
+            if (res.statusCode == '200') {
+              this.blogCategoryArray = res.responseData;
+            }
+          }
+        })
   }
 
   addItem(){
@@ -84,5 +115,62 @@ export class BlogMasterComponent implements OnInit {
     this.isSubBlogAdd =true;
   }
 
-  onClickSubmit(){}
+  displayData(){
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/GetAllBlogRegisterByPagination?pageno='+ (this.currentPage + 1) +'&pagesize=10&ispublish=0', false, false, false,
+      'whizhackService');
+    this.service.getHttp().subscribe({
+      next: (res: any) => {
+        if (res.statusCode == '200') {
+          this.dataSource = res.responseData.responseData1;
+          this.totalCount = res.responseData.responseData2.pageCount;
+        }
+        else {
+          this.dataSource = [];
+        }
+      }, error: (error: any) => {
+        this.errorHandler.handelError(error.status);
+      }
+    })
+  }
+
+  fileUpload(event: any) {
+    console.log(event);
+    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg').subscribe((res: any) => {
+      console.log('res',res);
+      if (res.statusCode === '200') {
+        this.imgSrc = res.responseData
+      }else{
+        this.imgSrc = '';
+        this.file.nativeElement.value=''
+      }
+    })
+  }
+
+  onClickSubmit(){
+    console.log(this.frm.value);
+  }
+
+  viewImage() {
+    window.open(this.imgSrc, '_blank');
+  }
+
+  deleteImage() {
+    this.imgSrc = ''
+    this.file.nativeElement.value = ''
+  }
+
+  onClickPaginatior(event:any){
+    this.currentPage = event.pageIndex;
+    this.displayData();
+  }
+}
+const ELEMENT_DATA: PeriodicElement[] = [
+  { position: 1, name: '',type:'',symbol: '' }
+];
+
+export interface PeriodicElement {
+  position: number;
+  name: string;
+  type:string;
+  symbol: string;
 }

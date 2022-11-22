@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GalleryMasterRoutingModule } from './gallery-master-routing.module';
-import { GalleryMasterComponent } from './gallery-master.component';
+import { ForgotPasswordRoutingModule } from './forgot-password-routing.module';
+import { ForgotPasswordComponent } from './forgot-password.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 
 
 @NgModule({
   declarations: [
-    GalleryMasterComponent
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
-    GalleryMasterRoutingModule,
+    ForgotPasswordRoutingModule,
     MaterialModule
   ]
 })
-export class GalleryMasterModule { }
+export class ForgotPasswordModule { }

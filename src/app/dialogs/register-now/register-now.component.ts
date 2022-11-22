@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 @Component({
   selector: 'app-register-now',
   templateUrl: './register-now.component.html',
@@ -9,8 +10,9 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class RegisterNowComponent implements OnInit {
   registerForm!: FormGroup;
+ 
 
-  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>, private fb: FormBuilder, private service: ApiService) { }
+  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>, private fb: FormBuilder, private service: ApiService,private errorSer:ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getFormData();
@@ -39,7 +41,6 @@ export class RegisterNowComponent implements OnInit {
     this.registerForm.controls['courseId'].setValue(courseId)
   }
 
-
   onSubmit() {
     if(this.registerForm.invalid){
       return
@@ -55,10 +56,14 @@ export class RegisterNowComponent implements OnInit {
     this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
-        if (res.statusCode == '200') {
+        if (res.statusCode == '200' ) {
           console.log(res)
         }
-      }),
+      }),error: (error: any) => {
+        this.errorSer.handelError(error.status);
+      }
     })
   }
+
+  
 }
