@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
 export interface PeriodicElement {
   srno: number;
@@ -28,9 +30,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./training-schedule.component.css']
 })
 export class TrainingScheduleComponent implements OnInit {
+  @ViewChild('uploadDocument') file!: ElementRef;
+  manageCoForm!:FormGroup;
   displayedColumns: string[] = ['srno', 'image', 'title','duration', 'price','action'];
   dataSource = ELEMENT_DATA;
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder,private fileUpl: FileUploadService) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
@@ -43,6 +47,31 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.controlManageCoForm();
   }
 
+  controlManageCoForm(){
+    this.manageCoForm = this.fb.group({
+      pageName: ['',Validators.required],
+      coTitle: ['',Validators.required],
+      coCaption: ['',Validators.required],
+      coDuration: ['',Validators.required],
+      coDescription: ['',Validators.required],
+      syllSummary:['',Validators.required],
+      price:['',Validators.required],
+      priceTerms:['',Validators.required],
+      uploadDocument:['',Validators.required]
+    })
+  }
+
+  fileUpload(event:any){
+    console.log(event);
+    this.fileUpl.uploadDocuments(event,'GR','png',10000,20000);
+  }
+
+  onClickSubmit(){
+  }
+  
+  onClickView(){
+  }
 }
