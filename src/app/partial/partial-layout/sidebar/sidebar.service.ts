@@ -14,16 +14,29 @@ export class SidebarService {
     {
       title: 'Dashboard',
       icon: 'fa-solid fa-chart-column',
-      active: false,
+      active: true,
       type: 'simple',
       url:'./dashboard'
     },
     {
-      title: 'Blog Master',
-      icon: 'fa-solid fa-blog',
+      title: 'Masters',
+      icon: 'fa fa-tachometer-alt',
       active: false,
-      type: 'simple',
-      url:'./blog-master'
+      type: 'dropdown',
+      submenus: [
+        {
+          title: 'Blog Master',
+          url:'blog-master'
+        },
+        {
+          title: 'Gallery Master',
+          url:'gallery-master'
+        },
+        {
+          title: 'Media Coverage',
+          url:'media-coverage'
+        }
+      ]
     },
     {
       title: 'Enquiries',

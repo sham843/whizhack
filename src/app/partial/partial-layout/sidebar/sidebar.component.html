@@ -11,23 +11,65 @@
         </div>
         <div class="sidebar-menu">
             <ul>
+                <li class="header-menu">
+                    <span class="">Management</span>
+                </li>
+                <li>
+                    <a routerLink="/dashboard" routerLinkActive="active">
+                        <i class=" fa-chart-column fa-solid"></i>
+                        <span class="">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a data-bs-toggle="collapse" href="#collapseExample" routerLinkActive="active" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa fa-tachometer-alt"></i>
+                        <span>Masters</span>
+                    </a>
+                    <div class="collapse sidebar-submenu" id="collapseExample">
+                        <ul>
+                            <li><a routerLink="blog-master" routerLinkActive="active">Blog Master </a></li>
+                            <li><a routerLink="gallery-master" routerLinkActive="active">Gallery Master</a></li>
+                            <li><a routerLink="media-coverage" routerLinkActive="active">Media Coverage</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a routerLink="/enquiries" routerLinkActive="active">
+                        <i class=" fa-envelope fa-solid"></i>
+                        <span>Enquiries</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/training-schedule" routerLinkActive="active">
+                        <i class="fa-chalkboard-user fa-solid"></i>
+                        <span>Training Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/post-job" routerLinkActive="active">
+                        <i class=" fa-briefcase fa-solid"></i>
+                        <span>Post Job</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- <ul>
                 <li *ngFor="let menu of menus"
                     [ngClass]="{'active': menu.active , 'sidebar-dropdown':menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">
                     <span *ngIf="menu.type === 'header'">{{menu.title}}</span>
-                    <a *ngIf="menu.type !== 'header'" (click)='toggle(menu)' routerLink="{{menu.url}}" routerLinkActive="active">
+                    <a *ngIf="menu.type !== 'header'" (click)='toggle(menu)' routerLink="{{menu.url}}">
                         <i class="{{menu.icon}}"></i>
                         <span>{{menu.title}}</span>
                     </a>
                     <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
                         <ul>
                             <li *ngFor="let submenu of menu.submenus">
-                                <a href="{{submenu.url}}"> {{submenu.title}}
+                                <a routerLink="{{submenu.url}}"> {{submenu.title}}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </nav>
