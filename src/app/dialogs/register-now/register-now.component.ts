@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class RegisterNowComponent implements OnInit {
   registerForm!: FormGroup;
+ 
 
   constructor(public dialogRef: MatDialogRef<RegisterNowComponent>, private fb: FormBuilder, private service: ApiService) { }
 
@@ -61,4 +62,6 @@ export class RegisterNowComponent implements OnInit {
       }),
     })
   }
+
+  
 }
