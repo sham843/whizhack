@@ -10,7 +10,10 @@ textarea.mat-input-element,
     font-family: 'Lato', sans-serif !important;
     font-size: 0.85rem;
 }
-
+.mat-raised-button{
+    font-family: 'Lato', sans-serif !important;
+    font-weight: 600;
+}
 .mat-form-field-flex {
     height: 40px;
 }
