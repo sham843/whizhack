@@ -17,16 +17,13 @@ export class LoginComponent implements OnInit {
     public validation: FormValidationService, private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.captcha();
     this.controlLoginForm();
+    this.captcha();
   }
 
   captcha() {
-    this.commonMethodService.createCaptchaCarrerPage();
-  }
-  
-  refresh(){
     this.loginForm.controls['captcha'].setValue('');
+    this.commonMethodService.createCaptchaCarrerPage();
   }
 
   controlLoginForm() {
