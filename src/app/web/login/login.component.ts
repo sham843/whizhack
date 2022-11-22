@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
             if (res.statusCode == '200') {
               sessionStorage.setItem('loggedIn', 'true');
               localStorage.setItem('loggedInData',JSON.stringify(res));
-              this.clearForm();
               this.router.navigate(['/dashboard']);
+              this.clearForm();
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
               console.log(this.loginForm.value);
             }
