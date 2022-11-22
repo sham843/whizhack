@@ -11,12 +11,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmationModalComponent } from './dialogs/confirmation-modal/confirmation-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterNowComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
