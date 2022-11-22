@@ -5,10 +5,8 @@
             <form [formGroup]="frm">
                 <div class="card-body">
                     <div class="mb-3">
-                        <mat-radio-group aria-label="Select an option">
-                            <mat-radio-button value="Blog" class="me-3">Blog</mat-radio-button>
-                            <mat-radio-button value="White Paper" class="me-3">White Paper</mat-radio-button>
-                            <mat-radio-button value="Case Study">Case Study</mat-radio-button>
+                        <mat-radio-group aria-label="Select an option" formControlName="optionType">
+                            <mat-radio-button value="{{ options }}" *ngFor="let options of optionsArray" class="me-3">{{ options }}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                     <div class="mb-3">
@@ -28,10 +26,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
                             <mat-select formControlName="blogCategory">
-                                <mat-option value="volvo">Volvo</mat-option>
-                                <mat-option value="saab">Saab</mat-option>
-                                <mat-option value="mercedes">Mercedes</mat-option>
-                                <mat-option value="audi">Audi</mat-option>
+                                <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories">{{ categories }}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -44,16 +39,16 @@
                     <div class="mb-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <input type="file" id="real-file" hidden="hidden" />
-                                <button type="button" id="fileupload-button">Upload Blog Image</button>
+                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden" #uploadDocument/>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Blog Image</button>
                             </div>
-                            <div>
-                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2">
+                            <div *ngIf="imgSrc">
+                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2" (click)="viewImage()">
                                     <span class="material-symbols-outlined">
                                         description
                                     </span>
                                 </button>
-                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
+                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger" (click)="deleteImage()">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>

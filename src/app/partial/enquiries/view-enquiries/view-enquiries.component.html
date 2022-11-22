@@ -9,46 +9,47 @@
 <div class="dialog-body form-container">
     <div class="row">
         <div class="col-sm-8 border-end">
-            <div class="row gy-3">
+            <div class="row gy-3" *ngFor="let arr of newArray">
                 <div class="col-sm-3">
                     <span class="form-label">Name :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Mr. Anil Vishwas</span>
+                    <span class="form-data">Mr. {{arr.fullName}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Email ID :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">anilvishwas@gmail.com</span>
+                    <span class="form-data">{{arr.email}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Contact No. :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">6873543210</span>
+                    <span class="form-data">{{arr.mobileNo}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Course :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">CyberNinja</span>
+                    <span class="form-data">{{arr.CourseId}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Training</span>
+                    <span class="form-data">{{arr.pageName}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Message :</span>
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">
-                        I want to take admission for the same course. Please guide me how to enroll to the course, also
+                        <!-- I want to take admission for the same course. Please guide me how to enroll to the course, also
                         tell me
                         if you provide the
-                        scholarship and accomodation for me. Thanking you.
+                        scholarship and accomodation for me. Thanking you. -->
+                        {{arr.message}}
                     </span>
                 </div>
             </div>
