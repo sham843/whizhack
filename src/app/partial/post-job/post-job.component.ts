@@ -111,7 +111,14 @@ export class PostJobComponent implements OnInit {
 //   })
 // }
 //----------------------------End Bind Table Logic Here------------------------
-
+openDialog1(obj?: any): void {
+  this.dialog.open(JobDetailsComponent,{
+    width: '750px',
+  // height: '80%',
+    data: obj,
+    disableClose: true
+  });
+}
 //----------------------------Start Publish Button Logic Here------------------
 // onClickToggle(element:any){ 
 //   this.service.setHttp('put','',false,false,false,'whizhackService');
