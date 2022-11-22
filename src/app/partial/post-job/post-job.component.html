@@ -36,7 +36,7 @@
                         <div class="mb-3">
                             <mat-form-field appearance="legacy" class="w-100">
                                 <mat-label>Job Description</mat-label>
-                                <textarea matInput placeholder="Job Description" rows="5"></textarea>
+                                    <textarea matInput placeholder="Job Description" rows="20"></textarea>
                             </mat-form-field>
                         </div>
                     </div>
@@ -45,18 +45,30 @@
                             <div class="col-sm-6">
                                 <div class="form-label">Roles & Responsibility</div>
                                 <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editor" formControlName="editorContent">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" formControlName="editorContent">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Experience</div>
+                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Qualification</div>
+                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Skills Required</div>
+                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                         </div>
                     </div>
@@ -96,7 +108,7 @@
                     </ng-container>
                     <ng-container matColumnDef="publish">
                         <th mat-header-cell *matHeaderCellDef> Publish </th>
-                        <td mat-cell *matCellDef="let element"> 
+                        <td mat-cell *matCellDef="let element">
                             <mat-slide-toggle></mat-slide-toggle>
                         </td>
                     </ng-container>
