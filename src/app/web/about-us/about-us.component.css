@@ -88,11 +88,26 @@ section{
     padding: 40px;
 }
 #media-converage .card{
-    background-color:transparent;
+    background-color:var(--card-bg-color);
+    text-align: center;
+    border: solid 1px var(--card-bg-color);
+    transition: all 0.6s ease;
+}
+#media-converage .card:hover{
+    background-color:var(--main-color);
+    color: #000;
+    transition: all 0.6s ease;
+}
+#media-converage .card:hover a{
+    color: #000;
+    transition: all 0.6s ease;
+}
+#media-converage h5{
+    line-height:2rem;
 }
 #media-converage p{
     font-size: 0.9rem;
-    font-weight: 300;
+    font-weight: 600;
     margin-top: 15px;
 }
 #media-converage a{
