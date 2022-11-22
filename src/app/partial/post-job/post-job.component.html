@@ -11,21 +11,21 @@
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Title</mat-label>
                                 <input matInput placeholder="Job Title" formControlName="jobTitle">
-
-                                <mat-error *ngIf="f['jobTitle'].hasError('required') || f['jobTitle'].hasError('touched')">
-                                   Job Title Is Required
-                                </mat-error>
-                            </mat-form-field>
+                                <mat-error  class="mt-2" *ngIf="f['jobTitle'].hasError('required') || f['jobTitle'].hasError('touched')">
+                                    Job Title Is Required
+                                 </mat-error>
+                           </mat-form-field>
+                           
                         </div>
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Location</mat-label>
-                                <input matInput placeholder="Job Location" formControlName="jobLocation">
-
-                                <mat-error *ngIf="f['jobLocation'].hasError('required') || f['jobLocation'].hasError('touched')">
+                                <input matInput placeholder="Job Location" formControlName="jobLocation"><br>
+                                <mat-error class="mt-2" *ngIf="f['jobLocation'].hasError('required') || f['jobLocation'].hasError('touched')">
                                     Job Location Is Required
                                 </mat-error>
                             </mat-form-field>
+                           
                         </div>
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
@@ -33,32 +33,32 @@
                                 <input matInput [matDatepicker]="picker" formControlName="dateOfPosting">
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-
-                                <mat-error *ngIf="f['dateOfPosting'].hasError('required') || f['dateOfPosting'].hasError('touched')">
-                                 Date Of Posting Is Required
-                                </mat-error> 
+                                <mat-error class="mt-2" *ngIf="f['dateOfPosting'].hasError('required') || f['dateOfPosting'].hasError('touched')">
+                                    Date Of Posting Is Required
+                                   </mat-error>
                             </mat-form-field>
-                        </div>
+                            
+                        </div> 
                         <div class="mb-1">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Last Date of Application</mat-label>
                                 <input matInput [matDatepicker]="picker1" formControlName="lastDateOfApp">
                                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker #picker1></mat-datepicker>
-
-                                <mat-error *ngIf="f['lastDateOfApp'].hasError('required') || f['lastDateOfApp'].hasError('touched')">
+                                <mat-error class="mt-2" *ngIf="f['lastDateOfApp'].hasError('required') || f['lastDateOfApp'].hasError('touched')">
                                     Last Date of Application Is Required
                                    </mat-error> 
-                            </mat-form-field>
+                          </mat-form-field>
+                            
                         </div>
                         <div class="mb-3">
                             <mat-form-field appearance="legacy" class="w-100">
                                 <mat-label>Job Description</mat-label>
                                 <textarea matInput placeholder="Job Description" rows="5" formControlName="description"></textarea>
-                                <mat-error *ngIf="f['description'].hasError('required') || f['description'].hasError('touched')">
+                                <mat-error class="mt-2" *ngIf="f['description'].hasError('required') || f['description'].hasError('touched')">
                                     Description Is Required
                                 </mat-error>
-                                    <textarea matInput placeholder="Job Description" rows="20"></textarea>
+                                    
                             </mat-form-field>
                         </div>
                     </div>
@@ -68,28 +68,28 @@
                                 <div class="form-label">Roles & Responsibility</div>
                                 <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorRoles" formControlName="editorContent">
+                                <ngx-editor [editor]="editorRoles" formControlName="roles">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Experience</div>
                                 <ngx-editor-menu [editor]="editorExperience" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorExperience" formControlName="editorContent">
+                                <ngx-editor [editor]="editorExperience" formControlName="experience">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Qualification</div>
                                 <ngx-editor-menu [editor]="editorQualification" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorQualification" formControlName="editorContent">
+                                <ngx-editor [editor]="editorQualification" formControlName="qualification">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Skills Required</div>
                                 <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorSkills" formControlName="editorContent">
+                                <ngx-editor [editor]="editorSkills" formControlName="skills">
                                 </ngx-editor>
                             </div>
                         </div>
