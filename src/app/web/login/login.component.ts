@@ -17,11 +17,12 @@ export class LoginComponent implements OnInit {
     public validation: FormValidationService, private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.captcha();
     this.controlLoginForm();
+    this.captcha();
   }
 
   captcha() {
+    this.loginForm.controls['captcha'].setValue('');
     this.commonMethodService.createCaptchaCarrerPage();
   }
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      captcha: ['']
+      captcha: ['',Validators.required]
     })
   }
 
@@ -42,27 +43,23 @@ export class LoginComponent implements OnInit {
     let userId = this.loginForm.value.username;
     let userPassword = this.loginForm.value.password;
     if (this.loginForm.invalid) {
-      this.commonMethodService.matSnackBar('Please Enter Required Credentials', 1);
       return;
     }
     else {
       if (this.loginForm.value.captcha == this.commonMethodService.checkvalidateCaptcha()) {
-        // localStorage.setItem('user-data',JSON.stringify(this.loginForm.value));
-        // this.clearForm();
-        // alert('success');
-        // return
         this.service.setHttp('get', 'whizhack_cms/login/CheckLogin/' + userId + '/' + userPassword, false, false, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: (res: any) => {
             if (res.statusCode == '200') {
-              localStorage.setItem('user-data',JSON.stringify(res.responseData));
-              this.clearForm();
+              sessionStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('loggedInData',JSON.stringify(res));
               this.router.navigate(['/dashboard']);
-              this.commonMethodService.matSnackBar('Logged-in Successfuly', 0)
+              this.clearForm();
+              this.commonMethodService.matSnackBar(res.statusMessage, 0)
               console.log(this.loginForm.value);
             }
             else{
-              this.commonMethodService.matSnackBar('The username or password, you entered is incorrect',1)
+              this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
         })

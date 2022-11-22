@@ -58,6 +58,7 @@
                                 <mat-error *ngIf="f['description'].hasError('required') || f['description'].hasError('touched')">
                                     Description Is Required
                                 </mat-error>
+                                    <textarea matInput placeholder="Job Description" rows="20"></textarea>
                             </mat-form-field>
                         </div>
                     </div>
@@ -65,15 +66,31 @@
                         <div class="row gy-3 form-container">
                             <div class="col-sm-6">
                                 <div class="form-label">Roles & Responsibility</div>
+                                <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editorRoles" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Experience</div>
+                                <ngx-editor-menu [editor]="editorExperience" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editorExperience" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Qualification</div>
+                                <ngx-editor-menu [editor]="editorQualification" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editorQualification" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-label">Skills Required</div>
+                                <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editorSkills" formControlName="editorContent">
+                                </ngx-editor>
                             </div>
                         </div>
                     </div>
@@ -114,10 +131,15 @@
                     </ng-container>
                     <ng-container matColumnDef="publish">
                         <th mat-header-cell *matHeaderCellDef> Publish </th>
+<<<<<<< HEAD
                         <td mat-cell *matCellDef="let element"> 
                             <mat-slide-toggle [checked]="element.publish">
                                 <!-- (click)="onClickToggle(element)" -->
                             </mat-slide-toggle>
+=======
+                        <td mat-cell *matCellDef="let element">
+                            <mat-slide-toggle></mat-slide-toggle>
+>>>>>>> 5891ae93bfe8ef4c3f87f53098b364f20693dbd6
                         </td>
                     </ng-container>
 

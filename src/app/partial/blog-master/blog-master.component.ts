@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 
@@ -27,8 +28,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class BlogMasterComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'symbol'];
   dataSource = ELEMENT_DATA;
+  frm!:FormGroup;
+  items!:FormArray;
+  isSubBlogAdd:boolean=true;
+  get f() { return this.frm.controls }
+  get itemsForm(): FormArray{
+    return this.frm.get('items') as FormArray;
+  }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private fb: FormBuilder) { }
 
   openDialog(): void {
     this.dialog.open(BlogDetailsComponent,{
@@ -37,6 +45,43 @@ export class BlogMasterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.controlForm();
   }
 
+  controlForm() {
+    this.frm = this.fb.group({
+      blogTitle: ['', Validators.required],
+      blogDesc: ['', Validators.required],
+      blogCategory: ['', Validators.required],
+      blogAuthor: ['', Validators.required],
+      items: this.fb.array([
+        this.fb.group({
+          subTitle: ['', Validators.required],
+          subDescription: ['', Validators.required]
+        })
+      ])
+    })
+  }
+
+  addItem(){
+    let fg = this.fb.group({
+      subTitle: [''],
+      subDescription: [''],
+    });
+    if(this.isSubBlogAdd == true){
+      if(this.frm.value.items.length > 0){
+      if (this.frm.value.items[this.frm.value.items.length - 1].subTitle && this.frm.value.items[this.frm.value.items.length - 1].subDescription) {
+        this.itemsForm.push(fg);
+      } else {
+        alert('Fill Blog Sub Details')
+      }
+    }
+    else{
+      this.itemsForm.push(fg);
+    }
+    }
+    this.isSubBlogAdd =true;
+  }
+
+  onClickSubmit(){}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -41,6 +42,17 @@ export class PostJobComponent implements OnInit {
   constructor(public dialog: MatDialog,private fb:FormBuilder,private snackbar:MatSnackBar,
     private service:ApiService,private error:ErrorHandlerService) { }
 
+  editorRoles!: Editor;
+  editorExperience!: Editor;
+  editorQualification!: Editor;
+  editorSkills!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['ordered_list', 'bullet_list'],
+    ['link'],
+  ];
+
   openDialog(): void {
     this.dialog.open(JobDetailsComponent,{
       width: '750px',
@@ -48,8 +60,15 @@ export class PostJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.formData();
     // this.bindTable();
+=======
+    this.editorRoles = new Editor();
+    this.editorExperience = new Editor();
+    this.editorQualification = new Editor();
+    this.editorSkills = new Editor();
+>>>>>>> 5891ae93bfe8ef4c3f87f53098b364f20693dbd6
   }
 // ----------------------------Start Form Field Here-------------------------------
   formData(){

@@ -2,85 +2,91 @@
     <div class="col-sm-4">
         <div class="card form-card">
             <div class="card-header">Blog Register</div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Blog Title</mat-label>
-                        <input matInput placeholder="Blog Title">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="legacy" class="w-100">
-                        <mat-label>Blog Description</mat-label>
-                        <textarea matInput placeholder="Blog Description" rows="5"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Blog Category</mat-label>
-                        <mat-select>
-                          <mat-option value="volvo">Volvo</mat-option>
-                          <mat-option value="saab">Saab</mat-option>
-                          <mat-option value="mercedes">Mercedes</mat-option>
-                          <mat-option value="audi">Audi</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Blog Author</mat-label>
-                        <input matInput placeholder="Blog Author">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
+            <form [formGroup]="frm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Blog Title</mat-label>
+                            <input matInput placeholder="Blog Title" formControlName="blogTitle">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Blog Description</mat-label>
+                            <textarea matInput placeholder="Blog Description" rows="5" formControlName="blogDesc"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Blog Category</mat-label>
+                            <mat-select formControlName="blogCategory">
+                              <mat-option value="volvo">Volvo</mat-option>
+                              <mat-option value="saab">Saab</mat-option>
+                              <mat-option value="mercedes">Mercedes</mat-option>
+                              <mat-option value="audi">Audi</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Blog Author</mat-label>
+                            <input matInput placeholder="Blog Author" formControlName="blogAuthor">
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <input type="file" id="real-file" hidden="hidden" />
+                                <button type="button" id="fileupload-button">Upload Blog Image</button>
+                            </div>
+                            <div>
+                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2">
+                                    <span class="material-symbols-outlined">
+                                        description
+                                    </span>
+                                </button>
+                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="card card-body form-card border">
+                            <div formArrayName="items" *ngFor="let item of itemsForm.controls; let i = index;">
+                               <div [formGroupName]="i">
+                                <div class="mb-3">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Blog Sub-Title</mat-label>
+                                        <input matInput placeholder="Blog Sub-Title" formControlName="subTitle">
+                                    </mat-form-field>
+                                </div>
+                                <div class="mb-3">
+                                    <mat-form-field appearance="legacy" class="w-100">
+                                        <mat-label>Blog Sub-Description</mat-label>
+                                        <textarea matInput placeholder="Blog Sub-Description" rows="5" formControlName="subDescription"></textarea>
+                                    </mat-form-field>
+                                </div>
+                               </div>
+                            </div>
+                            <div class="text-end mb-2">
+                                <button mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
+                                    <span class="material-symbols-outlined">
+                                        add
+                                    </span>
+                                    Add New
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <input type="file" id="real-file" hidden="hidden" />
-                            <button type="button" id="fileupload-button">Upload Blog Image</button>
-                        </div>
-                        <div>
-                            <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2">
-                                <span class="material-symbols-outlined">
-                                    description
-                                </span>
-                            </button>
-                            <button mat-icon-button class="bg-danger bg-opacity-10 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
+                        <button mat-stroked-button class="btn-main-outline">Cancel</button>
+                        <button type="button" mat-stroked-button class="btn-main" (click)="onClickSubmit()">Submit</button>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <div class="card card-body form-card border">
-                        <div class="mb-3">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Blog Sub-Title</mat-label>
-                                <input matInput placeholder="Blog Sub-Title">
-                            </mat-form-field>
-                        </div>
-                        <div class="mb-3">
-                            <mat-form-field appearance="legacy" class="w-100">
-                                <mat-label>Blog Sub-Description</mat-label>
-                                <textarea matInput placeholder="Blog Sub-Description" rows="5"></textarea>
-                            </mat-form-field>
-                        </div>
-                        <div class="text-end mb-2">
-                            <button mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success">
-                                <span class="material-symbols-outlined">
-                                    add
-                                </span>
-                                Add New
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button mat-stroked-button class="btn-main">Submit</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="col-sm-8">
