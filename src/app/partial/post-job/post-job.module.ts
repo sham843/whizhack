@@ -5,6 +5,7 @@ import { PostJobRoutingModule } from './post-job-routing.module';
 import { PostJobComponent } from './post-job.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { JobDetailsComponent } from './job-details/job-details.component';
   imports: [
     CommonModule,
     PostJobRoutingModule,
-    MaterialModule
+    MaterialModule,
+    NgxEditorModule
   ]
 })
 export class PostJobModule { }
