@@ -5,47 +5,26 @@ header{
     display:flex;
     align-items: center;
 }
-
-.line-1{
-    border-right: 2px solid rgba(255,255,255,.75);
-    font-size: 5.8rem;
-    white-space: nowrap;
-    overflow: hidden;
+#homecarousel .carousel-inner{
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+#homecarousel h1{
+    font-size: 5rem;
     color: #fff;
-    text-transform: uppercase;   
-    font-weight: 700;
+    font-weight: 900;
 }
-
-.typing-erase {
-    animation: 10s typing-erase 0s steps(50, end) infinite, blink-caret 1s step-end infinite
+#homecarousel h2{
+    font-size: 4rem;
+    color: #fff;
+    font-weight: 900;
 }
-
-@keyframes typing-erase {
-    0% {
-        width: 0
-    }
-
-    80% {
-        width: 100%
-    }
-
-    90%,
-    to {
-        width: 0
-    }
-}
-
-@keyframes blink-caret {
-
-    0%,
-    to {
-        border-color: transparent
-    }
-
-    50% {
-        border-color: #fff;
-        border-radius: 1px
-    }
+#homecarousel h3{
+    font-size: 2.3rem;
+    color: #fff;
+    font-weight: 300;
 }
 .btn-home{
     background-color: #020b20;
