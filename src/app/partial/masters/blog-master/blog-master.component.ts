@@ -38,8 +38,10 @@ export class BlogMasterComponent implements OnInit {
   frm!:FormGroup;
   items!:FormArray;
   isSubBlogAdd:boolean=true;
-  optionsArray:any[]=['Blog','White Paper','Case Study'];
-  blogCategoryArray:any[]=['Audi','Ferrari','BMW','Nissan'];
+  totalCount: number = 0;
+  currentPage: number = 0;
+  optionsArray:any[]=[{id:1,blogType:'Blog'},{id:2,blogType:'White Paper'},{id:3,blogType:'Case Study'}];
+  blogCategoryArray = new Array();
   get f() { return this.frm.controls }
   get itemsForm(): FormArray{
     return this.frm.get('items') as FormArray;
@@ -59,6 +61,7 @@ export class BlogMasterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCategory();
     this.controlForm();
     this.displayData();
   }
@@ -78,6 +81,18 @@ export class BlogMasterComponent implements OnInit {
         })
       ])
     })
+  }
+
+  getCategory(){
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/getCategory', false, false, false, 'whizhackService');
+        this.service.getHttp().subscribe({
+          next: (res: any) => {
+            console.log(res);
+            if (res.statusCode == '200') {
+              this.blogCategoryArray = res.responseData;
+            }
+          }
+        })
   }
 
   addItem(){
@@ -101,12 +116,13 @@ export class BlogMasterComponent implements OnInit {
   }
 
   displayData(){
-    this.service.setHttp('get', '', false, false, false,
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/GetAllBlogRegisterByPagination?pageno='+ (this.currentPage + 1) +'&pagesize=10&ispublish=0', false, false, false,
       'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
-        if (res.statusCode == '200' && res.responseData.length) {
-          this.dataSource = res.responseData;
+        if (res.statusCode == '200') {
+          this.dataSource = res.responseData.responseData1;
+          this.totalCount = res.responseData.responseData2.pageCount;
         }
         else {
           this.dataSource = [];
@@ -141,6 +157,11 @@ export class BlogMasterComponent implements OnInit {
   deleteImage() {
     this.imgSrc = ''
     this.file.nativeElement.value = ''
+  }
+
+  onClickPaginatior(event:any){
+    this.currentPage = event.pageIndex;
+    this.displayData();
   }
 }
 const ELEMENT_DATA: PeriodicElement[] = [
