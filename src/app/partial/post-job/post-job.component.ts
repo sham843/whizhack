@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
 
 export interface PeriodicElement {
@@ -35,6 +36,18 @@ export class PostJobComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   constructor(public dialog: MatDialog) { }
 
+  editor!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
   openDialog(): void {
     this.dialog.open(JobDetailsComponent,{
       width: '750px',
@@ -42,6 +55,7 @@ export class PostJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.editor = new Editor();
   }
 
 }
