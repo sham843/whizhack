@@ -3,9 +3,10 @@ import {MatDialog} from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ApiService } from 'src/app/core/services/api.service';
-import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+// import { ApiService } from 'src/app/core/services/api.service';
+// import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
+
 export interface PeriodicElement {
   title: string;
   srno: number;
@@ -39,8 +40,11 @@ export class PostJobComponent implements OnInit {
   displayedColumns: string[] = ['srno', 'title', 'location', 'postdate','lastdate','publish', 'actions'];
   dataSource = ELEMENT_DATA;
   editFlag:boolean=false;
-  constructor(public dialog: MatDialog,private fb:FormBuilder,private snackbar:MatSnackBar,
-    private service:ApiService,private error:ErrorHandlerService) { }
+  constructor(public dialog: MatDialog,private fb:FormBuilder
+    // private snackbar:MatSnackBar,
+    // private service:ApiService,
+    // private error:ErrorHandlerService
+    ) { }
 
   editorRoles!: Editor;
   editorExperience!: Editor;
@@ -60,15 +64,11 @@ export class PostJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
-<<<<<<< HEAD
     this.formData();
-    // this.bindTable();
-=======
     this.editorRoles = new Editor();
     this.editorExperience = new Editor();
     this.editorQualification = new Editor();
     this.editorSkills = new Editor();
->>>>>>> 5891ae93bfe8ef4c3f87f53098b364f20693dbd6
   }
 // ----------------------------Start Form Field Here-------------------------------
   formData(){
