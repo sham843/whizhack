@@ -24,12 +24,16 @@ export class LoginComponent implements OnInit {
   captcha() {
     this.commonMethodService.createCaptchaCarrerPage();
   }
+  
+  refresh(){
+    this.loginForm.controls['captcha'].setValue('');
+  }
 
   controlLoginForm() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      captcha: ['']
+      captcha: ['',Validators.required]
     })
   }
 
@@ -42,7 +46,6 @@ export class LoginComponent implements OnInit {
     let userId = this.loginForm.value.username;
     let userPassword = this.loginForm.value.password;
     if (this.loginForm.invalid) {
-      this.commonMethodService.matSnackBar('Please Enter Required Credentials', 1);
       return;
     }
     else {
