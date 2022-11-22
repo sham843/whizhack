@@ -1,0 +1,41 @@
+input::-webkit-file-upload-button {
+    position: absolute;
+    padding: 5px 20px;
+    font-size: 0.85rem;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+    transition: 100ms ease-out;
+    cursor: pointer;
+    width: 91%;
+  }
+  
+  input::-webkit-file-upload-button:hover {
+    background-color: var(--main-dark-color);
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12)
+  }
+.gallery{
+    position: relative;
+    width: 100px;
+}
+.gallery img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position:center;
+}
+.gallery button{
+    position: absolute;
+    right: -10px;
+    top: -17px;
+}
+.gallery .mat-icon-button{
+    width: 34px;
+    height: 34px;
+    line-height: inherit;
+}
+.gallery .mat-icon-button .material-symbols-outlined{
+    font-size: 20px;
+}
