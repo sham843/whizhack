@@ -32,7 +32,7 @@ export class FileUploadService {
               formData.append('FolderName', folderName);
               formData.append('DocumentType', docExt);
               formData.append('UploadDocPath', file);
-              this.apiService.setHttp('post', 'samadhan/documents/UplodFile', false, formData, false, 'samadhanMiningService');
+              this.apiService.setHttp('post', 'whizhack_cms/upload/upload-photo', false, formData, false, 'whizhackService');
               this.apiService.getHttp().subscribe({
                 next: (res: any) => {
                   if (res.statusCode === "200") {
