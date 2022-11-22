@@ -261,3 +261,49 @@ a.text-main:hover{
   background-image: url('assets/image/captcha_bg.jpg');
   border-radius: 0.375rem;
 }
+.NgxEditor__Content,
+.NgxEditor,
+.NgxEditor__MenuBar{
+  background-color: #000 !important;
+  color: white !important;
+  font-size: 0.85rem;
+}
+.NgxEditor__MenuItem:hover {
+  background-color: var(--card-bg-color) !important;
+}
+.NgxEditor__Popup{
+  background-color: #656565 !important;
+  color: #fff !important;
+}
+.NgxEditor__Popup input{
+  background-color: var(--card-bg-color) !important;
+  color: #fff !important;
+}
+.NgxEditor__HelpText.NgxEditor__HelpText--Error {
+  color: #2DF611;
+}
+.NgxEditor{
+  height: 30vh;
+  overflow-y: auto;
+  font-size: 0.85rem;
+}
+.snack-warning {
+  background: #fff !important;
+  color: black !important;
+  border-left: 5px solid #ffc107 !important;
+  border-radius: 0 !important;
+}
+
+.snack-danger {
+  background: #fff !important;
+  color: black !important;
+  border-left: 5px solid #ff4141 !important;
+  border-radius: 0 !important;
+}
+
+.snack-success {
+  background: #fff !important;
+  color: black !important;
+  border-left: 5px solid #198754 !important;
+  border-radius: 0 !important;
+}

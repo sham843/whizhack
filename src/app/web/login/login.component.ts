@@ -47,22 +47,19 @@ export class LoginComponent implements OnInit {
     }
     else {
       if (this.loginForm.value.captcha == this.commonMethodService.checkvalidateCaptcha()) {
-        // localStorage.setItem('user-data',JSON.stringify(this.loginForm.value));
-        // this.clearForm();
-        // alert('success');
-        // return
         this.service.setHttp('get', 'whizhack_cms/login/CheckLogin/' + userId + '/' + userPassword, false, false, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: (res: any) => {
             if (res.statusCode == '200') {
-              localStorage.setItem('user-data',JSON.stringify(res.responseData));
-              this.clearForm();
+              sessionStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('loggedInData',JSON.stringify(res));
               this.router.navigate(['/dashboard']);
-              this.commonMethodService.matSnackBar('Logged-in Successfuly', 0)
+              this.clearForm();
+              this.commonMethodService.matSnackBar(res.statusMessage, 0)
               console.log(this.loginForm.value);
             }
             else{
-              this.commonMethodService.matSnackBar('The username or password, you entered is incorrect',1)
+              this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
         })

@@ -5,6 +5,8 @@ import { BlogMasterRoutingModule } from './blog-master-routing.module';
 import { BlogMasterComponent } from './blog-master.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import { BlogDetailsComponent } from './blog-details/blog-details.component';
   imports: [
     CommonModule,
     BlogMasterRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class BlogMasterModule { }
