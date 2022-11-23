@@ -1,10 +1,13 @@
 <div id="login" class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="card" id="loginbox">
-                <img src="assets/image/home/Product3.png" class="card-img-top" alt="...">
+                <div class="logo pt-5">
+                    <img src="assets/image/whilz-logo.png" alt="Logo">
+                    <h4 class="text-white fw-bold my-3">ADMIN LOGIN</h4>
+                </div>
                 <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
-                    <div class="card-body p-5">
+                    <div class="card-body px-5 pb-5">
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Enter Username</mat-label>
@@ -27,7 +30,7 @@
                         </div>
                         <div class="mb-3">
                             <div class="row gx-1 align-items-center">
-                                <div class="col-sm-4">
+                                <div class="col-sm-auto">
                                     <div id="captcha" class="mb-2">
                                     </div>
                                 </div>
@@ -35,7 +38,7 @@
                                     <button class="text-white mb-2"  matTooltip="Refresh" type="button" mat-icon-button (click)="captcha()"><i
                                             class="fa fa-sync"></i></button>
                                 </div>
-                                <div class="col-sm-7">
+                                <div class="col-sm">
                                     <mat-form-field appearance="outline" class="w-100">
                                         <mat-label>Enter Captcha</mat-label>
                                         <input matInput placeholder="Captcha"
