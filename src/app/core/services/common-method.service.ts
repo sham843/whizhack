@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class CommonMethodService {
 
   codecareerPage!: string;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private http: HttpClient,  private deviceService: DeviceDetectorService) { }
 
   createCaptchaCarrerPage() {
     //clear the contents of captcha div first
@@ -64,5 +66,17 @@ export class CommonMethodService {
       value = true;
     }
     return value;
+  }
+
+  getIpAddress() {
+    this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
+      console.log(res);
+    
+    })
+  }
+
+  epicFunction() {
+    var deviceInfo = this.deviceService.getDeviceInfo();
+    console.log(deviceInfo);
   }
 }
