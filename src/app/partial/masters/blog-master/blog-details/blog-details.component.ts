@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-details.component.css']
 })
 export class BlogDetailsComponent implements OnInit {
-
-  constructor() { }
+  elementData:any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any,
+              private service: ApiService
+              ) { }
 
   ngOnInit(): void {
+    this.getElementById();
+    console.log(this.data);
   }
 
+  resId:number = this.data;
+  getElementById(){
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/GetById?id=' + this.resId, false, false, false, 'whizhackService');
+        this.service.getHttp().subscribe({
+          next: (res: any) => {
+            console.log(res);
+            if (res.statusCode == '200') {
+              this.elementData = res.responseData;
+            }
+          }
+        })
+  }
 }
