@@ -7,10 +7,11 @@
     </button>
 </div>
 <div class="dialog-body form-container">
+    <div>{{data.title}}</div>
     <div class="row gy-3">
         <div class="d-flex align-items-center justify-content-between p-3">
-            <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button>
-            <button mat-button class="btn-main" type="submit">OK</button>
+            <button mat-button mat-dialog-close class="btn-main-outline">{{data.cancelButton}}</button>
+            <button mat-button class="btn-main" type="submit" (click)="closeDialog('yes')">{{data.okButton}}</button>
         </div>
     </div>
 </div>
