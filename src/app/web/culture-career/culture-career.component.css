@@ -46,3 +46,14 @@ section {
 #values .card p{
     margin-bottom:0rem
 }
+
+.g-overlay {
+    min-width: 320px;
+  }
+.culture-image{
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position:top;
+}

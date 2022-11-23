@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-// MatDialogRef,
+import { Component,Inject,OnInit } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-job-details',
   templateUrl: './job-details.component.html',
@@ -8,11 +7,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class JobDetailsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any
-  // ,private dialogRef:MatDialogRef<JobDetailsComponent>
-    ) { }
-
+  constructor(public dialogRef: MatDialogRef<JobDetailsComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any
+              ) { }
+newArray = [this.data];
   ngOnInit(): void {
+    //  console.log("data",this.data)
   }
 
 }
