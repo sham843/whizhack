@@ -115,3 +115,6 @@ input:-webkit-autofill:active {
 .mat-paginator-outer-container{
     background-color:var(--card-bg-color);
 }
+.cdk-overlay-container{
+    z-index: 99999;
+}

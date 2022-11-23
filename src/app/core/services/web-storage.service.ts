@@ -30,4 +30,14 @@ export class WebStorageService {
     let userName = this.getLoggedInLocalstorageData().responseData?.userName;
     return userName;
   }
+
+  createdByProps(): any {
+    return {
+        "createdBy": this.getUserId() || 0,
+        "modifiedBy": this.getUserId() || 0,
+        "createdDate": new Date(),
+        "modifiedDate": new Date(),
+        "isDeleted": false
+    }
+}
 }

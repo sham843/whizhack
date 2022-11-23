@@ -4,7 +4,7 @@
             <div class="col-sm-12">
                 <h1>CULTURE & CAREER</h1>
                 <h3>
-                    Always preparing for the next threat. 
+                    Always preparing for the next threat.
                 </h3>
             </div>
         </div>
@@ -15,7 +15,8 @@
         <h2 class="mb-4">Our Culture</h2>
         <div class="row g-5 align-items-center" id="culture">
             <div class="col-sm-6">
-                <h1>Eccentric minds hack, innovate, take risks and contribute to chasing seemingly impossible goals.</h1>
+                <h1>Eccentric minds hack, innovate, take risks and contribute to chasing seemingly impossible goals.
+                </h1>
             </div>
             <div class="col-sm-6">
                 <img src="assets/image/culture-career/Pratnership-Program.png">
@@ -27,7 +28,8 @@
                 <h1>We have people from all walks of life hacking a few dream ideas of their own every day.</h1>
             </div>
             <div class="col-sm-6">
-                <h1>The explorers at WhizHack seek intellectual challenges to creatively overcome the limitations of legacy systems.</h1>
+                <h1>The explorers at WhizHack seek intellectual challenges to creatively overcome the limitations of
+                    legacy systems.</h1>
             </div>
             <div class="col-sm-6">
                 <img src="assets/image/culture-career/Pratnership-Program.png">
@@ -99,26 +101,18 @@
     </div>
 </section> -->
 <section>
+    <!-- <h2>Another lightbox with custom gallery config</h2>
+          <p class="container">
+            <img *ngFor="let item of items; index as i" 
+              [lightbox]="i"
+              [gallery]="'anotherLightbox'"
+              [src]="item.data.thumb">
+        </p> -->
     <div class="container">
         <h2 class="mb-4">Life at WhizHack</h2>
         <div class="row g-5 align-items-center" id="culture">
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-            </div>
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-            </div>
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-            </div>
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-            </div>
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-            </div>
-            <div class="col-sm-4">
-                <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
+            <div class="col-sm-4" *ngFor="let item of items; index as i">
+                <img [lightbox]="i" [src]="item.data.thumb">
             </div>
         </div>
     </div>

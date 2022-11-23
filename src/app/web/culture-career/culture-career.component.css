@@ -46,3 +46,19 @@ section {
 #values .card p{
     margin-bottom:0rem
 }
+
+.g-overlay {
+    min-width: 320px;
+  }
+  
+  gallery {
+    font-size: 16px;
+  }
+  
+  img {
+    width: 150px;
+  }
+  
+  .lightbox-example, .gallerize-example {
+    margin: 2em;
+  }
