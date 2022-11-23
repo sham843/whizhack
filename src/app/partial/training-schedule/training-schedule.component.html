@@ -10,7 +10,7 @@
                             <mat-select formControlName="pageId">
                                 <mat-option *ngFor="let ele of pageNameArray" [value]="ele.id">{{ele.pageName}}</mat-option>
                             </mat-select>
-                            <mat-error *ngIf="formControls['pageId'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['pageId'].hasError('required')">
                                 Select Page Name
                             </mat-error>
                         </mat-form-field>
@@ -19,7 +19,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
                             <input matInput placeholder="Course Title" formControlName="course_Title">
-                            <mat-error *ngIf="formControls['course_Title'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Select course Title
                             </mat-error>
                         </mat-form-field>
@@ -28,7 +28,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Course Caption" formControlName="course_Caption">
-                            <mat-error *ngIf="formControls['course_Caption'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
                                 Select course Caption
                             </mat-error>
                         </mat-form-field>
@@ -38,7 +38,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
                             <input matInput placeholder="Course Duration" formControlName="duration">
-                            <mat-error *ngIf="formControls['duration'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
                                 Select course Duration
                             </mat-error>
                         </mat-form-field>
@@ -52,8 +52,7 @@
                                 <mat-error *ngIf="formControls['course_Description'].hasError('required')">
                                     Select course Description
                                 </mat-error>
-                        </mat-form-field>
-                        
+                        </mat-form-field>                        
                     </div>
                     <div class="mb-1">
                         <div class="d-flex align-items-center justify-content-between">
@@ -94,7 +93,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
                             <input matInput placeholder="Price" formControlName="price">
-                            <mat-error *ngIf="formControls['price'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Select Price
                             </mat-error>
                         </mat-form-field>
@@ -104,7 +103,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
                             <input matInput placeholder="Terms" formControlName="price_Terms">
-                            <mat-error *ngIf="formControls['price_Terms'].hasError('required')">
+                            <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Select price Terms
                             </mat-error>
                         </mat-form-field>
@@ -112,7 +111,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearForm()">Cancel</button>
-                        <button type="button" mat-stroked-button (click)="onClickSubmit()"
+                        <button type="submit" mat-stroked-button (click)="onClickSubmit()"
                             class="btn-main">{{editFlag ? 'Update':'Submit'}}</button>
                     </div>
                 </div>

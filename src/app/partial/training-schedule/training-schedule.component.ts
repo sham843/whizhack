@@ -24,6 +24,7 @@ export class TrainingScheduleComponent implements OnInit {
   currentPage: number = 0;
   imgSrc: string = '';
   editFlag: boolean = false;
+  sumitted: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -48,7 +49,7 @@ export class TrainingScheduleComponent implements OnInit {
     this.getAllCourseList();
   }
 
- 
+
 
   courseManageFormData() {
     this.courseManageForm = this.fb.group({
@@ -70,8 +71,22 @@ export class TrainingScheduleComponent implements OnInit {
     })
   }
 
-  get formControls() { return this.courseManageForm.controls }
+  get formControls() { return this.courseManageForm.controls}
 
+  getAllCourseList() {
+    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
+    this.api.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode === '200') {
+          this.dataSource = res.responseData
+          this.totalCount = res.responseData1.pageCount
+        }
+      }),
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
 
   getPageName() {
     this.api.setHttp('get', 'whizhack_cms/course/getPageList', false, false, false, 'whizhackService');
@@ -101,19 +116,13 @@ export class TrainingScheduleComponent implements OnInit {
     })
   }
 
-  getAllCourseList() {
-    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
-    this.api.getHttp().subscribe({
-      next: ((res: any) => {
-        if (res.statusCode === '200') {
-          this.dataSource = res.responseData
-          this.totalCount = res.responseData1.pageCount
-        }
-      }),
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
+  deleteImage() {
+    this.imgSrc = ''
+    this.file.nativeElement.value = ''
+  }
+
+  onClickViewImage() {
+    window.open(this.imgSrc, '_blank');
   }
 
   editCourse(obj: any) {
@@ -128,10 +137,11 @@ export class TrainingScheduleComponent implements OnInit {
       syllabus_Summary: obj.syllabus_Summary,
       price: obj.price,
       price_Terms: obj.price_Terms,
-      imagePath:obj?.imagePath
+      imagePath: obj?.imagePath
     })
+
     this.imgSrc = obj.imagePath;
-    // this.file.nativeElement.value =  obj?.imagePath;
+    this.file.nativeElement.value = obj?.imagePath;
   }
 
   pageChanged(event: any) {
@@ -167,37 +177,30 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   onClickSubmit() {
-  if(this.courseManageForm.invalid){
-   return;
-  }else{
-    let submitObj = this.courseManageForm.value;
-    submitObj.imagePath = this.imgSrc;
-    console.log(submitObj);
-    let url 
-    this.editFlag ? url = 'whizhack_cms/course/Update' : url = 'whizhack_cms/course/Insert'
+    // this.sumitted = true
+    if (this.courseManageForm.invalid) {
+      console.log(this.courseManageForm.value);      
+      return;
+    }  else {
+      let submitObj = this.courseManageForm.value;
+      submitObj.imagePath = this.imgSrc;
+      console.log(submitObj);
+      let url
+      this.editFlag ? url = 'whizhack_cms/course/Update' : url = 'whizhack_cms/course/Insert'
 
-    this.api.setHttp( this.editFlag ? 'put':'post', url, false, submitObj, false, 'whizhackService');
-    this.api.getHttp().subscribe({
-      next: ((res: any) => {
-        if (res.statusCode === '200') {
-          this.getAllCourseList();
-          this.clearForm();
+      this.api.setHttp(this.editFlag ? 'put' : 'post', url, false, submitObj, false, 'whizhackService');
+      this.api.getHttp().subscribe({
+        next: ((res: any) => {
+          if (res.statusCode === '200') {
+            this.getAllCourseList();
+            this.clearForm();
+          }
+        }),
+        error: (error: any) => {
+          console.log(error);
         }
-      }),
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
+      })
+    }
   }
 
-  }
-
-  deleteImage() {
-    this.imgSrc = ''
-    this.file.nativeElement.value = ''
-  }
-
-  onClickViewImage() {
-    window.open(this.imgSrc, '_blank');
-  }
 }
