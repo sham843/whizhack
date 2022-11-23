@@ -1,25 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  title: string;
-  srno: number;
-  gallery: string;
-  action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {srno: 1, title: 'Hydrogen', gallery: '', action: 'H'},
-  {srno: 2, title: 'Helium', gallery: '', action: 'He'},
-  {srno: 3, title: 'Lithium', gallery: '', action: 'Li'},
-  {srno: 4, title: 'Beryllium', gallery: '', action: 'Be'},
-  {srno: 5, title: 'Boron', gallery: '', action: 'B'},
-  {srno: 6, title: 'Carbon', gallery: '', action: 'C'},
-  {srno: 7, title: 'Nitrogen', gallery: '', action: 'N'},
-  {srno: 8, title: 'Oxygen', gallery: '', action: 'O'},
-  {srno: 9, title: 'Fluorine', gallery: '', action: 'F'},
-  {srno: 10, title: 'Neon', gallery: '', action: 'Ne'},
-];
-
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from 'src/app/core/services/api.service';
+import { FileUploadService } from 'src/app/core/services/file-upload.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 @Component({
   selector: 'app-gallery-master',
   templateUrl: './gallery-master.component.html',
@@ -27,12 +12,108 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class GalleryMasterComponent implements OnInit {
 
-  displayedColumns: string[] = ['srno', 'title', 'gallery', 'action'];
-  dataSource = ELEMENT_DATA;
+  frmGallery!:FormGroup;
+  get g() { return this.frmGallery.controls };
+  @ViewChild('uploadDocument') uploadDocument!: ElementRef;
+  totalCount: number = 0;
+  currentPage: number = 0;
 
-  constructor() { }
+  displayedColumns: string[] = ['srno', 'title', 'action'];
+  dataSource: any;
+
+  constructor(private fb: FormBuilder, 
+    public vs: FormValidationService,
+    private fileUploadService: FileUploadService,
+    private api: ApiService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.createMediaForm();
+    this.getGalleryList();
+  }
+
+  createMediaForm(){
+    this.frmGallery = this.fb.group({
+      id: [0],
+      gallery_title: ['', [Validators.required]],
+      gallery_description: ['', [Validators.required]],
+      uploadImages: ['', [Validators.required]],
+    })
+  }
+
+  onClickPaginatior(event:any){
+    this.currentPage = event.pageIndex;
+    this.getGalleryList();
+  }
+
+  getGalleryList(){
+
+  }
+
+  mediaFileUpload(event: any) {
+    console.log(event);
+    this.fileUploadService.uploadDocuments(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
+      if (res.statusCode == 200) {
+
+      }else{
+        this.uploadDocument.nativeElement.value = ''
+      }
+    })
+  }
+
+  onMediaSubmit(){
+    if(this.frmGallery.invalid){
+      return;
+    }else{
+
+    }
+  }
+
+  editGalleryRecord(data: any){
+    this.frmGallery.patchValue({
+      gallery_title: data
+    })
+  }
+
+  deleteGalleryRecord(data: any){
+    let dialoObj = {
+      header: 'Delete',
+      title:'Do you want to delete the selected course ?',
+      cancelButton:'Cancel',
+      okButton:'Ok'
+    }
+
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '300px',
+      data: dialoObj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'yes'){
+        let deleteObj = {
+          "id": data.id,
+          "modifiedBy": 0,
+        }
+    
+        this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode === '200') {
+              this.getGalleryList();
+            }
+          }),
+          error: (error: any) => {
+            console.log(error);
+          }
+        })
+      }
+    });
+    
+  }
+
+  clearGalleryForm(){
+    this.frmGallery.reset();
+    this.createMediaForm();
   }
 
 }
