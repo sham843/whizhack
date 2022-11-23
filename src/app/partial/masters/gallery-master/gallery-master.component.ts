@@ -1,3 +1,4 @@
+import { WebStorageService } from './../../../core/services/web-storage.service';
 // import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -45,6 +46,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     private _fileUploadService: FileUploadService,
     public _commonMethodService: CommonMethodService,
     // private _errorService: ErrorHandlerService,
+    public _webStorageService:WebStorageService,
     private api: ApiService,
     public dialog: MatDialog) { }
 
@@ -124,41 +126,74 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this._fileUploadService.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
       if (res.statusCode === "200") {
         this.imagepath = res.responseData;
-        if( this.imageArray.length){
-         let flag= this.imagepath.includes(',')
-         flag ? this.imageArray.push(this.imagepath.split(',')):this.imageArray.push(this.imagepath);
-        }else{
+        if (this.imageArray.length) {
+          let flag = this.imagepath.includes(',')
+          flag ? this.imageArray.push(this.imagepath.split(',')) : this.imageArray.push(this.imagepath);
+        } else {
           this.imageArray = this.imagepath.split(',');
         }
 
       } else {
+        this.imagepath = '';
         this.fileInput.nativeElement.value = '';
         this.imageArray = [];
       }
     })
   }
-//#endregion
+  //#endregion
 
-//#region  Delete IMG Start Here
-deleteImage(ind:number){
-this.imageArray .splice(ind,1);
-}
+  //#region  Delete IMG Start Here
+  deleteImage(ind: number) {
+    this.imageArray.splice(ind, 1);
+  }
 
-//#endregion
+  //#endregion
 
-
+  //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid) {
       return;
-    } else {
-
     }
+
+    if (!this.imageArray.length) {
+      this._commonMethodService.matSnackBar("Please upload image", 1);
+      return
+    }
+
+    let obj ={
+      "createdBy":this._webStorageService.getUserId(),
+      "modifiedBy": this._webStorageService.getUserId(),
+      "createdDate": new Date(),
+      "modifiedDate": new Date(),
+      "isDeleted": false,
+      "id": 0,
+      "gallery_Title": "string",
+      "description": "string",
+      "imagepath": "string"
+    }
+    this.api.setHttp('post', 'whizhack_cms/Gallery/Insert' , false, obj, false, 'whizhackService');
+    this.api.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode === '200') {
+          this._commonMethodService.matSnackBar(res.statusMessage,0);
+        } else {
+            this._commonMethodService.matSnackBar(res.statusMessage, 1);
+        }
+      }),
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+
   }
+
 
   editGalleryRecord(data: any) {
     this.frmGallery.patchValue({
-      gallery_title: data
-    })
+      gallery_description   : data?.description,
+      gallery_title :  data?.gallery_Title  ,
+    });
+    this.imageArray = data.imagepaths;
   }
 
   deleteGalleryRecord(data: any) {
