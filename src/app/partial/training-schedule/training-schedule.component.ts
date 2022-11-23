@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
 
 
@@ -149,23 +150,44 @@ export class TrainingScheduleComponent implements OnInit {
     this.getAllCourseList();
   }
 
-  deleteCourse(id: any) {
-    let deleteObj = {
-      "id": id,
-      "modifiedBy": 0,
+  openDeleteDialog(id: any) {
+    let dialoObj = {
+      title:'Do you want to delete the selected course ?',
+      cancelButton:'Cancel',
+      okButton:'Ok'
     }
 
-    this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
-    this.api.getHttp().subscribe({
-      next: ((res: any) => {
-        if (res.statusCode === '200') {
-          this.getAllCourseList();
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '300px',
+      data: dialoObj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'yes'){
+        let deleteObj = {
+          "id": id,
+          "modifiedBy": 0,
         }
-      }),
-      error: (error: any) => {
-        console.log(error);
+    
+        this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode === '200') {
+              this.getAllCourseList();
+            }
+          }),
+          error: (error: any) => {
+            console.log(error);
+          }
+        })
+      }else{
+        this.getAllCourseList();
       }
-    })
+    });
+
+
+
+   
   }
 
   clearForm() {
@@ -178,8 +200,7 @@ export class TrainingScheduleComponent implements OnInit {
 
   onClickSubmit() {
     // this.sumitted = true
-    if (this.courseManageForm.invalid) {
-      console.log(this.courseManageForm.value);      
+    if (!this.courseManageForm.valid) {      
       return;
     }  else {
       let submitObj = this.courseManageForm.value;
