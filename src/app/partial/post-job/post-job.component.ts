@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
-// import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
  import { ApiService } from 'src/app/core/services/api.service';
  import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
-
+ import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 export interface PeriodicElement {
   title: string;
   srno: number;
@@ -37,16 +38,17 @@ export interface PeriodicElement {
 })
 export class PostJobComponent implements OnInit {
   postNewJobFrm!:FormGroup;
-  displayedColumns: string[] = ['srno', 'title', 'location', 'postdate','lastdate','actions'];
+  displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting','date_of_Application','publish','actions'];
   // 'publish',
-  dataSource = new Array();
+  dataSource:any;
   editFlag:boolean=false;
+  buttonValue: string = 'Submit';
   constructor(public dialog: MatDialog,private fb:FormBuilder,
-    // private snackbar:MatSnackBar,
+     private snackbar:MatSnackBar,
     private service:ApiService,
      private error:ErrorHandlerService
     ) { }
-
+    @ViewChild(MatSort) sort!: MatSort;
   editorRoles!: Editor;
   editorExperience!: Editor;
   editorQualification!: Editor;
@@ -75,15 +77,17 @@ export class PostJobComponent implements OnInit {
 // ----------------------------Start Form Field Here-------------------------------
   formData(){
     this.postNewJobFrm = this.fb.group({
-      jobTitle: ['',Validators.required],
-      jobLocation: ['',Validators.required],
-      dateOfPosting: ['',Validators.required],
-      lastDateOfApp: ['',Validators.required],
-      description: ['',Validators.required],
-      roles: [''],
-      experience: [''],
-      qualification:[''],
-       skills:['']
+      id: 0,
+      job_Title: ['',Validators.required],
+      job_Location: ['',Validators.required],
+      date_of_Posting: ['',Validators.required],
+      date_of_Application: ['',Validators.required],
+      job_Description: ['',Validators.required],
+      roles_and_Responsibility: [''],
+      qualification: [''],
+      experience:[''],
+      skills_Required:[''],
+      publish:true
     });
   }
   // ----------------------------End Form Field Here-------------------------------
@@ -97,11 +101,13 @@ export class PostJobComponent implements OnInit {
   //----------------------------Start Bind Table Logic Here--------------------
   // http://whizhackwebapi.mahamining.com/whizhack_cms/postjobs/GetAllCourses?pageno=1&pagesize=10
 bindTable(){
-  this.service.setHttp('get','whizhack_cms/postjobs/GetAllCourses?pageno=1&pagesize=10',false,false,false,'whizhackService');
+  this.service.setHttp('get','whizhack_cms/postjobs/GetAllPostJobs?pageno=1&pagesize=10',false,false,false,'whizhackService');
   this.service.getHttp().subscribe({
     next:(res:any)=>{
       if(res.statusCode == '200'){
-        this.dataSource=res.responseData;
+        this.dataSource=new MatTableDataSource(res.responseData);
+        this.dataSource.sort =this.sort; 
+        console.log(this.dataSource)
       }
       else{
         this.dataSource=[];
@@ -123,74 +129,115 @@ openDialog1(obj?: any): void {
   });
 }
 //----------------------------Start Publish Button Logic Here------------------
-// onClickToggle(element:any){ 
-//   this.service.setHttp('put','',false,false,false,'whizhackService');
-//   this.service.getHttp().subscribe({
-//     next: (res: any) =>{
-//       if(res.statusCode == '200')
-//       {
-//       this.bindTable();
-//       console.log("Toggle",element);   
-//       } 
-//     }
-//   })
-// }
+onClickToggle(element:any){ 
+  let isPublishFlag = {
+    "jobpostId": element.jobpostId,
+  // "publish": true
+   "publish": element.publish ? false : true
+  }
+  this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish',false,isPublishFlag,false,'whizhackService');
+  this.service.getHttp().subscribe({
+    next: (res: any) =>{
+      if(res.statusCode == '200')
+      {
+      this.bindTable();
+      console.log("Toggle",element);   
+      } 
+    }
+  })
+}
 //----------------------------End Publish Button Logic Here------------------
 
-// ----------------------------Start Delete Logic Here-------------------------
-// onDelete(id:any){
-//   this.service.setHttp('delete',''+id,false,false,false,'whizhackService');
-//   this.service.getHttp().subscribe({
-//     next:(res:any)=>{
-//       if(res.statusCode == '200'){
-//         this.snackbar.open(res.statusMessage,'ok');
-//         this.bindTable();
-//       }
-//     },
-//     error:(error:any)=>{
-//       console.log("Error",error);
-//       this.error.handelError(error.statusCode);
-//     }
-//   })
+onEdit(editObj:any){
+  console.log("editobj",editObj)
+  this.editFlag=true;
+  this.buttonValue = 'Update';
+  let obj1=editObj;
+  this.postNewJobFrm.patchValue({
+  createdBy: 0,
+  modifiedBy: 0,
+  createdDate:new Date(),
+  modifiedDate:new Date(),
+  isDeleted: true,
+  id:obj1.jobpostId,
+  job_Title:obj1.job_Title,
+  job_Location:obj1.job_Location,
+  date_of_Posting:obj1.date_of_Posting,
+  date_of_Application:obj1.date_of_Application,
+  job_Description:obj1.job_Description,
+  roles_and_Responsibility:obj1.roles_and_Responsibility,
+  qualification:obj1.qualification,
+  experience:obj1.experience,
+  skills_Required:obj1.skills_Required,
+  publish:true
+  })
+}
 
-// }
+// ----------------------------Start Delete Logic Here-------------------------
+onDelete(data:any){
+ let obj={
+    id: data.jobpostId,
+  modifiedBy: 0
+  }
+  this.service.setHttp('delete','whizhack_cms/postjobs/Delete',false,obj,false,'whizhackService');
+  this.service.getHttp().subscribe({
+    next:(res:any)=>{
+      if(res.statusCode == '200'){
+        this.snackbar.open(res.statusMessage,'ok');
+        this.bindTable();
+      }
+    },
+    error:(error:any)=>{
+      console.log("Error",error);
+      this.error.handelError(error.statusCode);
+    }
+  })
+
+}
 // ----------------------------End Delete Logic Here---------------------------
 
 // ----------------------------Start Submit Logic Here-------------------------
-  // onSubmit(){
-  //   let data=this.postNewJobFrm.value;
-  //   if(!this.editFlag){
-  //     this.service.setHttp('post','',false,data,false,'whizhackService');
-  //     this.service.getHttp().subscribe({
-  //       next:(res:any)=>{
-  //         if (res.statusCode == '200'){
-  //           this.snackbar.open(res.statusMessage, 'ok');
-  //           this.bindTable();
-  //         }
-  //       },
-  //       error:(error:any)=>{
-  //         console.log("Error:",error);
-  //         this.error.handelError(error.statusCode)
-  //       }
-  //     })
-  //   }
-  //   else{
-  //     this.editFlag=true;
-  //     this.service.setHttp('put','',false,data,false,'whizhackService');
-  //     this.service.getHttp().subscribe({
-  //       next:(res:any)=>{
-  //         if(res.statusCode == '200'){
-  //           this.snackbar.open(res.statusMessage,'ok');
-  //           this.bindTable();
-  //         }
-  //       },
-  //         error: (error: any) => {
-  //           console.log("Error : ", error);
-  //           this.error.handelError(error.statusCode);
+  onSubmit(){
+    let data=this.postNewJobFrm.value;
+    if(!this.editFlag){
+      this.service.setHttp('post','whizhack_cms/postjobs/Insert',false,data,false,'whizhackService');
+      this.service.getHttp().subscribe({
+        next:(res:any)=>{
+          if (res.statusCode == '200'){
+            this.snackbar.open(res.statusMessage, 'ok');
+            this.bindTable();
+          }
+        },
+        error:(error:any)=>{
+          console.log("Error:",error);
+          this.error.handelError(error.statusCode)
+        }
+      })
+    }
+  else{
+      this.editFlag=true;
+      //data.id = this.editObj.jobpostId
+      this.service.setHttp('put','whizhack_cms/postjobs/Update',false,data,false,'whizhackService');
+      this.service.getHttp().subscribe({
+        next:(res:any)=>{
+          if(res.statusCode == '200'){
+            this.snackbar.open(res.statusMessage,'ok');
+            this.bindTable();
+          }
+        },
+          error: (error: any) => {
+            console.log("Error : ", error);
+            this.error.handelError(error.statusCode);
           
-  //       }
-  //     })
-  //   }
-  // }
+        }
+      })
+    }
+  }
  // ----------------------------End Submit Logic Here-------------------------------
+
+ onClickClear(){
+  this.postNewJobFrm.reset();
+  this.formData();
+  this.buttonValue = 'Submit'
+}
 }
