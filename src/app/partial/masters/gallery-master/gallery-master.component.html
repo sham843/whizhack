@@ -1,96 +1,107 @@
 <div class="row">
     <div class="col-sm-4">
         <div class="card form-card">
-            <div class="card-header">Media Coverage</div>
+            <div class="card-header">Gallery</div>
             <div class="card-body">
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Gallery Title</mat-label>
-                        <input matInput placeholder="Gallery Title">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="legacy" class="w-100">
-                        <mat-label>"Gallery Description</mat-label>
-                        <textarea matInput placeholder="Gallery Description" rows="5"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="mb-5">
-                    <input id="upload" type="file" accept="image/*" />
-                </div>
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between flex-wrap gap-4">
-                        <div class="gallery">
-                            <img src="assets/image/about-us/Media-Coverage-1.png">
-                            <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                        <div class="gallery">
-                            <img src="assets/image/about-us/Media-Coverage-1.png">
-                            <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                        <div class="gallery">
-                            <img src="assets/image/about-us/Media-Coverage-1.png">
-                            <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                        <div class="gallery">
-                            <img src="assets/image/about-us/Media-Coverage-1.png">
-                            <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
+                <form [formGroup]="frmGallery" (ngSubmit)="onMediaSubmit()">
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Gallery Title</mat-label>
+                            <input matInput placeholder="Gallery Title" formControlName="gallery_title" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">                            
+                            <mat-error *ngIf="g['gallery_title']?.errors">
+                                <span *ngIf="g['gallery_title']?.hasError('required')"> Gallery title is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="legacy" class="w-100">
+                            <mat-label>Gallery Description</mat-label>
+                            <textarea matInput placeholder="Gallery Description" rows="5" formControlName="gallery_description" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpaces($event)" maxlength="200"></textarea>
+                            <mat-error *ngIf="g['gallery_description']?.errors">
+                                <span *ngIf="g['gallery_description']?.hasError('required')"> Gallery description is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-5">
+                        <input id="upload" type="file" accept="image/*" formControlName="uploadImages" (change)="mediaFileUpload($event)"/>
+                        <mat-error *ngIf="g['uploadImages']?.errors">
+                            <span *ngIf="g['uploadImages']?.hasError('required')"> Images are required</span>
+                        </mat-error>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between flex-wrap gap-4">
+                            <div class="gallery">
+                                <img src="assets/image/about-us/Media-Coverage-1.png">
+                                <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="gallery">
+                                <img src="assets/image/about-us/Media-Coverage-1.png">
+                                <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="gallery">
+                                <img src="assets/image/about-us/Media-Coverage-1.png">
+                                <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="gallery">
+                                <img src="assets/image/about-us/Media-Coverage-1.png">
+                                <button mat-icon-button class="bg-danger bg-opacity-25 text-danger">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button type="button" mat-stroked-button class="btn-main">Submit</button>
-                </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearGalleryForm()">Cancel</button>
+                        <button type="submit" mat-stroked-button class="btn-main">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="col-sm-8">
         <div class="card form-card">
             <div class="card-header">
-                <span>Media Coverage List</span>
+                <span>Gallery List</span>
             </div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
                     <ng-container matColumnDef="srno">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
-                        <td mat-cell *matCellDef="let element" class="srno"> {{element.srno}} </td>
+                        <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{((currentPage + 1) * 10 + i + 1)-10}} </td>
                     </ng-container>
                     <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef> Gallery Title </th>
                         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="gallery">
+                    <!-- <ng-container matColumnDef="gallery">
                         <th mat-header-cell *matHeaderCellDef> Article Source </th>
                         <td mat-cell *matCellDef="let element"> 
                             <img src="assets/image/home/Product1.png" class="table-img">
                         </td>
-                    </ng-container>
+                    </ng-container> -->
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button class="text-warning">
+                            <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger">
+                            <button mat-icon-button class="text-danger" (click)="deleteGalleryRecord(element)">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
@@ -100,6 +111,10 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <ng-container *ngIf="totalCount > 1">
+                    <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
+                        (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
+                </ng-container>
             </div>
         </div>
     </div>
