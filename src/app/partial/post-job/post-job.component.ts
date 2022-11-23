@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
  import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
  import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 export interface PeriodicElement {
   title: string;
   srno: number;
@@ -18,18 +19,7 @@ export interface PeriodicElement {
   actions: string;
 }
 
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {srno: 1, title: 'Hydrogen', location: '1.0079', postdate: 'H', lastdate: 'H',publish:'',actions:''},
-//   {srno: 2, title: 'Helium', location: '4.0026', postdate: 'He', lastdate: 'H',publish:'',actions:''},
-//   {srno: 3, title: 'Lithium', location: '6.941', postdate: 'Li', lastdate: 'H',publish:'',actions:''},
-//   {srno: 4, title: 'Beryllium', location: '9.0122', postdate: 'Be', lastdate: 'H',publish:'',actions:''},
-//   {srno: 5, title: 'Boron', location: '10.811', postdate: 'B', lastdate: 'H',publish:'',actions:''},
-//   {srno: 6, title: 'Carbon', location: '12.0107', postdate: 'C', lastdate: 'H',publish:'',actions:''},
-//   {srno: 7, title: 'Nitrogen', location: '14.0067', postdate: 'N', lastdate: 'H',publish:'',actions:''},
-//   {srno: 8, title: 'Oxygen', location: '15.9994', postdate: 'O', lastdate: 'H',publish:'',actions:''},
-//   {srno: 9, title: 'Fluorine', location: '18.9984', postdate: 'F', lastdate: 'H',publish:'',actions:''},
-//   {srno: 10, title: 'Neon', location: '20.1797', postdate: 'Ne', lastdate: 'H',publish:'',actions:''},
-// ];
+
 
 @Component({
   selector: 'app-post-job',
@@ -39,10 +29,12 @@ export interface PeriodicElement {
 export class PostJobComponent implements OnInit {
   postNewJobFrm!:FormGroup;
   displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting','date_of_Application','publish','actions'];
-  // 'publish',
   dataSource:any;
   editFlag:boolean=false;
   buttonValue: string = 'Submit';
+  pageSize: number = 10;
+currentPage: number = 0;
+ totalCount: any;
   constructor(public dialog: MatDialog,private fb:FormBuilder,
      private snackbar:MatSnackBar,
     private service:ApiService,
@@ -83,10 +75,10 @@ export class PostJobComponent implements OnInit {
       date_of_Posting: ['',Validators.required],
       date_of_Application: ['',Validators.required],
       job_Description: ['',Validators.required],
-      roles_and_Responsibility: [''],
-      qualification: [''],
-      experience:[''],
-      skills_Required:[''],
+      roles_and_Responsibility: ['',Validators.required],
+      qualification: ['',Validators.required],
+      experience:['',Validators.required],
+      skills_Required:['',Validators.required],
       publish:true
     });
   }
@@ -99,14 +91,14 @@ export class PostJobComponent implements OnInit {
   //---------------------------for Validation Handle---------------------------/
 
   //----------------------------Start Bind Table Logic Here--------------------
-  // http://whizhackwebapi.mahamining.com/whizhack_cms/postjobs/GetAllCourses?pageno=1&pagesize=10
-bindTable(){
-  this.service.setHttp('get','whizhack_cms/postjobs/GetAllPostJobs?pageno=1&pagesize=10',false,false,false,'whizhackService');
+ bindTable(){
+  this.service.setHttp('get','whizhack_cms/postjobs/GetAllPostJobs?pageno='+(this.currentPage+1)+'&pagesize=10',false,false,false,'whizhackService');
   this.service.getHttp().subscribe({
     next:(res:any)=>{
       if(res.statusCode == '200'){
         this.dataSource=new MatTableDataSource(res.responseData);
         this.dataSource.sort =this.sort; 
+        this.totalCount = res.responseData1.pageCount;
         console.log(this.dataSource)
       }
       else{
@@ -120,14 +112,21 @@ bindTable(){
   })
 }
 //----------------------------End Bind Table Logic Here------------------------
-openDialog1(obj?: any): void {
-  this.dialog.open(JobDetailsComponent,{
-    width: '750px',
-  // height: '80%',
+
+//----------------------------view logic start Here------------------------
+openDialog1(obj?: any) {
+  const dialogRef = this.dialog.open(JobDetailsComponent, {
+    height:'80%',
+    width:'80%',
     data: obj,
     disableClose: true
   });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 }
+//----------------------------view logic End Here------------------------
+
 //----------------------------Start Publish Button Logic Here------------------
 onClickToggle(element:any){ 
   let isPublishFlag = {
@@ -172,7 +171,43 @@ onEdit(editObj:any){
   publish:true
   })
 }
+//---------------------------Start Delete Logic Here---------------------------------------
+openDeleteDialog(id: any) {
+  let dialoObj = {
+    title:'Do you want to delete the selected course ?',
+    cancelButton:'Cancel',
+    okButton:'Ok'
+  }
 
+  const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+    width: '300px',
+    data: dialoObj
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'yes'){
+      let deleteObj = {
+        "id": id,
+        "modifiedBy": 0,
+      }
+  
+      this.service.setHttp('delete', 'whizhack_cms/postjobs/Delete', false, deleteObj, false, 'whizhackService');
+      this.service.getHttp().subscribe({
+        next: ((res: any) => {
+          if (res.statusCode === '200') {
+            this.bindTable();
+          }
+        }),
+        error: (error: any) => {
+          console.log(error);
+        }
+      })
+    }else{
+      this.bindTable();
+    }
+  });
+}
+// ----------------------------End Delete Logic Here---------------------------
 // ----------------------------Start Delete Logic Here-------------------------
 onDelete(data:any){
  let obj={
@@ -194,50 +229,42 @@ onDelete(data:any){
   })
 
 }
-// ----------------------------End Delete Logic Here---------------------------
+// ----------------------------End Delete Logic Here-------------------------
 
 // ----------------------------Start Submit Logic Here-------------------------
-  onSubmit(){
-    let data=this.postNewJobFrm.value;
-    if(!this.editFlag){
-      this.service.setHttp('post','whizhack_cms/postjobs/Insert',false,data,false,'whizhackService');
+  onSubmit() {
+  if (!this.postNewJobFrm.valid) {      
+      return;
+    }  else {
+      let data = this.postNewJobFrm.value;
+     console.log(data);
+      let url
+      this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
+
+      this.service.setHttp(this.editFlag ? 'put' : 'post', url, false, data, false, 'whizhackService');
       this.service.getHttp().subscribe({
-        next:(res:any)=>{
-          if (res.statusCode == '200'){
-            this.snackbar.open(res.statusMessage, 'ok');
+        next: ((res: any) => {
+          if (res.statusCode === '200') {
             this.bindTable();
+            this.onClickClear();
           }
-        },
-        error:(error:any)=>{
-          console.log("Error:",error);
-          this.error.handelError(error.statusCode)
-        }
-      })
-    }
-  else{
-      this.editFlag=true;
-      //data.id = this.editObj.jobpostId
-      this.service.setHttp('put','whizhack_cms/postjobs/Update',false,data,false,'whizhackService');
-      this.service.getHttp().subscribe({
-        next:(res:any)=>{
-          if(res.statusCode == '200'){
-            this.snackbar.open(res.statusMessage,'ok');
-            this.bindTable();
-          }
-        },
-          error: (error: any) => {
-            console.log("Error : ", error);
-            this.error.handelError(error.statusCode);
-          
+        }),
+        error: (error: any) => {
+          console.log(error);
         }
       })
     }
   }
  // ----------------------------End Submit Logic Here-------------------------------
-
- onClickClear(){
+onClickClear(){
   this.postNewJobFrm.reset();
   this.formData();
   this.buttonValue = 'Submit'
+}
+//------------------------------------Pagination Logic Start------------------------
+paginationEvent(event: any) {
+  this.currentPage = event.pageIndex;
+  this.pageSize = event.pageSize;
+  this.bindTable();
 }
 }
