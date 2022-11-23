@@ -232,7 +232,7 @@ onDelete(data:any){
 // ----------------------------End Delete Logic Here-------------------------
 
 // ----------------------------Start Submit Logic Here-------------------------
-  onSubmit() {
+  onSubmit(frm:any) {
   if (!this.postNewJobFrm.valid) {      
       return;
     }  else {
@@ -246,7 +246,7 @@ onDelete(data:any){
         next: ((res: any) => {
           if (res.statusCode === '200') {
             this.bindTable();
-            this.onClickClear();
+            this.onClickClear(frm);
           }
         }),
         error: (error: any) => {
@@ -256,8 +256,8 @@ onDelete(data:any){
     }
   }
  // ----------------------------End Submit Logic Here-------------------------------
-onClickClear(){
-  this.postNewJobFrm.reset();
+onClickClear(frm?:any){
+  frm.resetForm();
   this.formData();
   this.buttonValue = 'Submit'
 }
