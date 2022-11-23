@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from 'src/app/core/services/api.service';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,9 +11,84 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
   hide = true;
-  constructor() { }
+  registerForm! : FormGroup;
+  displayFields : boolean = false;
+  displayFields1 : boolean = false;
+  obj = { "createdBy": 0,
+  "modifiedBy": 0,
+  "createdDate": "2022-11-23T12:46:11.832Z",
+  "modifiedDate": "2022-11-23T12:46:11.832Z",
+  "isDeleted": false,
+  "id": 0,
+  "mobileNo": "",
+  "otp": "",
+  "pageName": "string",
+  "otpExpireDate": "2022-11-23T12:46:11.832Z",
+  "isUser": true}
+  stringOtp : string = '';
+  constructor(private fb : FormBuilder, private api : ApiService, private mat : MatSnackBar) { }
 
   ngOnInit(): void {
+    this.defaultForm();
+  }
+
+  defaultForm(){
+    this.registerForm = this.fb.group({
+      "mobile":"",
+      "digitOne":"",
+      "digitTwo":"",
+      "digitThree":"",
+      "digitFour":"",
+      "digitFive":"",
+      "passwordNew":"",
+      "retypePassword":""
+    })
+  }
+
+  sendOTP(){
+    let objj = this.registerForm.value;
+    this.obj.mobileNo = objj.mobile;
+    this.api.setHttp('post','whizhack_cms/login/AddOTP',false,this.obj,false,'whizhackService');
+    this.api.getHttp().subscribe({
+      next: (res: any) => {        
+        res.statusCode == 200 || res.statusCode == 404? this.mat.open(res.statusMessage,'ok',{duration:2000}):'';
+        res.statusCode == 200 ? this.displayFields = true : false;
+      }
+    })
+  }
+   verifyOTP(){
+    let obj  = this.registerForm.value;
+    let otp = obj.digitOne+obj.digitTwo+obj.digitThree+obj.digitFour+obj.digitFive;
+    this.stringOtp = otp.toString();
+    this.obj.otp = this.stringOtp;
+  
+    this.api.setHttp('post','whizhack_cms/login/VerifyOTP',false,this.obj,false,'whizhackService');
+    this.api.getHttp().subscribe({
+      next: (res: any) => {        
+        res.statusCode == 200 || res.statusCode == 409? this.mat.open(res.statusMessage,'ok',{duration:2000}):'';
+        res.statusCode == 200 ? this.displayFields1 = true : false;
+      }
+    })
+   }
+
+  onSumbit(clear : any){
+    let obj  = this.registerForm.value;
+    let otp = obj.digitOne+obj.digitTwo+obj.digitThree+obj.digitFour+obj.digitFive;
+    this.stringOtp = otp.toString();
+    obj.otp = this.stringOtp
+    if(obj.passwordNew == obj.retypePassword){
+    this.api.setHttp('put','whizhack_cms/login/ForgotPassword?UserName=anand&Password='+obj.passwordNew+'&NewPassword='+obj.retypePassword+'&MobileNo='+obj.mobile,false,false,false,'whizhackService');
+    this.api.getHttp().subscribe({
+      next: (res: any) => {        
+        res.statusCode == 200 || res.statusCode == 409? (this.mat.open(res.statusMessage,'ok',{duration:2000}), clear.resetForm()):'';
+      }
+    })
+   }
+   else{
+    this.mat.open('incorrect password','ok',{duration:2000})
+   }
+   
+    
   }
 
 }

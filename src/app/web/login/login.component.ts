@@ -13,6 +13,7 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class LoginComponent implements OnInit {
   hide = true;
   loginForm!: FormGroup;
+  get f() { return this.loginForm.controls }
   constructor(private commonMethodService: CommonMethodService, private fb: FormBuilder,
     public validation: FormValidationService, private service: ApiService, private router: Router) { }
 
