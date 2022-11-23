@@ -50,15 +50,10 @@ section {
 .g-overlay {
     min-width: 320px;
   }
-  
-  gallery {
-    font-size: 16px;
-  }
-  
-  img {
-    width: 150px;
-  }
-  
-  .lightbox-example, .gallerize-example {
-    margin: 2em;
-  }
+.culture-image{
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position:top;
+}
