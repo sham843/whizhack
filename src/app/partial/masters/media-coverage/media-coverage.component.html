@@ -3,28 +3,39 @@
         <div class="card form-card">
             <div class="card-header">Media Coverage</div>
             <div class="card-body">
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Article Title</mat-label>
-                        <input matInput placeholder="Article Title">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Article Source</mat-label>
-                        <input matInput placeholder="Article Source">
-                    </mat-form-field>
-                </div>
-                <div class="mb-3">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Article URL</mat-label>
-                        <input matInput placeholder="Article URL">
-                    </mat-form-field>
-                </div>   
-                <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button type="button" mat-stroked-button class="btn-main">Submit</button>
-                </div>
+                <form [formGroup]="frmMedia" (ngSubmit)="onMediaSubmit()">
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Article Title</mat-label>
+                            <input matInput placeholder="Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
+                            <mat-error *ngIf="f['article_Title']?.errors">
+                                <span *ngIf="f['article_Title']?.hasError('required')"> Article title is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Article Source</mat-label>
+                            <input matInput placeholder="Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="20">
+                            <mat-error *ngIf="f['source']?.errors">
+                                <span *ngIf="f['source']?.hasError('required')"> Article source is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Article URL</mat-label>
+                            <input matInput placeholder="Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
+                            <mat-error *ngIf="f['url']?.errors">
+                                <span *ngIf="f['url']?.hasError('required')"> Article url is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>   
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearMediaForm()">Cancel</button>
+                        <button type="submit" mat-stroked-button class="btn-main">{{submitBtnTxt}}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
