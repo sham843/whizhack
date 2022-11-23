@@ -75,7 +75,7 @@ export class CommonMethodService {
     })
   }
 
-  epicFunction() {
+  getDeviceInfo() {
     var deviceInfo = this.deviceService.getDeviceInfo();
     console.log(deviceInfo);
   }
