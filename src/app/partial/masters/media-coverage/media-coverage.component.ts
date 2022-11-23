@@ -1,38 +1,111 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  srno: number;
-  title: string;
-  source: string;
-  url: string;
-  action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {srno: 1, title: 'Hydrogen', source: 'News Paper', url: 'H', action: ''},
-  {srno: 2, title: 'Helium', source: 'News Paper', url: 'He', action: ''},
-  {srno: 3, title: 'Lithium', source: 'News Paper', url: 'Li', action: ''},
-  {srno: 4, title: 'Beryllium', source: 'News Paper', url: 'Be', action: ''},
-  {srno: 5, title: 'Boron', source: 'News Paper', url: 'B', action: ''},
-  {srno: 6, title: 'Carbon', source: 'News Paper', url: 'C', action: ''},
-  {srno: 7, title: 'Nitrogen', source: 'News Paper', url: 'N', action: ''},
-  {srno: 8, title: 'Oxygen', source: 'News Paper', url: 'O', action: ''},
-  {srno: 9, title: 'Fluorine', source: 'News Paper', url: 'F', action: ''},
-  {srno: 10, title: 'Neon', source: 'News Paper', url: 'Ne', action: ''},
-];
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from 'src/app/core/services/api.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 @Component({
   selector: 'app-media-coverage',
   templateUrl: './media-coverage.component.html',
   styleUrls: ['./media-coverage.component.css']
 })
 export class MediaCoverageComponent implements OnInit {
-  displayedColumns: string[] = ['srno', 'title', 'source', 'url', 'action'];
-  dataSource = ELEMENT_DATA;
+
+  frmMedia!:FormGroup;
+  submitBtnTxt:string = 'Submit';
+  get f() { return this.frmMedia.controls };
+  totalCount: number = 0;
+  currentPage: number = 0;
+
+  displayedColumns: string[] = ['srno', 'title', 'action'];
+  dataSource: any;
   
-  constructor() { }
+  constructor(private fb: FormBuilder, 
+    public vs: FormValidationService,
+    private api: ApiService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.createMediaForm();
+    this.getMediaList();
+  }
+
+  createMediaForm(){
+    this.frmMedia = this.fb.group({
+      id: [0],
+      article_Title: ['', [Validators.required]],
+      source: ['', [Validators.required]],
+      url: ['', [Validators.required]],
+    })
+  }
+
+  onClickPaginatior(event:any){
+    this.currentPage = event.pageIndex;
+    this.getMediaList();
+  }
+
+  getMediaList(){
+
+  }
+
+  onMediaSubmit(){
+    if(this.frmMedia.invalid){
+      return;
+    }else{
+
+    }
+  }
+
+  editMediaRecord(data: any){
+    this.submitBtnTxt = 'Update'
+    this.frmMedia.patchValue({
+      id: data.id,
+      article_Title: data.article_Title,
+      source: data.source,
+      url: data.url,
+    })
+  }
+
+  deleteMediaRecord(data: any){
+    let dialoObj = {
+      header: 'Delete',
+      title:'Do you want to delete the selected course ?',
+      cancelButton:'Cancel',
+      okButton:'Ok'
+    }
+
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '300px',
+      data: dialoObj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'yes'){
+        let deleteObj = {
+          "id": data.id,
+          "modifiedBy": 0,
+        }
+    
+        this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode === '200') {
+              this.getMediaList();
+            }
+          }),
+          error: (error: any) => {
+            console.log(error);
+          }
+        })
+      }
+    });
+    
+  }
+
+  clearMediaForm(){
+    this.submitBtnTxt = 'Submit';
+    this.frmMedia.reset();
+    this.createMediaForm();
   }
 
 }
