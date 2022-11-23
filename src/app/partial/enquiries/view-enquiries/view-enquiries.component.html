@@ -45,16 +45,12 @@
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">
-                        <!-- I want to take admission for the same course. Please guide me how to enroll to the course, also
-                        tell me
-                        if you provide the
-                        scholarship and accomodation for me. Thanking you. -->
                         {{arr.message}}
                     </span>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" *ngFor="let data of this.deviceDataarray">
             <div class="card form-card border border-white">
                 <div class="card-header">Additional Information</div>
                 <div class="card-body">
@@ -64,11 +60,11 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Operating System :</div>
-                        <div class="form-data">Windows 10</div>
+                        <div class="form-data">{{data.deviceService.os_version}}</div>
                     </div>
                     <div class="mb-0">
                         <div class="form-label">Browser :</div>
-                        <div class="form-data">Google Chrome</div>
+                        <div class="form-data">{{data.deviceService.browser}}</div>
                     </div>
                 </div>
             </div>
