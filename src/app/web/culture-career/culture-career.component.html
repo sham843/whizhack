@@ -99,6 +99,24 @@
     </div>
 </section> -->
 <section>
+    <div class="gallerize-example">
+
+        <h2>Lightbox Example</h2>
+        <p class="container">
+            <img *ngFor="let item of items; index as i" 
+             [lightbox]="i"
+             [src]="item.data.thumb">
+        </p>
+      
+      <h2>Another lightbox with custom gallery config</h2>
+          <p class="container">
+            <img *ngFor="let item of items; index as i" 
+              [lightbox]="i"
+              [gallery]="'anotherLightbox'"
+              [src]="item.data.thumb">
+        </p>
+      
+    </div>
     <div class="container">
         <h2 class="mb-4">Life at WhizHack</h2>
         <div class="row g-5 align-items-center" id="culture">
