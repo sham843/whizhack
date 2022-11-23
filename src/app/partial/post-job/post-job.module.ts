@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.mo
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     PostJobComponent,
@@ -18,7 +19,8 @@ import { NgxEditorModule } from 'ngx-editor';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxEditorModule
+    NgxEditorModule,
+    HttpClientModule
   ]
 })
 export class PostJobModule { }
