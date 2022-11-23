@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h5 class="text-main">Blog Name <small class="text-muted">[Blog Category]</small></h5>
+    <h5 class="text-main">{{ elementData.title }}<small class="text-muted">[{{elementData.blogType == 1 ? 'Blog' : elementData.blogType == 2 ? 'White Paper' : 'Case Study'}}]</small></h5>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -13,9 +13,9 @@
         </div>
         <div class="col-sm-9">
             <div class="blog-height scrollbar">
-                <p>Blog Description</p>
-                <h6 class="text-main">Blog Sub-Title</h6>
-                <p>Blog Sub-Description</p>
+                <p>{{ elementData.description }}</p>
+                <h6 class="text-main" *ngFor="let i = index">{{ elementData.blogRegisterDetailsModel[0].title }}</h6>
+                <p>{{ elementData.blogRegisterDetailsModel[0].description }}</p>
             </div>
         </div>
     </div>
