@@ -53,9 +53,55 @@ export class FileUploadService {
       }
       else {
         obj.next('error');
-        obj.error("Only " + allowedDocTypes + " file format allowed.");   
+        obj.error("Only " + allowedDocTypes + " file format allowed.");
         this.commonService.matSnackBar('Only Supported file Types... pdf, jpg, png, jpeg', 1)
       }
     })
   }
+
+
+  uploadMultipleDocument(event: any, _folderName?: any, allowedDocTypes?: any) {
+
+    let docTypeCheckFlag = true;
+    return new Observable(obj => {
+      const formData = new FormData();
+      if (event.target.files && event.target.files[0]) {
+        var filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+          formData.append("files", event.target.files[i]);
+          let nameText = event.target.files[i].name;
+          console.log(nameText,'444')
+          const selResult = nameText.split('.');
+          const docExt = selResult.pop();
+          const docExtLowerCase =  docExt.toLowerCase();
+          if (allowedDocTypes.match(docExtLowerCase)) { }
+          else {
+            docTypeCheckFlag = false;
+          }
+        }
+      }
+
+      if (docTypeCheckFlag == true) {
+        this.apiService.setHttp('post', 'whizhack_cms/upload/upload-multiple-photos' , false, formData, false, 'whizhackService');
+        this.apiService.getHttp().subscribe({
+          next: (res: any) => {
+            if (res.statusCode === "200") {
+              obj.next(res);
+            }
+            else {
+              this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) :''// this.toastrService.error(res.statusMessage);
+            }
+          },
+          error: ((error: any) => {
+            this.error.handelError(error.status);
+          })
+        })
+      }
+      else {
+        obj.error("Only " + allowedDocTypes + " file format allowed.");
+        this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.",1);
+      }
+    })
+  }
+
 }
