@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 
 export interface PeriodicElement {
   srno: number;
@@ -60,13 +61,24 @@ export class EnquiriesComponent implements OnInit {
     })
   }
 
+  openDeleteDialog(ele?:any):void {
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '30%',
+      data: ele,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      result == 'Yes' ? this.deleteUser() : '';
+    });
+  }
+
   deleteUser(event?: any) {
     let obj;
     obj = {
       "registerId":event.registerId,
       "modifiedBy": 0
     }
-    this.service.setHttp('put', 'whizhack_cms/register/Delete', false, obj, false, 'whizhackService');
+    this.service.setHttp('delete', 'whizhack_cms/register/Delete', false, obj, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {

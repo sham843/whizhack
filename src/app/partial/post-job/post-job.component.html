@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card form-card mb-3">
-            <form [formGroup]="postNewJobFrm">
+            <form [formGroup]="postNewJobFrm" (ngSubmit)="onSubmit()">
                 <!-- (ngSubmit)="onSubmit()" -->
          <div class="card-header">Post New Job</div>
             <div class="card-body">
@@ -10,8 +10,8 @@
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Title</mat-label>
-                                <input matInput placeholder="Job Title" formControlName="jobTitle">
-                                <mat-error  class="mt-2" *ngIf="f['jobTitle'].hasError('required') || f['jobTitle'].hasError('touched')">
+                                <input matInput placeholder="Job Title" formControlName="job_Title">
+                                <mat-error  class="mt-2" *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
                                     Job Title Is Required
                                  </mat-error>
                            </mat-form-field>
@@ -20,8 +20,8 @@
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Location</mat-label>
-                                <input matInput placeholder="Job Location" formControlName="jobLocation"><br>
-                                <mat-error class="mt-2" *ngIf="f['jobLocation'].hasError('required') || f['jobLocation'].hasError('touched')">
+                                <input matInput placeholder="Job Location" formControlName="job_Location"><br>
+                                <mat-error class="mt-2" *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
                                     Job Location Is Required
                                 </mat-error>
                             </mat-form-field>
@@ -30,10 +30,10 @@
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Date Of Posting</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="dateOfPosting">
+                                <input matInput [matDatepicker]="picker" formControlName="date_of_Posting">
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                                <mat-error class="mt-2" *ngIf="f['dateOfPosting'].hasError('required') || f['dateOfPosting'].hasError('touched')">
+                                <mat-error class="mt-2" *ngIf="f['date_of_Posting'].hasError('required') || f['date_of_Posting'].hasError('touched')">
                                     Date Of Posting Is Required
                                    </mat-error>
                             </mat-form-field>
@@ -42,10 +42,10 @@
                         <div class="mb-1">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Last Date of Application</mat-label>
-                                <input matInput [matDatepicker]="picker1" formControlName="lastDateOfApp">
+                                <input matInput [matDatepicker]="picker1" formControlName="date_of_Application">
                                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker #picker1></mat-datepicker>
-                                <mat-error class="mt-2" *ngIf="f['lastDateOfApp'].hasError('required') || f['lastDateOfApp'].hasError('touched')">
+                                <mat-error class="mt-2" *ngIf="f['date_of_Application'].hasError('required') || f['date_of_Application'].hasError('touched')">
                                     Last Date of Application Is Required
                                    </mat-error> 
                           </mat-form-field>
@@ -54,8 +54,8 @@
                         <div class="mb-3">
                             <mat-form-field appearance="legacy" class="w-100">
                                 <mat-label>Job Description</mat-label>
-                                <textarea matInput placeholder="Job Description" rows="5" formControlName="description"></textarea>
-                                <mat-error class="mt-2" *ngIf="f['description'].hasError('required') || f['description'].hasError('touched')">
+                                <textarea matInput placeholder="Job Description" rows="5" formControlName="job_Description"></textarea>
+                                <mat-error class="mt-2" *ngIf="f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')">
                                     Description Is Required
                                 </mat-error>
                                     
@@ -68,7 +68,7 @@
                                 <div class="form-label">Roles & Responsibility</div>
                                 <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorRoles" formControlName="roles">
+                                <ngx-editor [editor]="editorRoles" formControlName="roles_and_Responsibility">
                                 </ngx-editor>
                             </div>
                             <div class="col-sm-6">
@@ -89,7 +89,7 @@
                                 <div class="form-label">Skills Required</div>
                                 <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
                                 </ngx-editor-menu>
-                                <ngx-editor [editor]="editorSkills" formControlName="skills">
+                                <ngx-editor [editor]="editorSkills" formControlName="skills_Required">
                                 </ngx-editor>
                             </div>
                         </div>
@@ -98,8 +98,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button mat-stroked-button class="btn-main">Submit Job Post</button>
+                    <button mat-stroked-button class="btn-main-outline" (click)="onClickClear()">Cancel</button>
+                    <button mat-stroked-button class="btn-main" type="submit">{{buttonValue}}</button>
                 </div>
             </div>
             </form>
@@ -108,38 +108,31 @@
         <div class="card form-card">
             <div class="card-header">Jobs Posted</div>
             <div class="card-body">
-                <table mat-table [dataSource]="dataSource" class="dashboard-table">
-                    <ng-container matColumnDef="srno">
-                        <th mat-header-cell *matHeaderCellDef class="srno">Sr. No. </th>
-                        <td mat-cell *matCellDef="let element" class="srno"> {{element.srno}} </td>
+                <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
+                    <ng-container matColumnDef="srNo">
+                        <th mat-header-cell *matHeaderCellDef class="srno" mat-sort-header>Sr. No. </th>
+                        <td mat-cell *matCellDef="let element" class="srno"> {{element.srNo}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="title">
-                        <th mat-header-cell *matHeaderCellDef> Job Title </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    <ng-container matColumnDef="job_Title">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Title </th>
+                        <td mat-cell *matCellDef="let element"> {{element.job_Title}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="location">
-                        <th mat-header-cell *matHeaderCellDef> Job Location </th>
-                        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                    <ng-container matColumnDef="job_Location">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Location </th>
+                        <td mat-cell *matCellDef="let element"> {{element.job_Location}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="postdate">
-                        <th mat-header-cell *matHeaderCellDef> Date of Posting </th>
-                        <td mat-cell *matCellDef="let element"> {{element.postdate}} </td>
+                    <ng-container matColumnDef="date_of_Posting">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Posting </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date_of_Posting | date: 'dd-MM-yyyy'}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="lastdate">
-                        <th mat-header-cell *matHeaderCellDef> Last Date of Application </th>
-                        <td mat-cell *matCellDef="let element"> {{element.lastdate}} </td>
+                    <ng-container matColumnDef="date_of_Application">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Date of Application </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date_of_Application | date: 'dd-MM-yyyy'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="publish">
-                        <th mat-header-cell *matHeaderCellDef> Publish </th>
-<<<<<<< HEAD
-                        <td mat-cell *matCellDef="let element"> 
-                            <mat-slide-toggle [checked]="element.publish">
-                                <!-- (click)="onClickToggle(element)" -->
-                            </mat-slide-toggle>
-=======
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish </th>
                         <td mat-cell *matCellDef="let element">
-                            <mat-slide-toggle></mat-slide-toggle>
->>>>>>> 5891ae93bfe8ef4c3f87f53098b364f20693dbd6
+                            <mat-slide-toggle [checked]="element.publish" (click)="onClickToggle(element)"></mat-slide-toggle>
                         </td>
                     </ng-container>
 
@@ -151,12 +144,12 @@
                                     visibility
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-warning">
+                            <button mat-icon-button class="text-warning" (click)="onEdit(element)">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger">
+                            <button mat-icon-button class="text-danger" (click)="onDelete(element)">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
