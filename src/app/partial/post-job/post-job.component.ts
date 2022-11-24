@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { FormGroup,FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
  import { ApiService } from 'src/app/core/services/api.service';
  import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
  import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 export interface PeriodicElement {
   title: string;
   srno: number;
@@ -38,9 +39,11 @@ currentPage: number = 0;
   constructor(public dialog: MatDialog,private fb:FormBuilder,
      private snackbar:MatSnackBar,
     private service:ApiService,
-     private error:ErrorHandlerService
+     private error:ErrorHandlerService,
+     public validation: FormValidationService
     ) { }
     @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(FormGroupDirective) formRef!: FormGroupDirective;
   editorRoles!: Editor;
   editorExperience!: Editor;
   editorQualification!: Editor;
@@ -128,23 +131,23 @@ openDialog1(obj?: any) {
 //----------------------------view logic End Here------------------------
 
 //----------------------------Start Publish Button Logic Here------------------
-onClickToggle(element:any){ 
-  let isPublishFlag = {
-    "jobpostId": element.jobpostId,
-  // "publish": true
-   "publish": element.publish ? false : true
-  }
-  this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish',false,isPublishFlag,false,'whizhackService');
-  this.service.getHttp().subscribe({
-    next: (res: any) =>{
-      if(res.statusCode == '200')
-      {
-      this.bindTable();
-      console.log("Toggle",element);   
-      } 
-    }
-  })
-}
+// onClickToggle1(element:any){ 
+//   let isPublishFlag = {
+//     "id": element.jobpostId,
+ 
+//    "publish": element.publish ? false : true
+//   }
+//   this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish',false,isPublishFlag,false,'whizhackService');
+//   this.service.getHttp().subscribe({
+//     next: (res: any) =>{
+//       if(res.statusCode == '200')
+//       {
+//       this.bindTable();
+//       console.log("Toggle",element);   
+//       } 
+//     }
+//   })
+// }
 //----------------------------End Publish Button Logic Here------------------
 
 onEdit(editObj:any){
@@ -170,6 +173,43 @@ onEdit(editObj:any){
   skills_Required:obj1.skills_Required,
   publish:true
   })
+}
+//---------------------------------------------------------------------------------
+onClickToggle(element: any) {
+  let dialoObj = {
+    title:'Do you want to publish the selected field ? ?',
+    cancelButton:'Cancel',
+    okButton:'Ok'
+  }
+
+  const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+    width: '300px',
+    data: dialoObj
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'yes'){
+      let isPublishFlag = {
+        "id": element.jobpostId,
+      // "publish": true
+       "publish": element.publish ? false : true
+      }
+  
+      this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish',false,isPublishFlag,false,'whizhackService');
+      this.service.getHttp().subscribe({
+        next: ((res: any) => {
+          if (res.statusCode === '200') {
+            this.bindTable();
+          }
+        }),
+        error: (error: any) => {
+          console.log(error);
+        }
+      })
+    }else{
+      this.bindTable();
+    }
+  });
 }
 //---------------------------Start Delete Logic Here---------------------------------------
 openDeleteDialog(id: any) {
@@ -232,7 +272,7 @@ onDelete(data:any){
 // ----------------------------End Delete Logic Here-------------------------
 
 // ----------------------------Start Submit Logic Here-------------------------
-  onSubmit(frm:any) {
+  onSubmit() {
   if (!this.postNewJobFrm.valid) {      
       return;
     }  else {
@@ -246,7 +286,8 @@ onDelete(data:any){
         next: ((res: any) => {
           if (res.statusCode === '200') {
             this.bindTable();
-            this.onClickClear(frm);
+            // this.onClickClear(frm);
+            this.clearAll()
           }
         }),
         error: (error: any) => {
@@ -266,5 +307,8 @@ paginationEvent(event: any) {
   this.currentPage = event.pageIndex;
   this.pageSize = event.pageSize;
   this.bindTable();
+}
+clearAll(){
+  this.formRef.resetForm();
 }
 }
