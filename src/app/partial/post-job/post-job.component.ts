@@ -36,7 +36,6 @@ export class PostJobComponent implements OnInit {
   editorQualification!: Editor;
   editorSkills!: Editor;
   
-
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -68,7 +67,6 @@ export class PostJobComponent implements OnInit {
   min = new Date();
   submited:boolean = false;
 
-
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
@@ -94,7 +92,7 @@ export class PostJobComponent implements OnInit {
       id: 0,
       job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
       job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      date_of_Posting: ['', Validators.required],
+      date_of_Posting: [''],
       date_of_Application: ['', Validators.required],
       job_Description: ['', Validators.required],
       roles_and_Responsibility: ['', Validators.required],
@@ -159,7 +157,7 @@ export class PostJobComponent implements OnInit {
       id: obj1.jobpostId,
       job_Title: obj1.job_Title,
       job_Location: obj1.job_Location,
-      date_of_Posting: obj1.date_of_Posting,
+      // date_of_Posting: obj1.date_of_Posting,
       date_of_Application: obj1.date_of_Application,
       job_Description: obj1.job_Description,
       roles_and_Responsibility: obj1.roles_and_Responsibility,
@@ -276,6 +274,7 @@ export class PostJobComponent implements OnInit {
       this.ngxSpinner.show();
       let data = this.postNewJobFrm.value;
       data.publish = false;
+      data.date_of_Posting = new Date();
       this.editFlag ? '' : data.id = 0;
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
