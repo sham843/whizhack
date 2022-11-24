@@ -78,8 +78,8 @@ items!: GalleryItem[];
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required]],
-      gallery_description: ['', [Validators.required]],
+      gallery_title: ['', [Validators.required,Validators.pattern(this.vs.valUserName)]],
+      gallery_description: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
       uploadImages: [''],
     })
   }
@@ -172,7 +172,7 @@ items!: GalleryItem[];
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Please upload image' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Images is required' : this.showImagError = '';
   }
 
   //#endregion
@@ -180,7 +180,7 @@ items!: GalleryItem[];
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Please upload image" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Images is required" : this.showImagError = '';
       return;
     }
 
@@ -220,7 +220,7 @@ items!: GalleryItem[];
 
   }
 
-
+//#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
     this.highlightedRow = data.galleryId;
@@ -230,7 +230,9 @@ items!: GalleryItem[];
     });
     this.imageArray = data.imagepaths;
   }
+//#endregion
 
+//#region delete Record
   deleteGalleryRecord(data: any) {
     this.createMediaForm();
     this.imageArray = [];
@@ -271,6 +273,7 @@ items!: GalleryItem[];
     });
 
   }
+//#endregion
 
   //#region Clear Form And Validation
   clearGalleryForm() {
