@@ -172,7 +172,7 @@ items!: GalleryItem[];
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Please upload image' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Images is required' : this.showImagError = '';
   }
 
   //#endregion
@@ -180,7 +180,7 @@ items!: GalleryItem[];
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Please upload image" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Images is required" : this.showImagError = '';
       return;
     }
 
