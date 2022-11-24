@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
   selector: 'app-change-password',
@@ -7,9 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordComponent implements OnInit {
   hide = true;
-  constructor() { }
+  registerForm!: FormGroup;
+  constructor(private fb: FormBuilder, private api: ApiService, 
+    private validations: FormValidationService, private common : CommonMethodService) { }
 
   ngOnInit(): void {
+    this.defaultForm();
   }
 
+  defaultForm() {
+    this.registerForm = this.fb.group({
+      currentPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
+      newPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
+      retypePassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]]
+    })
+  }
+
+  get fc() { return this.registerForm.controls };
+
+  onCancel(clear: any) {
+    clear.resetForm();
+  }
+
+  onSumbit(clear: any) {
+    let obj = this.registerForm.value;
+    if (obj.newPassword == obj.retypePassword && this.registerForm.valid && obj.currentPassword != obj.newPassword) {
+      let loginObj = JSON.parse(localStorage.getItem('loggedInData') || '');
+      let id = loginObj.responseData[0].id
+      this.api.setHttp('get', 'login/change-password/' + obj.currentPassword + '?UserId=' + id + '&NewPassword=' + obj.newPassword, false, false, false, 'whizhackService');
+      this.api.getHttp().subscribe({
+        next: (res: any) => {
+          res.statusCode == 200 || res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 0) : '';
+          res.statusCode == 200 ? clear.resetForm() : '';
+        }
+      })
+    }
+    else {
+      return;
+    }
+  }
 }

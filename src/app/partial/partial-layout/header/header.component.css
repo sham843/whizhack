@@ -2,6 +2,28 @@
     background-color: var(--main-dark-color);
     padding: 10px;
 }
+.navbar-header{
+    width: 280px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+}
+.navbar-header a{
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.navbar-header i{
+    font-size: 1rem;
+    color: #fff;
+}
+.navbar-header img{
+    width: 50px;
+    margin-right: 10px;
+}
 .navbar .form-control,
 .navbar .btn{
     font-size: 0.85rem;

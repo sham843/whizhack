@@ -1,0 +1,15 @@
+section {
+    padding-block: 4rem;
+    color: #fff;
+}
+.list-group .list-group-item{
+    background-color:transparent;
+    padding-block: 15px;
+}
+.list-group .list-group-item a{
+    color:#fff;
+    text-decoration: none;
+}
+.list-group .list-group-item a:hover{
+    color:var(--main-color);
+}
