@@ -9,9 +9,13 @@ export class WebStorageService {
 
   checkUserIsLoggedIn() { // check user isLoggedIn or not
     let sessionData: any = sessionStorage.getItem('loggedIn');
-    // !sessionData ? localStorage.clear() : '';
-    if (localStorage.getItem('loggedInData') && sessionData == 'true') return true;
-    else return false;
+    !sessionData ? localStorage.clear() : '';
+    if (localStorage.getItem('loggedInData') && sessionData == 'true') {
+      return true;
+    }
+    else {
+      return false
+    };
   }
 
   getLoggedInLocalstorageData() {
