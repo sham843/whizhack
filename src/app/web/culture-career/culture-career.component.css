@@ -3,13 +3,18 @@ section {
     color: #fff;
 }
 #jobs .card{
-    color: #111;
+    background-color:var(--card-bg-color);
+    color: #fff;
 }
-#jobs .card .card-header {
-    background-color: transparent;
-}
-#jobs .card .card-header p{
+#jobs .card p.location{
     margin-bottom: 0;
+    color: #aaa;
+}
+#jobs .card p.description{
+    margin-bottom: 0;
+    color: #aaa;
+    font-size: 0.85rem;
+    line-height: 1.6rem;
 }
 #jobs .card a{
     font-size: 0.85rem;
