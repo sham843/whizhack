@@ -10,17 +10,17 @@
                     <div class="card-body px-5 pb-5">
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Enter Username</mat-label>
-                                <input matInput placeholder="Username" formControlName="username"
+                                <mat-label> Username</mat-label>
+                                <input matInput placeholder="Enter Username" formControlName="username"
                                     (keypress)="validation.alphaNumeric($event)" maxlength="20">
                                     <mat-error class="mt-2" *ngIf="f['username'].hasError('required')">Username required</mat-error>
                             </mat-form-field>
                         </div>
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Enter Password</mat-label>
+                                <mat-label> Password</mat-label>
                                 <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
-                                    placeholder="Password" (keypress)="validation.noSpaces($event)" maxlength="20">
+                                    placeholder="Enter Password" (keypress)="validation.noSpaces($event)" maxlength="20">
                                     <mat-error class="mt-2" *ngIf="f['password'].hasError('required')">Password required</mat-error>
                                 <button mat-icon-button matSuffix (click)="hide = !hide"
                                     [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" matTooltip="show">
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="col-sm col-7">
                                     <mat-form-field appearance="outline" class="w-100">
-                                        <mat-label>Enter Captcha</mat-label>
-                                        <input matInput placeholder="Captcha"
+                                        <mat-label> Captcha</mat-label>
+                                        <input matInput placeholder="Enter Captcha"
                                             (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="4"
                                             autocomplete="off" formControlName="captcha">
                                         <mat-error class="mt-2" *ngIf="f['captcha'].hasError('required')">Captcha required</mat-error>
