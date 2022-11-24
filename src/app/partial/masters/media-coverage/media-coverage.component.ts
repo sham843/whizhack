@@ -1,38 +1,162 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  srno: number;
-  title: string;
-  source: string;
-  url: string;
-  action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {srno: 1, title: 'Hydrogen', source: 'News Paper', url: 'H', action: ''},
-  {srno: 2, title: 'Helium', source: 'News Paper', url: 'He', action: ''},
-  {srno: 3, title: 'Lithium', source: 'News Paper', url: 'Li', action: ''},
-  {srno: 4, title: 'Beryllium', source: 'News Paper', url: 'Be', action: ''},
-  {srno: 5, title: 'Boron', source: 'News Paper', url: 'B', action: ''},
-  {srno: 6, title: 'Carbon', source: 'News Paper', url: 'C', action: ''},
-  {srno: 7, title: 'Nitrogen', source: 'News Paper', url: 'N', action: ''},
-  {srno: 8, title: 'Oxygen', source: 'News Paper', url: 'O', action: ''},
-  {srno: 9, title: 'Fluorine', source: 'News Paper', url: 'F', action: ''},
-  {srno: 10, title: 'Neon', source: 'News Paper', url: 'Ne', action: ''},
-];
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { WebStorageService } from 'src/app/core/services/web-storage.service';
+import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 @Component({
   selector: 'app-media-coverage',
   templateUrl: './media-coverage.component.html',
   styleUrls: ['./media-coverage.component.css']
 })
 export class MediaCoverageComponent implements OnInit {
-  displayedColumns: string[] = ['srno', 'title', 'source', 'url', 'action'];
-  dataSource = ELEMENT_DATA;
+
+  frmMedia!:FormGroup;
+  submitBtnTxt:string = 'Submit';
+  get f() { return this.frmMedia.controls };
+  totalCount: number = 0;
+  currentPage: number = 0;
+  pageSize: number = 10;
+
+  displayedColumns: string[] = ['srno', 'article_Title', 'source', 'url', 'action'];
+  dataSource: any;
   
-  constructor() { }
+  constructor(private fb: FormBuilder, 
+    public vs: FormValidationService,
+    private api: ApiService,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    public commonMethod: CommonMethodService,
+    public error: ErrorHandlerService,
+    public webStorageService: WebStorageService,
+    public apiService: ApiService) { }
 
   ngOnInit(): void {
+    this.createMediaForm();
+    this.getMediaList();
+  }
+
+  createMediaForm(){
+    this.frmMedia = this.fb.group({
+      id: [0],
+      article_Title: ['', [Validators.required]],
+      source: ['', [Validators.required]],
+      url: ['', [Validators.required]],
+    })
+  }
+
+  onClickPaginatior(event:any){
+    this.currentPage = event.pageIndex;
+    this.getMediaList();
+  }
+
+  getQueryString() {
+    let str = "?pageno=" + this.currentPage + "&pagesize=" + this.pageSize;
+    return str;
+  }
+
+  getMediaList(){
+    this.spinner.show();
+    this.apiService.setHttp('get', "whizhack_cms/media/GetAllByPagination" + this.getQueryString(), false, false, false, 'whizhackService');
+    this.apiService.getHttp().subscribe({
+      next: (res: any) => {
+        if (res.statusCode == 200) {
+          this.dataSource = res.responseData?.responseData1;
+          this.totalCount = res.responseData?.responseData2?.totalCount;
+          this.currentPage = res.responseData?.responseData2?.pageNo;
+        } else {
+          this.dataSource = [];
+          this.totalCount = 0;
+          this.commonMethod.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 1);
+        }
+        this.spinner.hide();
+      },
+      error: ((error: any) => { this.error.handelError(error.status); this.spinner.hide(); })
+    })
+  }
+
+  onMediaSubmit(){
+    if(this.frmMedia.invalid){
+      return;
+    }else{
+      var req = {
+        ...this.webStorageService.createdByProps(),
+        ...this.frmMedia.value
+      }
+
+      this.apiService.setHttp((this.submitBtnTxt = 'Update' ? 'put' : 'post'), "whizhack_cms/media/" + (this.submitBtnTxt = 'Update' ? 'Update' : 'Register'), false, req, false, 'WBMiningService');
+      this.apiService.getHttp().subscribe({
+        next: (res: any) => {
+          if (res.statusCode == 200) {
+            this.spinner.hide();
+            this.getMediaList();
+            this.clearMediaForm();
+            this.commonMethod.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 0);
+          } else {
+            this.spinner.hide();
+            this.commonMethod.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 1);
+          }
+        },
+        error: ((error: any) => { this.error.handelError(error.status); this.spinner.hide(); })
+      })
+    }
+  }
+
+  editMediaRecord(data: any){
+    this.submitBtnTxt = 'Update'
+    this.frmMedia.patchValue({
+      id: data.id,
+      article_Title: data.article_Title,
+      source: data.source,
+      url: data.url,
+    })
+  }
+
+  deleteMediaRecord(data: any){
+    let dialoObj = {
+      header: 'Delete',
+      title:'Do you want to delete the selected course ?',
+      cancelButton:'Cancel',
+      okButton:'Ok'
+    }
+
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '300px',
+      data: dialoObj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'yes'){
+        let deleteObj = {
+          "id": data.id,
+          "modifiedBy": 0,
+        }
+    
+        this.api.setHttp('delete', 'whizhack_cms/media/Delete', false, deleteObj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode === 200) {
+              this.getMediaList();
+              this.clearMediaForm();
+            }
+          }),
+          error: (error: any) => {
+            console.log(error);
+          }
+        })
+      }
+    });
+    
+  }
+
+  clearMediaForm(){
+    this.submitBtnTxt = 'Submit';
+    this.frmMedia.reset();
+    this.createMediaForm();
   }
 
 }

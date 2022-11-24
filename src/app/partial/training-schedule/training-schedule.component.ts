@@ -1,8 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
 
@@ -17,8 +23,9 @@ export class TrainingScheduleComponent implements OnInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
   courseManageForm!: FormGroup;
-  displayedColumns: string[] = ['srno', 'image', 'title', 'duration', 'price', 'action'];
-  dataSource = new Array();
+  fillterForm!: FormGroup;
+  displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
+  dataSource :any;
   pageNameArray = new Array();
 
   totalCount: number = 0;
@@ -27,11 +34,17 @@ export class TrainingScheduleComponent implements OnInit {
   editFlag: boolean = false;
   sumitted: boolean = false;
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
     private fileUpl: FileUploadService,
-    private api: ApiService) { }
+    private api: ApiService,
+    private errorService: ErrorHandlerService,
+    private ngxSpinner: NgxSpinnerService,
+    private snakBar: MatSnackBar,
+    public vadations :FormValidationService) { }
 
   openDialog(id: any) {
     const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
@@ -60,31 +73,39 @@ export class TrainingScheduleComponent implements OnInit {
       modifiedDate: "2022-11-22T12:17:01.881Z",
       isDeleted: true,
       id: 0,
-      pageId: ['', Validators.required],
-      course_Title: ['', Validators.required],
-      course_Caption: ['', Validators.required],
+      pageName: ['', Validators.required],
+      course_Title: ['', [Validators.required,Validators.pattern(this.vadations.alphabetsWithSpace)]],
+      course_Caption: ['', [Validators.required,Validators.pattern(this.vadations.alphabetsWithSpace)]],
       duration: ['', Validators.required],
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
-      price: ['', Validators.required],
+      price: ['', [Validators.required, Validators.pattern(this.vadations.onlyNumbers)]],
       price_Terms: ['', Validators.required],
       imagePath: ['', Validators.required]
     })
   }
 
-  get formControls() { return this.courseManageForm.controls}
+  get formControls() { return this.courseManageForm.controls }
 
   getAllCourseList() {
+    this.ngxSpinner.show()
     this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          this.dataSource = res.responseData
-          this.totalCount = res.responseData1.pageCount
+          this.ngxSpinner.hide()
+          this.dataSource =  new MatTableDataSource(res.responseData); 
+          this.dataSource.sort = this.sort;       
+          this.totalCount = res.responseData1.pageCount;
+          this.snakBar.open(res.statusMessage, 'ok', {
+            duration: 2000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+          })
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this.errorService.handelError(error.statusMessage)
       }
     })
   }
@@ -98,7 +119,7 @@ export class TrainingScheduleComponent implements OnInit {
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this.errorService.handelError(error.statusMessage)
       }
     })
   }
@@ -108,7 +129,13 @@ export class TrainingScheduleComponent implements OnInit {
     this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
       console.log('res', res);
       if (res.statusCode === '200') {
-        this.imgSrc = res.responseData
+        this.imgSrc = res.responseData;
+        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
+        this.snakBar.open(res.statusMessage, 'ok', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        })
       } else {
         this.imgSrc = '';
         this.file.nativeElement.value = ''
@@ -120,6 +147,7 @@ export class TrainingScheduleComponent implements OnInit {
   deleteImage() {
     this.imgSrc = ''
     this.file.nativeElement.value = ''
+    this.courseManageForm.controls['imagePath'].setValue('')
   }
 
   onClickViewImage() {
@@ -127,10 +155,12 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   editCourse(obj: any) {
+    console.log(obj);
+
     this.editFlag = true;
     this.courseManageForm.patchValue({
       id: obj.courseId,
-      pageId: obj.pageId,
+      pageName: obj.pageName,
       course_Title: obj.course_Title,
       course_Caption: obj.course_Caption,
       duration: obj.duration,
@@ -138,23 +168,25 @@ export class TrainingScheduleComponent implements OnInit {
       syllabus_Summary: obj.syllabus_Summary,
       price: obj.price,
       price_Terms: obj.price_Terms,
-      imagePath: obj?.imagePath
+      // imagePath: obj?.imagePath
     })
-
-    this.imgSrc = obj.imagePath;
-    this.file.nativeElement.value = obj?.imagePath;
+    this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath)
+    this.imgSrc = obj?.imagePath;
+    // this.file.nativeElement.value = obj?.imagePath;
   }
 
   pageChanged(event: any) {
+    this.clearForm()
     this.currentPage = event.pageIndex;
     this.getAllCourseList();
   }
 
   openDeleteDialog(id: any) {
     let dialoObj = {
-      title:'Do you want to delete the selected course ?',
-      cancelButton:'Cancel',
-      okButton:'Ok'
+      header: 'Delete',
+      title: 'Do you want to delete the selected course ?',
+      cancelButton: 'Cancel',
+      okButton: 'Ok'
     }
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
@@ -163,12 +195,12 @@ export class TrainingScheduleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == 'yes'){
+      if (result == 'yes') {
+        this.clearForm();
         let deleteObj = {
           "id": id,
           "modifiedBy": 0,
         }
-    
         this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: ((res: any) => {
@@ -177,32 +209,38 @@ export class TrainingScheduleComponent implements OnInit {
             }
           }),
           error: (error: any) => {
-            console.log(error);
+            this.errorService.handelError(error.statusMessage)
           }
         })
-      }else{
-        this.getAllCourseList();
       }
     });
-
-
-
-   
   }
 
-  clearForm() {
-    this.courseManageForm.reset();
+  clearForm(clear?:any) {
+    console.log(clear);
+    
+    this.courseManageForm.reset()
+    clear?.resetForm();
     this.imgSrc = '';
     this.file.nativeElement.value = '';
     this.editFlag = false;
-    this.courseManageFormData()
+    this.courseManageFormData();
   }
 
-  onClickSubmit() {
+  onClickSubmit(clear:any) {
     // this.sumitted = true
-    if (!this.courseManageForm.valid) {      
+    if (!this.courseManageForm.valid) {
+      if(!this.imgSrc){
+        this.snakBar.open('Please Upload Image', 'ok', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',        
+        })
+      }     
       return;
-    }  else {
+    } 
+     else {
+      this.ngxSpinner.show();
       let submitObj = this.courseManageForm.value;
       submitObj.imagePath = this.imgSrc;
       console.log(submitObj);
@@ -213,12 +251,18 @@ export class TrainingScheduleComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
+            this.ngxSpinner.hide();
+            this.snakBar.open(res.statusMessage, 'ok', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+            })
             this.getAllCourseList();
-            this.clearForm();
+            this.clearForm(clear);
           }
         }),
         error: (error: any) => {
-          console.log(error);
+          this.errorService.handelError(error.statusMessage)
         }
       })
     }

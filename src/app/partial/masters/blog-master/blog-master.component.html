@@ -5,35 +5,39 @@
             <form [formGroup]="frm">
                 <div class="card-body">
                     <div class="mb-3">
-                        <mat-radio-group aria-label="Select an option" formControlName="optionType">
-                            <mat-radio-button value="{{ options.id }}" *ngFor="let options of optionsArray" class="me-3">{{ options.blogType }}</mat-radio-button>
+                        <mat-radio-group aria-label="Select an option" formControlName="blogType">
+                            <mat-radio-button *ngFor="let options of optionsArray" [value]="options.id"  class="me-3">{{ options.name }}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Title</mat-label>
-                            <input matInput placeholder="Blog Title" formControlName="blogTitle">
+                            <input maxlength="50" matInput placeholder="Blog Title" formControlName="title" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
-                            <textarea matInput placeholder="Blog Description" rows="5"
-                                formControlName="blogDesc"></textarea>
+                            <textarea maxlength="500" matInput placeholder="Blog Description" rows="5"
+                                formControlName="description" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
+                                <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog Description *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
-                            <mat-select formControlName="blogCategory">
-                                <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories">{{ categories.categoryName }}</mat-option>
+                            <mat-select formControlName="blog_categary_Id">
+                                <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{ categories.categoryName }}</mat-option>
                             </mat-select>
+                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select Blog Category *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Author</mat-label>
-                            <input matInput placeholder="Blog Author" formControlName="blogAuthor">
+                            <input maxlength="20" matInput placeholder="Blog Author" formControlName="author" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -58,19 +62,21 @@
                     </div>
                     <div class="mb-3">
                         <div class="card card-body form-card border">
-                            <div formArrayName="items" *ngFor="let item of itemsForm.controls; let i = index;">
+                            <div formArrayName="blogRegisterDetailsModel" *ngFor="let item of itemsForm.controls; let i = index;">
                                 <div [formGroupName]="i">
                                     <div class="mb-3">
                                         <mat-form-field appearance="outline" class="w-100">
                                             <mat-label>Blog Sub-Title</mat-label>
-                                            <input matInput placeholder="Blog Sub-Title" formControlName="subTitle">
+                                            <input maxlength="50" matInput placeholder="Blog Sub-Title" formControlName="title" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
+                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Sub-Title *</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea matInput placeholder="Blog Sub-Description" rows="5"
-                                                formControlName="subDescription"></textarea>
+                                            <textarea maxlength="500" matInput placeholder="Blog Sub-Description" rows="5"
+                                                formControlName="description" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
+                                                <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please Enter Blog Sub-Description *</mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -87,9 +93,9 @@
                         </div>
                     </div>   
                     <div class="d-flex align-items-center justify-content-between">
-                        <button mat-stroked-button class="btn-main-outline">Cancel</button>
+                        <button mat-stroked-button class="btn-main-outline" (click)="clearForm()">Cancel</button>
                         <button type="button" mat-stroked-button class="btn-main"
-                            (click)="onClickSubmit()">Submit</button>
+                            (click)="onClickSubmit()">{{ editFlag ? 'Update' : 'Submit' }}</button>
                     </div>
                 </div>
             </form>
@@ -98,21 +104,21 @@
     <div class="col-sm-8">
         <div class="card form-card">
             <div class="card-header">
+                <form [formGroup]="filterFrm">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-sm-3">
                         <span>Blogs List</span>
                     </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Type</mat-label>
-                            <mat-select formControlName="blogCategory">
-                                <mat-option value="Blog">Blog</mat-option>
-                                <mat-option value="Case Study">Case Study</mat-option>
-                                <mat-option value="White Paper">White Paper</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="blogType" (selectionChange)="displayData()">
+                                    <mat-option *ngFor="let options of optionsArray" [value]="options.id">{{ options.name }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                 </div>
+                </form>
             </div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
@@ -127,22 +133,22 @@
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element.blogType}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.blogType == 1 ? 'Blog' : element.blogType == 2 ? 'White Paper' : 'Case Study'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog()">
+                            <button mat-icon-button (click)="openDialog(element.id)">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-warning">
+                            <button mat-icon-button class="text-warning" (click)="onClickEdit(element)">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger">
+                            <button mat-icon-button class="text-danger" (click)="onClickDelete(element.id)">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
@@ -152,7 +158,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <ng-container *ngIf="totalCount > 1">
+                <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
                         (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
                 </ng-container>
