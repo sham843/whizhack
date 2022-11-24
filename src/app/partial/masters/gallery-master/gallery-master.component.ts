@@ -78,7 +78,7 @@ items!: GalleryItem[];
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required,Validators.pattern(this.vs.valUserName)]],
+      gallery_title: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
       gallery_description: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
       uploadImages: [''],
     })
