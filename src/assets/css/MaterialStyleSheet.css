@@ -119,3 +119,6 @@ input:-webkit-autofill:active {
 .cdk-overlay-container{
     z-index: 99999;
 }
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color:var(--main-color);
+}

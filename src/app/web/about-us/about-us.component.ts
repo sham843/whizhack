@@ -19,8 +19,7 @@ constructor(private apiService:ApiService,private spinner:NgxSpinnerService) { }
   this.apiService.getHttp().subscribe({
     next: (res: any) => {
       if (res.statusCode == 200) {
-        this.mediaCoverageData = res.responseData?.responseData1;
-        console.log("mediaCoverageData",this.mediaCoverageData)
+        this.mediaCoverageData = res.responseData?.responseData;
       } else {
         this.mediaCoverageData = [];
       }
@@ -28,4 +27,5 @@ constructor(private apiService:ApiService,private spinner:NgxSpinnerService) { }
     },
 })
   }
+ 
 }
