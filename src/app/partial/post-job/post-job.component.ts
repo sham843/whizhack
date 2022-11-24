@@ -172,7 +172,8 @@ export class PostJobComponent implements OnInit {
   //---------------------------------------------------------------------------------
   onClickToggle(element: any) {
     let dialoObj = {
-      title: 'Do you want to publish the selected field ?',
+      header: element.publish ? 'isPublish' : 'Publish',
+      title: 'Do you want to change the status ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
     }

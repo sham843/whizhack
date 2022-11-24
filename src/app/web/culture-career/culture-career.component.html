@@ -100,11 +100,51 @@
         </div>
     </div>
 </section> -->
-<section>
+<section class="mb-5 pb-5">
     <div class="container">
-        <h2 class="mb-4">Life at WhizHack</h2>
+        <h2 class="mb-5">Life at WhizHack</h2>
         <div class="row g-3 align-items-center" id="culture">
-            <div class="col-sm-3" *ngFor="let item of items; index as i">
+            <div class="col-sm-3">
+                <div class="albums-tab">
+                    <div class="albums-tab-thumb sim-anim-1">
+                        <img src="assets/image/about-us/Media-Coverage-1.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-2.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-3.png" class="all studio" />
+                        <img src="assets/image/about-us/Pratnership-Program.png" class="all studio" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="albums-tab">
+                    <div class="albums-tab-thumb sim-anim-1">
+                        <img src="assets/image/about-us/Media-Coverage-1.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-2.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-3.png" class="all studio" />
+                        <img src="assets/image/about-us/Pratnership-Program.png" class="all studio" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="albums-tab">
+                    <div class="albums-tab-thumb sim-anim-1">
+                        <img src="assets/image/about-us/Media-Coverage-1.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-2.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-3.png" class="all studio" />
+                        <img src="assets/image/about-us/Pratnership-Program.png" class="all studio" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="albums-tab">
+                    <div class="albums-tab-thumb sim-anim-1">
+                        <img src="assets/image/about-us/Media-Coverage-1.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-2.png" class="all studio" />
+                        <img src="assets/image/about-us/Media-Coverage-3.png" class="all studio" />
+                        <img src="assets/image/about-us/Pratnership-Program.png" class="all studio" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-sm-3" *ngFor="let item of items; index as i">
                 <div class="image-container">
                   <ng-container *ngIf="i <4">
                     <img [lightbox]="i" [src]="item.data.thumb" class="culture-image">
@@ -114,7 +154,7 @@
                         asdf
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
@@ -126,29 +166,26 @@
                 <div class="text-center py-5">
                     <h4 class="text-white">Head start towards choosing right career</h4>
                 </div>
-                <div class="row g-4">
-                    <div class="col-sm-4">
+                <div class="row g-4" >
+                    <div class="col-sm-4" *ngFor="let postJob of postJobArray">
                         <div class="card h-100">
                             <div class="card-header">
-                                <h5 class="mb-1">Business Development Manager</h5>
-                                <p class="location">Pune</p>
+                                <h5 class="mb-1">{{postJob?.job_Title}}</h5>
+                                <p class="location">{{postJob?.job_Location}}</p>
                             </div>
                             <div class="card-body">
                                 <p class="description">
-                                    Add captions to your slides easily with the .carousel-caption element within any
-                                    .carousel-item. They can be easily hidden on smaller viewports, as shown below, with
-                                    optional display utilities. We hide them initially with .d-none and bring them back
-                                    on medium-sized devices with .d-md-block.
+                                    {{postJob?.job_Description}}
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <div class="text-end">
-                                    <a class="text-main" routerLink="../job-details">Read More</a>
+                                    <a class="text-main" routerLink="../job-details" (click)="navigatePage(postJob?.jobpostId)">Read More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                         <div class="card h-100">
                             <div class="card-header">
                                 <h5 class="mb-1">Training Lead for Cyber Security</h5>
@@ -189,7 +226,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+
                 </div>
             </div>
         </div>

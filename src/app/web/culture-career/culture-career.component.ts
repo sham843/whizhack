@@ -14,20 +14,22 @@ export class CultureCareerComponent implements OnInit {
 
   items!: GalleryItem[];
   imageArray = new Array();
+  postJobArray:any;
 
   constructor(
     private _errorService: ErrorHandlerService,
     private api: ApiService,
     public gallery: Gallery,
-    public _commonMethodService: CommonMethodService,
-    public lightbox: Lightbox,) { }
+    public commonService: CommonMethodService,
+    public lightbox: Lightbox,
+    private service: ApiService,
+    private error: ErrorHandlerService,
+    ) { }
 
   ngOnInit() {
     this.getImageData();
-
+    this.getAllPostJobs();
   }
-
-
 
   getImageData() {
     this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllImages', false, false, false, 'whizhackService');
@@ -50,7 +52,7 @@ export class CultureCareerComponent implements OnInit {
           this.basicLightboxExample();
 
         } else {
-          this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
+          this.commonService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
         }
       }),
       error: (error: any) => {
@@ -79,6 +81,30 @@ export class CultureCareerComponent implements OnInit {
     lightboxGalleryRef.load(this.items);
   }
 
+  //........................................post Job Code Start Here..............................................//
+
+  getAllPostJobs() {
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + 1 + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.getHttp().subscribe({
+      next: (res: any) => {
+        if (res.statusCode == '200') {
+          this.postJobArray = res.responseData;
+        }
+        else {
+          this.postJobArray = [];
+        }
+      },
+      error: (error: any) => {
+      this.error.handelError(error.statusCode);
+      }
+    })
+  }
+
+  navigatePage(jobpostId: any) {
+    this.commonService.routerLinkRedirect('../job-details/' + jobpostId);
+  }
+
+  //........................................post Job Code End Here..............................................//
 
 }
 
