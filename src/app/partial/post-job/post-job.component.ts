@@ -109,14 +109,15 @@ export class PostJobComponent implements OnInit {
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno='+ this.currentPage+'&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
+      // whizhack_cms/postjobs/GetAllPostJobs?pageno=1&pagesize=10
       next: (res: any) => {
         if (res.statusCode == '200') {
           this.ngxSpinner.hide()
-          this.dataSource = new MatTableDataSource(res.responseData);
+          this.dataSource = new MatTableDataSource(res.responseData.responseData1);
           this.dataSource.sort = this.sort;
-          this.totalCount = res.responseData1.pageCount;
+          this.totalCount = res.responseData.responseData2.pageCount;
         }
         else {
           this.ngxSpinner.hide();
@@ -139,8 +140,8 @@ export class PostJobComponent implements OnInit {
       data: obj,
       disableClose: true
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(()=> {
+      // console.log(`Dialog result: ${result}`);
     });
   }
   //----------------------------view logic End Here------------------------
