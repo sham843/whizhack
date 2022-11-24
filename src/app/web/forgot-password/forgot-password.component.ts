@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 
@@ -34,7 +34,8 @@ export class ForgotPasswordComponent implements OnInit {
     "isUser": true
   }
   stringOtp: string = '';
-  constructor(private fb: FormBuilder, private api: ApiService, private mat: MatSnackBar, public validations : FormValidationService) { }
+  constructor(private fb: FormBuilder, private api: ApiService,
+     public validations : FormValidationService, private common : CommonMethodService) { }
 
   ngOnInit(): void {
     this.defaultForm();
@@ -61,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        res.statusCode == 200 || res.statusCode == 404 ? this.mat.open(res.statusMessage, 'ok', { duration: 2000 }) : '';
+        res.statusCode == 200 || res.statusCode == 404 ? this.common.matSnackBar(res.statusMessage, 0) : '';
         res.statusCode == 200 ? (this.displayFields = true, this.otpStatus = true) : '';
       }
     })
@@ -72,12 +73,12 @@ export class ForgotPasswordComponent implements OnInit {
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
     this.obj.otp = this.stringOtp;
-    this.timeLeft == 0 ? (this.obj.otp = this.stringOtp = '', this.mat.open('Please enter Valid OTP','ok',{duration:2000})):'';
+    this.timeLeft == 0 ? (this.obj.otp = this.stringOtp = '', this.common.matSnackBar('Please enter Valid OTP',1)):'';
     if (this.obj.otp) {
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 || res.statusCode == 409 ? this.mat.open(res.statusMessage, 'ok', { duration: 2000 }) : '';
+          res.statusCode == 200 || res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 0) : '';
           res.statusCode == 200 ? this.displayFields1 = true : false;
         }
       })
@@ -120,12 +121,11 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + this.userName + '&Password=' + obj.passwordNew + '&NewPassword=' + obj.retypePassword + '&MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 || res.statusCode == 409 ? (this.mat.open(res.statusMessage, 'ok', { duration: 2000 }), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
+          res.statusCode == 200  ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
+          res.statusCode == 409 ? this.common.matSnackBar('incorrect password', 1) : '';
         }
       })
     }
-    else {
-      this.mat.open('incorrect password', 'ok', { duration: 2000 })
-    }
+    
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
@@ -12,7 +12,8 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class ChangePasswordComponent implements OnInit {
   hide = true;
   registerForm!: FormGroup;
-  constructor(private fb: FormBuilder, private api: ApiService, private mat: MatSnackBar, private validations: FormValidationService) { }
+  constructor(private fb: FormBuilder, private api: ApiService, 
+    private validations: FormValidationService, private common : CommonMethodService) { }
 
   ngOnInit(): void {
     this.defaultForm();
@@ -40,7 +41,7 @@ export class ChangePasswordComponent implements OnInit {
       this.api.setHttp('get', 'login/change-password/' + obj.currentPassword + '?UserId=' + id + '&NewPassword=' + obj.newPassword, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 || res.statusCode == 409 ? (this.mat.open(res.statusMessage, 'ok', { duration: 2000 })) : '';
+          res.statusCode == 200 || res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 0) : '';
           res.statusCode == 200 ? clear.resetForm() : '';
         }
       })
