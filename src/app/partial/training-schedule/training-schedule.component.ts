@@ -231,6 +231,7 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   onClickSubmit(clear:any) {
+    this.updateValidation();
     // this.sumitted = true
     if (!this.courseManageForm.valid) {
       if(!this.imgSrc){
@@ -265,12 +266,21 @@ export class TrainingScheduleComponent implements OnInit {
     this.title = this.fillterForm.value.courseTitle;
     console.log(this.title);
     this.currentPage = 0
-     this.getAllCourseList();   
-    
+     this.getAllCourseList();  
   }
 
   setOffer(event:any){
    this.offer = event.checked      
+  }
+
+  updateValidation(){    
+    if(this.offer){
+      this.courseManageForm.controls['discountPrice'].setValidators([Validators.required]);
+      this.courseManageForm.controls['discountPrice'].updateValueAndValidity();
+    }else{
+      this.courseManageForm.controls['discountPrice'].setValidators([]);
+      this.courseManageForm.controls['discountPrice'].updateValueAndValidity();
+    }
   }
 
 }
