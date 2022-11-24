@@ -28,9 +28,9 @@
           <div class="mb-5">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
-            <mat-error *ngIf="g['uploadImages']?.errors">
-              <span *ngIf="g['uploadImages']?.hasError('required')"> Images are required</span>
-            </mat-error>
+            <!-- <mat-error *ngIf="!imageArray.length && imagepath">
+              <span> Images are required</span>
+            </mat-error> -->
           </div>
           <div class="mb-3">
             <div class="d-flex justify-content-between flex-wrap gap-4">

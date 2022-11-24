@@ -32,7 +32,8 @@
                     <span class="form-label">Course :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.CourseId || '-----'}}</span>
+                    <span class="form-data">{{arr.courseId == 1 ? 'Cyber Ninja' :
+                        arr.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
@@ -56,7 +57,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-label">IP Address :</div>
-                        <div class="form-data">125.140.012.220</div>
+                        <div class="form-data">{{address}}</div>
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Operating System :</div>
