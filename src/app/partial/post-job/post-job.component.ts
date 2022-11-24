@@ -175,9 +175,10 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } else {
-        this.bindTable();
       }
+      //  else {
+      //   this.bindTable();
+      // }
     });
   }
 
@@ -262,7 +263,8 @@ export class PostJobComponent implements OnInit {
               horizontalPosition: 'right',
             })
             this.bindTable();
-            this.clearForm();
+             this.clearForm();
+             this.buttonValue = 'Submit';
           }
         }),
         error: (error: any) => {
