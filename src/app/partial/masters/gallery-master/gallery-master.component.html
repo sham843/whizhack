@@ -62,7 +62,7 @@
           <div class="col-sm-3">
             <span>Gallery List</span>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Gallery Title" [formControl]="searchFilter"
@@ -93,6 +93,11 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
+              <button mat-icon-button class="text-white" (click)="openBox(element)">
+                <span class="material-symbols-outlined">
+                  visibility
+                </span>
+              </button>
               <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)">
                 <span class="material-symbols-outlined">
                   edit
@@ -103,7 +108,6 @@
                   delete
                 </span>
               </button>
-              <button (click)="openBox(element)">img</button>
             </td>
           </ng-container>
           <tr class="mat-row p-2 w-100" *matNoDataRow col>
