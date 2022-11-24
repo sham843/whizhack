@@ -35,6 +35,7 @@ export class TrainingScheduleComponent implements OnInit {
   sumitted: boolean = false;
 
   @ViewChild(MatSort) sort!: MatSort;
+  title: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -59,8 +60,15 @@ export class TrainingScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseManageFormData();
+    this.fillterFormData();
     this.getPageName();
     this.getAllCourseList();
+  }
+
+  fillterFormData(){
+    this.fillterForm = this.fb.group({
+      courseTitle:['']
+    })
   }
 
 
@@ -89,7 +97,7 @@ export class TrainingScheduleComponent implements OnInit {
 
   getAllCourseList() {
     this.ngxSpinner.show()
-    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title='+this.title, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
@@ -102,6 +110,10 @@ export class TrainingScheduleComponent implements OnInit {
             verticalPosition: 'top',
             horizontalPosition: 'right',
           })
+        }else{
+          this.ngxSpinner.hide()
+          this.dataSource = '';
+          this.totalCount = 0
         }
       }),
       error: (error: any) => {
@@ -126,7 +138,7 @@ export class TrainingScheduleComponent implements OnInit {
 
   fileUpload(event: any) {
     console.log(event);
-    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
       console.log('res', res);
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData;
@@ -240,9 +252,7 @@ export class TrainingScheduleComponent implements OnInit {
       return;
     } 
      else {
-      this.ngxSpinner.show();
       let submitObj = this.courseManageForm.value;
-      submitObj.imagePath = this.imgSrc;
       console.log(submitObj);
       let url
       this.editFlag ? url = 'whizhack_cms/course/Update' : url = 'whizhack_cms/course/Insert'
@@ -251,7 +261,6 @@ export class TrainingScheduleComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.ngxSpinner.hide();
             this.snakBar.open(res.statusMessage, 'ok', {
               duration: 2000,
               verticalPosition: 'top',
@@ -266,6 +275,11 @@ export class TrainingScheduleComponent implements OnInit {
         }
       })
     }
+  }
+
+  onFillterSubmit(){
+    this.title = this.fillterForm.value.courseTitle;
+    this.getAllCourseList()
   }
 
 }
