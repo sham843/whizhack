@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Course Title</div>
-                    <div class="form-data">{{showObj.course_Title}}</div>
+                    <div class="form-data">{{showObj.course_Title | titlecase}}</div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-label">Page Caption</div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Price</div>
-                    <div class="form-data">{{showObj.course_Caption}}</div>
+                    <div class="form-data">{{showObj.price | currency:"INR"}}</div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Price Terms</div>

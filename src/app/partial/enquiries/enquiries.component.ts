@@ -32,7 +32,6 @@ export class EnquiriesComponent implements OnInit {
 
 
   constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
-  // private router:Router
   openDialog(ele?: any): void {
     this.dialog.open(ViewEnquiriesComponent, {
       data: ele,
