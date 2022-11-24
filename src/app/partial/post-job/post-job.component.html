@@ -81,7 +81,7 @@
                             <div class="row gy-3 form-container">
                                 <div class="col-sm-6">
                                     <div class="form-label">Roles & Responsibility</div>
-                                    <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig">
+                                    <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig" placeholder="Enter  Roles & Responsibility here...">
                                     </angular-editor>
                                     <mat-error class="mt-2">
                                         <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
@@ -91,7 +91,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-label">Experience</div>
-                                    <angular-editor formControlName="experience" [config]="editorConfig">
+                                    <angular-editor formControlName="experience" [config]="editorConfig" placeholder="Enter Experience here...">
                                     </angular-editor>
                                     <mat-error class="mt-2"
                                         *ngIf="f['experience'].hasError('required') && submited == true">
@@ -101,7 +101,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-label">Qualification</div>
-                                    <angular-editor formControlName="qualification" [config]="editorConfig">
+                                    <angular-editor formControlName="qualification" [config]="editorConfig" placeholder="Enter Qualification here...">
                                     </angular-editor>
                                     <mat-error class="mt-2"
                                         *ngIf="f['qualification'].hasError('required') && submited == true">
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-label">Skills Required</div>
-                                    <angular-editor formControlName="skills_Required" [config]="editorConfig">
+                                    <angular-editor formControlName="skills_Required" [config]="editorConfig" placeholder="Enter Skills here...">
                                     </angular-editor>
                                     <mat-error class="mt-2"
                                     *ngIf="f['skills_Required'].hasError('required') && submited == true">
