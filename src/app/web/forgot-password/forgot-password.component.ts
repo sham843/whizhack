@@ -62,7 +62,8 @@ export class ForgotPasswordComponent implements OnInit {
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        res.statusCode == 200 || res.statusCode == 404 ? this.common.matSnackBar(res.statusMessage, 0) : '';
+        res.statusCode == 200  ? this.common.matSnackBar(res.statusMessage, 0) : '';
+        res.statusCode == 404 ?  this.common.matSnackBar(res.statusMessage, 1) : '';
         res.statusCode == 200 ? (this.displayFields = true, this.otpStatus = true) : '';
       }
     })
@@ -122,7 +123,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: (res: any) => {
           res.statusCode == 200  ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
-          res.statusCode == 409 ? this.common.matSnackBar('incorrect password', 1) : '';
+          res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 1) : '';
         }
       })
     }
