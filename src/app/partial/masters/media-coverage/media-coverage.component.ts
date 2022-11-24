@@ -42,8 +42,8 @@ export class MediaCoverageComponent implements OnInit {
   createMediaForm() {
     this.frmMedia = this.fb.group({
       id: [0],
-      article_Title: ['', [Validators.required]],
-      source: ['', [Validators.required]],
+      article_Title: ['',Validators.compose([Validators.required,Validators.minLength(5),Validators.maxLength(100)])],
+      source: ['',Validators.compose([Validators.required,Validators.minLength(5),Validators.maxLength(100)])],
       url: ['', [Validators.required,Validators.pattern('^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$')]],
     })
   }
