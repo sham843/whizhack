@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card form-card mb-3">
-            <form [formGroup]="postNewJobFrm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="postNewJobFrm"  #clear="ngForm">
                 <!-- #frm="ngForm" -->
                
          <div class="card-header">Post New Job</div>
@@ -112,8 +112,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline" (click)="clearAll()">Cancel</button>
-                    <button mat-stroked-button class="btn-main" type="submit">{{buttonValue}}</button>
+                    <button mat-stroked-button class="btn-main-outline" (click)="clearForm(clear)">Cancel</button>
+                    <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit(clear)">{{buttonValue}}</button>
                 </div>
             </div>
             </form>
