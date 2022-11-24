@@ -153,8 +153,8 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Search By Course Title</mat-label>
                             <input matInput placeholder="Search By Course Title" formControlName="courseTitle" maxlength="20"
-                             
-                            (keyup)="onFillterSubmit()">  
+                            (keypress)="vadations.alphabetsWithSpaces($event)" 
+                            (keyup)="vadations.removeSpaceAtBegining($event);onFillterSubmit()">  
                         </mat-form-field> 
                         <!-- <ng-container>
                             <button type="submit" (click)="onFillterSubmit()"> Apply </button>

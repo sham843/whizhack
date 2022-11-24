@@ -265,8 +265,7 @@ export class TrainingScheduleComponent implements OnInit {
     this.title = this.fillterForm.value.courseTitle;
     console.log(this.title);
     this.currentPage = 0
-    this.title? this.getAllCourseList() :''
-    
+     this.getAllCourseList();   
     
   }
 
