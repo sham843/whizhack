@@ -16,7 +16,7 @@ export class JobDetailsComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(ApplyNowComponent, {
-      width: '250px',
+      width: '700px',
     });
   }
 }
