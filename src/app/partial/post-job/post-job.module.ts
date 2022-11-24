@@ -8,6 +8,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     PostJobComponent,
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     NgxEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule,
   ]
 })
 export class PostJobModule { }
