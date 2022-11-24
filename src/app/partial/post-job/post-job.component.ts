@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 export interface PeriodicElement {
   title: string;
   srno: number;
@@ -40,7 +41,8 @@ currentPage: number = 0;
      private snackbar:MatSnackBar,
     private service:ApiService,
      private error:ErrorHandlerService,
-     public validation: FormValidationService
+     public validation: FormValidationService,
+     private ngxSpinner: NgxSpinnerService,
     ) { }
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(FormGroupDirective) formRef!: FormGroupDirective;
@@ -95,14 +97,21 @@ currentPage: number = 0;
 
   //----------------------------Start Bind Table Logic Here--------------------
  bindTable(){
+  this.ngxSpinner.show()
   this.service.setHttp('get','whizhack_cms/postjobs/GetAllPostJobs?pageno='+(this.currentPage+1)+'&pagesize=10',false,false,false,'whizhackService');
   this.service.getHttp().subscribe({
     next:(res:any)=>{
       if(res.statusCode == '200'){
+        this.ngxSpinner.hide()
         this.dataSource=new MatTableDataSource(res.responseData);
         this.dataSource.sort =this.sort; 
         this.totalCount = res.responseData1.pageCount;
         console.log(this.dataSource)
+        this.snackbar.open(res.statusMessage, 'ok', {
+          duration: 4000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        })
       }
       else{
         this.dataSource=[];
@@ -177,7 +186,7 @@ onEdit(editObj:any){
 //---------------------------------------------------------------------------------
 onClickToggle(element: any) {
   let dialoObj = {
-    title:'Do you want to publish the selected field ? ?',
+    title:'Do you want to publish the selected field ?',
     cancelButton:'Cancel',
     okButton:'Ok'
   }
@@ -277,8 +286,9 @@ onDelete(data:any){
   if (!this.postNewJobFrm.valid) {      
       return;
     }  else {
+      this.ngxSpinner.show();
       let data = this.postNewJobFrm.value;
-     console.log(data);
+    //  console.log(data);
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
@@ -286,6 +296,12 @@ onDelete(data:any){
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
+            this.ngxSpinner.hide();
+            this.snackbar.open(res.statusMessage, 'ok', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+            })
             this.bindTable();
             // this.onClickClear(frm);
             // this.clearAll()
