@@ -27,7 +27,6 @@ export class TrainingScheduleComponent implements OnInit {
   displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
   dataSource :any;
   pageNameArray = new Array();
-
   totalCount: number = 0;
   currentPage: number = 0;
   imgSrc: string = '';
