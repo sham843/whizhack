@@ -23,6 +23,8 @@ export class ViewEnquiriesComponent implements OnInit {
     this.getDataById();
     this.getDevice();
     this.getdeviceIpAddress();
+    console.log('tdata',this.data);
+    
   }
 
   getDataById(){
