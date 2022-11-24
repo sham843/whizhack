@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
@@ -13,6 +13,7 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class LoginComponent implements OnInit {
   hide = true;
   loginForm!: FormGroup;
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective
   get f() { return this.loginForm.controls }
   constructor(private commonMethodService: CommonMethodService, private fb: FormBuilder,
     public validation: FormValidationService, private service: ApiService, private router: Router) { }
@@ -36,11 +37,10 @@ export class LoginComponent implements OnInit {
   }
 
   clearForm() {
-    this.loginForm.reset();
     this.controlLoginForm();
   }
 
-  onClickLogin() {
+  onClickLogin(formDirective?:any) {
     let userId = this.loginForm.value.username;
     let userPassword = this.loginForm.value.password;
     if (this.loginForm.invalid) {
@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('loggedIn', 'true');
               localStorage.setItem('loggedInData',JSON.stringify(res));
               this.router.navigate(['/dashboard']);
+              formDirective.resetForm();
               this.clearForm();
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
               console.log(this.loginForm.value);

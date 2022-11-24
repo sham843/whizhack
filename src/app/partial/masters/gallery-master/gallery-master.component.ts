@@ -1,8 +1,8 @@
 import { WebStorageService } from './../../../core/services/web-storage.service';
-// import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
@@ -24,29 +24,42 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   //#region  Pagination Variables
-  totalCount: number = 0;
+  totalCount!: number;
   currentPage: number = 1;
   perPage: number = 10;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   //#region  table Variables
   displayedColumns: string[] = ['srNo', 'gallery_Title', 'action'];
   dataSource: any;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
 
   //#region  form Group Variables
   frmGallery!: FormGroup;
   searchFilter = new FormControl('');
 
+  //#region  clear Validation
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
+
   //#region  image Variables
   imagepath: any;
   imageArray = new Array();
+  showImagError: any;
+  //#endregion
+
+  //#region edit Variables
+  UpdateObj: any;
+
+  //#region selected Row variables
+  highlightedRow:any;
+
 
   constructor(private fb: FormBuilder,
     public vs: FormValidationService,
     private _fileUploadService: FileUploadService,
     public _commonMethodService: CommonMethodService,
-    // private _errorService: ErrorHandlerService,
-    public _webStorageService:WebStorageService,
+    private _errorService: ErrorHandlerService,
+    public _webStorageService: WebStorageService,
     private api: ApiService,
     public dialog: MatDialog) { }
 
@@ -60,7 +73,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
       id: [0],
       gallery_title: ['', [Validators.required]],
       gallery_description: ['', [Validators.required]],
-      uploadImages: ['', [Validators.required]],
+      uploadImages: [''],
     })
   }
 
@@ -76,6 +89,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
       distinctUntilChanged())
       .subscribe(() => {
         this.currentPage = 1;
+        this.createMediaForm();
+        this.imageArray = [];
         this.getGalleryList();
       })
   }
@@ -90,9 +105,11 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   //#region onclick pagination
   onClickPaginatior(event: any) {
-    this.currentPage = event.pageIndex;
+    this.currentPage = event.pageIndex + 1;
+    this.clearGalleryForm();
     this.getGalleryList();
   }
+  //#endregion
 
   //#region   GalleryList
   getGalleryList() {
@@ -102,12 +119,13 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
       next: ((res: any) => {
         if (res.statusCode === '200') {
           this.dataSource = new MatTableDataSource(res.responseData);
-          this.totalCount = res.responseData1.totalPages;
-
+          this.totalCount = res.responseData1.pageCount;
+          this.currentPage == 1 ? this.paginator?.firstPage() : '';
         } else {
           this.dataSource = [];
+          this.totalCount = 0
           if (res.statusCode != 404) {
-            this._commonMethodService.matSnackBar(res.statusMessage, 1);
+            this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
           }
 
         }
@@ -129,9 +147,11 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
         if (this.imageArray.length) {
           let flag = this.imagepath.includes(',')
           flag ? this.imageArray.push(this.imagepath.split(',')) : this.imageArray.push(this.imagepath);
+
         } else {
           this.imageArray = this.imagepath.split(',');
         }
+        this.showImagError = '';
 
       } else {
         this.imagepath = '';
@@ -145,39 +165,45 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
+    !this.imageArray.length ? this.showImagError = 'Please upload image' : this.showImagError = '';
   }
 
   //#endregion
 
   //#region save Update Data
   onMediaSubmit() {
-    if (this.frmGallery.invalid) {
+    if (this.frmGallery.invalid || !this.imageArray.length) {
+      !this.imageArray.length ? this.showImagError = "Please upload image" : this.showImagError = '';
       return;
     }
 
-    if (!this.imageArray.length) {
-      this._commonMethodService.matSnackBar("Please upload image", 1);
-      return
-    }
-
-    let obj ={
-      "createdBy":this._webStorageService.getUserId(),
+    let formData = this.frmGallery.value;
+    let imagepath: string = '';
+    this.imageArray.map((ele: any) => { imagepath += ele + "," });
+    imagepath = imagepath.substring(0, imagepath.length - 1);
+    let obj = {
+      "createdBy": this._webStorageService.getUserId(),
       "modifiedBy": this._webStorageService.getUserId(),
       "createdDate": new Date(),
       "modifiedDate": new Date(),
       "isDeleted": false,
-      "id": 0,
-      "gallery_Title": "string",
-      "description": "string",
-      "imagepath": "string"
+      "id": this.UpdateObj ? this.UpdateObj.galleryId : 0,
+      "gallery_Title": formData.gallery_title,
+      "description": formData.gallery_description,
+      "imagepath": imagepath
     }
-    this.api.setHttp('post', 'whizhack_cms/Gallery/Insert' , false, obj, false, 'whizhackService');
+    let url, formType: any;
+    this.UpdateObj ? (url = 'Update', formType = 'put') : (url = 'insert', formType = 'post');
+    this.api.setHttp(formType, 'whizhack_cms/Gallery/' + url, false, obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          this._commonMethodService.matSnackBar(res.statusMessage,0);
+          this._commonMethodService.matSnackBar(res.statusMessage, 0);
+          formType == 'post' ? this.currentPage = 1 : '';
+          this.clearGalleryForm();
+          this.getGalleryList();
         } else {
-            this._commonMethodService.matSnackBar(res.statusMessage, 1);
+          this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
         }
       }),
       error: (error: any) => {
@@ -189,14 +215,18 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
 
   editGalleryRecord(data: any) {
+    this.UpdateObj = data;
+    this.highlightedRow = data.galleryId;
     this.frmGallery.patchValue({
-      gallery_description   : data?.description,
-      gallery_title :  data?.gallery_Title  ,
+      gallery_description: data?.description,
+      gallery_title: data?.gallery_Title,
     });
     this.imageArray = data.imagepaths;
   }
 
   deleteGalleryRecord(data: any) {
+    this.createMediaForm();
+    this.imageArray = [];
     let dialoObj = {
       header: 'Delete',
       title: 'Do you want to delete the selected course ?',
@@ -212,15 +242,18 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {
         let deleteObj = {
-          "id": data.id,
-          "modifiedBy": 0,
+          "id": data.galleryId,
+          "modifiedBy": this._webStorageService.getUserId(),
         }
 
-        this.api.setHttp('delete', 'whizhack_cms/course/Delete', false, deleteObj, false, 'whizhackService');
+        this.api.setHttp('delete', 'whizhack_cms/Gallery/Delete', false, deleteObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
+              this._commonMethodService.matSnackBar(res.statusMessage, 0);
               this.getGalleryList();
+            } else {
+              this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
@@ -232,9 +265,15 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   }
 
+  //#region Clear Form And Validation
   clearGalleryForm() {
     this.frmGallery.reset();
     this.createMediaForm();
+    this.formGroupDirective.resetForm();
+    this.showImagError = '';
+    this.imageArray = [];
+    this.UpdateObj = '';
   }
+  //#endregion
 
 }
