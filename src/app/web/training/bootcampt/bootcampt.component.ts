@@ -11,9 +11,10 @@ export class BootcamptComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-  openDialog() {
+  openDialog(flag:any) {
     const dialogRef = this.dialog.open(RegisterNowComponent,{
       width: '500px',
+      data:flag
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
