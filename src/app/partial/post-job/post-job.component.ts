@@ -176,6 +176,9 @@ export class PostJobComponent implements OnInit {
           }
         })
       }
+      else{
+        this.bindTable();
+      }
     });
   }
 
