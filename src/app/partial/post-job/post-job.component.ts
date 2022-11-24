@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormGroup, FormBuilder, Validators, NgForm} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -21,6 +21,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PostJobComponent implements OnInit {
 
   postNewJobFrm!: FormGroup;
+  fillterForm!: FormGroup;
   displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting', 'date_of_Application', 'publish', 'actions'];
   dataSource: any;
   editFlag: boolean = false;
@@ -39,10 +40,11 @@ export class PostJobComponent implements OnInit {
     ['ordered_list', 'bullet_list'],
     ['link'],
   ];
-  
+
   @ViewChild('formDirective')
   private formDirective!: NgForm;
   min = new Date();
+  title: string = '';
 
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
@@ -55,6 +57,7 @@ export class PostJobComponent implements OnInit {
 
   ngOnInit(): void {
     this.formData();
+    // this. fillterFormData();
     this.bindTable();
     this.editorRoles = new Editor();
     this.editorExperience = new Editor();
@@ -80,12 +83,12 @@ export class PostJobComponent implements OnInit {
   }
   // ----------------------------End Form Field Here-------------------------------
 
-  get f() { return this.postNewJobFrm.controls}
+  get f() { return this.postNewJobFrm.controls }
 
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10&job_Title=' + this.title, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {
@@ -176,7 +179,7 @@ export class PostJobComponent implements OnInit {
           }
         })
       }
-      else{
+      else {
         this.bindTable();
       }
     });
@@ -214,8 +217,8 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } 
-     });
+      }
+    });
   }
   // ----------------------------End Delete Logic Here---------------------------
   // ----------------------------Start Delete Logic Here-------------------------
@@ -243,7 +246,8 @@ export class PostJobComponent implements OnInit {
 
   // ----------------------------Start Submit Logic Here-------------------------
   onSubmit() {
-    if (!this.postNewJobFrm.valid) {return;
+    if (!this.postNewJobFrm.valid) {
+      return;
     } else {
       this.ngxSpinner.show();
       let data = this.postNewJobFrm.value;
@@ -261,8 +265,8 @@ export class PostJobComponent implements OnInit {
               horizontalPosition: 'right',
             })
             this.bindTable();
-             this.clearForm();
-             this.buttonValue = 'Submit';
+            this.clearForm();
+            this.buttonValue = 'Submit';
           }
         }),
         error: (error: any) => {

@@ -72,6 +72,7 @@ export class ForgotPasswordComponent implements OnInit {
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
     this.obj.otp = this.stringOtp;
+    this.timeLeft == 0 ? (this.obj.otp = this.stringOtp = '', this.mat.open('Please enter Valid OTP','ok',{duration:2000})):'';
     if (this.obj.otp) {
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
@@ -88,7 +89,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
-        this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false, this.displayFields = true, this.stringOtp = '') : ''
+        this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false, this.displayFields = true) : ''
       } else {
         this.timeLeft = 60;
       }
@@ -113,7 +114,8 @@ export class ForgotPasswordComponent implements OnInit {
     let obj = this.registerForm.value;
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
-    obj.otp = this.stringOtp
+    obj.otp = this.stringOtp;
+
     if (obj.passwordNew == obj.retypePassword) {
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + this.userName + '&Password=' + obj.passwordNew + '&NewPassword=' + obj.retypePassword + '&MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
