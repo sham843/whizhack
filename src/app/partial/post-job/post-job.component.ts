@@ -226,6 +226,7 @@ openDeleteDialog(id: any) {
 
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'yes'){
+      this.clearForm();
       let deleteObj = {
         "id": id,
         "modifiedBy": 0,
@@ -272,7 +273,7 @@ onDelete(data:any){
 // ----------------------------End Delete Logic Here-------------------------
 
 // ----------------------------Start Submit Logic Here-------------------------
-  onSubmit() {
+  onSubmit(clear:any) {
   if (!this.postNewJobFrm.valid) {      
       return;
     }  else {
@@ -287,7 +288,8 @@ onDelete(data:any){
           if (res.statusCode === '200') {
             this.bindTable();
             // this.onClickClear(frm);
-            this.clearAll()
+            // this.clearAll()
+            this.clearForm(clear);
           }
         }),
         error: (error: any) => {
@@ -304,11 +306,20 @@ onClickClear(frm?:any){
 }
 //------------------------------------Pagination Logic Start------------------------
 paginationEvent(event: any) {
+  this.clearForm()
   this.currentPage = event.pageIndex;
   this.pageSize = event.pageSize;
   this.bindTable();
 }
 clearAll(){
   this.formRef.resetForm();
+}
+
+clearForm(clear?:any) {
+  console.log(clear);
+  this.postNewJobFrm.reset()
+  clear?.resetForm();
+ this.editFlag = false;
+  this.formData();
 }
 }
