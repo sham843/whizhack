@@ -19,7 +19,7 @@ export class MediaCoverageComponent implements OnInit {
   submitBtnTxt:string = 'Submit';
   get f() { return this.frmMedia.controls };
   totalCount: number = 0;
-  currentPage: number = 0;
+  currentPage: number = 1;
   pageSize: number = 10;
 
   displayedColumns: string[] = ['srno', 'article_Title', 'source', 'url', 'action'];
@@ -66,7 +66,7 @@ export class MediaCoverageComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.dataSource = res.responseData?.responseData1;
-          this.totalCount = res.responseData?.responseData2?.totalCount;
+          this.totalCount = res.responseData?.responseData2?.pageCount;
           this.currentPage = res.responseData?.responseData2?.pageNo;
         } else {
           this.dataSource = [];
@@ -109,10 +109,10 @@ export class MediaCoverageComponent implements OnInit {
   editMediaRecord(data: any){
     this.submitBtnTxt = 'Update'
     this.frmMedia.patchValue({
-      id: data.mediaId,
-      article_Title: data.article_Title,
-      source: data.source,
-      url: data.url,
+      id: data?.mediaId,
+      article_Title: data?.article_Title,
+      source: data?.source,
+      url: data?.url,
     })
   }
 
