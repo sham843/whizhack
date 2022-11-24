@@ -84,6 +84,7 @@ section {
 	float: left;
 	width: 300px;
 	height: 200px;
+    margin-bottom: 8rem;
 }
 .albums-tab-thumb img {
 	height: auto;
