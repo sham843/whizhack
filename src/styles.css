@@ -310,3 +310,7 @@ a.text-main:hover{
 .g-backdrop {
   background-color: rgb(0 0 0 / 95%) !important;
 }
+
+.highlightedRow{
+  background: #eeeeee !important;
+}
