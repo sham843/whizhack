@@ -119,10 +119,12 @@ export class PostJobComponent implements OnInit {
           this.totalCount = res.responseData1.pageCount;
         }
         else {
+          this.ngxSpinner.hide();
           this.dataSource = [];
         }
       },
       error: (error: any) => {
+        this.ngxSpinner.hide();
         console.log("Error:", error);
         this.error.handelError(error.statusCode);
       }
@@ -271,8 +273,7 @@ export class PostJobComponent implements OnInit {
     if (!this.postNewJobFrm.valid) {
       return;
     } else {
-      this.ngxSpinner.show();
-      let data = this.postNewJobFrm.value;
+    let data = this.postNewJobFrm.value;
       data.publish = false;
       data.date_of_Posting = new Date();
       this.editFlag ? '' : data.id = 0;
@@ -283,8 +284,7 @@ export class PostJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.ngxSpinner.hide();
-            this.snackbar.open(res.statusMessage, 'ok', {
+           this.snackbar.open(res.statusMessage, 'ok', {
               duration: 2000,
               verticalPosition: 'top',
               horizontalPosition: 'right',
