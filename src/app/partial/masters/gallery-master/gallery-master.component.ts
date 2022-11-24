@@ -11,6 +11,9 @@ import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/c
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
+import { Lightbox } from '@ngx-gallery/lightbox';
+
 @Component({
   selector: 'app-gallery-master',
   templateUrl: './gallery-master.component.html',
@@ -50,6 +53,11 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region edit Variables
   UpdateObj: any;
 
+  //#region selected Row variables
+  highlightedRow:any;
+
+//#region light box variables
+items!: GalleryItem[];
 
   constructor(private fb: FormBuilder,
     public vs: FormValidationService,
@@ -58,6 +66,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     private _errorService: ErrorHandlerService,
     public _webStorageService: WebStorageService,
     private api: ApiService,
+    public gallery: Gallery,
+    public lightbox: Lightbox,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -68,8 +78,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required]],
-      gallery_description: ['', [Validators.required]],
+      gallery_title: ['', [Validators.required,Validators.pattern(this.vs.valUserName)]],
+      gallery_description: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
       uploadImages: [''],
     })
   }
@@ -210,16 +220,19 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   }
 
-
+//#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
+    this.highlightedRow = data.galleryId;
     this.frmGallery.patchValue({
       gallery_description: data?.description,
       gallery_title: data?.gallery_Title,
     });
     this.imageArray = data.imagepaths;
   }
+//#endregion
 
+//#region delete Record
   deleteGalleryRecord(data: any) {
     this.createMediaForm();
     this.imageArray = [];
@@ -260,6 +273,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     });
 
   }
+//#endregion
 
   //#region Clear Form And Validation
   clearGalleryForm() {
@@ -269,7 +283,29 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this.showImagError = '';
     this.imageArray = [];
     this.UpdateObj = '';
+    this.highlightedRow='';
   }
   //#endregion
 
+  //#region light box code start here
+  openBox(data:any){
+    this.lightbox.open(0, 'lightbox')
+    this.items = data.imagepaths.map((item:any) =>  new ImageItem({ src: item, thumb: item }));
+    this.basicLightboxExample();
+    this.withCustomGalleryConfig()
+  }
+
+  basicLightboxExample() {
+    this.gallery.ref('lightbox').load(this.items);
+  }
+
+  withCustomGalleryConfig() {
+    const lightboxGalleryRef = this.gallery.ref('anotherLightbox');
+    lightboxGalleryRef.setConfig({
+      imageSize: ImageSize.Cover,
+      thumbPosition: ThumbnailsPosition.Top
+    });
+    lightboxGalleryRef.load(this.items);
+  }
+  //#endregion
 }
