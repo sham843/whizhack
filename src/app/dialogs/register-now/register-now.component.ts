@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-now.component.css']
 })
 export class RegisterNowComponent implements OnInit {
-  registerForm!: FormGroup;
+  registerForm!: FormGroup | any;
 
-  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder, private service: ApiService,
+  constructor(
+    public dialogRef: MatDialogRef<RegisterNowComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private service: ApiService,
     private errorSer: ErrorHandlerService,
     public validator: FormValidationService,
     private route: Router) { }
@@ -23,12 +26,14 @@ export class RegisterNowComponent implements OnInit {
     this.getFormData();
   }
 
+  get f() { return this.registerForm.controls }
+
   // Cyber Security Training Program
   getFormData() {
     this.registerForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$')]],
-      mobileNo: ['', [Validators.required, Validators.pattern('[7-9]\\d{9}'), Validators.maxLength(10)]],
+      fullName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$')]],
+      email: ['', [Validators.required, Validators.email]],
+      mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
       courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : this.data == 3 ? 'Cyber Guru' : this.data == 4? 'Cyber Security Training Program' :'Cyber Security Training Program'],
       message: ['', [Validators.required]],
       pageName:['']
@@ -58,5 +63,4 @@ export class RegisterNowComponent implements OnInit {
     
   }
 
-  
 }
