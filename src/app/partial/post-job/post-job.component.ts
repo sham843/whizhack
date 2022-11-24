@@ -211,10 +211,8 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } else {
-        this.bindTable();
-      }
-    });
+      } 
+     });
   }
   // ----------------------------End Delete Logic Here---------------------------
   // ----------------------------Start Delete Logic Here-------------------------
