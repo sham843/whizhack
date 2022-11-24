@@ -8,59 +8,56 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label> Select Page Name</mat-label>
                             <mat-select formControlName="pageName">
-                                <mat-option *ngFor="let ele of pageNameArray" [value]="ele.pageName">{{ele.pageName}}</mat-option>
+                                <mat-option *ngFor="let ele of pageNameArray" [value]="ele.pageName">{{ele.pageName}}
+                                </mat-option>
                             </mat-select>
                             <mat-error class="mt-2" *ngIf="formControls['pageName'].hasError('required')">
                                 Select Page Name
-                            </mat-error>                           
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
                             <input matInput placeholder="Course Title" formControlName="course_Title" maxlength="20"
-                            (keypress)="vadations.alphabetsWithSpaces($event)" (keyup)="vadations.removeSpaceAtBegining($event)">
+                            (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
-                                Please Enter course Title
-                            </mat-error> 
-                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('pattern')">
-                               No Space at Staring And Only Alphabet </mat-error>                            
+                                Course Title is Required
+                            </mat-error>                            
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Course Caption" formControlName="course_Caption"
-                            (keypress)="vadations.alphabetsWithSpaces($event)" (keyup)="vadations.removeSpaceAtBegining($event)">
+                                maxlength="500" (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
-                                Please Enter course Caption
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('pattern')">
-                                No space at Staring And Only Alphabet </mat-error>
+                                Course Caption is Required
+                            </mat-error>                           
                         </mat-form-field>
-                       
+
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
                             <input matInput placeholder="Course Duration" formControlName="duration"
-                            (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
+                            (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
-                                Please Enter Course Duration
+                                Course Duration is Required
                             </mat-error>
                         </mat-form-field>
-                       
+
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Course Description</mat-label>
-                            <textarea matInput placeholder="Course Description" rows="4"
+                            <textarea matInput placeholder="Course Description" rows="4" maxlength="500"
                                 formControlName="course_Description"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
-                                <mat-error *ngIf="formControls['course_Description'].hasError('required')">
-                                    Please Enter Course Description
-                                </mat-error>
-                        </mat-form-field>                        
+                            <mat-error *ngIf="formControls['course_Description'].hasError('required')">
+                                Course Description is Required
+                            </mat-error>
+                        </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <div class="d-flex align-items-center justify-content-between">
@@ -78,7 +75,7 @@
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
-                                (click)="deleteImage()">
+                                    (click)="deleteImage()">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -89,54 +86,60 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Syllabus Summary" rows="4"
-                                formControlName="syllabus_Summary" 
+                            <textarea matInput placeholder="Syllabus Summary" rows="4" maxlength="500"
+                                formControlName="syllabus_Summary"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
-                                <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
-                                    Please Enter Syllabus Summary
-                                </mat-error>
+                            <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
+                                Course Description is Required
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
-                        <mat-checkbox class="example-margin" (change)="setOffer($event)">Exclusive Offer?</mat-checkbox>
+                        <mat-checkbox [checked]="offer" class="example-margin" (change)="setOffer($event)">Exclusive
+                            Offer?</mat-checkbox>
                     </div>
-                    <div class="mb-3" >
+                    <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
-                            <input matInput placeholder="Price" formControlName="price" (keypress)="vadations.onlyDigits($event)">
+                            <input matInput placeholder="Price" formControlName="price" 
+                                (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
-                                Please Enter Price
+                                Price is Required
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('pattern')">
-                                Enter Only Number</mat-error> 
+                                Enter Only Number</mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('maxlength')">
+                                Maximum 10 Number</mat-error>
                         </mat-form-field>
-                       
+
                     </div>
                     <div class="mb-3" *ngIf="offer">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Discount Price</mat-label>
-                            <input matInput placeholder="Actual Price" formControlName="discountPrice" (keypress)="vadations.onlyDigits($event)">
-                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
-                                Please Enter Actual Price
+                            <input matInput placeholder="Actual Price" formControlName="actual_price" maxlength="10"
+                                (keypress)="vadations.onlyDigits($event)">
+                            <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
+                                Discount Price is Required
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('pattern')">
-                                Enter Only Number</mat-error> 
+                            <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('pattern')">
+                                Enter Only Number</mat-error>
                         </mat-form-field>
-                       
+
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
-                            <input matInput placeholder="Terms" formControlName="price_Terms"
-                            (keypress)="vadations.alphabetsWithSpaces($event)" (keyup)="vadations.removeSpaceAtBegining($event)">
+                            <input matInput placeholder="Terms" formControlName="price_Terms" maxlength="50"
+                            (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
-                                Please Enter Price Terms
+                                Price Terms is Required
                             </mat-error>
                         </mat-form-field>
-                       
+
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearForm(clear)">Cancel</button>
+                        <button type="button" mat-stroked-button class="btn-main-outline"
+                            (click)="clearForm(clear)">Cancel</button>
                         <button type="submit" mat-stroked-button (click)="onClickSubmit(clear)"
                             class="btn-main">{{editFlag ? 'Update':'Submit'}}</button>
                     </div>
@@ -149,21 +152,24 @@
             <div class="card-header">Course List</div>
             <div class="row">
                 <div class="col-4">
-                    <form [formGroup]="fillterForm">
+                    
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Search By Course Title</mat-label>
-                            <input matInput placeholder="Search By Course Title" formControlName="courseTitle" maxlength="20"
-                            (keypress)="vadations.alphabetsWithSpaces($event)" 
-                            (keyup)="vadations.removeSpaceAtBegining($event);onFillterSubmit()">  
-                        </mat-form-field> 
-                        <!-- <ng-container>
-                            <button type="submit" (click)="onFillterSubmit()"> Apply </button>
-                        </ng-container>                         -->
-                    </form>
+                            <input matInput placeholder="Search By Course Title" [formControl]="searchFilter"
+                                maxlength="20" (keypress)="vadations.alphabetsWithSpaces($event)"
+                                (keyup)="vadations.removeSpaceAtBegining($event)">
+                                
+                                <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
+                                (click)="clearSearchFilter()">
+                                <span class="material-symbols-outlined">
+                                  close
+                                </span>
+                              </button>
+                        </mat-form-field>                      
+                   
                 </div>
             </div>
             <div class="card-body">
-              <ng-container *ngIf="dataSource; else elseBlock">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
                     <ng-container matColumnDef="srno">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
@@ -201,20 +207,23 @@
                                     edit
                                 </span>
                             </button>
-                            <button type="button" mat-icon-button class="text-danger" (click)="openDeleteDialog(element.courseId)">
+                            <button type="button" mat-icon-button class="text-danger"
+                                (click)="openDeleteDialog(element.courseId)">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
                             </button>
                         </td>
                     </ng-container>
+                    <tr class="mat-row p-2 w-100" *matNoDataRow col>
+                        <td class="alert alert-danger text-center m-2 mt-2" colspan="8">
+                            No data found </td>
+                    </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>  
-              </ng-container>  
-              <ng-template #elseBlock>
-                 <h4>No Data Found</h4>
-              </ng-template>           
+                </table>
+
+
             </div>
             <ng-container *ngIf="totalCount > 10">
                 <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
