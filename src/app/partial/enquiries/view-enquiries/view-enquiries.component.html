@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <span>ID : #232</span>
+    <span>ID :{{viewData.id}}</span>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -9,44 +9,44 @@
 <div class="dialog-body form-container">
     <div class="row">
         <div class="col-sm-8 border-end">
-            <div class="row gy-3" *ngFor="let arr of newArray">
+            <div class="row gy-3">
                 <div class="col-sm-3">
                     <span class="form-label">Name :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Mr. {{arr.fullName || '-'}}</span>
+                    <span class="form-data">Mr. {{viewData.fullName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Email ID :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.email || '-'}}</span>
+                    <span class="form-data">{{viewData.email || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Contact No. :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.mobileNo || '-'}}</span>
+                    <span class="form-data">{{viewData.mobileNo || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Course :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.courseId == 1 ? 'Cyber Ninja' :
-                        arr.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}}</span>
+                    <span class="form-data">{{viewData.courseId == 1 ? 'Cyber Ninja' :
+                        viewData.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.pageName || '-'}}</span>
+                    <span class="form-data">{{viewData.pageName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Message :</span>
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">
-                        {{arr.message}}
+                        {{viewData.message}}
                     </span>
                 </div>
             </div>

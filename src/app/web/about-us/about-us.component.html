@@ -731,13 +731,13 @@
             </div>
         </div> -->
         <div class="row">
-            <div class="col-sm-4 mb-3" *ngFor="let data of mediaCoverageData">
+            <div class="col-sm-4 mb-3" *ngFor="let mediaData of mediaCoverageData">
                 <div class="card">
                     <div class="card-body">
-                        <h5>{{data.article_Title}}</h5>
-                        <p>{{data.source}}
+                        <h5>{{mediaData.article_Title}}</h5>
+                        <p>{{mediaData.source}}
                         </p>
-                        <a class="text-main" href="{{data.url}}" target="_blank">View More</a>
+                        <a class="text-main" href="{{mediaData.url}}" target="_blank">View More</a>
                     </div>
                 </div>
             </div>

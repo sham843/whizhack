@@ -14,17 +14,17 @@ export class FormValidationService {
   alphaNumericWithSpaceAndSpecialChar = '^[a-zA-Z0-9 /(,)&.+-@#$]*$';
   onlyNumbers = '^[0-9]*$';
   numbersWithDot = '^[0-9\s]*\.?[0-9\s]+$'
-  valUserName = '^[^\\s\\[\\[`&-._@#%*!-+"\'\/\\]\\]{}][a-zA-Z@0-9.\\s]+$';    
+  valUserName = '^[^\\s\\[\\[`&-._@#%*!-+"\'\/\\]\\]{}][a-zA-Z@0-9.\\s]+$';
   valPassword = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z0-9\d@$!%*?&]{8,20}$';
   valMobileNo = '[6-9]\\d{9}';
   valOtp = '[0-9]\\d{6}';
 
-  valDescription = '^[^\\s\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z@0-9.,\\s]+$'; // Description or commit
+  valDescription = '^[^\\s\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z@#$%^&*()0-9.,\\s]+$'; // Description or commit
   // valEmailId = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   valEmailId='^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$';
 
   constructor() { }
-   
+
 
   onlyAlphabets(event: any) {
     if (!this.noSpacesAtStart(event)) {
@@ -101,7 +101,7 @@ export class FormValidationService {
     }
     return temp
   }
-  
+
   patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
@@ -131,7 +131,7 @@ export class FormValidationService {
       }
     }
   }
-  
+
   noWhiteSpace(control: AbstractControl): ValidationErrors | null {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
@@ -156,7 +156,7 @@ export class FormValidationService {
     if (event.target.selectionStart === 0 && (event.keyCode == 46)) return false;  // starting .Dot not accept
     if (event.target.selectionStart === 0 && (event.keyCode == 64)) return false;  // starting @ not accept
     let key = parseInt(event.key); if (event.target.selectionStart === 0 && (!isNaN(key))) return false; // starting Number not accept
-    const maskSeperator = new RegExp('^([a-zA-Z0-9 .@])', 'g'); // only Accept A-Z & 0-9 & .@ 
+    const maskSeperator = new RegExp('^([a-zA-Z0-9 .@])', 'g'); // only Accept A-Z & 0-9 & .@
     return maskSeperator.test(event.key);
   }
 
