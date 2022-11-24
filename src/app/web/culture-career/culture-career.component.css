@@ -50,10 +50,31 @@ section {
 .g-overlay {
     min-width: 320px;
   }
-.culture-image{
+  .image-container{
+    position: relative;
+  }
+.image-container .culture-image{
     width: 100%;
     height: 300px;
     border-radius: 15px;
     object-fit: cover;
     object-position:top;
+}
+.image-container .image-text{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+.image-container:hover .image-text{
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }
