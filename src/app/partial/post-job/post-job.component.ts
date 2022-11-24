@@ -42,7 +42,6 @@ export class PostJobComponent implements OnInit {
     spellcheck: true,
     height: '10rem',
     minHeight: '5rem',
-    placeholder: 'Enter text here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     toolbarHiddenButtons: [
