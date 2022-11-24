@@ -3,7 +3,7 @@
         <div class="card form-card">
             <div class="card-header">Media Coverage</div>
             <div class="card-body">
-                <form [formGroup]="frmMedia" (ngSubmit)="onMediaSubmit()">
+                <form [formGroup]="frmMedia" (ngSubmit)="onMediaSubmit(formDirective)" #formDirective="ngForm">
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Title</mat-label>
@@ -28,11 +28,12 @@
                             <input matInput placeholder="Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)" maxlength="200">
                             <mat-error *ngIf="f['url']?.errors" class="mt-2">
                                 <span *ngIf="f['url']?.hasError('required')"> Article url is required</span>
+                                <span *ngIf="f['url']?.hasError('pattern')">Please enter valid Article url</span>
                             </mat-error>
                         </mat-form-field>
                     </div>   
                     <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearMediaForm()">Cancel</button>
+                        <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearMediaForm(formDirective)">Cancel</button>
                         <button type="submit" mat-stroked-button class="btn-main">{{submitBtnTxt}}</button>
                     </div>
                 </form>
@@ -48,8 +49,8 @@
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
                     <ng-container matColumnDef="srno">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
-                        <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{(currentPage * 10 + i + 1)-10}} </td>
-                    </ng-container>
+                        <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{((currentPage + 1) * 10 + i + 1)-10}} </td>
+                    </ng-container>            
                     <ng-container matColumnDef="article_Title">
                         <th mat-header-cell *matHeaderCellDef> Article Title </th>
                         <td mat-cell *matCellDef="let element"> {{element.article_Title}} </td>
