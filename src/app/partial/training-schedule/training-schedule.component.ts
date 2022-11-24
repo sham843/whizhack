@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -33,9 +32,9 @@ export class TrainingScheduleComponent implements OnInit {
   imgSrc: string = '';
   editFlag: boolean = false;
   sumitted: boolean = false;
-
   @ViewChild(MatSort) sort!: MatSort;
   title: string = '';
+  offer: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -44,7 +43,6 @@ export class TrainingScheduleComponent implements OnInit {
     private api: ApiService,
     private errorService: ErrorHandlerService,
     private ngxSpinner: NgxSpinnerService,
-    private snakBar: MatSnackBar,
     public vadations :FormValidationService,
     private comMethods :CommonMethodService) { }
 
@@ -90,7 +88,8 @@ export class TrainingScheduleComponent implements OnInit {
       syllabus_Summary: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(this.vadations.onlyNumbers)]],
       price_Terms: ['', Validators.required],
-      imagePath: ['', Validators.required]
+      imagePath: ['', Validators.required],
+      discountPrice:['',[Validators.required, Validators.pattern(this.vadations.onlyNumbers)]]
     })
   }
 
@@ -232,14 +231,11 @@ export class TrainingScheduleComponent implements OnInit {
   }
 
   onClickSubmit(clear:any) {
+    this.updateValidation();
     // this.sumitted = true
     if (!this.courseManageForm.valid) {
       if(!this.imgSrc){
-        this.snakBar.open('Please Upload Image', 'ok', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',        
-        })
+        this.comMethods.matSnackBar('Please Upload Image',0)      
       }     
       return;
     } 
@@ -253,11 +249,7 @@ export class TrainingScheduleComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.snakBar.open(res.statusMessage, 'ok', {
-              duration: 2000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right',
-            })
+            this.comMethods.matSnackBar(res.statusMessage,0)
             this.getAllCourseList();
             this.clearForm(clear);
           }
@@ -268,11 +260,27 @@ export class TrainingScheduleComponent implements OnInit {
       })
     }
   }
+ 
 
   onFillterSubmit(){
     this.title = this.fillterForm.value.courseTitle;
-    this.totalCount = 0
-    this.getAllCourseList()
+    console.log(this.title);
+    this.currentPage = 0
+     this.getAllCourseList();  
+  }
+
+  setOffer(event:any){
+   this.offer = event.checked      
+  }
+
+  updateValidation(){    
+    if(this.offer){
+      this.courseManageForm.controls['discountPrice'].setValidators([Validators.required]);
+      this.courseManageForm.controls['discountPrice'].updateValueAndValidity();
+    }else{
+      this.courseManageForm.controls['discountPrice'].setValidators([]);
+      this.courseManageForm.controls['discountPrice'].updateValueAndValidity();
+    }
   }
 
 }
