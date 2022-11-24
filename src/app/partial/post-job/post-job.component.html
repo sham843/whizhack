@@ -9,7 +9,7 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Job Title</mat-label>
-                                    <input matInput placeholder="Job Title" formControlName="job_Title" maxlength="50"
+                                    <input matInput placeholder="Enter Job Title" formControlName="job_Title" maxlength="50"
                                         (keypress)="validation.noFirstSpaceAllow($event)">
                                     <mat-error class="mt-2">
                                         <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
@@ -24,7 +24,7 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Job Location</mat-label>
-                                    <input matInput placeholder="Job Location" formControlName="job_Location"
+                                    <input matInput placeholder="Enter Job Location" formControlName="job_Location"
                                         (keypress)="validation.noFirstSpaceAllow($event)"><br>
                                     <mat-error class="mt-2">
                                         <div *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
@@ -66,7 +66,7 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="legacy" class="w-100">
                                     <mat-label>Job Description</mat-label>
-                                    <textarea matInput placeholder="Job Description" rows="15" maxlength="500"
+                                    <textarea matInput placeholder="Enter Job Description" rows="15" maxlength="500"
                                         formControlName="job_Description"
                                         (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                     <mat-error class="mt-2"

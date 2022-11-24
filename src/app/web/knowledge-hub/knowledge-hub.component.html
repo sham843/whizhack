@@ -30,12 +30,12 @@
             <div class="col-sm-7">
                 <div class="position-relative">
                     <a routerLink="../blog-details">
-                        <img src="../../../assets/image/Products/blog-image.png" alt="blog" class="main-blog-img w-100">
+                        <img src="{{blogPostArray[0]?.imagePath}}" alt="blog" class="main-blog-img w-100">
                         <div class="card card-body main-blog-body mx-3">
                             <p class="mb-2">June 07</p>
                             <hr>
                             <p>
-                                {{blogPostData[0].description}}
+                                {{blogPostArray[0]?.description}}
                             </p>
                             <div class="text-start">
                                 <button type="button" class="btn btn-outline-light rounded-pill">Read More</button>
@@ -50,19 +50,19 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search Blogs">
                             <button class="btn" type="button" id="button-addon2">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i> [routerLink]="['/user', user.id]
                             </button>
                         </div>
                     </div> -->
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                         <a class="d-flex blog" routerLink="../blog-details"  *ngFor="let blogData of blogPostData">
+                         <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray">
                             <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
+                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id)">
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <p>{{blogData.description}}</p> 
-                                <small>June 07</small>
+                                <small>{{blogData.createdDate| date}}</small>
                             </div>
                         </a>
                     </div>
@@ -71,61 +71,22 @@
         </div>
     </div>
 </section>
-
 <section>
     <div class="container">
         <h2 class="mb-4">White Papers</h2>
         <div class="row gx-5 products">
-            <div class="col-sm-4">
-                <a class="card h-100" routerLink="">
-                    <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
+            <div class="col-sm-4 mb-4" *ngFor="let papers of whitePaperArray">
+                <a class="card h-100">
+                    <img src="{{papers?.imagePath}}" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
-                            White Papers 1
+                          {{papers.title}}
                         </h5>
                         <p class="card-text">
-                            An adaptable, triple-layer security system that uses industry-standard mature signature
-                            technology with highly optimized machine language and deep learning-based models on live
-                            traffic to detect threats in the hybrid cloud.
+                            {{papers.description}}
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline btn-sm">Read More</button>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a class="card h-100" routerLink="">
-                    <img src="../../../assets/image/home/Product2.png" alt="Product" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            White Papers 2
-                        </h5>
-                        <p class="card-text">
-                            An adaptable, triple-layer security system that uses industry-standard mature signature
-                            technology with highly optimized machine language and deep learning-based models on live
-                            traffic to detect threats in the hybrid cloud.
-                        </p>
-                        <div>
-                            <button type="button" class="btn btn-main-outline btn-sm">Read More</button>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a class="card h-100" routerLink="">
-                    <img src="../../../assets/image/home/Product3.png" alt="Product" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            White Papers 3
-                        </h5>
-                        <p class="card-text">
-                            An adaptable, triple-layer security system that uses industry-standard mature signature
-                            technology with highly optimized machine language and deep learning-based models on live
-                            traffic to detect threats in the hybrid cloud.
-                        </p>
-                        <div>
-                            <button type="button" class="btn btn-main-outline btn-sm">Read More</button>
+                            <button type="button" class="btn btn-main-outline btn-sm" (click)="blogDetails(papers.id)">Read More</button>
                         </div>
                     </div>
                 </a>
@@ -181,34 +142,14 @@
                 <div class="tab-pane fade show active" id="pills-All" role="tabpanel" aria-labelledby="pills-All-tab"
                     tabindex="0">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../../assets/image/Products/Case-Studies-1.png" class="card-img-top"
-                                    alt="...">
-                                <div class="card-overlay">
-                                    <h5>Lorem Ipsum</h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
+                        <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
+                            <div class="card pointer-link">
+                                <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id)"
+                                alt="...">
+                            <div class="card-overlay">
+                                <h5>{{caseData.title}}</h5>
+                                <p>{{caseData.description}}</p>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../../assets/image/Products/Case-Studies-2.png" class="card-img-top"
-                                    alt="...">
-                                <div class="card-overlay">
-                                    <h5>Lorem Ipsum</h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../../assets/image/Products/Case-Studies-3.png" class="card-img-top"
-                                    alt="...">
-                                <div class="card-overlay">
-                                    <h5>Lorem Ipsum</h5>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
