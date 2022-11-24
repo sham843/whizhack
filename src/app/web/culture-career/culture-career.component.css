@@ -15,6 +15,12 @@ section {
     color: #aaa;
     font-size: 0.85rem;
     line-height: 1.6rem;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 4; /* number of lines to show */
+           line-clamp: 4;
+   -webkit-box-orient: vertical;
 }
 #jobs .card a{
     font-size: 0.85rem;
