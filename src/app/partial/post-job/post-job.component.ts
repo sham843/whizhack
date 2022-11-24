@@ -125,8 +125,7 @@ export class PostJobComponent implements OnInit {
       },
       error: (error: any) => {
         this.ngxSpinner.hide();
-        console.log("Error:", error);
-        this.error.handelError(error.statusCode);
+      this.error.handelError(error.statusCode);
       }
     })
   }
