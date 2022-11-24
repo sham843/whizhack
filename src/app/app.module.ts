@@ -12,8 +12,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmationModalComponent } from './dialogs/confirmation-modal/confirmation-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ApplyNowComponent } from './dialogs/apply-now/apply-now.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,8 @@ import { ApplyNowComponent } from './dialogs/apply-now/apply-now.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    AngularEditorModule,
     MatDialogModule,
-    AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
