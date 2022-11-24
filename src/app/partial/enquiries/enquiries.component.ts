@@ -57,6 +57,7 @@ export class EnquiriesComponent implements OnInit {
         this.errorSer.handelError(error.status);
       }
     })
+    console.log('ds',this.dataSource);
   }
 
   openDeleteDialog(id: any) {
