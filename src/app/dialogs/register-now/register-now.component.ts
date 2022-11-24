@@ -36,11 +36,14 @@ export class RegisterNowComponent implements OnInit {
   }
 
   onSubmit() {
+    // debugger
     if (this.registerForm.invalid) {
       return
     } else {
       let formData = this.registerForm.value;
       formData.pageName=this.route.url || '';
+      formData.courseId=this.data == 'Cyber Ninja' ? 1 : formData.courseId=this.data == 'Cyber Samurai' ? 2 : 3;
+      console.log( 'cid',formData.courseId);
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
