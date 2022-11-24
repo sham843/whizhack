@@ -96,11 +96,25 @@
                                     Please Enter Syllabus Summary
                                 </mat-error>
                         </mat-form-field>
-                       
+                    </div>
+                    <div class="mb-3">
+                        <mat-checkbox class="example-margin">Exclusive Offer?</mat-checkbox>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
+                            <input matInput placeholder="Price" formControlName="price" (keypress)="vadations.onlyDigits($event)">
+                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
+                                Please Enter Price
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('pattern')">
+                                Enter Only Number</mat-error> 
+                        </mat-form-field>
+                       
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Actual Price</mat-label>
                             <input matInput placeholder="Price" formControlName="price" (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Please Enter Price

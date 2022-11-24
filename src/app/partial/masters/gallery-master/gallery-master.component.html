@@ -103,6 +103,7 @@
                   delete
                 </span>
               </button>
+              <button (click)="openBox(element)">img</button>
             </td>
           </ng-container>
           <tr class="mat-row p-2 w-100" *matNoDataRow col>
@@ -119,3 +120,13 @@
     </div>
   </div>
 </div>
+<section>
+  <div class="container" style="display: none;">
+
+      <div class="row g-3 align-items-center" id="culture">
+          <div class="col-sm-3" *ngFor="let item of items; index as i">
+              <img [lightbox]="i" [src]="item.data.thumb" class="culture-image">
+          </div>
+      </div>
+  </div>
+</section>

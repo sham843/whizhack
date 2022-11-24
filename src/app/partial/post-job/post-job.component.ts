@@ -175,7 +175,8 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } else {
+      }
+      else{
         this.bindTable();
       }
     });
@@ -213,10 +214,8 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } else {
-        this.bindTable();
-      }
-    });
+      } 
+     });
   }
   // ----------------------------End Delete Logic Here---------------------------
   // ----------------------------Start Delete Logic Here-------------------------
@@ -262,7 +261,8 @@ export class PostJobComponent implements OnInit {
               horizontalPosition: 'right',
             })
             this.bindTable();
-            this.clearForm();
+             this.clearForm();
+             this.buttonValue = 'Submit';
           }
         }),
         error: (error: any) => {
