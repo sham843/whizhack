@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Editor, Toolbar } from 'ngx-editor';
+import { Editor } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-post-job',
@@ -34,17 +35,40 @@ export class PostJobComponent implements OnInit {
   editorExperience!: Editor;
   editorQualification!: Editor;
   editorSkills!: Editor;
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['ordered_list', 'bullet_list'],
-    ['link'],
-  ];
+  
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    toolbarHiddenButtons: [
+      [ 'fontName', 'heading', 'fontSize','subscript','link','superscript','justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'justifyFull',
+      'indent',
+      'outdent','heading',
+      'fontName','customClasses',
+      'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',
+      'insertHorizontalRule','textColor',
+      'backgroundColor',
+    'removeFormat',
+  'toggleEditorMode']
+    ],
+  };
+  
   @ViewChild('formDirective')
   private formDirective!: NgForm;
   min = new Date();
-  title: string = '';
+  submited:boolean = false;
+
 
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
@@ -69,8 +93,8 @@ export class PostJobComponent implements OnInit {
   formData() {
     this.postNewJobFrm = this.fb.group({
       id: 0,
-      job_Title: ['', Validators.required],
-      job_Location: ['', Validators.required],
+      job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+      job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
       date_of_Posting: ['', Validators.required],
       date_of_Application: ['', Validators.required],
       job_Description: ['', Validators.required],
@@ -78,7 +102,7 @@ export class PostJobComponent implements OnInit {
       qualification: ['', Validators.required],
       experience: ['', Validators.required],
       skills_Required: ['', Validators.required],
-      publish: true
+      publish: false
     });
   }
   // ----------------------------End Form Field Here-------------------------------
@@ -88,7 +112,7 @@ export class PostJobComponent implements OnInit {
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10&job_Title=' + this.title, false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {
@@ -246,11 +270,14 @@ export class PostJobComponent implements OnInit {
 
   // ----------------------------Start Submit Logic Here-------------------------
   onSubmit() {
+    this.submited = true;
     if (!this.postNewJobFrm.valid) {
       return;
     } else {
       this.ngxSpinner.show();
       let data = this.postNewJobFrm.value;
+      data.publish = false;
+      this.editFlag ? '' : data.id = 0;
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
@@ -275,15 +302,10 @@ export class PostJobComponent implements OnInit {
       })
     }
   }
-  // ----------------------------End Submit Logic Here-------------------------------
-  onClickClear(frm?: any) {
-    frm.resetForm();
-    this.formData();
-    this.buttonValue = 'Submit'
-  }
+
   //------------------------------------Pagination Logic Start------------------------
   paginationEvent(event: any) {
-    this.clearForm()
+    this.clearForm();
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.bindTable();
@@ -292,6 +314,6 @@ export class PostJobComponent implements OnInit {
   clearForm() {
     this.formDirective && this.formDirective.resetForm();
     this.editFlag = false;
-    // this.formData();
+    this.submited = false;
   }
 }
