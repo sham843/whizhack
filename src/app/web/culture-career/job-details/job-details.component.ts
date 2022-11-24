@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { ApplyNowComponent } from 'src/app/dialogs/apply-now/apply-now.component';
 
 @Component({
   selector: 'app-job-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openDialog(): void {
+    this.dialog.open(ApplyNowComponent, {
+      width: '250px',
+    });
+  }
 }
