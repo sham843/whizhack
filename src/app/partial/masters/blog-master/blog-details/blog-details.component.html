@@ -12,10 +12,12 @@
             <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
         </div>
         <div class="col-sm-9">
-            <div class="blog-height scrollbar">
+            <div class="blog-height scrollbar" >
                 <p>{{ elementData.description }}</p>
-                <h6 class="text-main" *ngFor="let i = index">{{ elementData.blogRegisterDetailsModel[0].title }}</h6>
-                <p>{{ elementData.blogRegisterDetailsModel[0].description }}</p>
+                <div *ngFor="let nums of blogRegDetailsArray;let i = index">
+                    <h6 class="text-main">{{ nums.title }}</h6>
+                <p>{{ nums.description }}</p>
+                </div>
             </div>
         </div>
     </div>

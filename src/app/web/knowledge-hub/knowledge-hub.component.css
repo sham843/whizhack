@@ -84,3 +84,6 @@ section {
 #social-media p{
     font-size: 0.85rem;
 }
+    .pointer-link {
+        cursor: pointer;
+      }

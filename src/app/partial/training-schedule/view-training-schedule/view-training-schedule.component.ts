@@ -13,8 +13,7 @@ export class ViewTrainingScheduleComponent implements OnInit {
     private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
 
-  ngOnInit(): void {
-    console.log(this.data);    
+  ngOnInit(): void {    
     this.getCourseById();
   }
 
@@ -23,8 +22,7 @@ export class ViewTrainingScheduleComponent implements OnInit {
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          this.showObj = res.responseData;
-          
+          this.showObj = res.responseData;                    
         }
       }),
       error: (error: any) => {

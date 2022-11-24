@@ -14,7 +14,7 @@ export class CultureCareerComponent implements OnInit {
 
   items!: GalleryItem[];
   imageArray = new Array();
-  postJobArray:any;
+  postJobArray: any;
 
   constructor(
     private _errorService: ErrorHandlerService,
@@ -24,33 +24,29 @@ export class CultureCareerComponent implements OnInit {
     public lightbox: Lightbox,
     private service: ApiService,
     private error: ErrorHandlerService,
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.getImageData();
+    this.getAllImages();
     this.getAllPostJobs();
   }
 
-  getImageData() {
-    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllImages', false, false, false, 'whizhackService');
+  getAllImages() {
+    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery', false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          let data:any = [];
-          data = res.responseData;
-          data.find((ele: any) => {
-            let flag = ele.imagepath.includes(',');
-            if (flag) {
-              let splitArray = ele.imagepath.split(',');
-              splitArray.map((res: any) =>  this.imageArray.push(res))
+         let dataFromServer = res.responseData.responseData;
+          dataFromServer.map((ele: any) => {
+            let data = [];
+            if (ele.imagepath.includes(',')) {
+              data = ele.imagepath.split(',');
             } else {
-              this.imageArray.push(ele.imagepath);
+              data.push(ele.imagepath);
             }
+            ele.imageArray = data;
           })
-
-          this.items =  this.imageArray.map(item =>   new ImageItem({ src: item, thumb: item }) );
-          this.basicLightboxExample();
-
+          this.imageArray = dataFromServer;
         } else {
           this.commonService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
         }
@@ -61,8 +57,16 @@ export class CultureCareerComponent implements OnInit {
     })
   }
 
+  openLightBox(imgArray:any){
+    console.log(imgArray);
+    this.lightbox.open(0, 'lightbox')
+    this.items = imgArray.map((item:any) => new ImageItem({ src: item, thumb: item }));
+    this.basicLightboxExample();
+  }
+
+
   basicLightboxExample() {
-    this.gallery.ref().load(this.items);
+    this.gallery.ref('lightbox').load(this.items);
     this.withCustomGalleryConfig();
   }
 
@@ -84,18 +88,18 @@ export class CultureCareerComponent implements OnInit {
   //........................................post Job Code Start Here..............................................//
 
   getAllPostJobs() {
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + 1 + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {
-          this.postJobArray = res.responseData;
+          this.postJobArray = res.responseData.responseData;
         }
         else {
           this.postJobArray = [];
         }
       },
       error: (error: any) => {
-      this.error.handelError(error.statusCode);
+        this.error.handelError(error.statusCode);
       }
     })
   }
