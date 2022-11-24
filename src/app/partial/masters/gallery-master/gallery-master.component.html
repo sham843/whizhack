@@ -28,9 +28,9 @@
           <div class="mb-5">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
-            <!-- <mat-error *ngIf="!imageArray.length && imagepath">
-              <span> Images are required</span>
-            </mat-error> -->
+            <mat-error *ngIf="showImagError">
+               {{showImagError}}
+            </mat-error>
           </div>
           <div class="mb-3">
             <div class="d-flex justify-content-between flex-wrap gap-4">
@@ -49,7 +49,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <button mat-stroked-button class="btn-main-outline" type="button"
               (click)="clearGalleryForm()">Cancel</button>
-            <button type="submit" mat-stroked-button class="btn-main">Submit</button>
+            <button type="submit" mat-stroked-button class="btn-main">{{this.UpdateObj? "Update":"Submit"}}</button>
           </div>
         </form>
       </div>
@@ -67,8 +67,9 @@
               <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Gallery Title" [formControl]="searchFilter"
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
+
               <mat-icon matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
-                (click)="clearSearchFilter()"> close</mat-icon>
+                (click)="clearSearchFilter()">close</mat-icon>
             </mat-form-field>
           </div>
         </div>
@@ -104,12 +105,15 @@
               </button>
             </td>
           </ng-container>
+          <tr class="mat-row p-2 w-100" *matNoDataRow col>
+            <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found </td>
+        </tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <ng-container *ngIf="totalCount > 1">
-          <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
-            (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
+        <ng-container *ngIf="totalCount > 10">
+          <mat-paginator [length]="totalCount" [pageSize]="10"  showFirstLastButtons
+            (page)="onClickPaginatior($event)" ></mat-paginator>
         </ng-container>
       </div>
     </div>
