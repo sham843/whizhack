@@ -2,57 +2,72 @@
     <div class="col-sm-4">
         <div class="card form-card">
             <div class="card-header">Blog Register</div>
-            <form [formGroup]="frm">
+            <form [formGroup]="frm" (ngSubmit)="onClickSubmit(formDirective)" #formDirective="ngForm">
                 <div class="card-body">
                     <div class="mb-3">
                         <mat-radio-group aria-label="Select an option" formControlName="blogType">
-                            <mat-radio-button *ngFor="let options of optionsArray" [value]="options.id"  class="me-3">{{ options.name }}</mat-radio-button>
+                            <mat-radio-button *ngFor="let options of optionsArray" [value]="options.id" class="me-3">{{
+                                options.name }}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Title</mat-label>
-                            <input maxlength="50" matInput placeholder="Blog Title" formControlName="title" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title *</mat-error>
+                            <input maxlength="50" matInput placeholder="Blog Title" formControlName="title"
+                                (keypress)="validation.alphaNumericWithSpaces($event)"
+                                (keyup)="validation.removeSpaceAtBegining($event)">
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title *
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
                             <textarea maxlength="500" matInput placeholder="Blog Description" rows="5"
-                                formControlName="description" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
-                                <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog Description *</mat-error>
+                                formControlName="description" (keypress)="validation.alphaNumericWithSpaces($event)"
+                                (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
+                                Description *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
                             <mat-select formControlName="blog_categary_Id">
-                                <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{ categories.categoryName }}</mat-option>
+                                <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
+                                    categories.categoryName }}</mat-option>
                             </mat-select>
-                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select Blog Category *</mat-error>
+                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select
+                                Blog Category *</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Author</mat-label>
-                            <input maxlength="20" matInput placeholder="Blog Author" formControlName="author" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name *</mat-error>
+                            <input maxlength="20" matInput placeholder="Blog Author" formControlName="author"
+                                (keypress)="validation.alphaNumericWithSpaces($event)"
+                                (keyup)="validation.removeSpaceAtBegining($event)">
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name *
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden" #uploadDocument/>
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Blog Image</button>
+                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
+                                    #uploadDocument />
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
+                                    Blog Image</button>
                             </div>
                             <div *ngIf="imgSrc">
-                                <button mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2" (click)="viewImage()">
+                                <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
+                                    (click)="viewImage()">
                                     <span class="material-symbols-outlined">
                                         description
                                     </span>
                                 </button>
-                                <button mat-icon-button class="bg-danger bg-opacity-10 text-danger" (click)="deleteImage()">
+                                <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
+                                    (click)="deleteImage()">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -62,40 +77,58 @@
                     </div>
                     <div class="mb-3">
                         <div class="card card-body form-card border">
-                            <div formArrayName="blogRegisterDetailsModel" *ngFor="let item of itemsForm.controls; let i = index;">
+                            <div formArrayName="blogRegisterDetailsModel"
+                                *ngFor="let item of itemsForm.controls; let i = index;">
                                 <div [formGroupName]="i">
                                     <div class="mb-3">
                                         <mat-form-field appearance="outline" class="w-100">
                                             <mat-label>Blog Sub-Title</mat-label>
-                                            <input maxlength="50" matInput placeholder="Blog Sub-Title" formControlName="title" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)">
-                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Sub-Title *</mat-error>
+                                            <input maxlength="50" matInput placeholder="Blog Sub-Title"
+                                                formControlName="title"
+                                                (keypress)="validation.alphaNumericWithSpaces($event)"
+                                                (keyup)="validation.removeSpaceAtBegining($event)">
+                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter
+                                                Blog Sub-Title *</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="500" matInput placeholder="Blog Sub-Description" rows="5"
-                                                formControlName="description" (keypress)="validation.alphaNumericWithSpaces($event)" (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
-                                                <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please Enter Blog Sub-Description *</mat-error>
+                                            <textarea maxlength="500" matInput placeholder="Blog Sub-Description"
+                                                rows="5" formControlName="description"
+                                                (keypress)="validation.alphaNumericWithSpaces($event)"
+                                                (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
+                                            <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please
+                                                Enter Blog Sub-Description *</mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-end mb-2">
-                                <button mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success"
+                                <button type="button" mat-stroked-button class="btn-sm bg-success bg-opacity-10 text-success"
                                     (click)="addItem()">
                                     <span class="material-symbols-outlined">
                                         add
                                     </span>
                                     Add New
                                 </button>
+                                <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
+                                    <button type="button" mat-stroked-button class="btn-sm bg-danger bg-opacity-10 text-danger"
+                                    (click)="removeItem()">
+                                    <span class="material-symbols-outlined">
+                                        remove
+                                    </span>
+                                    Remove
+                                </button>
+                                </span>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <button mat-stroked-button class="btn-main-outline" (click)="clearForm()">Cancel</button>
-                        <button type="button" mat-stroked-button class="btn-main"
-                            (click)="onClickSubmit()">{{ editFlag ? 'Update' : 'Submit' }}</button>
+                        <button type="button" mat-stroked-button class="btn-main-outline"
+                            (click)="clearForm(formDirective)">Cancel</button>
+                        <button type="submit" mat-stroked-button class="btn-main">{{ editFlag ? 'Update' : 'Submit'
+                            }}</button>
                     </div>
                 </div>
             </form>
@@ -105,26 +138,28 @@
         <div class="card form-card">
             <div class="card-header">
                 <form [formGroup]="filterFrm">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-sm-3">
-                        <span>Blogs List</span>
-                    </div>
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-sm-3">
+                            <span>Blogs List</span>
+                        </div>
                         <div class="col-sm-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Type</mat-label>
-                                <mat-select formControlName="blogType" (selectionChange)="displayData()">
-                                    <mat-option *ngFor="let options of optionsArray" [value]="options.id">{{ options.name }}</mat-option>
+                                <mat-select formControlName="blogType" (selectionChange)="filterData()">
+                                    <mat-option *ngFor="let options of optionsArray" [value]="options.id">{{
+                                        options.name }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                </div>
+                    </div>
                 </form>
             </div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
                     <ng-container matColumnDef="position">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
-                        <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{((currentPage + 1) * 10 + i +
+                        <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{((currentPage + 1) * 10 +
+                            i +
                             1)-10}}</td>
                     </ng-container>
                     <ng-container matColumnDef="name">
@@ -133,7 +168,12 @@
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element.blogType == 1 ? 'Blog' : element.blogType == 2 ? 'White Paper' : 'Case Study'}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.blogType == 1 ? 'Blog' : element.blogType == 2
+                            ? 'White Paper' : 'Case Study'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="blog_categary_Id">
+                        <th mat-header-cell *matHeaderCellDef> Category </th>
+                        <td mat-cell *matCellDef="let element"> {{element.blogType == 1 ? 'Training' : 'Products'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
@@ -160,7 +200,8 @@
                 </table>
                 <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
-                        (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
+                        (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results">
+                    </mat-paginator>
                 </ng-container>
             </div>
         </div>
