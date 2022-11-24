@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
@@ -34,6 +35,7 @@ export class TrainingScheduleComponent implements OnInit {
   sumitted: boolean = false;
 
   @ViewChild(MatSort) sort!: MatSort;
+  title: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -43,7 +45,8 @@ export class TrainingScheduleComponent implements OnInit {
     private errorService: ErrorHandlerService,
     private ngxSpinner: NgxSpinnerService,
     private snakBar: MatSnackBar,
-    public vadations :FormValidationService) { }
+    public vadations :FormValidationService,
+    private comMethods :CommonMethodService) { }
 
   openDialog(id: any) {
     const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
@@ -58,8 +61,15 @@ export class TrainingScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseManageFormData();
+    this.fillterFormData();
     this.getPageName();
     this.getAllCourseList();
+  }
+
+  fillterFormData(){
+    this.fillterForm = this.fb.group({
+      courseTitle:['']
+    })
   }
 
 
@@ -88,19 +98,18 @@ export class TrainingScheduleComponent implements OnInit {
 
   getAllCourseList() {
     this.ngxSpinner.show()
-    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=', false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title='+this.title, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
           this.ngxSpinner.hide()
           this.dataSource =  new MatTableDataSource(res.responseData); 
           this.dataSource.sort = this.sort;       
-          this.totalCount = res.responseData1.pageCount;
-          this.snakBar.open(res.statusMessage, 'ok', {
-            duration: 2000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-          })
+          this.totalCount = res.responseData1.pageCount;          
+        }else{
+          this.ngxSpinner.hide()
+          this.dataSource = '';
+          this.totalCount = 0
         }
       }),
       error: (error: any) => {
@@ -125,16 +134,12 @@ export class TrainingScheduleComponent implements OnInit {
 
   fileUpload(event: any) {
     console.log(event);
-    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
       console.log('res', res);
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData;
         this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
-        this.snakBar.open(res.statusMessage, 'ok', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-        })
+       this.comMethods.matSnackBar(res.statusMessage,0)
       } else {
         this.imgSrc = '';
         this.file.nativeElement.value = ''
@@ -239,9 +244,7 @@ export class TrainingScheduleComponent implements OnInit {
       return;
     } 
      else {
-      this.ngxSpinner.show();
       let submitObj = this.courseManageForm.value;
-      submitObj.imagePath = this.imgSrc;
       console.log(submitObj);
       let url
       this.editFlag ? url = 'whizhack_cms/course/Update' : url = 'whizhack_cms/course/Insert'
@@ -250,7 +253,6 @@ export class TrainingScheduleComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.ngxSpinner.hide();
             this.snakBar.open(res.statusMessage, 'ok', {
               duration: 2000,
               verticalPosition: 'top',
@@ -265,6 +267,12 @@ export class TrainingScheduleComponent implements OnInit {
         }
       })
     }
+  }
+
+  onFillterSubmit(){
+    this.title = this.fillterForm.value.courseTitle;
+    this.totalCount = 0
+    this.getAllCourseList()
   }
 
 }

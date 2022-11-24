@@ -14,19 +14,19 @@
                     <span class="form-label">Name :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Mr. {{arr.fullName || '-----'}}</span>
+                    <span class="form-data">Mr. {{arr.fullName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Email ID :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.email || '-----'}}</span>
+                    <span class="form-data">{{arr.email || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Contact No. :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.mobileNo || '-----'}}</span>
+                    <span class="form-data">{{arr.mobileNo || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Course :</span>
@@ -39,7 +39,7 @@
                     <span class="form-label">Page :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.pageName || '-----'}}</span>
+                    <span class="form-data">{{arr.pageName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Message :</span>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Operating System :</div>
-                        <div class="form-data">{{data.deviceService.os_version}}</div>
+                        <div class="form-data">{{data.deviceService.os_version | titlecase}}</div>
                     </div>
                     <div class="mb-0">
                         <div class="form-label">Browser :</div>

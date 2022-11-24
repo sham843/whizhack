@@ -165,4 +165,10 @@ export class FormValidationService {
       event.preventDefault();
     }
   }
+  noSpaceAllow(event: any) {  // for All Space Not Allow
+    if (event.code === 'Space') {
+        event.preventDefault();
+    }
+}
+
 }

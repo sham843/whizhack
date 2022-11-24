@@ -33,7 +33,6 @@ export class ViewEnquiriesComponent implements OnInit {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
     this.deviceIpAddress=res 
      let arr=JSON.stringify(this.deviceIpAddress)
-     console.log('type',typeof(arr));
      this.address=arr.slice(7,22);
     })   
   }
