@@ -9,37 +9,37 @@
 <div class="dialog-body form-container">
     <div class="row gy-3">
         <div class="col-sm-4 text-center">
-            <img src="{{showObj.imagePath}}" class="view-image">
+            <img src="{{showObj?.imagePath}}" class="view-image">
         </div>
         <div class="col-sm-8">
             <div class="row gy-3">
                 <div class="col-sm-6">
                     <div class="form-label">Page Name</div>
-                    <div class="form-data">{{showObj.pageName}}</div>
+                    <div class="form-data">{{showObj?.pageName}}</div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Course Title</div>
-                    <div class="form-data">{{showObj.course_Title | titlecase}}</div>
+                    <div class="form-data">{{showObj?.course_Title | titlecase}}</div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-label">Page Caption</div>
-                    <div class="form-data">{{showObj.course_Caption}}</div>
+                    <div class="form-data">{{showObj?.course_Caption}}</div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-label">Description</div>
-                    <div class="form-data">{{showObj.course_Description}}</div>
+                    <div class="form-data">{{showObj?.course_Description}}</div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-label">Syllabus Summary</div>
-                    <div class="form-data">{{showObj.syllabus_Summary}}</div>
+                    <div class="form-data">{{showObj?.syllabus_Summary}}</div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Price</div>
-                    <div class="form-data">{{showObj.price | currency:"INR"}}</div>
+                    <div class="form-data">{{showObj?.price | currency:"INR"}}</div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Price Terms</div>
-                    <div class="form-data">{{showObj.price_Terms}}</div>
+                    <div class="form-data">{{showObj?.price_Terms}}</div>
                 </div>
             </div>
         </div>
