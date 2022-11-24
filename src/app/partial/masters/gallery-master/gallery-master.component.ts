@@ -50,6 +50,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region edit Variables
   UpdateObj: any;
 
+  //#region selected Row variables
+  highlightedRow:any;
+
 
   constructor(private fb: FormBuilder,
     public vs: FormValidationService,
@@ -213,6 +216,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
+    this.highlightedRow = data.galleryId;
     this.frmGallery.patchValue({
       gallery_description: data?.description,
       gallery_title: data?.gallery_Title,

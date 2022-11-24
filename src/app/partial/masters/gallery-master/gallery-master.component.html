@@ -109,7 +109,7 @@
             <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found </td>
         </tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlightedRow ': highlightedRow == row.galleryId}"></tr>
         </table>
         <ng-container *ngIf="totalCount > 10">
           <mat-paginator [length]="totalCount" [pageSize]="10"  showFirstLastButtons
