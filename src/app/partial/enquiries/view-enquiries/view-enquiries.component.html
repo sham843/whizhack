@@ -14,31 +14,32 @@
                     <span class="form-label">Name :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Mr. {{arr.fullName || '-----'}}</span>
+                    <span class="form-data">Mr. {{arr.fullName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Email ID :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.email || '-----'}}</span>
+                    <span class="form-data">{{arr.email || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Contact No. :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.mobileNo || '-----'}}</span>
+                    <span class="form-data">{{arr.mobileNo || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Course :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.CourseId || '-----'}}</span>
+                    <span class="form-data">{{arr.courseId == 1 ? 'Cyber Ninja' :
+                        arr.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{arr.pageName || '-----'}}</span>
+                    <span class="form-data">{{arr.pageName || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Message :</span>
@@ -56,7 +57,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-label">IP Address :</div>
-                        <div class="form-data">125.140.012.220</div>
+                        <div class="form-data">{{address}}</div>
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Operating System :</div>

@@ -8,7 +8,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Title</mat-label>
                             <input matInput placeholder="Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
-                            <mat-error *ngIf="f['article_Title']?.errors">
+                            <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
                                 <span *ngIf="f['article_Title']?.hasError('required')"> Article title is required</span>
                             </mat-error>
                         </mat-form-field>
@@ -17,7 +17,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Source</mat-label>
                             <input matInput placeholder="Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="20">
-                            <mat-error *ngIf="f['source']?.errors">
+                            <mat-error *ngIf="f['source']?.errors" class="mt-2">
                                 <span *ngIf="f['source']?.hasError('required')"> Article source is required</span>
                             </mat-error>
                         </mat-form-field>
@@ -25,8 +25,8 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article URL</mat-label>
-                            <input matInput placeholder="Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)" maxlength="50">
-                            <mat-error *ngIf="f['url']?.errors">
+                            <input matInput placeholder="Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)" maxlength="200">
+                            <mat-error *ngIf="f['url']?.errors" class="mt-2">
                                 <span *ngIf="f['url']?.hasError('required')"> Article url is required</span>
                             </mat-error>
                         </mat-form-field>
@@ -88,7 +88,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <ng-container *ngIf="totalCount > 1">
+                <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
                         (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
                 </ng-container>

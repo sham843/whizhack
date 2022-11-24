@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-now',
   templateUrl: './register-now.component.html',
@@ -12,15 +13,14 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class RegisterNowComponent implements OnInit {
   registerForm!: FormGroup;
 
-
-  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>,
+  constructor(public dialogRef: MatDialogRef<RegisterNowComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder, private service: ApiService,
     private errorSer: ErrorHandlerService,
-    public validator: FormValidationService) { }
+    public validator: FormValidationService,
+    private route: Router) { }
 
   ngOnInit(): void {
     this.getFormData();
-    this.sendCourseData();
   }
 
 
@@ -29,26 +29,19 @@ export class RegisterNowComponent implements OnInit {
       fullName: ['', [Validators.required, Validators.maxLength(30)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$')]],
       mobileNo: ['', [Validators.required, Validators.pattern('[7-9]\\d{9}'), Validators.maxLength(10)]],
-      courseId: 1 ? 'Cyber Ninja' ? 2 : 'Cyber Samurai' ? 3 : 'Cyber Guru' : '',
+      courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : 'Cyber Guru'],
       message: ['', [Validators.required]],
-      "createdBy": 0,
-      "modifiedBy": 0,
-      "createdDate": new Date(),
-      "modifiedDate": new Date(),
-      "isDeleted": true,
-      "id": 0,
     })
   }
 
-  sendCourseData() {
-    let courseId = 1 ? 'Cyber Ninja' ? 2 : 'Cyber Samurai' ? 3 : 'Cyber Guru' : ''
-    this.registerForm.controls['courseId'].setValue(courseId)
-  }
   onSubmit() {
     if (this.registerForm.invalid) {
       return
     } else {
       let formData = this.registerForm.value;
+      formData.pageName = this.route.url || '';
+      formData.courseId = this.data == 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : 3;
+      console.log('cid', formData.courseId);
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
@@ -62,7 +55,4 @@ export class RegisterNowComponent implements OnInit {
       })
     }
   }
-
-
-
 }

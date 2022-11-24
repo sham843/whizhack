@@ -6,7 +6,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
-
+// import { Router } from '@angular/router';
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -24,15 +24,15 @@ export interface PeriodicElement {
 })
 export class EnquiriesComponent implements OnInit {
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
-  dataSource:any;
-  totalCount!:number;
-  currentPage:number=0;
+  dataSource: any;
+  totalCount:number = 0;
+  currentPage: number = 0;
   @ViewChild(MatSort) sortheader!: MatSort;
-  
+  getpage:any;
 
-  constructor(public dialog: MatDialog, private service: ApiService,private errorSer:ErrorHandlerService) { }
 
-  openDialog(ele?:any): void {
+  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
+  openDialog(ele?: any): void {
     this.dialog.open(ViewEnquiriesComponent, {
       data: ele,
       width: '1024px'
@@ -45,56 +45,58 @@ export class EnquiriesComponent implements OnInit {
 
 
   getTableData() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno='+this.currentPage+'&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno='+(this.currentPage+1)+'&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          // this.dataSource = new MatTableDataSource(res.responseData.responseData1);
-          this.dataSource = new MatTableDataSource (res.responseData.responseData);
+          this.dataSource = new MatTableDataSource(res.responseData.responseData);
           this.dataSource.sort = this.sortheader;
-          console.log("11",this.sortheader);
-          this.totalCount=res.responseData.responseData1.pageCount;
+          this.totalCount = res.responseData.responseData1.pageCount;
         }
-      }),error: (error: any) => {
+      }), error: (error: any) => {
         this.errorSer.handelError(error.status);
       }
     })
   }
 
-  openDeleteDialog(ele?:any):void {
+  openDeleteDialog(id: any) {
+    let dialoObj = {
+      title: 'Do you want to delete the selected course ?',
+      cancelButton: 'Cancel',
+      okButton: 'Ok'
+    }
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
-      width: '30%',
-      data: ele,
-      disableClose: true
+      width: '300px',
+      data: dialoObj
     });
     dialogRef.afterClosed().subscribe(result => {
-      result == 'Yes' ? this.deleteUser() : '';
+      if (result == 'yes') {
+        let deleteObj = {
+          "registerId": id.registerId,
+          "modifiedBy": 0
+        }
+        this.service.setHttp('delete', 'whizhack_cms/register/Delete', false, deleteObj, false, 'whizhackService');
+        this.service.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode === '200') {
+              this.getTableData();
+            }
+          }),
+          error: (error: any) => {
+            this.errorSer.handelError(error.statusMessage)
+          }
+        })
+      } else {
+        this.getTableData();
+      }
     });
   }
 
-  deleteUser(event?: any) {
-    let obj;
-    obj = {
-      "registerId":event.registerId,
-      "modifiedBy": 0
-    }
-    this.service.setHttp('delete', 'whizhack_cms/register/Delete', false, obj, false, 'whizhackService');
-    this.service.getHttp().subscribe({
-      next: ((res: any) => {
-        if (res.statusCode == '200') {
-          console.log('data', this.dataSource);
-          this.getTableData();
-        }
-      }),error: (error: any) => {
-        this.errorSer.handelError(error.status);
-      }
-    })
-  }
-
- pageChanged(event?:any){
-    this.currentPage=event.pageIndex;
+  pageChanged(event?: any) {
+    this.currentPage = event.pageIndex;
     this.getTableData();
   }
 }
+
 
 

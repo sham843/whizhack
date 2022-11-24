@@ -19,7 +19,7 @@ export class MediaCoverageComponent implements OnInit {
   submitBtnTxt:string = 'Submit';
   get f() { return this.frmMedia.controls };
   totalCount: number = 0;
-  currentPage: number = 0;
+  currentPage: number = 1;
   pageSize: number = 10;
 
   displayedColumns: string[] = ['srno', 'article_Title', 'source', 'url', 'action'];
@@ -66,7 +66,7 @@ export class MediaCoverageComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.dataSource = res.responseData?.responseData1;
-          this.totalCount = res.responseData?.responseData2?.totalCount;
+          this.totalCount = res.responseData?.responseData2?.pageCount;
           this.currentPage = res.responseData?.responseData2?.pageNo;
         } else {
           this.dataSource = [];
@@ -88,7 +88,7 @@ export class MediaCoverageComponent implements OnInit {
         ...this.frmMedia.value
       }
 
-      this.apiService.setHttp((this.submitBtnTxt = 'Update' ? 'put' : 'post'), "whizhack_cms/media/" + (this.submitBtnTxt = 'Update' ? 'Update' : 'Register'), false, req, false, 'WBMiningService');
+      this.apiService.setHttp((this.submitBtnTxt == 'Update' ? 'put' : 'post'), "whizhack_cms/media/" + (this.submitBtnTxt == 'Update' ? 'Update' : 'Register'), false, req, false, 'whizhackService');
       this.apiService.getHttp().subscribe({
         next: (res: any) => {
           if (res.statusCode == 200) {
@@ -109,17 +109,17 @@ export class MediaCoverageComponent implements OnInit {
   editMediaRecord(data: any){
     this.submitBtnTxt = 'Update'
     this.frmMedia.patchValue({
-      id: data.id,
-      article_Title: data.article_Title,
-      source: data.source,
-      url: data.url,
+      id: data?.mediaId,
+      article_Title: data?.article_Title,
+      source: data?.source,
+      url: data?.url,
     })
   }
 
   deleteMediaRecord(data: any){
     let dialoObj = {
       header: 'Delete',
-      title:'Do you want to delete the selected course ?',
+      title:'Do you want to delete the selected record ?',
       cancelButton:'Cancel',
       okButton:'Ok'
     }
@@ -132,14 +132,14 @@ export class MediaCoverageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'yes'){
         let deleteObj = {
-          "id": data.id,
+          "id": data.mediaId,
           "modifiedBy": 0,
         }
     
         this.api.setHttp('delete', 'whizhack_cms/media/Delete', false, deleteObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: ((res: any) => {
-            if (res.statusCode === 200) {
+            if (res.statusCode == 200) {
               this.getMediaList();
               this.clearMediaForm();
             }
