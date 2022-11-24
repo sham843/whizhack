@@ -10,7 +10,7 @@
               <input matInput placeholder="Gallery Title" formControlName="gallery_title"
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
               <mat-error *ngIf="g['gallery_title']?.errors">
-                <span *ngIf="g['gallery_title']?.hasError('required')"> Gallery title is required</span>
+                <span *ngIf="g['gallery_title']?.hasError('required') || g['gallery_title']?.hasError('pattern')"> Gallery title is required</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -21,7 +21,7 @@
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpaces($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
-                <span *ngIf="g['gallery_description']?.hasError('required')"> Gallery description is required</span>
+                <span *ngIf="g['gallery_description']?.hasError('required') || g['gallery_description']?.hasError('pattern')"> Gallery description is required</span>
               </mat-error>
             </mat-form-field>
           </div>
