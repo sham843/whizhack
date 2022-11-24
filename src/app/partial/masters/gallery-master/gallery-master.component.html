@@ -10,7 +10,7 @@
               <input matInput placeholder="Gallery Title" formControlName="gallery_title"
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
               <mat-error *ngIf="g['gallery_title']?.errors">
-                <span *ngIf="g['gallery_title']?.hasError('required')"> Gallery title is required</span>
+                <span *ngIf="g['gallery_title']?.hasError('required') || g['gallery_title']?.hasError('pattern')"> Gallery title is required</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -21,7 +21,7 @@
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpaces($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
-                <span *ngIf="g['gallery_description']?.hasError('required')"> Gallery description is required</span>
+                <span *ngIf="g['gallery_description']?.hasError('required') || g['gallery_description']?.hasError('pattern')"> Gallery description is required</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -62,7 +62,7 @@
           <div class="col-sm-3">
             <span>Gallery List</span>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Gallery Title" [formControl]="searchFilter"
@@ -93,6 +93,11 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
+              <button mat-icon-button class="text-white" (click)="openBox(element)">
+                <span class="material-symbols-outlined">
+                  visibility
+                </span>
+              </button>
               <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)">
                 <span class="material-symbols-outlined">
                   edit
@@ -119,3 +124,13 @@
     </div>
   </div>
 </div>
+<section>
+  <div class="container" style="display: none;">
+
+      <div class="row g-3 align-items-center" id="culture">
+          <div class="col-sm-3" *ngFor="let item of items; index as i">
+              <img [lightbox]="i" [src]="item.data.thumb" class="culture-image">
+          </div>
+      </div>
+  </div>
+</section>

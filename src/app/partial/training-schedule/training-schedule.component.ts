@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
@@ -27,7 +28,6 @@ export class TrainingScheduleComponent implements OnInit {
   displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
   dataSource :any;
   pageNameArray = new Array();
-
   totalCount: number = 0;
   currentPage: number = 0;
   imgSrc: string = '';
@@ -45,7 +45,8 @@ export class TrainingScheduleComponent implements OnInit {
     private errorService: ErrorHandlerService,
     private ngxSpinner: NgxSpinnerService,
     private snakBar: MatSnackBar,
-    public vadations :FormValidationService) { }
+    public vadations :FormValidationService,
+    private comMethods :CommonMethodService) { }
 
   openDialog(id: any) {
     const dialogRef = this.dialog.open(ViewTrainingScheduleComponent, {
@@ -104,12 +105,7 @@ export class TrainingScheduleComponent implements OnInit {
           this.ngxSpinner.hide()
           this.dataSource =  new MatTableDataSource(res.responseData); 
           this.dataSource.sort = this.sort;       
-          this.totalCount = res.responseData1.pageCount;
-          this.snakBar.open(res.statusMessage, 'ok', {
-            duration: 2000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-          })
+          this.totalCount = res.responseData1.pageCount;          
         }else{
           this.ngxSpinner.hide()
           this.dataSource = '';
@@ -143,11 +139,7 @@ export class TrainingScheduleComponent implements OnInit {
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData;
         this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
-        this.snakBar.open(res.statusMessage, 'ok', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-        })
+       this.comMethods.matSnackBar(res.statusMessage,0)
       } else {
         this.imgSrc = '';
         this.file.nativeElement.value = ''
@@ -279,6 +271,7 @@ export class TrainingScheduleComponent implements OnInit {
 
   onFillterSubmit(){
     this.title = this.fillterForm.value.courseTitle;
+    this.totalCount = 0
     this.getAllCourseList()
   }
 

@@ -6,6 +6,7 @@ button.mat-menu-item,
 .mat-option-text,
 textarea.mat-input-element,
 .mat-radio-label,
+.mat-checkbox-label,
 .mat-tab-label-content {
     font-family: 'Lato', sans-serif !important;
     font-size: 0.85rem;
