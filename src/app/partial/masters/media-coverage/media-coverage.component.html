@@ -88,7 +88,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <ng-container *ngIf="totalCount > 1">
+                <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
                         (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
                 </ng-container>

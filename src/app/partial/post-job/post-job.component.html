@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card form-card mb-3">
-            <form [formGroup]="postNewJobFrm" (ngSubmit)="onSubmit(frm)" #frm="ngForm">
-                <!-- (ngSubmit)="onSubmit()" -->
+            <form [formGroup]="postNewJobFrm"  #clear="ngForm">
+                <!-- #frm="ngForm" -->
+               
          <div class="card-header">Post New Job</div>
             <div class="card-body">
                 <div class="row">
@@ -10,7 +11,7 @@
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Title</mat-label>
-                                <input matInput placeholder="Job Title" formControlName="job_Title">
+                                <input matInput placeholder="Job Title" formControlName="job_Title"  (keypress)="validation.alphaNumeric($event)">
                                 <mat-error  class="mt-2" *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
                                     Job Title Is Required
                                  </mat-error>
@@ -20,7 +21,7 @@
                         <div class="mb-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Job Location</mat-label>
-                                <input matInput placeholder="Job Location" formControlName="job_Location"><br>
+                                <input matInput placeholder="Job Location" formControlName="job_Location"  (keypress)="validation.alphaNumeric($event)"><br>
                                 <mat-error class="mt-2" *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
                                     Job Location Is Required
                                 </mat-error>
@@ -54,7 +55,7 @@
                         <div class="mb-3">
                             <mat-form-field appearance="legacy" class="w-100">
                                 <mat-label>Job Description</mat-label>
-                                <textarea matInput placeholder="Job Description" rows="5" formControlName="job_Description"></textarea>
+                                <textarea matInput placeholder="Job Description" rows="5" formControlName="job_Description"  (keypress)="validation.alphaNumeric($event)" ></textarea>
                                 <mat-error class="mt-2" *ngIf="f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')">
                                     Description Is Required
                                 </mat-error>
@@ -111,8 +112,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex align-items-center justify-content-between">
-                    <button mat-stroked-button class="btn-main-outline" (click)="onClickClear()">Cancel</button>
-                    <button mat-stroked-button class="btn-main" type="submit">{{buttonValue}}</button>
+                    <button mat-stroked-button class="btn-main-outline" (click)="clearForm(clear)">Cancel</button>
+                    <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit(clear)">{{buttonValue}}</button>
                 </div>
             </div>
             </form>
