@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -45,7 +46,9 @@ export class BlogMasterComponent implements OnInit {
   totalCount: number = 0;
   currentPage: number = 0;
   editFlag: boolean = false;
+  radioFlag:boolean = false;
   optionsArray: any[] = [{ id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
+  optionsFilterArray: any[] = [{ id: 0, name: 'All' },{ id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   blogCategoryArray = new Array();
   get f() { return this.frm.controls }
   get itemsForm(): FormArray {
@@ -57,7 +60,8 @@ export class BlogMasterComponent implements OnInit {
     private service: ApiService,
     private errorHandler: ErrorHandlerService,
     private fileUpl: FileUploadService,
-    private commonMethod : CommonMethodService, 
+    private commonMethod : CommonMethodService,
+    private ngxspinner : NgxSpinnerService, 
     public validation: FormValidationService) { }
 
   openDialog(id: any): void {
@@ -92,8 +96,8 @@ export class BlogMasterComponent implements OnInit {
       blogType: ['', Validators.required],
       createdBy: 0,
       modifiedBy: 0,
-      createdDate: "2022-11-23T12:29:30.815Z",
-      modifiedDate: "2022-11-23T12:29:30.815Z",
+      createdDate: new Date(),
+      modifiedDate: new Date(),
       isDeleted: true,
       // key: 0,
       blogRegisterDetailsModel: this.fb.array([
@@ -105,8 +109,8 @@ export class BlogMasterComponent implements OnInit {
           key: 0,
           createdBy: 0,
           modifiedBy: 0,
-          createdDate:  "2022-11-23T12:29:30.815Z",
-          modifiedDate: "2022-11-23T12:29:30.815Z",
+          createdDate:  new Date(),
+          modifiedDate: new Date(),
           isDeleted: false,
         })
       ])
@@ -139,8 +143,8 @@ export class BlogMasterComponent implements OnInit {
       key: 0,
       createdBy: 0,
       modifiedBy: 0,
-      createdDate:  "2022-11-23T12:29:30.815Z",
-      modifiedDate: "2022-11-23T12:29:30.815Z",
+      createdDate:  new Date(),
+      modifiedDate: new Date(),
       isDeleted: false,
     });
     if (this.isSubBlogAdd == true) {
@@ -156,10 +160,12 @@ export class BlogMasterComponent implements OnInit {
       }
     }
     this.isSubBlogAdd = true;
+    console.log(this.itemsForm,'formArray');
+    
   }
 
-  removeItem(){
-    this.itemsForm.removeAt(this.frm.value.blogRegisterDetailsModel.length - 1)
+  removeItem(i:number){
+    this.itemsForm.removeAt(i)
   }
   
   filterData(){
@@ -191,11 +197,14 @@ export class BlogMasterComponent implements OnInit {
     this.controlForm();
     formDirective?.resetForm();
     this.editFlag = false;
+    this.radioFlag = false;
   }
 
   fileUpload(event: any) {
+    this.ngxspinner.show();
     this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg').subscribe((res: any) => {
       if (res.statusCode === '200') {
+        this.ngxspinner.hide();
         this.imgSrc = res.responseData
         this.frm.controls['imagePath'].setValue(this.imgSrc);
       } else {
@@ -207,23 +216,31 @@ export class BlogMasterComponent implements OnInit {
   }
 
   onClickSubmit(formDirective?:any) {
-    console.log(this.frm.value.imagePath,'yyy');
-    if(this.frm.value.imagePath == ''){
-        this.commonMethod.matSnackBar('please, Upload Image First !',1)
+    if(this.itemsForm.controls[this.itemsForm.length-1].status == 'INVALID'){
+      if(!this.frm.value.blogType){
+        this.radioFlag=true;
+      }
+      return;
+    }
+    else
+    {
+      if(this.frm.value.imagePath == ''){
+        this.commonMethod.matSnackBar('please, Upload Image !',1)
       if (!this.frm.valid) {
         return;
       }
     }
       else{
+        // this.ngxspinner.show();
         let postObj = this.frm.value;
   
         let url;
         this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
-  
         this.service.setHttp(this.editFlag ? 'put':'post', url , false, postObj, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode == '200') {
+              // this.ngxspinner.hide();
               formDirective?.resetForm();
               this.imgSrc = '';
               this.file.nativeElement.value = '';
@@ -239,6 +256,7 @@ export class BlogMasterComponent implements OnInit {
         })
       }
     
+    }
   }
 
   onClickEdit(editObj: any) {
@@ -261,8 +279,8 @@ export class BlogMasterComponent implements OnInit {
      let fg = this.fb.group({
       createdBy: 0,
       modifiedBy: 0,
-      createdDate: "2022-11-23T12:31:04.451Z",
-      modifiedDate: "2022-11-23T12:31:04.451Z",
+      createdDate: new Date(),
+      modifiedDate: new Date(),
       isDeleted: true,
       blog_Register_Id: 0,
       id: [element.id],
