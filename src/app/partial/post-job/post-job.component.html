@@ -9,11 +9,14 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Job Title</mat-label>
-                                    <input matInput placeholder="Job Title" formControlName="job_Title"
+                                    <input matInput placeholder="Job Title" formControlName="job_Title" maxlength="50"
                                         (keypress)="validation.noFirstSpaceAllow($event)">
-                                    <mat-error class="mt-2"
-                                        *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
-                                        Job Title Is Required
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
+                                            Job Title Is Required</div>
+                                        <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
+                                            Valid Job Title.
+                                        </div>
                                     </mat-error>
                                 </mat-form-field>
 
@@ -23,9 +26,12 @@
                                     <mat-label>Job Location</mat-label>
                                     <input matInput placeholder="Job Location" formControlName="job_Location"
                                         (keypress)="validation.noFirstSpaceAllow($event)"><br>
-                                    <mat-error class="mt-2"
-                                        *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
-                                        Job Location Is Required
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
+                                            Job Location is Required</div>
+                                        <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
+                                            Valid Job Location
+                                        </div>
                                     </mat-error>
                                 </mat-form-field>
 
@@ -73,43 +79,41 @@
                             <div class="row gy-3 form-container">
                                 <div class="col-sm-6">
                                     <div class="form-label">Roles & Responsibility</div>
-                                    <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorRoles" formControlName="roles_and_Responsibility">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig">
+                                    </angular-editor>
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
+                                            Roles & Responsibility is Required</div>
+                                    </mat-error>
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-label">Experience</div>
-                                    <ngx-editor-menu [editor]="editorExperience" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorExperience" formControlName="experience">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="experience" [config]="editorConfig">
+                                    </angular-editor>
                                     <mat-error class="mt-2"
-                                        *ngIf="f['experience'].hasError('required') || f['experience'].hasError('touched')">
+                                        *ngIf="f['experience'].hasError('required') && submited == true">
                                         Experience Is Required
                                     </mat-error>
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-label">Qualification</div>
-                                    <ngx-editor-menu [editor]="editorQualification" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorQualification" formControlName="qualification">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="qualification" [config]="editorConfig">
+                                    </angular-editor>
                                     <mat-error class="mt-2"
-                                        *ngIf="f['qualification'].hasError('required') || f['qualification'].hasError('touched')">
+                                        *ngIf="f['qualification'].hasError('required') && submited == true">
                                         Qualification Is Required
                                     </mat-error>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-label">Skills Required</div>
-                                    <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorSkills" formControlName="skills_Required">
-                                        <mat-error class="mt-2"
-                                            *ngIf="f['skills_Required'].hasError('required') || f['skills_Required'].hasError('touched')">
-                                            Skills Is Required
-                                        </mat-error>
-                                    </ngx-editor>
+                                    <angular-editor formControlName="skills_Required" [config]="editorConfig">
+                                    </angular-editor>
+                                    <mat-error class="mt-2"
+                                    *ngIf="f['skills_Required'].hasError('required') && submited == true">
+                                    Skills Is Required
+                                </mat-error>
                                 </div>
                             </div>
                         </div>
