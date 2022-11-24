@@ -35,19 +35,7 @@
                             <p class="mb-2">June 07</p>
                             <hr>
                             <p>
-                                Lorem Ipsum is simply dummy text ofthe anadthe printing of typesetting industry dummy
-                                texat
-                                the dummy text ofthe anadthe printing dummy text ofthe anadthe printing of dummy text of
-                                the
-                                anadthe printing of dummy text ofthe anadthe printing of typesetting texat the dummy
-                                text of
-                                the anadthe printing dummy text ofthe anadthe printing of dummy text ofthe anadthe
-                                printing
-                                of Lorem Ipsum is simply dummy text ofthe anadthe printing of type setting industry
-                                dummy
-                                texat the dummy text ofthe anadthe printing dummy text ofthe anadthe printing of dummy
-                                text
-                                ofthe anadthe printing of dummy text ofthe anadthe printing of type
+                                {{blogPostData[0].description}}
                             </p>
                             <div class="text-start">
                                 <button type="button" class="btn btn-outline-light rounded-pill">Read More</button>
@@ -58,83 +46,22 @@
             </div>
             <div class="col-sm-5">
                 <div class="card blogs-all">
-                    <div class="card-header p-3">
+                   <!--  <div class="card-header p-3">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search Blogs">
                             <button class="btn" type="button" id="button-addon2">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog" routerLink="../blog-details">
+                         <a class="d-flex blog" routerLink="../blog-details"  *ngFor="let blogData of blogPostData">
                             <div class="flex-shrink-0">
                                 <img src="../../../assets/image/Products/blog-image.png" alt="...">
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
+                                <p>{{blogData.description}}</p> 
                                 <small>June 07</small>
                             </div>
                         </a>

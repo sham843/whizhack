@@ -3,13 +3,24 @@ section {
     color: #fff;
 }
 #jobs .card{
-    color: #111;
+    background-color:var(--card-bg-color);
+    color: #fff;
 }
-#jobs .card .card-header {
-    background-color: transparent;
-}
-#jobs .card .card-header p{
+#jobs .card p.location{
     margin-bottom: 0;
+    color: #aaa;
+}
+#jobs .card p.description{
+    margin-bottom: 0;
+    color: #aaa;
+    font-size: 0.85rem;
+    line-height: 1.6rem;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 4; /* number of lines to show */
+           line-clamp: 4;
+   -webkit-box-orient: vertical;
 }
 #jobs .card a{
     font-size: 0.85rem;
@@ -50,10 +61,31 @@ section {
 .g-overlay {
     min-width: 320px;
   }
-.culture-image{
+  .image-container{
+    position: relative;
+  }
+.image-container .culture-image{
     width: 100%;
     height: 300px;
     border-radius: 15px;
     object-fit: cover;
     object-position:top;
+}
+.image-container .image-text{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+.image-container:hover .image-text{
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }

@@ -31,6 +31,7 @@ export class RegisterNowComponent implements OnInit {
       mobileNo: ['', [Validators.required, Validators.pattern('[7-9]\\d{9}'), Validators.maxLength(10)]],
       courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : 'Cyber Guru'],
       message: ['', [Validators.required]],
+      pageName:['']
     })
   }
 
@@ -39,20 +40,23 @@ export class RegisterNowComponent implements OnInit {
       return
     } else {
       let formData = this.registerForm.value;
-      formData.pageName = this.route.url || '';
-      formData.courseId = this.data == 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : 3;
-      console.log('cid', formData.courseId);
+      formData.pageName = this.route.url;
+      formData.courseId = this.data == 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : 3 ;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode == '200') {
-            console.log(res)
-            this.dialogRef.close()
+            console.log('cc',formData);
+            this.dialogRef.close();
           }
         }), error: (error: any) => {
           this.errorSer.handelError(error.status);
+          
         }
       })
     }
+    
   }
+
+  
 }

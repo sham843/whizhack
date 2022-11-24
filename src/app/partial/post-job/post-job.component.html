@@ -39,7 +39,8 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Date Of Posting</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="date_of_Posting" [min]="min">
+                                    <input matInput [matDatepicker]="picker" formControlName="date_of_Posting"
+                                        [min]="min">
                                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                     <mat-error class="mt-2"
@@ -52,7 +53,8 @@
                             <div class="mb-1">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Last Date of Application</mat-label>
-                                    <input matInput [matDatepicker]="picker1" formControlName="date_of_Application" [min]="min">
+                                    <input matInput [matDatepicker]="picker1" formControlName="date_of_Application"
+                                        [min]="min">
                                     <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
                                     <mat-error class="mt-2"
@@ -121,7 +123,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="d-flex align-items-center justify-content-between">
-                        <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Cancel</button>
+                        <button mat-stroked-button class="btn-main-outline" type="button"
+                            (click)="clearForm()">Cancel</button>
                         <button mat-stroked-button class="btn-main" type="submit"
                             (click)="onSubmit()">{{buttonValue}}</button>
                     </div>
@@ -131,7 +134,10 @@
 
         <div class="card form-card">
             <div class="card-header">Jobs Posted</div>
+
             <div class="card-body">
+
+
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
                     <ng-container matColumnDef="srNo">
                         <th mat-header-cell *matHeaderCellDef class="srno" mat-sort-header>Sr. No. </th>
@@ -186,12 +192,14 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
 
-                <ng-container>
-                    <mat-paginator [length]="totalCount" [pageSize]="10" (page)="paginationEvent($event)"
-                       showFirstLastButtons aria-label="Select page">
-                    </mat-paginator>
-                </ng-container>
+
             </div>
+
+            <ng-container>
+                <mat-paginator [length]="totalCount" [pageSize]="10" (page)="paginationEvent($event)"
+                    showFirstLastButtons aria-label="Select page">
+                </mat-paginator>
+            </ng-container>
         </div>
     </div>
 </div>

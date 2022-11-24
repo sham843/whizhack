@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
@@ -33,7 +34,8 @@ export interface PeriodicElement {
 })
 export class BlogMasterComponent implements OnInit {
   @ViewChild('uploadDocument') file!: ElementRef;
-  displayedColumns: string[] = ['position', 'name', 'type', 'symbol'];
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective
+  displayedColumns: string[] = ['position', 'name', 'type','blog_categary_Id','symbol'];
   dataSource = ELEMENT_DATA;
   imgSrc: string = '';
   frm!: FormGroup;
@@ -55,6 +57,7 @@ export class BlogMasterComponent implements OnInit {
     private service: ApiService,
     private errorHandler: ErrorHandlerService,
     private fileUpl: FileUploadService,
+    private commonMethod : CommonMethodService, 
     public validation: FormValidationService) { }
 
   openDialog(id: any): void {
@@ -121,17 +124,31 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
+  createItem(): FormGroup {
+    return this.fb.group({
+      title: ['', [Validators.required ,Validators.maxLength(200)]],
+      description: ['', [Validators.required]],
+    });
+  }
+
   addItem() {
     let fg = this.fb.group({
-      title: [''],
-      description: [''],
+      blog_Register_Id: 0,
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      key: 0,
+      createdBy: 0,
+      modifiedBy: 0,
+      createdDate:  "2022-11-23T12:29:30.815Z",
+      modifiedDate: "2022-11-23T12:29:30.815Z",
+      isDeleted: false,
     });
     if (this.isSubBlogAdd == true) {
       if (this.frm.value.blogRegisterDetailsModel.length > 0) {
         if (this.frm.value.blogRegisterDetailsModel[this.frm.value.blogRegisterDetailsModel.length - 1].title && this.frm.value.blogRegisterDetailsModel[this.frm.value.blogRegisterDetailsModel.length - 1].description) {
           this.itemsForm.push(fg);
         } else {
-          alert('Fill Blog Sub Details')
+          this.commonMethod.matSnackBar('Please, Enter Sub-Title and Sub-Description !',1)
         }
       }
       else {
@@ -139,6 +156,15 @@ export class BlogMasterComponent implements OnInit {
       }
     }
     this.isSubBlogAdd = true;
+  }
+
+  removeItem(){
+    this.itemsForm.removeAt(this.frm.value.blogRegisterDetailsModel.length - 1)
+  }
+  
+  filterData(){
+    this.currentPage = 0;
+    this.displayData();
   }
 
   displayData() {
@@ -159,16 +185,16 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
-  clearForm(){
-    this.frm.reset();
+  clearForm(formDirective?:any){
     this.imgSrc = '';
     this.file.nativeElement.value = '';
+    this.controlForm();
+    formDirective?.resetForm();
     this.editFlag = false;
-    this.controlForm()
   }
 
   fileUpload(event: any) {
-    this.fileUpl.uploadDocuments(event, 'Upload', 'png,jpg').subscribe((res: any) => {
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg').subscribe((res: any) => {
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData
         this.frm.controls['imagePath'].setValue(this.imgSrc);
@@ -180,33 +206,39 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
-  onClickSubmit() {
-    console.log(this.frm.value,'yyy');
-    
-    if (!this.frm.valid) {
-      alert('warning');
-      return;
-    } else {
-      alert('success')
-      let postObj = this.frm.value;
-
-      let url;
-      this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
-
-      this.service.setHttp(this.editFlag ? 'put':'post', url , false, postObj, false, 'whizhackService');
-      this.service.getHttp().subscribe({
-        next: ((res: any) => {
-          if (res.statusCode == '200') {
-            this.clearForm();
-            this.displayData();
-            this.editFlag = false;
-          }
-        }),
-        error: (error: any) => {
-          console.log(error);
-        }
-      })
+  onClickSubmit(formDirective?:any) {
+    console.log(this.frm.value.imagePath,'yyy');
+    if(this.frm.value.imagePath == ''){
+        this.commonMethod.matSnackBar('please, Upload Image First !',1)
+      if (!this.frm.valid) {
+        return;
+      }
     }
+      else{
+        let postObj = this.frm.value;
+  
+        let url;
+        this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
+  
+        this.service.setHttp(this.editFlag ? 'put':'post', url , false, postObj, false, 'whizhackService');
+        this.service.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode == '200') {
+              formDirective?.resetForm();
+              this.imgSrc = '';
+              this.file.nativeElement.value = '';
+              this.controlForm();
+              this.displayData();
+              this.commonMethod.matSnackBar(res.statusMessage, 0)
+              this.editFlag = false;
+            }
+          }),
+          error: (error: any) => {
+            console.log(error);
+          }
+        })
+      }
+    
   }
 
   onClickEdit(editObj: any) {
@@ -234,13 +266,11 @@ export class BlogMasterComponent implements OnInit {
       isDeleted: true,
       blog_Register_Id: 0,
       id: [element.id],
-      title: [element.title, [Validators.minLength(2), Validators.maxLength(200)]],
-      description: [element.description, [Validators.minLength(2)]],
+      title: [element.title, [Validators.maxLength(200)]],
+      description: [element.description],
     });
 		this.itemsForm.push(fg);
     })
-    this.imgSrc = editObj.imagePath;
-    this.file.nativeElement.value = editObj?.imagePath;
   }
 
   onClickDelete(id: any) {
@@ -255,7 +285,8 @@ export class BlogMasterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == 'yes'){
+      if(result == 'yes'){ 
+        this.clearForm();
         let deleteObj = 
           {
             "id": id,
@@ -275,6 +306,7 @@ export class BlogMasterComponent implements OnInit {
         })
       }else{
         this.displayData();
+        this.clearForm();
       }
     });
   }
@@ -287,20 +319,23 @@ export class BlogMasterComponent implements OnInit {
   deleteImage() {
     this.imgSrc = ''
     this.file.nativeElement.value = ''
+    this.frm.controls['imagePath'].setValue('');
   }
 
   onClickPaginatior(event: any) {
     this.currentPage = event.pageIndex;
+    this.clearForm();
     this.displayData();
   }
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: '', type: '', symbol: '' }
+  { position: 1, name: '', type: '',blog_categary_Id: 1, symbol: '' }
 ];
 
 export interface PeriodicElement {
   position: number;
   name: string;
   type: string;
+  blog_categary_Id: number
   symbol: string;
 }
