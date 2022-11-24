@@ -93,7 +93,7 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       price: ['', [Validators.required,Validators.maxLength(10)]],
       price_Terms: ['', [Validators.required,Validators.maxLength(10)]],
       imagePath: ['', Validators.required],
-      actual_price:['',[Validators.required,Validators.maxLength(10)]]
+      actual_price:[0,[Validators.required,Validators.maxLength(10)]]
     })
   }
 
