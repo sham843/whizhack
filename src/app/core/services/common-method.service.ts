@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
@@ -10,7 +11,13 @@ export class CommonMethodService {
 
   codecareerPage!: string;
 
-  constructor(private snackBar: MatSnackBar, private http: HttpClient,  private deviceService: DeviceDetectorService) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private http: HttpClient,
+    private deviceService: DeviceDetectorService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   createCaptchaCarrerPage() {
     //clear the contents of captcha div first
@@ -79,4 +86,10 @@ export class CommonMethodService {
     var deviceInfo = this.deviceService.getDeviceInfo();
     console.log(deviceInfo);
   }
+
+  routerLinkRedirect(path: any) {
+    this.router.navigate([path], { relativeTo: this.route })
+  }
+
+
 }

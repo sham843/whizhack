@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'contact-us', loadChildren: () => import('../../web/contact-us/contact-us.module').then(m => m.ContactUsModule), data: { breadcrumb: [{ title: 'Contact Us', active: true }] } },
   { path: 'culture-and-career', loadChildren: () => import('../../web/culture-career/culture-career.module').then(m => m.CultureCareerModule), data: { breadcrumb: [{ title: 'Culture & Career', active: true }] } },
   { path: 'job-details', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: { breadcrumb: [{ title: 'Job Details', active: true }] }  },
+  { path: 'job-details/:id', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: { breadcrumb: [{ title: 'Job Details', active: true }] }  },
 ];
 
 @NgModule({
