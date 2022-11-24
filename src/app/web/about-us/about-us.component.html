@@ -698,34 +698,46 @@
 <section id="media-converage">
     <div class="container">
         <h2 class="mb-4">MEDIA COVERAGE</h2>
+        <!-- <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
+                        <p>TISC
+                        </p>
+                        <a class="text-main" routerLink="">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
+                        <p>TISC
+                        </p>
+                        <a class="text-main" routerLink="">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
+                        <p>TISC
+                        </p>
+                        <a class="text-main" routerLink="">View More</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-3" *ngFor="let mediaData of mediaCoverageData">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
-                        <p>TISC
+                        <h5>{{mediaData.article_Title}}</h5>
+                        <p>{{mediaData.source}}
                         </p>
-                        <a class="text-main" routerLink="">View More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
-                        <p>TISC
-                        </p>
-                        <a class="text-main" routerLink="">View More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Mr. Sanjay Sengupta, Co-Founder and CTO, WhizHack Technologies talks about Cyber Security training for students.</h5>
-                        <p>TISC
-                        </p>
-                        <a class="text-main" routerLink="">View More</a>
+                        <a class="text-main" href="{{mediaData.url}}" target="_blank">View More</a>
                     </div>
                 </div>
             </div>

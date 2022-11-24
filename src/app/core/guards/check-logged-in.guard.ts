@@ -14,6 +14,7 @@ export class CheckLoggedInGuard implements CanActivate {
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree|any {
       if (this.WebStorageService.checkUserIsLoggedIn()) {
         this.router.navigate(['/dashboard']);
+        return false
       } else {
         return true;
       }

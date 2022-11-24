@@ -8,9 +8,13 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Gallery Title" formControlName="gallery_title"
-                (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
-              <mat-error *ngIf="g['gallery_title']?.errors">
-                <span *ngIf="g['gallery_title']?.hasError('required')"> Gallery title is required</span>
+                (keypress)="vs.noFirstSpaceAllow($event)" maxlength="50">
+              <mat-error *ngIf="g['gallery_title']?.errors" class="mt-2">
+                <span *ngIf="g['gallery_title']?.hasError('required') ">
+                  Gallery title is required</span>
+                <span *ngIf="g['gallery_title']?.hasError('pattern') ">
+                 Please enter Valid gallery title </span>
+
               </mat-error>
             </mat-form-field>
           </div>
@@ -18,19 +22,24 @@
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
               <textarea matInput placeholder="Gallery Description" rows="5" formControlName="gallery_description"
-                (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpaces($event)"
+               (keypress)="vs.noFirstSpaceAllow($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
-                <span *ngIf="g['gallery_description']?.hasError('required')"> Gallery description is required</span>
+                <span
+                  *ngIf="g['gallery_description']?.hasError('required') ">
+                  Gallery description is required</span>
+                <span
+                  *ngIf="g['gallery_description']?.hasError('pattern')">
+                Please enter valid gallery description </span>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="mb-5">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
-            <!-- <mat-error *ngIf="!imageArray.length && imagepath">
-              <span> Images are required</span>
-            </mat-error> -->
+            <mat-error *ngIf="showImagError" class="mt-2">
+              <span>{{showImagError}}</span>
+            </mat-error>
           </div>
           <div class="mb-3">
             <div class="d-flex justify-content-between flex-wrap gap-4">
@@ -49,7 +58,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <button mat-stroked-button class="btn-main-outline" type="button"
               (click)="clearGalleryForm()">Cancel</button>
-            <button type="submit" mat-stroked-button class="btn-main">Submit</button>
+            <button type="submit" mat-stroked-button class="btn-main">{{this.UpdateObj? "Update":"Submit"}}</button>
           </div>
         </form>
       </div>
@@ -62,13 +71,18 @@
           <div class="col-sm-3">
             <span>Gallery List</span>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Gallery Title" [formControl]="searchFilter"
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
-              <mat-icon matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
-                (click)="clearSearchFilter()"> close</mat-icon>
+
+              <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
+                (click)="clearSearchFilter()">
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+
             </mat-form-field>
           </div>
         </div>
@@ -92,6 +106,11 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
+              <button mat-icon-button class="text-white" (click)="openBox(element)">
+                <span class="material-symbols-outlined">
+                  photo_library
+                </span>
+              </button>
               <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)">
                 <span class="material-symbols-outlined">
                   edit
@@ -104,14 +123,28 @@
               </button>
             </td>
           </ng-container>
+          <tr class="mat-row p-2 w-100" *matNoDataRow col>
+            <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found </td>
+          </tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            [ngClass]="{'highlightedRow ': highlightedRow == row.galleryId}"></tr>
         </table>
-        <ng-container *ngIf="totalCount > 1">
-          <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
-            (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results"></mat-paginator>
+        <ng-container *ngIf="totalCount > 10">
+          <mat-paginator [length]="totalCount" [pageSize]="10" showFirstLastButtons (page)="onClickPaginatior($event)">
+          </mat-paginator>
         </ng-container>
       </div>
     </div>
   </div>
 </div>
+<section>
+  <div class="container" style="display: none;">
+
+    <div class="row g-3 align-items-center" id="culture">
+      <div class="col-sm-3" *ngFor="let item of items; index as i">
+        <img [lightbox]="i" [src]="item.data.thumb" class="culture-image">
+      </div>
+    </div>
+  </div>
+</section>

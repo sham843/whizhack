@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -15,17 +15,17 @@ import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/c
 })
 export class MediaCoverageComponent implements OnInit {
 
-  frmMedia!:FormGroup;
-  submitBtnTxt:string = 'Submit';
+  frmMedia!: FormGroup;
+  submitBtnTxt: string = 'Submit';
   get f() { return this.frmMedia.controls };
   totalCount: number = 0;
   currentPage: number = 0;
   pageSize: number = 10;
-
   displayedColumns: string[] = ['srno', 'article_Title', 'source', 'url', 'action'];
   dataSource: any;
-  
-  constructor(private fb: FormBuilder, 
+ reg = '';
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
+  constructor(private fb: FormBuilder,
     public vs: FormValidationService,
     private api: ApiService,
     public dialog: MatDialog,
@@ -39,35 +39,33 @@ export class MediaCoverageComponent implements OnInit {
     this.createMediaForm();
     this.getMediaList();
   }
-
-  createMediaForm(){
+  createMediaForm() {
     this.frmMedia = this.fb.group({
       id: [0],
-      article_Title: ['', [Validators.required]],
-      source: ['', [Validators.required]],
-      url: ['', [Validators.required]],
+      article_Title: ['',Validators.compose([Validators.required,Validators.minLength(5),Validators.maxLength(100)])],
+      source: ['',Validators.compose([Validators.required,Validators.minLength(5),Validators.maxLength(100)])],
+      url: ['', [Validators.required,Validators.pattern('^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$')]],
     })
   }
 
-  onClickPaginatior(event:any){
+  onClickPaginatior(event: any) {
     this.currentPage = event.pageIndex;
     this.getMediaList();
   }
 
   getQueryString() {
-    let str = "?pageno=" + this.currentPage + "&pagesize=" + this.pageSize;
+    let str = "?pageno=" + (this.currentPage + 1) + "&pagesize=" + this.pageSize;
     return str;
   }
 
-  getMediaList(){
+  getMediaList() {
     this.spinner.show();
     this.apiService.setHttp('get', "whizhack_cms/media/GetAllByPagination" + this.getQueryString(), false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.dataSource = res.responseData?.responseData1;
-          this.totalCount = res.responseData?.responseData2?.totalCount;
-          this.currentPage = res.responseData?.responseData2?.pageNo;
+          this.totalCount = res.responseData?.responseData2?.pageCount;
         } else {
           this.dataSource = [];
           this.totalCount = 0;
@@ -79,22 +77,22 @@ export class MediaCoverageComponent implements OnInit {
     })
   }
 
-  onMediaSubmit(){
-    if(this.frmMedia.invalid){
+  onMediaSubmit(formDirective: any) {
+    if (this.frmMedia.invalid) {
       return;
-    }else{
+    } else {
       var req = {
         ...this.webStorageService.createdByProps(),
         ...this.frmMedia.value
       }
-
       this.apiService.setHttp((this.submitBtnTxt == 'Update' ? 'put' : 'post'), "whizhack_cms/media/" + (this.submitBtnTxt == 'Update' ? 'Update' : 'Register'), false, req, false, 'whizhackService');
       this.apiService.getHttp().subscribe({
         next: (res: any) => {
           if (res.statusCode == 200) {
             this.spinner.hide();
+            formDirective.resetForm();
             this.getMediaList();
-            this.clearMediaForm();
+            this.clearMediaForm(formDirective);
             this.commonMethod.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 0);
           } else {
             this.spinner.hide();
@@ -106,22 +104,22 @@ export class MediaCoverageComponent implements OnInit {
     }
   }
 
-  editMediaRecord(data: any){
+  editMediaRecord(data: any) {
     this.submitBtnTxt = 'Update'
     this.frmMedia.patchValue({
-      id: data.mediaId,
-      article_Title: data.article_Title,
-      source: data.source,
-      url: data.url,
+      id: data?.mediaId,
+      article_Title: data?.article_Title,
+      source: data?.source,
+      url: data?.url,
     })
   }
 
-  deleteMediaRecord(data: any){
+  deleteMediaRecord(data: any, formDirective?: any) {
     let dialoObj = {
       header: 'Delete',
-      title:'Do you want to delete the selected record ?',
-      cancelButton:'Cancel',
-      okButton:'Ok'
+      title: 'Do you want to delete the selected record ?',
+      cancelButton: 'Cancel',
+      okButton: 'Ok'
     }
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
@@ -130,31 +128,33 @@ export class MediaCoverageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == 'yes'){
+      if (result == 'yes') {
         let deleteObj = {
           "id": data.mediaId,
           "modifiedBy": 0,
         }
-    
+
         this.api.setHttp('delete', 'whizhack_cms/media/Delete', false, deleteObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode == 200) {
+              this.commonMethod.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 0);
               this.getMediaList();
-              this.clearMediaForm();
+              this.clearMediaForm(formDirective);
             }
           }),
-          error: (error: any) => {
-            console.log(error);
+          error: () => {
+
           }
         })
       }
     });
-    
+
   }
 
-  clearMediaForm(){
+  clearMediaForm(formDirective?: any) {
     this.submitBtnTxt = 'Submit';
+    formDirective.resetForm();
     this.frmMedia.reset();
     this.createMediaForm();
   }
