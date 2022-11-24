@@ -26,7 +26,7 @@ export class AppComponent {
     });
   }
   ngOnInit() {
-    this.router.events.subscribe((event: any) => { // each and every page default call spinner and window scroll 
+    this.router.events.subscribe((event: any) => { // each and every page default call spinner and window scroll
       if (event instanceof NavigationStart) {
         // this.spinner.show()
       } else if (event instanceof NavigationEnd) {
@@ -37,7 +37,8 @@ export class AppComponent {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd),  // set title dynamic
     ).subscribe(() => {
       var rt = this.getChild(this.activatedRoute);
-      let titleName = rt.data._value.breadcrumb[rt.data._value.breadcrumb?.length - 1].title;
+      // let titleName = rt.data._value.breadcrumb[rt.data._value.breadcrumb?.length - 1].title;
+      let titleName= rt.data._value.title
       rt.data.subscribe(() => {
         this.titleService.setTitle(titleName)
       })

@@ -223,6 +223,7 @@ items!: GalleryItem[];
 //#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
+    this.showImagError = '';
     this.highlightedRow = data.galleryId;
     this.frmGallery.patchValue({
       gallery_description: data?.description,

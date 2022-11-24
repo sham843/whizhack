@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Editor, Toolbar } from 'ngx-editor';
+import { Editor } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormGroup, FormBuilder, Validators, NgForm} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-post-job',
@@ -21,6 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class PostJobComponent implements OnInit {
 
   postNewJobFrm!: FormGroup;
+  fillterForm!: FormGroup;
   displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting', 'date_of_Application', 'publish', 'actions'];
   dataSource: any;
   editFlag: boolean = false;
@@ -33,16 +35,37 @@ export class PostJobComponent implements OnInit {
   editorExperience!: Editor;
   editorQualification!: Editor;
   editorSkills!: Editor;
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['ordered_list', 'bullet_list'],
-    ['link'],
-  ];
+  
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    toolbarHiddenButtons: [
+      [ 'fontName', 'heading', 'fontSize','subscript','link','superscript','justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'justifyFull',
+      'indent',
+      'outdent','heading',
+      'fontName','customClasses',
+      'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',
+      'insertHorizontalRule','textColor',
+      'backgroundColor',
+    'removeFormat',
+  'toggleEditorMode']
+    ],
+  };
   
   @ViewChild('formDirective')
   private formDirective!: NgForm;
   min = new Date();
+  submited:boolean = false;
 
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
@@ -55,6 +78,7 @@ export class PostJobComponent implements OnInit {
 
   ngOnInit(): void {
     this.formData();
+    // this. fillterFormData();
     this.bindTable();
     this.editorRoles = new Editor();
     this.editorExperience = new Editor();
@@ -66,41 +90,43 @@ export class PostJobComponent implements OnInit {
   formData() {
     this.postNewJobFrm = this.fb.group({
       id: 0,
-      job_Title: ['', Validators.required],
-      job_Location: ['', Validators.required],
-      date_of_Posting: ['', Validators.required],
+      job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+      job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+      date_of_Posting: [''],
       date_of_Application: ['', Validators.required],
       job_Description: ['', Validators.required],
       roles_and_Responsibility: ['', Validators.required],
       qualification: ['', Validators.required],
       experience: ['', Validators.required],
       skills_Required: ['', Validators.required],
-      publish: true
+      publish: false
     });
   }
   // ----------------------------End Form Field Here-------------------------------
 
-  get f() { return this.postNewJobFrm.controls}
+  get f() { return this.postNewJobFrm.controls }
 
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + this.currentPage + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno='+ this.currentPage+'&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
+      // whizhack_cms/postjobs/GetAllPostJobs?pageno=1&pagesize=10
       next: (res: any) => {
         if (res.statusCode == '200') {
           this.ngxSpinner.hide()
-          this.dataSource = new MatTableDataSource(res.responseData);
+          this.dataSource = new MatTableDataSource(res.responseData.responseData1);
           this.dataSource.sort = this.sort;
-          this.totalCount = res.responseData1.pageCount;
+          this.totalCount = res.responseData.responseData2.pageCount;
         }
         else {
+          this.ngxSpinner.hide();
           this.dataSource = [];
         }
       },
       error: (error: any) => {
-        console.log("Error:", error);
-        this.error.handelError(error.statusCode);
+        this.ngxSpinner.hide();
+      this.error.handelError(error.statusCode);
       }
     })
   }
@@ -114,8 +140,8 @@ export class PostJobComponent implements OnInit {
       data: obj,
       disableClose: true
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe(()=> {
+      // console.log(`Dialog result: ${result}`);
     });
   }
   //----------------------------view logic End Here------------------------
@@ -133,7 +159,7 @@ export class PostJobComponent implements OnInit {
       id: obj1.jobpostId,
       job_Title: obj1.job_Title,
       job_Location: obj1.job_Location,
-      date_of_Posting: obj1.date_of_Posting,
+      // date_of_Posting: obj1.date_of_Posting,
       date_of_Application: obj1.date_of_Application,
       job_Description: obj1.job_Description,
       roles_and_Responsibility: obj1.roles_and_Responsibility,
@@ -147,7 +173,8 @@ export class PostJobComponent implements OnInit {
   //---------------------------------------------------------------------------------
   onClickToggle(element: any) {
     let dialoObj = {
-      title: 'Do you want to publish the selected field ?',
+      header: element.publish ? 'isPublish' : 'Publish',
+      title: 'Do you want to change the status ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
     }
@@ -176,7 +203,7 @@ export class PostJobComponent implements OnInit {
           }
         })
       }
-      else{
+      else {
         this.bindTable();
       }
     });
@@ -214,8 +241,8 @@ export class PostJobComponent implements OnInit {
             console.log(error);
           }
         })
-      } 
-     });
+      }
+    });
   }
   // ----------------------------End Delete Logic Here---------------------------
   // ----------------------------Start Delete Logic Here-------------------------
@@ -243,10 +270,14 @@ export class PostJobComponent implements OnInit {
 
   // ----------------------------Start Submit Logic Here-------------------------
   onSubmit() {
-    if (!this.postNewJobFrm.valid) {return;
+    this.submited = true;
+    if (!this.postNewJobFrm.valid) {
+      return;
     } else {
-      this.ngxSpinner.show();
-      let data = this.postNewJobFrm.value;
+    let data = this.postNewJobFrm.value;
+      data.publish = false;
+      data.date_of_Posting = new Date();
+      this.editFlag ? '' : data.id = 0;
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
@@ -254,15 +285,14 @@ export class PostJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.ngxSpinner.hide();
-            this.snackbar.open(res.statusMessage, 'ok', {
+           this.snackbar.open(res.statusMessage, 'ok', {
               duration: 2000,
               verticalPosition: 'top',
               horizontalPosition: 'right',
             })
             this.bindTable();
-             this.clearForm();
-             this.buttonValue = 'Submit';
+            this.clearForm();
+            this.buttonValue = 'Submit';
           }
         }),
         error: (error: any) => {
@@ -271,15 +301,10 @@ export class PostJobComponent implements OnInit {
       })
     }
   }
-  // ----------------------------End Submit Logic Here-------------------------------
-  onClickClear(frm?: any) {
-    frm.resetForm();
-    this.formData();
-    this.buttonValue = 'Submit'
-  }
+
   //------------------------------------Pagination Logic Start------------------------
   paginationEvent(event: any) {
-    this.clearForm()
+    this.clearForm();
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.bindTable();
@@ -288,6 +313,6 @@ export class PostJobComponent implements OnInit {
   clearForm() {
     this.formDirective && this.formDirective.resetForm();
     this.editFlag = false;
-    // this.formData();
+    this.submited = false;
   }
 }

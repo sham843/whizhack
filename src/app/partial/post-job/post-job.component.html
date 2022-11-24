@@ -9,11 +9,14 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Job Title</mat-label>
-                                    <input matInput placeholder="Job Title" formControlName="job_Title"
+                                    <input matInput placeholder="Enter Job Title" formControlName="job_Title" maxlength="50"
                                         (keypress)="validation.noFirstSpaceAllow($event)">
-                                    <mat-error class="mt-2"
-                                        *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
-                                        Job Title Is Required
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
+                                            Job Title Is Required</div>
+                                        <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
+                                            Valid Job Title.
+                                        </div>
                                     </mat-error>
                                 </mat-form-field>
 
@@ -21,19 +24,23 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Job Location</mat-label>
-                                    <input matInput placeholder="Job Location" formControlName="job_Location"
+                                    <input matInput placeholder="Enter Job Location" formControlName="job_Location"
                                         (keypress)="validation.noFirstSpaceAllow($event)"><br>
-                                    <mat-error class="mt-2"
-                                        *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
-                                        Job Location Is Required
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
+                                            Job Location is Required</div>
+                                        <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
+                                            Valid Job Location
+                                        </div>
                                     </mat-error>
                                 </mat-form-field>
 
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Date Of Posting</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="date_of_Posting" [min]="min">
+                                    <input matInput [matDatepicker]="picker" formControlName="date_of_Posting"
+                                        [min]="min">
                                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                     <mat-error class="mt-2"
@@ -41,12 +48,12 @@
                                         Date Of Posting Is Required
                                     </mat-error>
                                 </mat-form-field>
-
-                            </div>
+                            </div> -->
                             <div class="mb-1">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Last Date of Application</mat-label>
-                                    <input matInput [matDatepicker]="picker1" formControlName="date_of_Application" [min]="min">
+                                    <input matInput [matDatepicker]="picker1" formControlName="date_of_Application"
+                                        [min]="min">
                                     <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
                                     <mat-error class="mt-2"
@@ -59,7 +66,7 @@
                             <div class="mb-3">
                                 <mat-form-field appearance="legacy" class="w-100">
                                     <mat-label>Job Description</mat-label>
-                                    <textarea matInput placeholder="Job Description" rows="5"
+                                    <textarea matInput placeholder="Enter Job Description" rows="15" maxlength="500"
                                         formControlName="job_Description"
                                         (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                     <mat-error class="mt-2"
@@ -73,43 +80,41 @@
                             <div class="row gy-3 form-container">
                                 <div class="col-sm-6">
                                     <div class="form-label">Roles & Responsibility</div>
-                                    <ngx-editor-menu [editor]="editorRoles" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorRoles" formControlName="roles_and_Responsibility">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig" placeholder="Enter  Roles & Responsibility here...">
+                                    </angular-editor>
+                                    <mat-error class="mt-2">
+                                        <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
+                                            Roles & Responsibility is Required</div>
+                                    </mat-error>
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-label">Experience</div>
-                                    <ngx-editor-menu [editor]="editorExperience" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorExperience" formControlName="experience">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="experience" [config]="editorConfig" placeholder="Enter Experience here...">
+                                    </angular-editor>
                                     <mat-error class="mt-2"
-                                        *ngIf="f['experience'].hasError('required') || f['experience'].hasError('touched')">
+                                        *ngIf="f['experience'].hasError('required') && submited == true">
                                         Experience Is Required
                                     </mat-error>
                                 </div>
+
                                 <div class="col-sm-6">
                                     <div class="form-label">Qualification</div>
-                                    <ngx-editor-menu [editor]="editorQualification" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorQualification" formControlName="qualification">
-                                    </ngx-editor>
+                                    <angular-editor formControlName="qualification" [config]="editorConfig" placeholder="Enter Qualification here...">
+                                    </angular-editor>
                                     <mat-error class="mt-2"
-                                        *ngIf="f['qualification'].hasError('required') || f['qualification'].hasError('touched')">
+                                        *ngIf="f['qualification'].hasError('required') && submited == true">
                                         Qualification Is Required
                                     </mat-error>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-label">Skills Required</div>
-                                    <ngx-editor-menu [editor]="editorSkills" [toolbar]="toolbar">
-                                    </ngx-editor-menu>
-                                    <ngx-editor [editor]="editorSkills" formControlName="skills_Required">
-                                        <mat-error class="mt-2"
-                                            *ngIf="f['skills_Required'].hasError('required') || f['skills_Required'].hasError('touched')">
-                                            Skills Is Required
-                                        </mat-error>
-                                    </ngx-editor>
+                                    <angular-editor formControlName="skills_Required" [config]="editorConfig" placeholder="Enter Skills here...">
+                                    </angular-editor>
+                                    <mat-error class="mt-2"
+                                    *ngIf="f['skills_Required'].hasError('required') && submited == true">
+                                    Skills Is Required
+                                </mat-error>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +122,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="d-flex align-items-center justify-content-between">
-                        <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Cancel</button>
+                        <button mat-stroked-button class="btn-main-outline" type="button"
+                            (click)="clearForm()">Cancel</button>
                         <button mat-stroked-button class="btn-main" type="submit"
                             (click)="onSubmit()">{{buttonValue}}</button>
                     </div>
@@ -127,7 +133,10 @@
 
         <div class="card form-card">
             <div class="card-header">Jobs Posted</div>
+
             <div class="card-body">
+
+
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
                     <ng-container matColumnDef="srNo">
                         <th mat-header-cell *matHeaderCellDef class="srno" mat-sort-header>Sr. No. </th>
@@ -153,7 +162,7 @@
                     <ng-container matColumnDef="publish">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish </th>
                         <td mat-cell *matCellDef="let element">
-                            <mat-slide-toggle  [checked]="element.publish" (click)="onClickToggle(element)">
+                            <mat-slide-toggle [checked]="element.publish" (click)="onClickToggle(element)">
                             </mat-slide-toggle>
                         </td>
                     </ng-container>
@@ -182,12 +191,14 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
 
-                <ng-container>
-                    <mat-paginator [length]="totalCount" [pageSize]="10" (page)="paginationEvent($event)"
-                       showFirstLastButtons aria-label="Select page">
-                    </mat-paginator>
-                </ng-container>
+
             </div>
+
+            <ng-container>
+                <mat-paginator [length]="totalCount" [pageSize]="10" (page)="paginationEvent($event)"
+                    showFirstLastButtons aria-label="Select page">
+                </mat-paginator>
+            </ng-container>
         </div>
     </div>
 </div>
