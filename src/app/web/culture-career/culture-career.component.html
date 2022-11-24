@@ -95,7 +95,7 @@
         <h2 class="mb-4">Our Stories</h2>
         <div class="row g-5 align-items-center" id="culture">
             <div class="col-sm-12">
-                
+
             </div>
         </div>
     </div>
@@ -106,7 +106,10 @@
         <div class="row g-3 align-items-center" id="culture">
             <div class="col-sm-3" *ngFor="let item of items; index as i">
                 <div class="image-container">
+                  <ng-container *ngIf="i <4">
                     <img [lightbox]="i" [src]="item.data.thumb" class="culture-image">
+                  </ng-container>
+
                     <div class="image-text">
                         asdf
                     </div>

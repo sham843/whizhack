@@ -95,7 +95,7 @@
           </ng-container>
           <ng-container matColumnDef="gallery_Title">
             <th mat-header-cell *matHeaderCellDef> Gallery Title </th>
-            <td mat-cell *matCellDef="let element"> {{element.gallery_Title | titlecase}} </td>
+            <td mat-cell *matCellDef="let element" matTooltip="{{element.gallery_Title | titlecase}}"> {{element.gallery_Title | titlecase}} </td>
           </ng-container>
           <!-- <ng-container matColumnDef="gallery">
                         <th mat-header-cell *matHeaderCellDef> Article Source </th>
@@ -106,17 +106,17 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button class="text-white" (click)="openBox(element)">
+              <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos">
                 <span class="material-symbols-outlined">
                   photo_library
                 </span>
               </button>
-              <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)">
+              <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)" matTooltip="Edit">
                 <span class="material-symbols-outlined">
                   edit
                 </span>
               </button>
-              <button mat-icon-button class="text-danger" (click)="deleteGalleryRecord(element)">
+              <button mat-icon-button class="text-danger" (click)="deleteGalleryRecord(element)" matTooltip="Delete">
                 <span class="material-symbols-outlined">
                   delete
                 </span>
