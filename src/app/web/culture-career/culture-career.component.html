@@ -126,29 +126,26 @@
                 <div class="text-center py-5">
                     <h4 class="text-white">Head start towards choosing right career</h4>
                 </div>
-                <div class="row g-4">
-                    <div class="col-sm-4">
+                <div class="row g-4" >
+                    <div class="col-sm-4" *ngFor="let postJob of postJobArray">
                         <div class="card h-100">
                             <div class="card-header">
-                                <h5 class="mb-1">Business Development Manager</h5>
-                                <p class="location">Pune</p>
+                                <h5 class="mb-1">{{postJob?.job_Title}}</h5>
+                                <p class="location">{{postJob?.job_Location}}</p>
                             </div>
                             <div class="card-body">
                                 <p class="description">
-                                    Add captions to your slides easily with the .carousel-caption element within any
-                                    .carousel-item. They can be easily hidden on smaller viewports, as shown below, with
-                                    optional display utilities. We hide them initially with .d-none and bring them back
-                                    on medium-sized devices with .d-md-block.
+                                    {{postJob?.job_Description}}
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <div class="text-end">
-                                    <a class="text-main" routerLink="../job-details">Read More</a>
+                                    <a class="text-main" routerLink="../job-details" (click)="navigatePage(postJob?.jobpostId)">Read More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                         <div class="card h-100">
                             <div class="card-header">
                                 <h5 class="mb-1">Training Lead for Cyber Security</h5>
@@ -189,7 +186,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
+
                 </div>
             </div>
         </div>
