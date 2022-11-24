@@ -88,11 +88,11 @@ export class CultureCareerComponent implements OnInit {
   //........................................post Job Code Start Here..............................................//
 
   getAllPostJobs() {
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno=' + 1 + '&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {
-          this.postJobArray = res.responseData;
+          this.postJobArray = res.responseData.responseData;
         }
         else {
           this.postJobArray = [];
