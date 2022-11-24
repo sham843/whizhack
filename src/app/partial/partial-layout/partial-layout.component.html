@@ -1,7 +1,7 @@
 <div class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
+    <app-header></app-header>
     <app-sidebar *ngIf="!getSideBarState()"></app-sidebar>
     <main class="page-content">
-        <app-header></app-header>
         <div class="main-content scrollbar">
             <router-outlet></router-outlet>
         </div>
