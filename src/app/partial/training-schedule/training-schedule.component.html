@@ -24,7 +24,7 @@
                                 Please Enter course Title
                             </mat-error> 
                              <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('pattern')">
-                               No space at staring And only Alphabet </mat-error>                            
+                               No Space at Staring And Only Alphabet </mat-error>                            
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -36,7 +36,7 @@
                                 Please Enter course Caption
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('pattern')">
-                                No space at staring And only Alphabet </mat-error>
+                                No space at Staring And Only Alphabet </mat-error>
                         </mat-form-field>
                        
                     </div>
@@ -46,7 +46,7 @@
                             <input matInput placeholder="Course Duration" formControlName="duration"
                             (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
-                                Please Enter course Duration
+                                Please Enter Course Duration
                             </mat-error>
                         </mat-form-field>
                        
@@ -58,7 +58,7 @@
                                 formControlName="course_Description"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
                                 <mat-error *ngIf="formControls['course_Description'].hasError('required')">
-                                    Please Enter course Description
+                                    Please Enter Course Description
                                 </mat-error>
                         </mat-form-field>                        
                     </div>
@@ -93,7 +93,7 @@
                                 formControlName="syllabus_Summary" 
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
                                 <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
-                                    Please Enter syllabus Summary
+                                    Please Enter Syllabus Summary
                                 </mat-error>
                         </mat-form-field>
                        
@@ -106,7 +106,7 @@
                                 Please Enter Price
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('pattern')">
-                                Enter only Number</mat-error> 
+                                Enter Only Number</mat-error> 
                         </mat-form-field>
                        
                     </div>
@@ -116,7 +116,7 @@
                             <input matInput placeholder="Terms" formControlName="price_Terms"
                             (keypress)="vadations.alphabetsWithSpaces($event)" (keyup)="vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
-                                Please Enter price Terms
+                                Please Enter Price Terms
                             </mat-error>
                         </mat-form-field>
                        
@@ -144,9 +144,6 @@
                             <button type="submit" (click)="onFillterSubmit()"> Apply </button>
                         </ng-container>                        
                     </form>
-                    <!-- <div class="col-2">
-                        <button type="submit" (click)="onFillterSubmit()"> Apply </button>
-                    </div> -->
                 </div>
             </div>
             <div class="card-body">
