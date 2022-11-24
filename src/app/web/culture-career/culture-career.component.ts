@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
+import { Lightbox } from '@ngx-gallery/lightbox';
+import { ApiService } from 'src/app/core/services/api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
   selector: 'app-culture-career',
@@ -9,31 +13,57 @@ import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '
 export class CultureCareerComponent implements OnInit {
 
   items!: GalleryItem[];
+  imageArray = new Array();
 
-  constructor(public gallery: Gallery) {
-  }
+  constructor(
+    private _errorService: ErrorHandlerService,
+    private api: ApiService,
+    public gallery: Gallery,
+    public _commonMethodService: CommonMethodService,
+    public lightbox: Lightbox,) { }
 
   ngOnInit() {
-    // 1. Create gallery items
-    this.items = data.map(item =>
-      new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
-    );
+    this.getImageData();
 
-    // Load items into the lightbox
-    this.basicLightboxExample();
+  }
 
-    // Load item into different lightbox instance
-    // With custom gallery config
-    this.withCustomGalleryConfig();
+
+
+  getImageData() {
+    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllImages', false, false, false, 'whizhackService');
+    this.api.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode === '200') {
+          let data:any = [];
+          data = res.responseData;
+          data.find((ele: any) => {
+            let flag = ele.imagepath.includes(',');
+            if (flag) {
+              let splitArray = ele.imagepath.split(',');
+              splitArray.map((res: any) =>  this.imageArray.push(res))
+            } else {
+              this.imageArray.push(ele.imagepath);
+            }
+          })
+
+          this.items =  this.imageArray.map(item =>   new ImageItem({ src: item, thumb: item }) );
+          this.basicLightboxExample();
+
+        } else {
+          this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
+        }
+      }),
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
   }
 
   basicLightboxExample() {
     this.gallery.ref().load(this.items);
+    this.withCustomGalleryConfig();
   }
 
-  /**
-   * Use custom gallery config with the lightbox
-   */
   withCustomGalleryConfig() {
 
     // 2. Get a lightbox gallery ref
@@ -48,23 +78,7 @@ export class CultureCareerComponent implements OnInit {
     // 3. Load the items into the lightbox
     lightboxGalleryRef.load(this.items);
   }
+
+
 }
 
-const data = [
-  {
-    srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-    previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-    previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-    previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-    previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg'
-  }
-];

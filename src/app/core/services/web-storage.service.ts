@@ -9,7 +9,7 @@ export class WebStorageService {
 
   checkUserIsLoggedIn() { // check user isLoggedIn or not
     let sessionData: any = sessionStorage.getItem('loggedIn');
-    sessionData == null || sessionData == '' ? localStorage.clear() : '';
+    // !sessionData ? localStorage.clear() : '';
     if (localStorage.getItem('loggedInData') && sessionData == 'true') return true;
     else return false;
   }
@@ -21,23 +21,23 @@ export class WebStorageService {
     }
   }
 
-  getUserId(){
-    let data =this.getLoggedInLocalstorageData();
+  getUserId() {
+    let data = this.getLoggedInLocalstorageData();
     return data.responseData.id
   }
 
-  getUserName(){
+  getUserName() {
     let userName = this.getLoggedInLocalstorageData().responseData?.userName;
     return userName;
   }
 
   createdByProps(): any {
     return {
-        "createdBy": this.getUserId() || 0,
-        "modifiedBy": this.getUserId() || 0,
-        "createdDate": new Date(),
-        "modifiedDate": new Date(),
-        "isDeleted": false
+      "createdBy": this.getUserId() || 0,
+      "modifiedBy": this.getUserId() || 0,
+      "createdDate": new Date(),
+      "modifiedDate": new Date(),
+      "isDeleted": false
     }
-}
+  }
 }
