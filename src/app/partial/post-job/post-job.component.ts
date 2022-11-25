@@ -21,10 +21,7 @@ import { PostNewJobComponent } from './post-new-job/post-new-job.component';
 })
 
 export class PostJobComponent implements OnInit {
-
-  postNewJobFrm!: FormGroup;
-  fillterForm!: FormGroup;
-  displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting', 'date_of_Application', 'publish', 'actions'];
+ displayedColumns: string[] = ['srNo', 'job_Title', 'job_Location', 'date_of_Posting', 'date_of_Application', 'publish', 'actions'];
   dataSource: any;
   editFlag: boolean = false;
   buttonValue: string = 'Submit';
@@ -32,44 +29,12 @@ export class PostJobComponent implements OnInit {
   currentPage: number = 1;
   totalCount: any;
   @ViewChild(MatSort) sort!: MatSort;
-  editorRoles!: Editor;
-  editorExperience!: Editor;
-  editorQualification!: Editor;
-  editorSkills!: Editor;
-  
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '10rem',
-    minHeight: '5rem',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    toolbarHiddenButtons: [
-      [ 'fontName', 'heading', 'fontSize','subscript','link','superscript','justifyLeft',
-      'justifyCenter',
-      'justifyRight',
-      'justifyFull',
-      'indent',
-      'outdent','heading',
-      'fontName','customClasses',
-      'link',
-      'unlink',
-      'insertImage',
-      'insertVideo',
-      'insertHorizontalRule','textColor',
-      'backgroundColor',
-    'removeFormat',
-  'toggleEditorMode']
-    ],
-  };
-  
   @ViewChild('formDirective')
   private formDirective!: NgForm;
   min = new Date();
   submited:boolean = false;
 
   constructor(public dialog: MatDialog,
-    private snackbar: MatSnackBar,
     private service: ApiService,
     private error: ErrorHandlerService,
     public validation: FormValidationService,
@@ -77,42 +42,15 @@ export class PostJobComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.formData();
-    // this. fillterFormData();
-    this.bindTable();
-    // this.editorRoles = new Editor();
-    // this.editorExperience = new Editor();
-    // this.editorQualification = new Editor();
-    // this.editorSkills = new Editor();
+   this.bindTable();
   }
-
-  // ----------------------------Start Form Field Here-------------------------------
-  // formData() {
-  //   this.postNewJobFrm = this.fb.group({
-  //     id: 0,
-  //     job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-  //     job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-  //     date_of_Posting: [''],
-  //     date_of_Application: ['', Validators.required],
-  //     job_Description: ['', Validators.required],
-  //     roles_and_Responsibility: ['', Validators.required],
-  //     qualification: ['', Validators.required],
-  //     experience: ['', Validators.required],
-  //     skills_Required: ['', Validators.required],
-  //     publish: false
-  //   });
-  // }
-  // ----------------------------End Form Field Here-------------------------------
-
-  // get f() { return this.postNewJobFrm.controls }
-
+  
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
     this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?pageno='+ this.currentPage+'&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
-      // whizhack_cms/postjobs/GetAllPostJobs?pageno=1&pagesize=10
-      next: (res: any) => {
+    next: (res: any) => {
         if (res.statusCode == '200') {
           this.ngxSpinner.hide()
           this.dataSource = new MatTableDataSource(res.responseData.responseData1);
@@ -146,9 +84,7 @@ export class PostJobComponent implements OnInit {
   }
   //----------------------------view logic End Here------------------------
 
-  
-
-  //---------------------------------------------------------------------------------
+  //----------------------------Publish Button Logic start Here--------------
   onClickToggle(element: any) {
     let dialoObj = {
       header: element.publish ? 'isPublish' : 'Publish',
@@ -186,8 +122,9 @@ export class PostJobComponent implements OnInit {
       }
     });
   }
+ //----------------------------Publish Button Logic End Here--------------
 
-  //---------------------------Start Delete Logic Here---------------------------------------
+//---------------------------Start Delete Logic Here--------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
       title: 'Do you want to delete the selected course ?',
@@ -223,75 +160,9 @@ export class PostJobComponent implements OnInit {
     });
   }
   // ----------------------------End Delete Logic Here---------------------------
-  // ----------------------------Start Delete Logic Here-------------------------
-  onDelete(data: any) {
-    let obj = {
-      id: data.jobpostId,
-      modifiedBy: 0
-    }
-    this.service.setHttp('delete', 'whizhack_cms/postjobs/Delete', false, obj, false, 'whizhackService');
-    this.service.getHttp().subscribe({
-      next: (res: any) => {
-        if (res.statusCode == '200') {
-          this.snackbar.open(res.statusMessage, 'ok');
-          this.bindTable();
-        }
-      },
-      error: (error: any) => {
-        console.log("Error", error);
-        this.error.handelError(error.statusCode);
-      }
-    })
 
-  }
-  // ----------------------------End Delete Logic Here-------------------------
-
-  // ----------------------------Start Submit Logic Here-------------------------
-  // onSubmit() {
-  //   this.submited = true;
-  //   if (!this.postNewJobFrm.valid) {
-  //     return;
-  //   } else {
-  //   let data = this.postNewJobFrm.value;
-  //     data.publish = false;
-  //     data.date_of_Posting = new Date();
-  //     this.editFlag ? '' : data.id = 0;
-  //     let url
-  //     this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
-
-  //     this.service.setHttp(this.editFlag ? 'put' : 'post', url, false, data, false, 'whizhackService');
-  //     this.service.getHttp().subscribe({
-  //       next: ((res: any) => {
-  //         if (res.statusCode === '200') {
-  //          this.snackbar.open(res.statusMessage, 'ok', {
-  //             duration: 2000,
-  //             verticalPosition: 'top',
-  //             horizontalPosition: 'right',
-  //           })
-  //           this.bindTable();
-  //           this.clearForm();
-  //           this.buttonValue = 'Submit';
-  //         }
-  //       }),
-  //       error: (error: any) => {
-  //         console.log(error);
-  //       }
-  //     })
-  //   }
-  // }
-
-
-  // openPostJobDialog() {
-  //   const dialogRef = this.dialog.open(PostNewJobComponent, {
-  //     width: '90vw',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log(`Dialog result: ${result}`);
-  //   });
-  // }
-
-  openPostJobDialog(obj?: any) {
+ //-------------------------Add Button Dialog Box start---------------------------
+ openPostJobDialog(obj?: any) {
     const dialogRef = this.dialog.open(PostNewJobComponent, {
       width: '90vw',
       height: '80vw',
@@ -299,10 +170,10 @@ export class PostJobComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      result == 'Yes' ? this.bindTable() : '';//when we click on * button but not add value then didn't call getTableData()
+      result == 'Yes' ? this.bindTable() : '';
     });
   }
-
+//-------------------------Add Button Dialog Box End-----------------------------
 
   //------------------------------------Pagination Logic Start------------------------
   paginationEvent(event: any) {
