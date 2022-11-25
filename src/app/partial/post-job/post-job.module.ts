@@ -8,10 +8,12 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { PostNewJobComponent } from './post-new-job/post-new-job.component';
 @NgModule({
   declarations: [
     PostJobComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
+    PostNewJobComponent
   ],
   imports: [
     CommonModule,

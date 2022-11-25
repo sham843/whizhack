@@ -314,3 +314,8 @@ a.text-main:hover{
 .highlightedRow td{
   background: #000 !important;
 }
+
+/* ******** my css ****** */
+.fixed-top {
+  background-color: #000 !important;
+}

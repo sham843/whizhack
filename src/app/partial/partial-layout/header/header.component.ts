@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChangePasswordComponent } from 'src/app/dialogs/change-password/change-password.component';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { Router } from '@angular/router';
+import { MyProfileComponent } from 'src/app/dialogs/my-profile/my-profile.component';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,12 @@ export class HeaderComponent implements OnInit {
   openDialog() {
     this.dialog.open(ChangePasswordComponent, {
       width: '350px',
+    });
+  }
+
+  openProfileDialog() {
+    this.dialog.open(MyProfileComponent, {
+      width: '350px',disableClose:true
     });
   }
 
