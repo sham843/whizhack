@@ -7,7 +7,7 @@
           <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Gallery Title</mat-label>
-              <input matInput placeholder="Gallery Title" formControlName="gallery_title"
+              <input matInput placeholder="Enter Gallery Title" formControlName="gallery_title"
                 (keypress)="vs.noFirstSpaceAllow($event)" maxlength="50">
               <mat-error *ngIf="g['gallery_title']?.errors" class="mt-2">
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
@@ -21,7 +21,7 @@
           <div class="mb-3">
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
-              <textarea matInput placeholder="Gallery Description" rows="5" formControlName="gallery_description"
+              <textarea matInput placeholder="Enter Gallery Description" rows="5" formControlName="gallery_description"
                (keypress)="vs.noFirstSpaceAllow($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
@@ -73,7 +73,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <input matInput placeholder="Gallery Title" [formControl]="searchFilter"
+              <input matInput placeholder="Enter Gallery Title" [formControl]="searchFilter"
                 (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
 
               <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
