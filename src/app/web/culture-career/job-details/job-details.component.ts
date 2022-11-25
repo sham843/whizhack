@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
-import { CommonApiService } from 'src/app/core/services/common-api.service';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { ApplyNowComponent } from 'src/app/dialogs/apply-now/apply-now.component';
 
@@ -19,7 +19,7 @@ export class JobDetailsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public commonService: CommonApiService,
+    public commonService: CommonMethodService,
     private error: ErrorHandlerService,
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -41,6 +41,7 @@ export class JobDetailsComponent implements OnInit {
         }
         else {
           this.postJobArray = [];
+          this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
         }
       },
       error: (error: any) => {
@@ -58,6 +59,7 @@ export class JobDetailsComponent implements OnInit {
         }
         else {
           this.allPostJobArray = [];
+          this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
         }
       }, error: (error: any) => {
         this.error.handelError(error.statusCode);

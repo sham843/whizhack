@@ -96,6 +96,7 @@ export class CultureCareerComponent implements OnInit {
         }
         else {
           this.postJobArray = [];
+          this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
         }
       },
       error: (error: any) => {
