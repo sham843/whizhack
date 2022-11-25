@@ -27,15 +27,15 @@ export class ForgotPasswordComponent implements OnInit {
   obj = {
     "createdBy": 0,
     "modifiedBy": 0,
-    "createdDate": "2022-11-23T12:46:11.832Z",
-    "modifiedDate": "2022-11-23T12:46:11.832Z",
-    "isDeleted": false,
+    "createdDate": "2022-11-25T13:13:30.972Z",
+    "modifiedDate": "2022-11-25T13:13:30.972Z",
+    "isDeleted": true,
     "id": 0,
-    "mobile": "",
-    "EmailId": "",
-    "otp": "",
+    "mobileNo": "string",
+    "emailId": "",
+    "otp": "string",
     "pageName": "string",
-    "otpExpireDate": "2022-11-23T12:46:11.832Z",
+    "otpExpireDate": "2022-11-25T13:13:30.972Z",
     "isUser": true
   }
   stringOtp: string = '';
@@ -70,7 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
   sendOTP() {
     let objj = this.registerForm.value;
     objj.email.length < 1 ? this.common.matSnackBar('Please Enter Email Id', 1) : '';
-    this.obj.EmailId = objj.mobile
+    this.obj.emailId = objj.email;
     if (this.fc['email'].valid){
       this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
