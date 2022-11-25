@@ -16,13 +16,13 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Job Title</mat-label>
                             <input matInput placeholder="Enter Job Title" formControlName="job_Title" maxlength="50"
-                                (keypress)="validation.noFirstSpaceAllow($event)">
+                            [value]="postNewJobFrm.get('job_Title')?.value | titlecase"  (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2">
                                 <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
                                     Job Title Is Required</div>
-                                <!-- <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
+                                <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
                                         Valid Job Title.
-                                    </div> -->
+                                    </div>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -30,21 +30,21 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Job Location</mat-label>
                             <input matInput placeholder="Enter Job Location" formControlName="job_Location"
-                                (keypress)="validation.noFirstSpaceAllow($event)"><br>
+                            maxlength="50" (keypress)="validation.noFirstSpaceAllow($event)"><br>
                             <mat-error class="mt-2">
                                 <div
                                     *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
                                     Job Location is Required</div>
-                                <!-- <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
+                                <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
                                         Valid Job Location
-                                    </div> -->
+                                    </div>
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Last Date of Application</mat-label>
-                            <input matInput [matDatepicker]="picker1" formControlName="date_of_Application" [min]="min">
+                            <input matInput [matDatepicker]="picker1" formControlName="date_of_Application" [readonly]="true" [min]="min">
                             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                             <mat-error class="mt-2"
@@ -70,7 +70,7 @@
                     <div class="row gy-3 form-container">
                         <div class="col-sm-6">
                             <div class="form-label">Roles & Responsibilities</div>
-                            <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig"
+                            <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig" 
                                 placeholder="Enter  Roles & Responsibilities here...">
                             </angular-editor>
                             <mat-error class="mt-2">
@@ -112,7 +112,7 @@
         </div>
         <div class="card-footer">
             <div class="d-flex align-items-center justify-content-between">
-                <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Cancel</button>
+                <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Clear</button>
                 <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
                     'Update':'Submit'}}</button>
                 <!-- {{buttonValue}} -->
