@@ -27,7 +27,12 @@ export class WebStorageService {
 
   getUserId() {
     let data = this.getLoggedInLocalstorageData();
-    return data.responseData.id
+    return data.responseData[0].id
+  }
+
+  getUserTypeId() {
+    let data = this.getLoggedInLocalstorageData();
+    return data.responseData[0].userTypeId
   }
 
   getUserName() {

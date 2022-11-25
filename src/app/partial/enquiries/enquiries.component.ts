@@ -6,7 +6,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
-// import { Router } from '@angular/router';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -23,33 +23,28 @@ export interface PeriodicElement {
   styleUrls: ['./enquiries.component.css']
 })
 export class EnquiriesComponent implements OnInit {
+
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
   dataSource: any;
-  totalCount:number = 0;
+  totalCount: number = 0;
   currentPage: number = 0;
+  getpage: any;
   @ViewChild(MatSort) sortheader!: MatSort;
-  getpage:any;
 
-
-  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
-  openDialog(ele?: any): void {
-    this.dialog.open(ViewEnquiriesComponent, {
-      data: ele,
-      width: '1024px'
-    });
-  }
+  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService,private snack:CommonMethodService) { }
 
   ngOnInit(): void {
     this.getTableData();
   }
 
-
+//#region-----------------------------------------------Get Table Data Method Starts------------------------------------------- 
   getTableData() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno='+(this.currentPage+1)+'&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.dataSource = new MatTableDataSource(res.responseData.responseData);
+          this.snack.matSnackBar(res.statusMessage,0)
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
         }
@@ -57,9 +52,19 @@ export class EnquiriesComponent implements OnInit {
         this.errorSer.handelError(error.status);
       }
     })
-    console.log('ds',this.dataSource);
   }
+//#endregion--------------------------------------------Get Table Data Method Ends---------------------------------------------
 
+//#region ----------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+  openDialog(ele?: any): void {
+    this.dialog.open(ViewEnquiriesComponent, {
+      data: ele,
+      width: '1024px'
+    });
+  }
+//#endregion--------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+
+//#region-----------------------------------------------Delete Enquiry Data Method---------------------------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
       title: 'Do you want to delete the selected course ?',
@@ -81,6 +86,7 @@ export class EnquiriesComponent implements OnInit {
           next: ((res: any) => {
             if (res.statusCode === '200') {
               this.getTableData();
+              this.snack.matSnackBar(res.statusMessage,0)
             }
           }),
           error: (error: any) => {
@@ -92,12 +98,15 @@ export class EnquiriesComponent implements OnInit {
       }
     });
   }
+//#endregion--------------------------------------------Delete Enquiry Data Method---------------------------------------------
 
+//#region-----------------------------------------------Get Pagenation Method-------------------------------------------------- 
   pageChanged(event?: any) {
     this.currentPage = event.pageIndex;
     this.getTableData();
   }
 }
+//#endregion--------------------------------------------Get Pagenation Method--------------------------------------------------
 
 
 

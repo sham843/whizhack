@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'training/bootcamp', loadChildren: () => import('../../web/training/bootcampt/bootcampt.module').then(m => m.BootcamptModule), data: { breadcrumb: [{ title: 'Bootcamp', active: true }] } },
   { path: 'training/energy-professionals', loadChildren: () => import('../../web/training/energy-professionals/energy-professionals.module').then(m => m.EnergyProfessionalsModule), data: { breadcrumb: [{ title: 'Energy Professionals', active: true }] } },
   { path: 'knowledge-hub', loadChildren: () => import('../../web/knowledge-hub/knowledge-hub.module').then(m => m.KnowledgeHubModule), data: { breadcrumb: [{ title: 'Knowledge Hub', active: true }] } },
+  { path: 'knowledge-hub/:name', loadChildren: () => import('../../web/knowledge-hub/knowledge-hub.module').then(m => m.KnowledgeHubModule), data: { breadcrumb: [{ title: 'Knowledge Hub', active: true }] } },
   { path: 'blog-details', loadChildren: () => import('../../web/blog-details/blog-details.module').then(m => m.BlogDetailsModule), data: { breadcrumb: [{ title: 'Blog Details', active: true }] }  },
   { path: 'blog-details/:id', loadChildren: () => import('../../web/blog-details/blog-details.module').then(m => m.BlogDetailsModule), data: { breadcrumb: [{ title: 'Blog Details', active: true }] }  },
   { path: 'contact-us', loadChildren: () => import('../../web/contact-us/contact-us.module').then(m => m.ContactUsModule), data: { breadcrumb: [{ title: 'Contact Us', active: true }] } },
