@@ -255,7 +255,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
       if (!this.imgSrc) {
-        this.comMethods.matSnackBar('Please Upload Image', 1)
+        this.comMethods.matSnackBar('Please Upload Course Image', 1)
       }
       return;
     }
@@ -264,10 +264,10 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         ...this.webStrorage.createdByProps(),
         ... this.courseManageForm.value
       }
-      submitObj.exclusive_offer = this.offer ? 1 : 0
-
+      submitObj.exclusive_offer = this.offer ? 1 : 0;
+      submitObj.actual_price  =  submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
       let url = this.editFlag ? 'whizhack_cms/course/Update' : 'whizhack_cms/course/Insert'
-      submitObj.actual_price = submitObj.actual_price == '' ? 0 :submitObj.actual_price;
+
       this.api.setHttp(this.editFlag ? 'put' : 'post', url, false, submitObj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: ((res: any) => {
