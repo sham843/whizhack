@@ -21,7 +21,7 @@
           <div class="mb-3">
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
-              <textarea matInput placeholder="Enter Gallery Description" rows="5" formControlName="gallery_description"
+              <textarea matInput placeholder="Enter Gallery Description" rows="5" formControlName="gallery_description" rows="10"
                (keypress)="vs.noFirstSpaceAllow($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
