@@ -44,7 +44,6 @@ export class EnquiriesComponent implements OnInit {
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.dataSource = new MatTableDataSource(res.responseData.responseData);
-          this.snack.matSnackBar(res.statusMessage,0)
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
         }

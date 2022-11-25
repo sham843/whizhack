@@ -45,7 +45,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   defaultForm() {
     this.registerForm = this.fb.group({
-      "mobile": ["",[Validators.required,Validators.pattern(this.validations.valMobileNo)]],
+      "email": ["",[Validators.required,Validators.pattern(this.validations.valEmailId)]],
       "digitOne": ["",Validators.required],
       "digitTwo": ["",Validators.required],
       "digitThree": ["",Validators.required],
@@ -65,7 +65,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendOTP() {
     let objj = this.registerForm.value;
-    this.obj.mobileNo = objj.mobile;
+    objj.mobile.length < 1 ? this.common.matSnackBar('Please Enter Mobile Number',1) : '';
+
+    this.obj.mobileNo = objj.email;
+    if(this.fc['mobile'].valid)
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
@@ -125,7 +128,7 @@ export class ForgotPasswordComponent implements OnInit {
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
     obj.otp = this.stringOtp;
-
+    obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('Password did not match',1):''
     if (obj.passwordNew == obj.retypePassword) {
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + this.userName + '&Password=' + obj.passwordNew + '&NewPassword=' + obj.retypePassword + '&MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
