@@ -6,7 +6,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
-// import { Router } from '@angular/router';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -31,7 +31,7 @@ export class EnquiriesComponent implements OnInit {
   getpage: any;
   @ViewChild(MatSort) sortheader!: MatSort;
 
-  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
+  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService,private snack:CommonMethodService) { }
 
   ngOnInit(): void {
     this.getTableData();
@@ -44,6 +44,7 @@ export class EnquiriesComponent implements OnInit {
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.dataSource = new MatTableDataSource(res.responseData.responseData);
+          this.snack.matSnackBar(res.statusMessage,0)
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
         }
@@ -85,6 +86,7 @@ export class EnquiriesComponent implements OnInit {
           next: ((res: any) => {
             if (res.statusCode === '200') {
               this.getTableData();
+              this.snack.matSnackBar(res.statusMessage,0)
             }
           }),
           error: (error: any) => {
