@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -12,8 +12,9 @@ import { CommonMethodService } from 'src/app/core/services/common-method.service
   styleUrls: ['./register-now.component.css']
 })
 export class RegisterNowComponent implements OnInit {
+  @ViewChild('formDirective')
+  private formDirective!: NgForm;
   registerForm!: FormGroup | any;
-
   constructor(
     public dialogRef: MatDialogRef<RegisterNowComponent>,@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -64,4 +65,8 @@ export class RegisterNowComponent implements OnInit {
     }
   }
 //#endregion-------------------------------------------------Submit Form Data Method Ends-----------------------------------------------
+clearForm(){
+  this.getFormData();
+  this.formDirective && this.formDirective.resetForm();
+}
 }
