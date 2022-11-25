@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -22,7 +23,8 @@ export class MyProfileComponent implements OnInit {
     private error: ErrorHandlerService,
     public validation: FormValidationService,
     private commonService: CommonMethodService,
-    private webStorageService: WebStorageService
+    private webStorageService: WebStorageService,
+    public dialogRef: MatDialogRef<MyProfileComponent>
   ) { }
 
   ngOnInit(): void {
@@ -80,12 +82,12 @@ export class MyProfileComponent implements OnInit {
         "password": ""
       }
 
-      this.apiService.setHttp('put', 'whizhack_cms/login/Update', false, JSON.stringify(obj), false, 'whizhackService');
+      this.apiService.setHttp('put', 'whizhack_cms/login/Update', false, obj, false, 'whizhackService');
       this.apiService.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
             this.commonService.matSnackBar(res.statusMessage, 0);
-            // this.clearForm();
+            this.dialogRef.close();
           } else {
             this.commonService.matSnackBar(res.statusMessage, 1);
           }

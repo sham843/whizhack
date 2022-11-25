@@ -30,8 +30,7 @@ export class ApplyNowComponent implements OnInit {
     private error: ErrorHandlerService,
     public validation: FormValidationService,
     private commonService:CommonMethodService,
-    private fileUploadService:FileUploadService
-    // private ngxSpinner: NgxSpinnerService,
+    private fileUploadService:FileUploadService,
   ) { }
   
   ngOnInit(): void {
@@ -55,32 +54,32 @@ export class ApplyNowComponent implements OnInit {
       this.resumeSubmit = true;
       if (!this.postApplayForm.valid) {
         return;
+      } else if (this.commonService.checkDataType(this.resumePath) == false) {
+        return;
       } else {
       let data = this.postApplayForm.value;
 
-      let obj = {
+      let obj =  {
         "createdBy": 1,
         "modifiedBy": 1,
         "createdDate": new Date(),
         "modifiedDate": new Date(),
-        "isDeleted": true,
+        "isDeleted": false,
         "id": 0,
-        "jobTitle": data?.jobTitle,
+        "jobPostId": this.resData?.id,
         "firstName": data.firstName,
         "lastName": data.lastName,
-        "fullName": data,
         "emailId": data.emailId,
-        "contactNo": data.contactNo,
-        "gender": 0,
-        "resumePath": this.resumePath,
-        "isApproved": 0
+        "mobileNo": data.contactNo,
+        "resume": this.resumePath,
       }
 
-        this.service.setHttp('post', 'url', false, JSON.stringify(obj), false, 'whizhackService');
+        this.service.setHttp('post', 'whizhack_cms/jobs/Insertjobs', false, obj, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
               this.commonService.matSnackBar(res.statusMessage, 0);
+              this.dialogRef.close();
               this.clearForm();
             }else{
               this.commonService.matSnackBar(res.statusMessage, 1);
@@ -96,7 +95,7 @@ export class ApplyNowComponent implements OnInit {
     clearForm() {
       this.formDirective && this.formDirective.resetForm();
       this.defaultForm();
-      this.fileInput.nativeElement.value = '';
+      this.removeDocument();
       this.resumeSubmit = false;
     }
 

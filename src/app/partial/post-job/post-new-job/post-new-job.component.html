@@ -7,7 +7,7 @@
     </button>
 </div>
 <div class="dialog-body form-container">
-    <!-- <form [formGroup]="postNewJobFrm" #formDirective="ngForm">
+    <form [formGroup]="postNewJobFrm" #formDirective="ngForm">
         <div class="card-header">Post New Job</div>
         <div class="card-body">
             <div class="row">
@@ -19,10 +19,10 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2">
                                 <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
-                                    Job Title is Required</div>
-                                <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
-                                    Valid Job Title.
-                                </div>
+                                    Job Title Is Required</div>
+                                <!-- <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
+                                        Valid Job Title.
+                                    </div> -->
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -32,24 +32,24 @@
                             <input matInput placeholder="Enter Job Location" formControlName="job_Location"
                                 (keypress)="validation.noFirstSpaceAllow($event)"><br>
                             <mat-error class="mt-2">
-                                <div *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
+                                <div
+                                    *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
                                     Job Location is Required</div>
-                                <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
-                                    Valid Job Location
-                                </div>
+                                <!-- <div *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">Please enter
+                                        Valid Job Location
+                                    </div> -->
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Last Date of Application</mat-label>
-                            <input matInput [matDatepicker]="picker1" formControlName="date_of_Application"
-                                [min]="min">
+                            <input matInput [matDatepicker]="picker1" formControlName="date_of_Application" [min]="min">
                             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                             <mat-error class="mt-2"
                                 *ngIf="f['date_of_Application'].hasError('required') || f['date_of_Application'].hasError('touched')">
-                                Last Date of Application is Required
+                                Last Date of Application Is Required
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -61,7 +61,7 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-2"
                                 *ngIf="f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')">
-                                Job Description is Required
+                                Description Is Required
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -70,39 +70,41 @@
                     <div class="row gy-3 form-container">
                         <div class="col-sm-6">
                             <div class="form-label">Roles & Responsibilities</div>
-                            <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig" placeholder="Enter  Roles & Responsibilities here...">
+                            <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig"
+                                placeholder="Enter  Roles & Responsibilities here...">
                             </angular-editor>
                             <mat-error class="mt-2">
                                 <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
-                                    Roles & Responsibilities is Required</div>
+                                    Roles & Responsibility is Required</div>
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-label">Experience</div>
-                            <angular-editor formControlName="experience" [config]="editorConfig" placeholder="Enter Experience here...">
+                            <angular-editor formControlName="experience" [config]="editorConfig"
+                                placeholder="Enter Experience here...">
                             </angular-editor>
-                            <mat-error class="mt-2"
-                                *ngIf="f['experience'].hasError('required') && submited == true">
+                            <mat-error class="mt-2" *ngIf="f['experience'].hasError('required') && submited == true">
                                 Experience Is Required
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-label">Qualification</div>
-                            <angular-editor formControlName="qualification" [config]="editorConfig" placeholder="Enter Qualifications here...">
+                            <angular-editor formControlName="qualification" [config]="editorConfig"
+                                placeholder="Enter Qualifications here...">
                             </angular-editor>
-                            <mat-error class="mt-2"
-                                *ngIf="f['qualification'].hasError('required') && submited == true">
+                            <mat-error class="mt-2" *ngIf="f['qualification'].hasError('required') && submited == true">
                                 Qualification Is Required
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-label">Skills Required</div>
-                            <angular-editor formControlName="skills_Required" [config]="editorConfig" placeholder="Enter Skills here...">
+                            <angular-editor formControlName="skills_Required" [config]="editorConfig"
+                                placeholder="Enter Skills here...">
                             </angular-editor>
                             <mat-error class="mt-2"
-                            *ngIf="f['skills_Required'].hasError('required') && submited == true">
-                            Skills Is Required
-                        </mat-error>
+                                *ngIf="f['skills_Required'].hasError('required') && submited == true">
+                                Skills Is Required
+                            </mat-error>
                         </div>
                     </div>
                 </div>
@@ -110,16 +112,12 @@
         </div>
         <div class="card-footer">
             <div class="d-flex align-items-center justify-content-between">
-                <button mat-stroked-button class="btn-main-outline" type="button"
-                    (click)="clearForm()">Cancel</button>
-                <button mat-stroked-button class="btn-main" type="submit"
-                    (click)="onSubmit()">{{buttonValue}}</button>
+                <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Cancel</button>
+                <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
+                    'Update':'Submit'}}</button>
+                <!-- {{buttonValue}} -->
             </div>
         </div>
-    </form> -->
+    </form>
 </div>
 
-<div class="d-flex align-items-center justify-content-between p-3">
-    <button type="button" mat-button class="btn-main-outline">Cancel</button>
-    <button type="submit" mat-button class="btn-main">Submit Job</button>
-</div>
