@@ -62,7 +62,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Job Description</mat-label>
-                            <textarea matInput placeholder="Enter Job Description" rows="15" maxlength="500"
+                            <textarea matInput placeholder="Enter Job Description" rows="15" maxlength="50"
                                 formControlName="job_Description"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-2"
@@ -77,7 +77,7 @@
                         <div class="col-sm-6">
                             <div class="form-label">Roles & Responsibilities</div>
                             <angular-editor formControlName="roles_and_Responsibility" [config]="editorConfig"
-                                placeholder="Enter  Roles & Responsibilities here...">
+                                placeholder="Enter  Roles & Responsibilities here..." maxlength="500">
                             </angular-editor>
                             <mat-error class="mt-2">
                                 <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
@@ -97,7 +97,7 @@
                         <div class="col-sm-6">
                             <div class="form-label">Qualification</div>
                             <angular-editor formControlName="qualification" [config]="editorConfig"
-                                placeholder="Enter Qualifications here...">
+                                placeholder="Enter Qualifications here..." maxlength="50">
                             </angular-editor>
                             <mat-error class="mt-2"
                                 *ngIf="f['qualification'].hasError('required') && submited == true">
@@ -107,7 +107,7 @@
                         <div class="col-sm-6">
                             <div class="form-label">Skills Required</div>
                             <angular-editor formControlName="skills_Required" [config]="editorConfig"
-                                placeholder="Enter Skills here...">
+                                placeholder="Enter Skills here..." maxlength="50">
                             </angular-editor>
                             <mat-error class="mt-2"
                                 *ngIf="f['skills_Required'].hasError('required') && submited == true">
@@ -126,5 +126,4 @@
         (click)="clearForm()">Clear</button>
     <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
         'Update':'Submit'}}</button>
-    <!-- {{buttonValue}} -->
-</div>
+   </div>
