@@ -7,7 +7,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Title</mat-label>
-                            <input matInput placeholder="Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
+                            <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
                             <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
                                 <span *ngIf="f['article_Title']?.hasError('required')"> Article title is required</span>
                             </mat-error>
@@ -16,7 +16,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Source</mat-label>
-                            <input matInput placeholder="Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
+                            <input matInput placeholder="Enter Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
                             <mat-error *ngIf="f['source']?.errors" class="mt-2">
                                 <span *ngIf="f['source']?.hasError('required')"> Article source is required</span>
                             </mat-error>
@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article URL</mat-label>
-                            <input matInput placeholder="Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)">
+                            <input matInput placeholder="Enter Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)">
                             <mat-error *ngIf="f['url']?.errors" class="mt-2">
                                 <span *ngIf="f['url']?.hasError('required')"> Article url is required</span>
                                 <span *ngIf="f['url']?.hasError('pattern')">Please enter valid Article url</span>

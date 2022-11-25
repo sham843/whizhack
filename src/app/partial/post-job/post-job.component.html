@@ -13,7 +13,7 @@
                                         (keypress)="validation.noFirstSpaceAllow($event)">
                                     <mat-error class="mt-2">
                                         <div *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
-                                            Job Title Is Required</div>
+                                            Job Title is Required</div>
                                         <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">Please enter
                                             Valid Job Title.
                                         </div>
@@ -71,7 +71,7 @@
                                         (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                     <mat-error class="mt-2"
                                         *ngIf="f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')">
-                                        Description Is Required
+                                        Job Description is Required
                                     </mat-error>
                                 </mat-form-field>
                             </div>
