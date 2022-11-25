@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 
 @Component({
@@ -13,11 +14,24 @@ export class KnowledgeHubComponent implements OnInit {
   blogPostArray = new Array();
   whitePaperArray = new Array();
   caseStudyArray = new Array();
-  constructor(private apiService: ApiService, private spinner: NgxSpinnerService, private router: Router) { }
+  scrollId: string='';
+  paramsSubscription !: Subscription;
+  constructor(private apiService: ApiService, private spinner: NgxSpinnerService, private router: Router, private activated: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getBlog();
+    this.paramsSubscription=this.activated.params.subscribe((ele: any) => {
+      this.scrollId = ele.name;
+    })
+   setTimeout(() => {
+    this.scrollId? document.getElementById(this.scrollId)?.scrollIntoView({    
+      behavior: "smooth",
+      block: "start",
+      inline: "start"
+    }):'';
+   }, 1000);
   }
+
   getBlog() {
     this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetAllBlog", false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe({
@@ -34,7 +48,10 @@ export class KnowledgeHubComponent implements OnInit {
       },
     })
   }
-  blogDetails(blogId:number) {
-    this.router.navigate(['../blog-details',blogId]);
+  blogDetails(blogId: number) {
+    this.router.navigate(['../blog-details', blogId]);
+  }
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 }
