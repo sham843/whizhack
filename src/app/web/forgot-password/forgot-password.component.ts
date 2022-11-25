@@ -65,7 +65,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendOTP() {
     let objj = this.registerForm.value;
+    objj.mobile.length < 1 ? this.common.matSnackBar('Please Enter Mobile Number',1) : '';
+
     this.obj.mobileNo = objj.mobile;
+    if(this.fc['mobile'].valid)
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
