@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
 
   openProfileDialog() {
     this.dialog.open(MyProfileComponent, {
-      width: '350px',
+      width: '350px',disableClose:true
     });
   }
 
