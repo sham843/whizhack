@@ -23,6 +23,7 @@ export interface PeriodicElement {
   styleUrls: ['./enquiries.component.css']
 })
 export class EnquiriesComponent implements OnInit {
+
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
   dataSource: any;
   totalCount: number = 0;
@@ -31,18 +32,12 @@ export class EnquiriesComponent implements OnInit {
   @ViewChild(MatSort) sortheader!: MatSort;
 
   constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
-  openDialog(ele?: any): void {
-    this.dialog.open(ViewEnquiriesComponent, {
-      data: ele,
-      width: '1024px'
-    });
-  }
 
   ngOnInit(): void {
     this.getTableData();
   }
 
-
+//#region-----------------------------------------------Get Table Data Method Starts------------------------------------------- 
   getTableData() {
     this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
@@ -57,7 +52,18 @@ export class EnquiriesComponent implements OnInit {
       }
     })
   }
+//#endregion--------------------------------------------Get Table Data Method Ends---------------------------------------------
 
+//#region ----------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+  openDialog(ele?: any): void {
+    this.dialog.open(ViewEnquiriesComponent, {
+      data: ele,
+      width: '1024px'
+    });
+  }
+//#endregion--------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+
+//#region-----------------------------------------------Delete Enquiry Data Method---------------------------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
       title: 'Do you want to delete the selected course ?',
@@ -90,12 +96,15 @@ export class EnquiriesComponent implements OnInit {
       }
     });
   }
+//#endregion--------------------------------------------Delete Enquiry Data Method---------------------------------------------
 
+//#region-----------------------------------------------Get Pagenation Method-------------------------------------------------- 
   pageChanged(event?: any) {
     this.currentPage = event.pageIndex;
     this.getTableData();
   }
 }
+//#endregion--------------------------------------------Get Pagenation Method--------------------------------------------------
 
 
 
