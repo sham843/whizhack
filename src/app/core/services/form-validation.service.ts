@@ -62,6 +62,10 @@ export class FormValidationService {
     return maskSeperator.test(event.key);
   }
 
+  onlydigitsWithDec(event: any) {
+    const maskSeperator = new RegExp('^([0-9.])', 'g');
+    return maskSeperator.test(event.key);
+  }
   onlyDigitsExcludeZeroAtStart(event: any) {
     const maskSeperator = new RegExp('^[1-9][0-9]*$', 'g');
     if (event.currentTarget.value != "" && event.currentTarget.value.length > 0 && event.key == '0') {

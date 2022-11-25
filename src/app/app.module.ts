@@ -8,12 +8,14 @@ import { RegisterNowComponent } from './dialogs/register-now/register-now.compon
 import { MaterialModule } from './shared/angularMaterialModule/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { ConfirmationModalComponent } from './dialogs/confirmation-modal/confirmation-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
 import { ApplyNowComponent } from './dialogs/apply-now/apply-now.component';
+import { MyProfileComponent } from './dialogs/my-profile/my-profile.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     RegisterNowComponent,
     ConfirmationModalComponent,
     ChangePasswordComponent,
-    ApplyNowComponent
+    ApplyNowComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +35,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ReactiveFormsModule,
     NgxSpinnerModule,
     AngularEditorModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

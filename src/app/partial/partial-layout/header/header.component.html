@@ -27,12 +27,12 @@
                     <i class="fa-regular fa-bell"></i>
                 </button> -->
                 <div class="dropdown">
-                    <button class="btn shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    <button class="btn shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" matTooltip="Manage Profile"
                         aria-expanded="false">
                         <i class="fa-regular fa-user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" routerLink="#">My Profile</a></li>
+                        <li><a class="dropdown-item" (click)="openProfileDialog()">My Profile</a></li>
                         <li><a class="dropdown-item" (click)="openDialog()">Change Password</a></li>
                         <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
                     </ul>

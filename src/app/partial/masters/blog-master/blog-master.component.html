@@ -17,7 +17,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Title</mat-label>
-                            <input maxlength="100" matInput placeholder="Blog Title" formControlName="title"
+                            <input maxlength="100" matInput placeholder="Enter Blog Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please enter blog title
@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
-                            <textarea maxlength="1000" matInput placeholder="Blog Description" rows="5"
+                            <textarea maxlength="1000" matInput placeholder="Enter Blog Description" rows="5"
                                 formControlName="description"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
@@ -42,7 +42,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
-                            <mat-select formControlName="blog_categary_Id">
+                            <mat-select formControlName="Enter blog_categary_Id">
                                 <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
                                     categories.categoryName }}</mat-option>
                             </mat-select>
@@ -53,7 +53,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Author</mat-label>
-                            <input maxlength="50" matInput placeholder="Blog Author" formControlName="author"
+                            <input maxlength="50" matInput placeholder="Enter Blog Author" formControlName="author"
                                 (keypress)="validation.alphabetsWithSpaces($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please enter author name
@@ -94,7 +94,7 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="outline" class="w-100">
                                             <mat-label>Blog Sub-Title</mat-label>
-                                            <input maxlength="100" matInput placeholder="Blog Sub-Title"
+                                            <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)">
@@ -107,7 +107,7 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="1000" matInput placeholder="Blog Sub-Description"
+                                            <textarea maxlength="1000" matInput placeholder="Enter Blog Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
