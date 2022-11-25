@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Editor } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormGroup,NgForm } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgForm } from '@angular/forms';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { MatSort } from '@angular/material/sort';
@@ -11,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { PostNewJobComponent } from './post-new-job/post-new-job.component';
 
 @Component({
@@ -44,7 +41,7 @@ export class PostJobComponent implements OnInit {
   ngOnInit(): void {
    this.bindTable();
   }
-  
+
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
     this.ngxSpinner.show()
