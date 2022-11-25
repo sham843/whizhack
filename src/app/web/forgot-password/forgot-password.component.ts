@@ -18,6 +18,8 @@ export class ForgotPasswordComponent implements OnInit {
   registerForm!: FormGroup;
   displayFields: boolean = false;
   displayFields1: boolean = false;
+  displayFields2: boolean = true;
+
   timeLeft: number = 60;
   interval: any;
   obj = {
@@ -56,13 +58,18 @@ export class ForgotPasswordComponent implements OnInit {
 
   get fc(){return this.registerForm.controls};
 
+  clearFormFields(){
+    this.fc['digitOne'].setValue('');this.fc['digitTwo'].setValue('');this.fc['digitThree'].setValue('');
+    this.fc['digitFour'].setValue(''),this.fc['digitFive'].setValue('')
+  }
+
   sendOTP() {
     let objj = this.registerForm.value;
     this.obj.mobileNo = objj.mobile;
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        res.statusCode == 200  ? this.common.matSnackBar(res.statusMessage, 0) : '';
+        res.statusCode == 200  ? (this.common.matSnackBar(res.statusMessage, 0), this.displayFields2= false ): '';
         res.statusCode == 404 ?  this.common.matSnackBar(res.statusMessage, 1) : '';
         res.statusCode == 200 ? (this.displayFields = true, this.otpStatus = true) : '';
       }
@@ -79,19 +86,19 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 || res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 0) : '';
-          res.statusCode == 200 ? this.displayFields1 = true : false;
+          res.statusCode == 200  ? this.common.matSnackBar(res.statusMessage, 0) : '';
+          res.statusCode == 200 ? (this.displayFields1 = true, this.startTimer(), this.displayFields = false ): false;
+          res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1),this.clearFormFields()) : '';
         }
       })
       this.getUserName();
-      this.startTimer();
     }
   }
   startTimer() {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
-        this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false, this.displayFields = true) : ''
+        this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false) : ''
       } else {
         this.timeLeft = 60;
       }
@@ -99,9 +106,10 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   pauseTimer() {
-    clearInterval(this.interval);
+   clearInterval(this.interval);
+    // clearInterval(this.interval);
   }
-
+  
   getUserName() {
     let obj = this.registerForm.value;
     this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?MobileNo=' + obj.mobile, false, false, false, 'whizhackService');

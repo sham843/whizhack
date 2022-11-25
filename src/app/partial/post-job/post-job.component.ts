@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Editor } from 'ngx-editor';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup,NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -69,7 +69,6 @@ export class PostJobComponent implements OnInit {
   submited:boolean = false;
 
   constructor(public dialog: MatDialog,
-    private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private service: ApiService,
     private error: ErrorHandlerService,
@@ -78,34 +77,34 @@ export class PostJobComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.formData();
+    // this.formData();
     // this. fillterFormData();
     this.bindTable();
-    this.editorRoles = new Editor();
-    this.editorExperience = new Editor();
-    this.editorQualification = new Editor();
-    this.editorSkills = new Editor();
+    // this.editorRoles = new Editor();
+    // this.editorExperience = new Editor();
+    // this.editorQualification = new Editor();
+    // this.editorSkills = new Editor();
   }
 
   // ----------------------------Start Form Field Here-------------------------------
-  formData() {
-    this.postNewJobFrm = this.fb.group({
-      id: 0,
-      job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      date_of_Posting: [''],
-      date_of_Application: ['', Validators.required],
-      job_Description: ['', Validators.required],
-      roles_and_Responsibility: ['', Validators.required],
-      qualification: ['', Validators.required],
-      experience: ['', Validators.required],
-      skills_Required: ['', Validators.required],
-      publish: false
-    });
-  }
+  // formData() {
+  //   this.postNewJobFrm = this.fb.group({
+  //     id: 0,
+  //     job_Title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+  //     job_Location: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+  //     date_of_Posting: [''],
+  //     date_of_Application: ['', Validators.required],
+  //     job_Description: ['', Validators.required],
+  //     roles_and_Responsibility: ['', Validators.required],
+  //     qualification: ['', Validators.required],
+  //     experience: ['', Validators.required],
+  //     skills_Required: ['', Validators.required],
+  //     publish: false
+  //   });
+  // }
   // ----------------------------End Form Field Here-------------------------------
 
-  get f() { return this.postNewJobFrm.controls }
+  // get f() { return this.postNewJobFrm.controls }
 
   //----------------------------Start Bind Table Logic Here--------------------
   bindTable() {
@@ -147,29 +146,7 @@ export class PostJobComponent implements OnInit {
   }
   //----------------------------view logic End Here------------------------
 
-  onEdit(editObj: any) {
-    this.editFlag = true;
-    this.buttonValue = 'Update';
-    let obj1 = editObj;
-    this.postNewJobFrm.patchValue({
-      createdBy: 0,
-      modifiedBy: 0,
-      createdDate: new Date(),
-      modifiedDate: new Date(),
-      isDeleted: true,
-      id: obj1.jobpostId,
-      job_Title: obj1.job_Title,
-      job_Location: obj1.job_Location,
-      // date_of_Posting: obj1.date_of_Posting,
-      date_of_Application: obj1.date_of_Application,
-      job_Description: obj1.job_Description,
-      roles_and_Responsibility: obj1.roles_and_Responsibility,
-      qualification: obj1.qualification,
-      experience: obj1.experience,
-      skills_Required: obj1.skills_Required,
-      publish: true
-    })
-  }
+  
 
   //---------------------------------------------------------------------------------
   onClickToggle(element: any) {
@@ -270,54 +247,66 @@ export class PostJobComponent implements OnInit {
   // ----------------------------End Delete Logic Here-------------------------
 
   // ----------------------------Start Submit Logic Here-------------------------
-  onSubmit() {
-    this.submited = true;
-    if (!this.postNewJobFrm.valid) {
-      return;
-    } else {
-    let data = this.postNewJobFrm.value;
-      data.publish = false;
-      data.date_of_Posting = new Date();
-      this.editFlag ? '' : data.id = 0;
-      let url
-      this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
+  // onSubmit() {
+  //   this.submited = true;
+  //   if (!this.postNewJobFrm.valid) {
+  //     return;
+  //   } else {
+  //   let data = this.postNewJobFrm.value;
+  //     data.publish = false;
+  //     data.date_of_Posting = new Date();
+  //     this.editFlag ? '' : data.id = 0;
+  //     let url
+  //     this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
-      this.service.setHttp(this.editFlag ? 'put' : 'post', url, false, data, false, 'whizhackService');
-      this.service.getHttp().subscribe({
-        next: ((res: any) => {
-          if (res.statusCode === '200') {
-           this.snackbar.open(res.statusMessage, 'ok', {
-              duration: 2000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right',
-            })
-            this.bindTable();
-            this.clearForm();
-            this.buttonValue = 'Submit';
-          }
-        }),
-        error: (error: any) => {
-          console.log(error);
-        }
-      })
-    }
-  }
+  //     this.service.setHttp(this.editFlag ? 'put' : 'post', url, false, data, false, 'whizhackService');
+  //     this.service.getHttp().subscribe({
+  //       next: ((res: any) => {
+  //         if (res.statusCode === '200') {
+  //          this.snackbar.open(res.statusMessage, 'ok', {
+  //             duration: 2000,
+  //             verticalPosition: 'top',
+  //             horizontalPosition: 'right',
+  //           })
+  //           this.bindTable();
+  //           this.clearForm();
+  //           this.buttonValue = 'Submit';
+  //         }
+  //       }),
+  //       error: (error: any) => {
+  //         console.log(error);
+  //       }
+  //     })
+  //   }
+  // }
 
 
-  openPostJobDialog() {
+  // openPostJobDialog() {
+  //   const dialogRef = this.dialog.open(PostNewJobComponent, {
+  //     width: '90vw',
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
+
+  openPostJobDialog(obj?: any) {
     const dialogRef = this.dialog.open(PostNewJobComponent, {
       width: '90vw',
+      height: '80vw',
+      data: obj,
+      disableClose: true
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      result == 'Yes' ? this.bindTable() : '';//when we click on * button but not add value then didn't call getTableData()
     });
   }
 
 
   //------------------------------------Pagination Logic Start------------------------
   paginationEvent(event: any) {
-    this.clearForm();
+    // this.clearForm();
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.bindTable();
