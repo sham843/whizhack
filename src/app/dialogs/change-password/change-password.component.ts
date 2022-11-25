@@ -17,8 +17,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.defaultForm();
-  }
-
+  } 
   defaultForm() {
     this.registerForm = this.fb.group({
       currentPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
@@ -41,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
       this.api.setHttp('get', 'whizhack_cms/login/change-password/'+obj.currentPassword +'?UserId='+id+'&NewPassword=' + obj.newPassword , false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 ? (this.common.matSnackBar(res.responseData, 1)) : '';
+          res.responseData =='Password Changed Successfully...'? (this.common.matSnackBar(res.responseData, 0)) : (this.common.matSnackBar(res.responseData, 1));
         }
       })
     }
