@@ -53,7 +53,7 @@ export class RegisterNowComponent implements OnInit {
       formData.pageName =(this.route.url).split('/')[1];
       console.log('formData.pageName',formData.pageName);
       // formData.courseId = this.data =='Cyber Security Training Program' ? 4 : 5; 
-      formData.courseId = this.data == 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : formData.courseId=this.data == 'Cyber Guru' ? 3 : formData.courseId=this.data == 'Cyber Security Training Program' ? 4 : 5;
+      formData.courseId = this.data //== 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : formData.courseId=this.data == 'Cyber Guru' ? 3 : formData.courseId=this.data == 'Cyber Security Training Program' ? 4 : formData.courseId=this.data =='Cyber Security Training Programm' ;
       console.log('formData.courseId',formData.courseId);
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
       console.log('formData.formData',formData);
