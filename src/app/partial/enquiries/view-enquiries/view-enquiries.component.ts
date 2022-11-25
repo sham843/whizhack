@@ -11,53 +11,53 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 })
 export class ViewEnquiriesComponent implements OnInit {
 
-  constructor(private errorSer:ErrorHandlerService,private service:ApiService,public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private common:CommonMethodService,
-  private http:HttpClient) { }
-  viewData:any
-  deviceDataarray=new Array();
-  deviceIpAddress:any;
-  ipAddress:any;
-  address:any
+  constructor(private errorSer: ErrorHandlerService, private service: ApiService, public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private common: CommonMethodService,
+    private http: HttpClient) { }
+  viewData: any
+  deviceDataarray = new Array();
+  deviceIpAddress: any;
+  ipAddress: any;
+  address: any
 
   ngOnInit(): void {
     this.getDataById();
     this.getDevice();
     this.getdeviceIpAddress();
-    console.log('tdata',this.data);
-    
+    console.log('tdata', this.data);
+
   }
 
-  getDataById(){
-    this.service.setHttp('get', 'whizhack_cms/register/GetById?id='+this.data.registerId, false, false, false, 'whizhackService');
+  getDataById() {
+    this.service.setHttp('get', 'whizhack_cms/register/GetById?id=' + this.data.registerId, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-         this.viewData=res.responseData;
+          this.viewData = res.responseData;
         }
       }), error: (error: any) => {
         this.errorSer.handelError(error.status);
       }
     })
-    
+
   }
 
 
   getDevice() {
-   this.common.getDeviceInfo()
-    this.deviceDataarray=[this.common]
+    this.common.getDeviceInfo()
+    this.deviceDataarray = [this.common]
   }
 
-  getdeviceIpAddress(){
+  getdeviceIpAddress() {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
-    this.deviceIpAddress=res 
-     let arr=JSON.stringify(this.deviceIpAddress)
-     this.address=arr.slice(7,22);
-     console.log('addr', this.address);
-     
-    })   
+      this.deviceIpAddress = res
+      let arr = JSON.stringify(this.deviceIpAddress)
+      this.address = arr.slice(7, 22);
+      console.log('addr', this.address);
+
+    })
   }
 
-  
+
 
 
 
