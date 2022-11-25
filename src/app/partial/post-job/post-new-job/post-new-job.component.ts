@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Editor } from 'ngx-editor';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
@@ -30,32 +29,7 @@ export class PostNewJobComponent implements OnInit {
   editorExperience!: Editor;
   editorQualification!: Editor;
   editorSkills!: Editor;
-
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '10rem',
-    minHeight: '5rem',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    toolbarHiddenButtons: [
-      ['fontName', 'heading', 'fontSize', 'subscript', 'link', 'superscript', 'justifyLeft',
-        'justifyCenter',
-        'justifyRight',
-        'justifyFull',
-        'indent',
-        'outdent', 'heading',
-        'fontName', 'customClasses',
-        'link',
-        'unlink',
-        'insertImage',
-        'insertVideo',
-        'insertHorizontalRule', 'textColor',
-        'backgroundColor',
-        'removeFormat',
-        'toggleEditorMode']
-    ],
-  };
+  editorConfig = this.commonService.editorConfig;
 
   @ViewChild('formDirective')
   private formDirective!: NgForm;
@@ -116,7 +90,7 @@ export class PostNewJobComponent implements OnInit {
         "modifiedDate": new Date(),
         "isDeleted": false,
       }
-      let mainData = { ...obj , ...data };
+      let mainData = { ...obj, ...data };
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
