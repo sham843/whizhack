@@ -25,11 +25,10 @@ export interface PeriodicElement {
 export class EnquiriesComponent implements OnInit {
   displayedColumns: string[] = ['srNo', 'fullName', 'email', 'mobileNo', 'courseId', 'pageName', 'actions'];
   dataSource: any;
-  totalCount:number = 0;
+  totalCount: number = 0;
   currentPage: number = 0;
+  getpage: any;
   @ViewChild(MatSort) sortheader!: MatSort;
-  getpage:any;
-
 
   constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService) { }
   openDialog(ele?: any): void {
@@ -45,7 +44,7 @@ export class EnquiriesComponent implements OnInit {
 
 
   getTableData() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno='+(this.currentPage+1)+'&pagesize=10', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
@@ -57,7 +56,6 @@ export class EnquiriesComponent implements OnInit {
         this.errorSer.handelError(error.status);
       }
     })
-    console.log('ds',this.dataSource);
   }
 
   openDeleteDialog(id: any) {

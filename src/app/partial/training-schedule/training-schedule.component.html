@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
-                            <input matInput placeholder="Course Title" formControlName="course_Title" maxlength="20"
+                            <input matInput placeholder="Enter Course Title" formControlName="course_Title" maxlength="20"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Course Title is Required
@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
-                            <input matInput placeholder="Course Caption" formControlName="course_Caption"
+                            <input matInput placeholder="Enter Course Caption" formControlName="course_Caption"
                                 maxlength="500"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
@@ -41,7 +41,7 @@
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
-                            <input matInput placeholder="Course Duration" formControlName="duration" maxlength="10"
+                            <input matInput placeholder="Enter Course Duration" formControlName="duration" maxlength="10"
                                 (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
                                 Course Duration is Required
@@ -52,7 +52,7 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Course Description</mat-label>
-                            <textarea matInput placeholder="Course Description" rows="4" maxlength="500"
+                            <textarea matInput placeholder="Enter Course Description" rows="4" maxlength="500"
                                 formControlName="course_Description"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
                             <mat-error *ngIf="formControls['course_Description'].hasError('required')">
@@ -87,7 +87,7 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Syllabus Summary" rows="4" maxlength="500"
+                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4" maxlength="500"
                                 formControlName="syllabus_Summary"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
                             <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
@@ -102,7 +102,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
-                            <input matInput placeholder="Price" formControlName="price"
+                            <input matInput placeholder="Enter Price" formControlName="price"
                                 (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Price is Required
@@ -117,7 +117,7 @@
                     <div class="mb-3" *ngIf="offer">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Discount Price</mat-label>
-                            <input matInput placeholder="Actual Price" formControlName="actual_price" maxlength="10"
+                            <input matInput placeholder="Enter Actual Price" formControlName="actual_price" maxlength="10"
                                 (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
@@ -130,7 +130,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
-                            <input matInput placeholder="Terms" formControlName="price_Terms" maxlength="50"
+                            <input matInput placeholder="Enter Terms" formControlName="price_Terms" maxlength="50"
                                 (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required
