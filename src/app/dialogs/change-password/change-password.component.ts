@@ -13,7 +13,7 @@ export class ChangePasswordComponent implements OnInit {
   hide = true;
   registerForm!: FormGroup;
   constructor(private fb: FormBuilder, private api: ApiService, 
-    private validations: FormValidationService, private common : CommonMethodService) { }
+    public validations: FormValidationService, private common : CommonMethodService) { }
 
   ngOnInit(): void {
     this.defaultForm();
@@ -33,16 +33,15 @@ export class ChangePasswordComponent implements OnInit {
     clear.resetForm();
   }
 
-  onSumbit(clear: any) {
+  onSumbit() {
     let obj = this.registerForm.value;
     if (obj.newPassword == obj.retypePassword && this.registerForm.valid && obj.currentPassword != obj.newPassword) {
       let loginObj = JSON.parse(localStorage.getItem('loggedInData') || '');
-      let id = loginObj.responseData[0].id
-      this.api.setHttp('get', 'login/change-password/' + obj.currentPassword + '?UserId=' + id + '&NewPassword=' + obj.newPassword, false, false, false, 'whizhackService');
+      let id = loginObj.responseData[0].id;
+      this.api.setHttp('get', 'whizhack_cms/login/change-password/'+obj.currentPassword +'?UserId='+id+'&NewPassword=' + obj.newPassword , false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 || res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 0) : '';
-          res.statusCode == 200 ? clear.resetForm() : '';
+          res.statusCode == 200 ? (this.common.matSnackBar(res.responseData, 1)) : '';
         }
       })
     }
