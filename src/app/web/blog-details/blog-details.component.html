@@ -16,10 +16,10 @@
             <div class="col-sm-8" id="blog-details">
                 <div class="d-flex align-items-center justify-content-between details">
                     <div>
-                        By - <span>Pankaj Gadkar</span>
+                        By - <span>{{blogArray?.userName}}</span>
                     </div>
                     <div>
-                        <!-- Date : <span>{{blogArray.createdDate |date:'dd/MM/yyyy'}}</span>  -->
+                        Date : <span>{{blogArray?.createdDate |date:'dd/MM/yyyy'}}</span> 
                     </div>
                 </div>
                 <img src="{{blogArray?.imagePath}}" class="img-fluid rounded">
@@ -27,9 +27,9 @@
                     {{blogArray?.description}}
                 </p>
                <div *ngFor="let data of blogArray?.blogRegisterDetailsModel">
-                <h5>{{data.title}}</h5>
+                <h5>Sub Title : {{data.title}}</h5>
                 <p class="about-text">
-                    {{data.description}}
+                   Sub Title Description : {{data.description}}
                 </p>
                </div>
             </div>
@@ -49,66 +49,6 @@
                                 <small>{{blogData.createdDate| date}}</small>
                             </div>
                         </a>
-                       <!--  <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a>
-                        <a class="d-flex blog" routerLink="../blog-details">
-                            <div class="flex-shrink-0">
-                                <img src="../../../assets/image/Products/blog-image.png" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum is simply dummy text</p>
-                                <small>June 07</small>
-                            </div>
-                        </a> -->
                     </div>
                 </div>
             </div>

@@ -9,13 +9,13 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class BlogDetailsComponent implements OnInit {
   elementData:any;
+  blogRegDetailsArray= new Array();
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
               private service: ApiService
               ) { }
 
   ngOnInit(): void {
     this.getElementById();
-    console.log(this.data);
   }
 
   resId:number = this.data;
@@ -23,9 +23,9 @@ export class BlogDetailsComponent implements OnInit {
     this.service.setHttp('get', 'whizhack_cms/Blogregister/GetById?id=' + this.resId, false, false, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: (res: any) => {
-            console.log(res);
             if (res.statusCode == '200') {
               this.elementData = res.responseData;
+              this.blogRegDetailsArray = this.elementData.blogRegisterDetailsModel;
             }
           }
         })
