@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonApiService } from 'src/app/core/services/common-api.service';
@@ -13,9 +13,9 @@ import { ApplyNowComponent } from 'src/app/dialogs/apply-now/apply-now.component
 })
 export class JobDetailsComponent implements OnInit {
 
-  JobPostId:any;
-  postJobArray:any;
-  allPostJobArray:any;
+  JobPostId: any;
+  postJobArray: any;
+  allPostJobArray: any;
 
   constructor(
     public dialog: MatDialog,
@@ -23,7 +23,7 @@ export class JobDetailsComponent implements OnInit {
     private error: ErrorHandlerService,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    ) { 
+  ) {
     this.JobPostId = this.route.snapshot.params['id'];
   }
 
@@ -44,42 +44,33 @@ export class JobDetailsComponent implements OnInit {
         }
       },
       error: (error: any) => {
-      this.error.handelError(error.statusCode);
+        this.error.handelError(error.statusCode);
       }
     })
   }
 
-  getAllPostJob(){
-  this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?', false, false, false, 'whizhackService');
-  this.apiService.getHttp().subscribe({
-    next: (res: any) => {
-      if (res.statusCode == '200') {
-        this.allPostJobArray = res.responseData.responseData;
-      }
-      else {
-        this.allPostJobArray = [];
-      }
-    },  error: (error: any) => {
-      this.error.handelError(error.statusCode);
+  getAllPostJob() {
+    this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?', false, false, false, 'whizhackService');
+    this.apiService.getHttp().subscribe({
+      next: (res: any) => {
+        if (res.statusCode == '200') {
+          this.allPostJobArray = res.responseData.responseData;
+        }
+        else {
+          this.allPostJobArray = [];
+        }
+      }, error: (error: any) => {
+        this.error.handelError(error.statusCode);
       }
     })
-}
+  }
 
-  openDialog(dialoObj:any): void {
-    let dialogRef =  this.dialog.open(ApplyNowComponent, {
+  openDialog(dialoObj: any): void {
+    this.dialog.open(ApplyNowComponent, {
       width: '700px',
+      disableClose: true,
       data: dialoObj
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == 'yes') {
-
-      }
-      else {
-        
-      }
-    });
   }
-
-  
 
 }
