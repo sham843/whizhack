@@ -11,6 +11,9 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 })
 export class ChangePasswordComponent implements OnInit {
   hide = true;
+  hide1 = true;
+  hide2 = true;
+
   registerForm!: FormGroup;
   constructor(private fb: FormBuilder, private api: ApiService, 
     public validations: FormValidationService, private common : CommonMethodService) { }
@@ -28,19 +31,27 @@ export class ChangePasswordComponent implements OnInit {
 
   get fc() { return this.registerForm.controls };
 
+  
+  clearFields(){
+    this.fc['newPassword'].setValue('');
+    this.fc['retypePassword'].setValue('');
+  }
+
+
   onCancel(clear: any) {
     clear.resetForm();
   }
 
   onSumbit() {
     let obj = this.registerForm.value;
+    obj.newPassword != obj.retypePassword ? this.common.matSnackBar('Password Did Not Match',1): '';
     if (obj.newPassword == obj.retypePassword && this.registerForm.valid && obj.currentPassword != obj.newPassword) {
       let loginObj = JSON.parse(localStorage.getItem('loggedInData') || '');
       let id = loginObj.responseData[0].id;
       this.api.setHttp('get', 'whizhack_cms/login/change-password/'+obj.currentPassword +'?UserId='+id+'&NewPassword=' + obj.newPassword , false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.responseData =='Password Changed Successfully...'? (this.common.matSnackBar(res.responseData, 0)) : (this.common.matSnackBar(res.responseData, 1));
+          res.responseData =='Password Changed Successfully...'? (this.common.matSnackBar(res.responseData, 0)) : (this.common.matSnackBar(res.responseData, 1), this.clearFields());
         }
       })
     }
