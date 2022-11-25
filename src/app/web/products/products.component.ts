@@ -34,7 +34,10 @@ export class ProductsComponent implements OnInit {
       },
     })
   }
-  blogDetails(flag:any) {
+  resourceDetails(flag:any) {
     this.router.navigate(['../knowledge-hub',flag]);
+  }
+  blogDetails(blogId: number) {
+    this.router.navigate(['../blog-details', blogId]);
   }
 }
