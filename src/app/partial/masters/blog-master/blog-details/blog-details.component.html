@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h5 class="text-main">{{ elementData.title }}<small class="text-muted">[{{elementData.blogType == 1 ? 'Blog' : elementData.blogType == 2 ? 'White Paper' : 'Case Study'}}]</small></h5>
+    <h5 class="text-main">{{ elementData?.title }}<small class="text-muted">&nbsp;&nbsp;[{{elementData?.blog_categary_Id == 1 ? 'Training' : 'Products'}}]</small></h5>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -13,10 +13,10 @@
         </div>
         <div class="col-sm-9">
             <div class="blog-height scrollbar" >
-                <p>{{ elementData.description }}</p>
+                <p>{{ elementData?.description }}</p>
                 <div *ngFor="let nums of blogRegDetailsArray;let i = index">
-                    <h6 class="text-main">{{ nums.title }}</h6>
-                <p>{{ nums.description }}</p>
+                    <h6 class="text-main">{{ nums?.title }}</h6>
+                <p>{{ nums?.description }}</p>
                 </div>
             </div>
         </div>
