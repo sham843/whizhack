@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <span>ID :{{viewData.id}}</span>
+    <span>ID :{{viewData.id || '-'}}</span>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">{{viewData.courseId == 1 ? 'Cyber Ninja' :
-                        viewData.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru'}}</span>
+                        viewData.courseId == 2 ? 'Cyber Samurai' : 'Cyber Guru' || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">
-                        {{viewData.message}}
+                        {{viewData.message || '-'}}
                     </span>
                 </div>
             </div>
@@ -57,15 +57,15 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-label">IP Address :</div>
-                        <div class="form-data">{{address}}</div>
+                        <div class="form-data">{{address || '-'}}</div>
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Operating System :</div>
-                        <div class="form-data">{{data.deviceService.os_version | titlecase}}</div>
+                        <div class="form-data">{{data.deviceService.os_version || '-' | titlecase}}</div>
                     </div>
                     <div class="mb-0">
                         <div class="form-label">Browser :</div>
-                        <div class="form-data">{{data.deviceService.browser}}</div>
+                        <div class="form-data">{{data.deviceService.browser || '-'}}</div>
                     </div>
                 </div>
             </div>
