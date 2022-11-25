@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ChangePasswordComponent } from './dialogs/change-password/change-password.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ApplyNowComponent } from './dialogs/apply-now/apply-now.component';
+import { MyProfileComponent } from './dialogs/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ApplyNowComponent } from './dialogs/apply-now/apply-now.component';
     RegisterNowComponent,
     ConfirmationModalComponent,
     ChangePasswordComponent,
-    ApplyNowComponent
+    ApplyNowComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
