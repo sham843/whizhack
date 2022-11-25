@@ -19,7 +19,7 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2">
                                 <div
-                                    *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
+                                    *ngIf="(f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')) && submited">
                                     Job Title Is Required</div>
                                 <div
                                     *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">
@@ -36,7 +36,7 @@
                                 maxlength="50" (keypress)="validation.noFirstSpaceAllow($event)"><br>
                             <mat-error class="mt-2">
                                 <div
-                                    *ngIf="f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')">
+                                    *ngIf="(f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')) && submited">
                                     Job Location is Required</div>
                                 <div
                                     *ngIf="f['job_Location'].hasError('pattern') || f['job_Location'].hasError('touched')">
@@ -66,7 +66,7 @@
                                 formControlName="job_Description"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-2"
-                                *ngIf="f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')">
+                                *ngIf="(f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')) && submited">
                                 Description Is Required
                             </mat-error>
                         </mat-form-field>
@@ -131,12 +131,12 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex align-items-center justify-content-between p-3">
+            <button mat-stroked-button class="btn-main-outline" type="button"
+                (click)="clearForm()">Clear</button>
+            <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
+                'Update':'Submit'}}</button>
+           </div>
     </form>
 </div>
 
-<div class="d-flex align-items-center justify-content-between p-3">
-    <button mat-stroked-button class="btn-main-outline" type="button"
-        (click)="clearForm()">Clear</button>
-    <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
-        'Update':'Submit'}}</button>
-   </div>
