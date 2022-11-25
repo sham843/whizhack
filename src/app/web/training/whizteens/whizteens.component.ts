@@ -14,6 +14,7 @@ export class WhizteensComponent implements OnInit {
   openDialog(flag:any) {
     const dialogRef = this.dialog.open(RegisterNowComponent,{
       width: '500px',
+      disableClose:true,
       data:flag
       });
       dialogRef.afterClosed().subscribe(result => {
