@@ -43,7 +43,6 @@ export class BlogMasterComponent implements OnInit {
   frm!: FormGroup;
   filterFrm!:FormGroup;
   blogRegisterDetailsModel!: FormArray;
-  isSubBlogAdd: boolean = true;
   totalCount: number = 0;
   currentPage: number = 0;
   editFlag: boolean = false;
@@ -64,11 +63,16 @@ export class BlogMasterComponent implements OnInit {
     private commonMethod : CommonMethodService,
     private ngxspinner : NgxSpinnerService, 
     public validation: FormValidationService) { }
-
+ 
   openDialog(id: any): void {
-    this.dialog.open(BlogDetailsComponent, {
+    const dialogRef = this.dialog.open(BlogDetailsComponent, {
       width: '1024px',
       data: id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.clearForm();
+      console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -88,10 +92,10 @@ export class BlogMasterComponent implements OnInit {
   controlForm() {
     this.frm = this.fb.group({
       id: 0,
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+      description: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
       blog_categary_Id: [, Validators.required],
-      author: ['', Validators.required],
+      author: ['', [Validators.required,Validators.pattern(this.validation.alphabetsWithSpace)]],
       isPublish: false,
       imagePath: ['', Validators.required],
       blogType: ['', Validators.required],
@@ -105,8 +109,8 @@ export class BlogMasterComponent implements OnInit {
         this.fb.group({
           id: 0,
           blog_Register_Id: 0,
-          title: ['', Validators.required],
-          description: ['', Validators.required],
+          title: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+          description: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
           key: 0,
           createdBy: 0,
           modifiedBy: 0,
@@ -129,13 +133,6 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
-  createItem(): FormGroup {
-    return this.fb.group({
-      title: ['', [Validators.required ,Validators.maxLength(200)]],
-      description: ['', [Validators.required]],
-    });
-  }
-
   addItem() {
     let fg = this.fb.group({
       blog_Register_Id: 0,
@@ -148,7 +145,6 @@ export class BlogMasterComponent implements OnInit {
       modifiedDate: new Date(),
       isDeleted: false,
     });
-    if (this.isSubBlogAdd == true) {
       if (this.frm.value.blogRegisterDetailsModel.length > 0) {
         if (this.frm.value.blogRegisterDetailsModel[this.frm.value.blogRegisterDetailsModel.length - 1].title && this.frm.value.blogRegisterDetailsModel[this.frm.value.blogRegisterDetailsModel.length - 1].description) {
           this.itemsForm.push(fg);
@@ -160,10 +156,6 @@ export class BlogMasterComponent implements OnInit {
         this.itemsForm.push(fg);
       }
     }
-    this.isSubBlogAdd = true;
-    console.log(this.itemsForm,'formArray');
-    
-  }
 
   removeItem(i:number){
     this.itemsForm.removeAt(i)
@@ -203,66 +195,67 @@ export class BlogMasterComponent implements OnInit {
 
   fileUpload(event: any) {
     this.ngxspinner.show();
-    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg').subscribe((res: any) => {
-      if (res.statusCode === '200') {
-        this.ngxspinner.hide();
-        this.imgSrc = res.responseData
-        this.frm.controls['imagePath'].setValue(this.imgSrc);
-      } else {
-        this.imgSrc = '';
-        this.frm.value.imagePath = '';
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jfif').subscribe({
+      next:((res:any)=>{
+        if (res.statusCode === '200') {
+          this.ngxspinner.hide();
+          this.imgSrc = res.responseData
+          this.frm.controls['imagePath'].setValue(this.imgSrc);
+        } else {
+          this.imgSrc = '';
+          this.frm.value.imagePath = '';
+          this.file.nativeElement.value = ''
+        }
+      }),
+      error: (error: any) => {
         this.file.nativeElement.value = ''
-      }
-    })
+            this.ngxspinner.hide();
+            console.log(error);
+          }
+      })
   }
 
   onClickSubmit(formDirective?:any) {
-    if(this.itemsForm.controls[this.itemsForm.length-1].status == 'INVALID'){
-      if(!this.frm.value.blogType){
-        this.radioFlag=true;
-      }
-      return;
+    if(!this.frm.value.blogType){
+      this.radioFlag=true;
+    }else if(this.frm.value.imagePath == ''){
+      this.commonMethod.matSnackBar('please, Upload Image !',1)
     }
-    else
-    {
-      if(this.frm.value.imagePath == ''){
-        this.commonMethod.matSnackBar('please, Upload Image !',1)
-      if (!this.frm.valid) {
+    else if (!this.frm.valid) {
+      if(this.itemsForm.controls[this.itemsForm.length-1].status == 'INVALID'){
         return;
-      }
     }
-      else{
-        // this.ngxspinner.show();
-        let postObj = this.frm.value;
-  
-        let url;
-        this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
-        this.service.setHttp(this.editFlag ? 'put':'post', url , false, postObj, false, 'whizhackService');
-        this.service.getHttp().subscribe({
-          next: ((res: any) => {
-            if (res.statusCode == '200') {
-              // this.ngxspinner.hide();
-              formDirective?.resetForm();
-              this.imgSrc = '';
-              this.file.nativeElement.value = '';
-              this.controlForm();
-              this.displayData();
-              this.commonMethod.matSnackBar(res.statusMessage, 0)
-              this.editFlag = false;
+      return;
+    } else{
+      
+          this.ngxspinner.show();
+          let postObj = this.frm.value;
+    
+          let url;
+          this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
+          this.service.setHttp(this.editFlag ? 'put':'post', url , false, postObj, false, 'whizhackService');
+          this.service.getHttp().subscribe({
+            next: ((res: any) => {
+              this.ngxspinner.hide();
+              if (res.statusCode == '200') {
+                formDirective?.resetForm();
+                this.imgSrc = '';
+                this.file.nativeElement.value = '';
+                this.controlForm();
+                this.displayData();
+                this.commonMethod.matSnackBar(res.statusMessage, 0)
+                this.editFlag = false;
+                this.radioFlag = false;
+              }
+            }),
+            error: (error: any) => {
+              this.ngxspinner.hide();
+              console.log(error);
             }
-          }),
-          error: (error: any) => {
-            console.log(error);
-          }
-        })
+          })
+        }
       }
-    
-    }
-  }
-
   onClickEdit(editObj: any) {
-    console.log(editObj,'editObj');
-    
     this.imgSrc = editObj?.imagePath;
     this.editFlag = true;
     this.frm.patchValue({
@@ -294,6 +287,7 @@ export class BlogMasterComponent implements OnInit {
 
   onClickDelete(id: any) {
     let dialoObj = {
+      header: 'Delete',
       title:'Do you want to delete the selected course ?',
       cancelButton:'Cancel',
       okButton:'Ok'
