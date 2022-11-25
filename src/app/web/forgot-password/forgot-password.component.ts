@@ -12,6 +12,8 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 })
 export class ForgotPasswordComponent implements OnInit {
   hide = true;
+  hide1 = true;
+
   userId: number = 0;
   userName: string = '';
   otpStatus: boolean = false;
@@ -29,7 +31,8 @@ export class ForgotPasswordComponent implements OnInit {
     "modifiedDate": "2022-11-23T12:46:11.832Z",
     "isDeleted": false,
     "id": 0,
-    "mobileNo": "",
+    "mobile":"",
+    "EmailId": "",
     "otp": "",
     "pageName": "string",
     "otpExpireDate": "2022-11-23T12:46:11.832Z",
@@ -45,6 +48,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   defaultForm() {
     this.registerForm = this.fb.group({
+      "mobile":[""],
       "email": ["",[Validators.required,Validators.pattern(this.validations.valEmailId)]],
       "digitOne": ["",Validators.required],
       "digitTwo": ["",Validators.required],
@@ -65,10 +69,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendOTP() {
     let objj = this.registerForm.value;
-    objj.mobile.length < 1 ? this.common.matSnackBar('Please Enter Mobile Number',1) : '';
-
-    this.obj.mobileNo = objj.email;
-    if(this.fc['mobile'].valid)
+    objj.email.length < 1 ? this.common.matSnackBar('Please Enter Email Id',1) : '';
+    this.obj.mobile = objj.mobile
+    this.obj.EmailId = objj.email;
+    if(this.fc['email'].valid)
     this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
@@ -94,7 +98,7 @@ export class ForgotPasswordComponent implements OnInit {
           res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1),this.clearFormFields()) : '';
         }
       })
-      this.getUserName();
+      // this.getUserName();
     }
   }
   startTimer() {
@@ -130,6 +134,7 @@ export class ForgotPasswordComponent implements OnInit {
     obj.otp = this.stringOtp;
     obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('Password did not match',1):''
     if (obj.passwordNew == obj.retypePassword) {
+      this.getUserName();
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + this.userName + '&Password=' + obj.passwordNew + '&NewPassword=' + obj.retypePassword + '&MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
