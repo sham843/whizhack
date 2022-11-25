@@ -69,7 +69,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       syllabus_Summary: ['', Validators.required],
       price: ['', [Validators.required, Validators.maxLength(10)]],
       price_Terms: ['', [Validators.required, Validators.maxLength(10)]],
-      imagePath: ['', Validators.required],
+      imagePath: [''],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
   }
@@ -254,10 +254,10 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
-      if (!this.imgSrc) {
-        this.comMethods.matSnackBar('Please Upload Course Image', 1)
-      }
       return;
+    }else if (!this.imgSrc) {
+      this.comMethods.matSnackBar('Please Upload Course Image', 1)
+      return
     }
     else {
       let submitObj = {
