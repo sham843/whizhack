@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 
 @Component({
   selector: 'app-view-training-schedule',
@@ -11,6 +12,7 @@ export class ViewTrainingScheduleComponent implements OnInit {
  showObj:any
   constructor(
     private api: ApiService,
+    private errorService: ErrorHandlerService,
     @Inject(MAT_DIALOG_DATA) public data:any) { }
 
   ngOnInit(): void {    
@@ -26,7 +28,7 @@ export class ViewTrainingScheduleComponent implements OnInit {
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this.errorService.handelError(error.statusMessage)
       }
     })
 

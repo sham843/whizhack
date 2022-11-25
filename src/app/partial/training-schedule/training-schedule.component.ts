@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,23 +21,22 @@ import { ViewTrainingScheduleComponent } from './view-training-schedule/view-tra
   templateUrl: './training-schedule.component.html',
   styleUrls: ['./training-schedule.component.css']
 })
-export class TrainingScheduleComponent implements OnInit , AfterViewInit {
+export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
   courseManageForm!: FormGroup;
-  fillterForm!: FormGroup;
   displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
-  dataSource :any;
+  dataSource: any;
   pageNameArray = new Array();
   totalCount: number = 0;
   currentPage: number = 0;
   imgSrc: string = '';
   editFlag: boolean = false;
-  sumitted: boolean = false;
-  @ViewChild(MatSort) sort!: MatSort;
   offer: boolean = false;
-  searchFilter = new FormControl();
 
+  @ViewChild(MatSort) sort!: MatSort;
+
+  searchFilter = new FormControl();
 
   constructor(
     public dialog: MatDialog,
@@ -46,8 +45,8 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
     private api: ApiService,
     private errorService: ErrorHandlerService,
     private ngxSpinner: NgxSpinnerService,
-    public vadations :FormValidationService,
-    private comMethods :CommonMethodService,
+    public vadations: FormValidationService,
+    private comMethods: CommonMethodService,
     private webStrorage: WebStorageService) { }
 
   openDialog(id: any) {
@@ -56,33 +55,19 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       data: id
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe({ //result =>
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
   ngOnInit(): void {
     this.courseManageFormData();
-    this.fillterFormData();
     this.getPageName();
     this.getAllCourseList();
   }
 
-  fillterFormData(){
-    this.fillterForm = this.fb.group({
-      courseTitle:['']
-    })
-  }
-
-
-
   courseManageFormData() {
     this.courseManageForm = this.fb.group({
-      createdBy: 0,
-      modifiedBy: 0,
-      createdDate: "2022-11-22T12:17:01.881Z",
-      modifiedDate: "2022-11-22T12:17:01.881Z",
-      isDeleted: true,
       id: 0,
       pageName: ['', Validators.required],
       course_Title: ['', Validators.required],
@@ -90,25 +75,32 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       duration: ['', Validators.required],
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
-      price: ['', [Validators.required,Validators.maxLength(10)]],
-      price_Terms: ['', [Validators.required,Validators.maxLength(10)]],
+      price: ['', [Validators.required, Validators.maxLength(10)]],
+      price_Terms: ['', [Validators.required, Validators.maxLength(10)]],
       imagePath: ['', Validators.required],
-      actual_price:[0,[Validators.required,Validators.maxLength(10)]]
+      actual_price: [0, [Validators.required, Validators.maxLength(10)]]
     })
   }
 
   get formControls() { return this.courseManageForm.controls }
 
   ngAfterViewInit() {
+    this.searchFilter.value?.trim();
     let formValue = this.searchFilter.valueChanges;
     formValue.pipe(
       filter(() => this.searchFilter.valid),
       debounceTime(1000),
       distinctUntilChanged())
-      .subscribe(() => {
-        this.currentPage = 0;
-        this.courseManageFormData();
-        this.getAllCourseList();
+      .subscribe((res: any) => {
+        console.log(res);
+        if (res !=' ') {
+          this.currentPage = 0;
+          this.imgSrc = '';
+          this.file.nativeElement.value = '';
+          this.courseManageFormData();
+          this.getAllCourseList();
+        }
+
       })
   }
 
@@ -118,16 +110,16 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
 
   getAllCourseList() {
     this.ngxSpinner.show();
-    let search = this.searchFilter.value ? this.searchFilter.value.trim() :''
-    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title='+search, false, false, false, 'whizhackService');
+    let search = this.searchFilter.value ? this.searchFilter.value.trim() : ''
+    this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=' + search, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
           this.ngxSpinner.hide()
-          this.dataSource =  new MatTableDataSource(res.responseData); 
-          this.dataSource.sort = this.sort;       
-          this.totalCount = res.responseData1.pageCount;          
-        }else{
+          this.dataSource = new MatTableDataSource(res.responseData);
+          this.dataSource.sort = this.sort;
+          this.totalCount = res.responseData1.pageCount;
+        } else {
           this.ngxSpinner.hide()
           this.dataSource = [];
           this.totalCount = 0
@@ -145,6 +137,8 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       next: ((res: any) => {
         if (res.statusCode === '200') {
           this.pageNameArray = res.responseData;
+        } else {
+          this.pageNameArray = []
         }
       }),
       error: (error: any) => {
@@ -160,7 +154,7 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData;
         this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
-       this.comMethods.matSnackBar(res.statusMessage,0)
+        this.comMethods.matSnackBar(res.statusMessage, 0)
       } else {
         this.imgSrc = '';
         this.file.nativeElement.value = ''
@@ -192,9 +186,9 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       syllabus_Summary: obj?.syllabus_Summary,
       price: obj?.price,
       price_Terms: obj?.price_Terms,
-      actual_price:obj?.actual_price
+      actual_price: obj?.actual_price
     })
-    obj?.exclusive_offer == 1 ? this.offer = true:false;
+    obj?.exclusive_offer == 1 ? this.offer = true : false;
     this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath)
     this.imgSrc = obj?.imagePath;
   }
@@ -238,11 +232,13 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
             this.errorService.handelError(error.statusMessage)
           }
         })
+      } else {
+        this.clearForm()
       }
     });
   }
 
-  clearForm(clear?:any) {
+  clearForm(clear?: any) {
     this.courseManageForm.reset()
     clear?.resetForm();
     this.imgSrc = '';
@@ -252,30 +248,32 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
     this.courseManageFormData();
   }
 
-  onClickSubmit(clear:any) {
+  onClickSubmit(clear: any) {
     this.updateValidation();
-    // this.sumitted = true
     if (!this.courseManageForm.valid) {
-      if(!this.imgSrc){
-        this.comMethods.matSnackBar('Please Upload Image',0)      
-      }     
+      if (!this.imgSrc) {
+        this.comMethods.matSnackBar('Please Upload Image', 0)
+      }
       return;
-    } 
-     else {
-      let submitObj = this.courseManageForm.value;
-      submitObj.exclusive_offer = this.offer ? 1: 0
-      
-      let url = this.editFlag ?  'whizhack_cms/course/Update' :  'whizhack_cms/course/Insert'
+    }
+    else {
+      let submitObj = {
+        ...this.webStrorage.createdByProps(),
+        ... this.courseManageForm.value
+      }
+      submitObj.exclusive_offer = this.offer ? 1 : 0
+
+      let url = this.editFlag ? 'whizhack_cms/course/Update' : 'whizhack_cms/course/Insert'
 
       this.api.setHttp(this.editFlag ? 'put' : 'post', url, false, submitObj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            this.comMethods.matSnackBar(res.statusMessage,0)
+            this.comMethods.matSnackBar(res.statusMessage, 0)
             this.getAllCourseList();
             this.clearForm(clear);
-          }else{
-            this.comMethods.matSnackBar(res.statusMessage,1)
+          } else {
+            this.comMethods.matSnackBar(res.statusMessage, 1)
           }
         }),
         error: (error: any) => {
@@ -284,17 +282,16 @@ export class TrainingScheduleComponent implements OnInit , AfterViewInit {
       })
     }
   }
- 
 
-  setOffer(event:any){
-   this.offer = event.checked      
+  setOffer(event: any) {
+    this.offer = event.checked
   }
 
-  updateValidation(){    
-    if(this.offer){
+  updateValidation() {
+    if (this.offer) {
       this.courseManageForm.controls['actual_price'].setValidators([Validators.required]);
       this.courseManageForm.controls['actual_price'].updateValueAndValidity();
-    }else{
+    } else {
       this.courseManageForm.controls['actual_price'].setValidators([]);
       this.courseManageForm.controls['actual_price'].updateValueAndValidity();
     }
