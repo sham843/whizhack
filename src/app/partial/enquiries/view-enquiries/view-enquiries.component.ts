@@ -13,22 +13,20 @@ export class ViewEnquiriesComponent implements OnInit {
 
   constructor(private errorSer: ErrorHandlerService, private service: ApiService, public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private common: CommonMethodService,
     private http: HttpClient) { }
-  viewData: any
-  deviceDataarray = new Array();
-  deviceIpAddress: any;
-  ipAddress: any;
-  address: any
+    viewData: any
+    deviceDataarray = new Array();
+    deviceIpAddress: any;
+    ipAddress: any;
+    address: any
 
   ngOnInit(): void {
     this.getDataById();
     this.getDevice();
     this.getdeviceIpAddress();
-    console.log('tdata', this.data);
-
   }
-
+//#region ---------------------------------------------------------Get View Data By Id-----------------------------------------------------
   getDataById() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetById?id=' + this.data.registerId, false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetById?id='+this.data.registerId, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
@@ -38,10 +36,10 @@ export class ViewEnquiriesComponent implements OnInit {
         this.errorSer.handelError(error.status);
       }
     })
-
   }
+//#endregion ---------------------------------------------------------Get View Data By Id---------------------------------------------------
 
-
+//#region------------------------------------------------------------Get Device Information------------------------------------------------
   getDevice() {
     this.common.getDeviceInfo()
     this.deviceDataarray = [this.common]
@@ -52,11 +50,9 @@ export class ViewEnquiriesComponent implements OnInit {
       this.deviceIpAddress = res
       let arr = JSON.stringify(this.deviceIpAddress)
       this.address = arr.slice(7, 22);
-      console.log('addr', this.address);
-
     })
   }
-
+//#endregion------------------------------------------------------------Get Device Information------------------------------------------------
 
 
 

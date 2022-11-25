@@ -15,8 +15,7 @@ export class RegisterNowComponent implements OnInit {
   registerForm!: FormGroup | any;
 
   constructor(
-    public dialogRef: MatDialogRef<RegisterNowComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<RegisterNowComponent>,@Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private service: ApiService,
     private errorSer: ErrorHandlerService,
@@ -27,8 +26,9 @@ export class RegisterNowComponent implements OnInit {
   ngOnInit(): void {
     this.getFormData();
   }
-  get f() { return this.registerForm.controls }
 
+  //#region ------------------------------------------------FormData Method Start------------------------------------------------------
+  get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$')]],
@@ -39,7 +39,9 @@ export class RegisterNowComponent implements OnInit {
       pageName: ['']
     })
   }
+  //#endregion----------------------------------------------FormData Method End---------------------------------------------------------
 
+//#region --------------------------------------------------Submit Form Data Method Starts----------------------------------------------
   onSubmit() {
     if (this.registerForm.invalid) {
       return
@@ -60,7 +62,6 @@ export class RegisterNowComponent implements OnInit {
         }
       })
     }
-
   }
-
+//#endregion-------------------------------------------------Submit Form Data Method Ends-----------------------------------------------
 }
