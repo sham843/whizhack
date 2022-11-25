@@ -22,54 +22,45 @@ export class RegisterNowComponent implements OnInit {
     private errorSer: ErrorHandlerService,
     public validator: FormValidationService,
     private route: Router,
-    private snack:CommonMethodService) { }
+    private snack: CommonMethodService) { }
 
   ngOnInit(): void {
     this.getFormData();
-    console.log('id',this.data);
-    
   }
-
   get f() { return this.registerForm.controls }
 
-  // Cyber Security Training Program
   getFormData() {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$')]],
       email: ['', [Validators.required, Validators.email]],
       mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
-      courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : this.data == 3 ? 'Cyber Guru' : this.data == 4? 'Cyber Security Training Program' :'Cyber Security Training Program'],
+      courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : this.data == 3 ? 'Cyber Guru' : this.data == 4 ? 'Cyber Security Training Program' : 'Cyber Security Training Program'],
       message: ['', [Validators.required]],
-      pageName:['']
+      pageName: ['']
     })
   }
 
   onSubmit() {
-    // debugger
     if (this.registerForm.invalid) {
       return
     } else {
       let formData = this.registerForm.value;
-      formData.pageName =(this.route.url).split('/')[1];
-      console.log('formData.pageName',formData.pageName);
-      // formData.courseId = this.data =='Cyber Security Training Program' ? 4 : 5; 
-      formData.courseId = this.data //== 'Cyber Ninja' ? 1 : formData.courseId = this.data == 'Cyber Samurai' ? 2 : formData.courseId=this.data == 'Cyber Guru' ? 3 : formData.courseId=this.data == 'Cyber Security Training Program' ? 4 : formData.courseId=this.data =='Cyber Security Training Programm' ;
-      console.log('formData.courseId',formData.courseId);
+      formData.pageName = (this.route.url).split('/')[1];
+      console.log('formData.pageName', formData.pageName);
+      formData.courseId = this.data;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, formData, false, 'whizhackService');
-      console.log('formData.formData',formData);
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode == '200') {
-            this.snack.matSnackBar(res.statusMessage,0)
+            this.snack.matSnackBar(res.statusMessage, 0)
             this.dialogRef.close();
           }
         }), error: (error: any) => {
           this.errorSer.handelError(error.status);
-          
         }
       })
     }
-    
+
   }
 
 }
