@@ -85,18 +85,18 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   get formControls() { return this.courseManageForm.controls }
 
   ngAfterViewInit() {
-    this.searchFilter.value?.trim();
     let formValue = this.searchFilter.valueChanges;
+    console.log('formValue',formValue);
     formValue.pipe(
       filter(() => this.searchFilter.valid),
       debounceTime(1000),
       distinctUntilChanged())
       .subscribe((res: any) => {
-        console.log(res);
         if (res !=' ') {
           this.currentPage = 0;
           this.imgSrc = '';
           this.file.nativeElement.value = '';
+          this.editFlag = false;
           this.courseManageFormData();
           this.getAllCourseList();
         }
@@ -107,6 +107,22 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   clearSearchFilter() {
     this.searchFilter.setValue('');
   }
+
+  // getQueryString() {
+  //   let str = "";
+  //   this.frm && this.frm.value.stateId && (str += "?stateId=" + this.frm.value.stateId || 0)
+  //   this.frm && this.frm.value.divisionId && (str += "&divisionId=" + this.frm.value.divisionId || 0)
+  //   this.frm && this.frm.value.districtId && (str += "&districtId=" + this.frm.value.districtId || 0)
+  //   this.frm && this.frm.value.subDivisionId && (str += "&subDivisionId=" + this.frm.value.subDivisionId || 0)
+  //   this.frm && this.frm.value.talukaId && (str += "&talukaId=" + this.frm.value.talukaId || 0)
+  //   str += "&IsCaseCreated=1&IsDocumentUploaded=" + this.frm.value.case
+  //   this.frm && this.frm.value.Textsearch && (str += "&Textsearch=" + this.frm.value.Textsearch || '')
+  //   str += "&pageno=" + this.filter.pageno + "&pagesize=" + this.filter.pagesize;
+  //   return str;
+  // }
+
+
+
 
   getAllCourseList() {
     this.ngxSpinner.show();
@@ -149,7 +165,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   fileUpload(event: any) {
     console.log(event);
-    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc').subscribe((res: any) => {
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe((res: any) => {
       console.log('res', res);
       if (res.statusCode === '200') {
         this.imgSrc = res.responseData;

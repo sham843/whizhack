@@ -20,7 +20,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
                             <input matInput placeholder="Enter Course Title" formControlName="course_Title" maxlength="20"
-                                (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
+                            (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Course Title is Required
                             </mat-error>
@@ -31,7 +31,7 @@
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Enter Course Caption" formControlName="course_Caption"
                                 maxlength="500"
-                                (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
+                                (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
                                 Course Caption is Required
                             </mat-error>
@@ -54,7 +54,7 @@
                             <mat-label>Course Description</mat-label>
                             <textarea matInput placeholder="Enter Course Description" rows="4" maxlength="500"
                                 formControlName="course_Description"
-                                (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
+                                (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['course_Description'].hasError('required')">
                                 Course Description is Required
                             </mat-error>
@@ -89,7 +89,7 @@
                             <mat-label>Syllabus Summary</mat-label>
                             <textarea matInput placeholder="Enter Syllabus Summary" rows="4" maxlength="500"
                                 formControlName="syllabus_Summary"
-                                (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)"></textarea>
+                                (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
                                 Course Description is Required
                             </mat-error>
@@ -131,7 +131,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
                             <input matInput placeholder="Enter Terms" formControlName="price_Terms" maxlength="50"
-                                (keyup)="vadations.alphaNumericWithSpacesAndSpecChars($event);vadations.removeSpaceAtBegining($event)">
+                            (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required
                             </mat-error>
@@ -157,10 +157,9 @@
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Search By Course Title</mat-label>
                         <input matInput placeholder="Search By Course Title" [formControl]="searchFilter" maxlength="20"
-                            (keypress)="vadations.alphabetsWithSpaces($event)"
-                            (keyup)="vadations.removeSpaceAtBegining($event)">
+                        (keypress)="vadations.noFirstSpaceAllow($event)">
 
-                        <button mat-icon-button matSuffix *ngIf="searchFilter.value && searchFilter.value != ' '" matTooltip="close"
+                        <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close"
                             aria-label="tooltip" (click)="clearSearchFilter()">
                             <span class="material-symbols-outlined">
                                 close
