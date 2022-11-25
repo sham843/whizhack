@@ -51,7 +51,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" *ngFor="let allPost of allPostJobArray">
-                            <a (click)="JobPostId = allPost?.jobpostId;getByIdPostJobs()">{{allPost?.job_Title}}</a>
+                            <a [class.text-secondary]="allPost?.jobpostId==JobPostId" (click)="JobPostId = allPost?.jobpostId;getByIdPostJobs()">{{allPost?.job_Title}}</a>
                         </li>
                     </ul>
                 </div>
