@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
@@ -91,5 +92,30 @@ export class CommonMethodService {
     this.router.navigate([path], { relativeTo: this.route })
   }
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    toolbarHiddenButtons: [
+      ['fontName', 'heading', 'fontSize', 'subscript', 'link', 'superscript', 'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull',
+        'indent',
+        'outdent', 'heading',
+        'fontName', 'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule', 'textColor',
+        'backgroundColor',
+        'removeFormat',
+        'toggleEditorMode']
+    ],
+  };
 
 }
