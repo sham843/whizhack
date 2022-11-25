@@ -29,7 +29,6 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="position-relative">
-                    <a routerLink="../blog-details">
                         <img src="{{blogPostArray[0]?.imagePath}}" alt="blog" class="main-blog-img w-100">
                         <div class="card card-body main-blog-body mx-3">
                             <p class="mb-2">June 07</p>
@@ -38,10 +37,9 @@
                                 {{blogPostArray[0]?.description}}
                             </p>
                             <div class="text-start">
-                                <button type="button" class="btn btn-outline-light rounded-pill">Read More</button>
+                                <button type="button" class="btn btn-outline-light rounded-pill" (click)="blogDetails(blogPostArray[0].id)">Read More</button>
                             </div>
                         </div>
-                    </a>
                 </div>
             </div>
             <div class="col-sm-5">
