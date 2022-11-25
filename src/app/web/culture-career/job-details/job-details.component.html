@@ -2,16 +2,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Job Name</h1>
+                <h1>{{postJobArray?.job_Title}}</h1>
                 <div class="d-flex">
                     <div>
-                        <i class="fa-solid fa-location-dot me-1"></i> Location
+                        <i class="fa-solid fa-location-dot me-1"></i> {{postJobArray?.job_Location}}
                     </div>
                     <div class="mx-5">
-                        <i class="fa-regular fa-calendar-days me-1"></i> Date of Posting
+                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Posting | date: 'dd-MM-yyyy'}}
                     </div>
                     <div>
-                        <i class="fa-regular fa-calendar-days me-1"></i> Last Date of Application
+                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Application | date: 'dd-MM-yyyy'}}
                     </div>
                 </div>
             </div>
@@ -24,37 +24,23 @@
             <div class="col-sm-8">
                 <h5 class="mb-2">Job Description</h5>
                 <p class="about-text mb-4">
-                    Add captions to your slides easily with the .carousel-caption element within any .carousel-item.
-                    They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We
-                    hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.
+                    {{postJobArray?.job_Description}}
                 </p>
                 <h5 class="mb-2">Roles & Responsibility</h5>
-                <p class="about-text mb-4">
-                    Add captions to your slides easily with the .carousel-caption element within any .carousel-item.
-                    They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We
-                    hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.
+                <p class="about-text mb-4" innerHTML="{{postJobArray?.roles_and_Responsibility}}">
                 </p>
                 <h5 class="mb-2">Experience</h5>
-                <p class="about-text mb-4">
-                    Add captions to your slides easily with the .carousel-caption element within any .carousel-item.
-                    They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We
-                    hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.
+                <p class="about-text mb-4" innerHTML="{{postJobArray?.experience}}">
                 </p>
                 <h5 class="mb-2">Qualification</h5>
-                <p class="about-text mb-4">
-                    Add captions to your slides easily with the .carousel-caption element within any .carousel-item.
-                    They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We
-                    hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.
+                <p class="about-text mb-4" innerHTML="{{postJobArray?.qualification}}">
                 </p>
                 <h5 class="mb-2">Skills Required</h5>
-                <p class="about-text mb-4">
-                    Add captions to your slides easily with the .carousel-caption element within any .carousel-item.
-                    They can be easily hidden on smaller viewports, as shown below, with optional display utilities. We
-                    hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block.
+                <p class="about-text mb-4" innerHTML="{{postJobArray?.skills_Required}}">   
                 </p>
 
                 <div class="text-center">
-                    <button mat-stroked-button type="button" (click)="openDialog()" class="btn-main-outline rounded-pill px-5 py-3">Apply Now</button>
+                    <button mat-stroked-button type="button" (click)="openDialog(postJobArray)" class="btn-main-outline rounded-pill px-5 py-3">Apply Now</button>
                 </div>
             </div>
 
@@ -64,14 +50,8 @@
                         <h5 class="mb-0">Other Jobs</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a href="#">UI Developer</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">UI Developer</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">UI Developer</a>
+                        <li class="list-group-item" *ngFor="let allPost of allPostJobArray">
+                            <a (click)="JobPostId = allPost?.jobpostId;getByIdPostJobs()">{{allPost?.job_Title}}</a>
                         </li>
                     </ul>
                 </div>
