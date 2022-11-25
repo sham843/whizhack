@@ -12,6 +12,7 @@ import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/c
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { PostNewJobComponent } from './post-new-job/post-new-job.component';
 
 @Component({
   selector: 'app-post-job',
@@ -301,6 +302,18 @@ export class PostJobComponent implements OnInit {
       })
     }
   }
+
+
+  openPostJobDialog() {
+    const dialogRef = this.dialog.open(PostNewJobComponent, {
+      width: '90vw',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
   //------------------------------------Pagination Logic Start------------------------
   paginationEvent(event: any) {
