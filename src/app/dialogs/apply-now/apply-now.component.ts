@@ -82,7 +82,7 @@ export class ApplyNowComponent implements OnInit {
               this.dialogRef.close();
               this.clearForm();
             }else{
-              this.commonService.matSnackBar(res.statusMessage, 1);
+              this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {

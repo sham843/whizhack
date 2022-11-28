@@ -9,7 +9,7 @@
                             <mat-radio-button *ngFor="let options of optionsArray" [value]="options.id" class="me-3">{{
                                 options.name }}</mat-radio-button>
                         </mat-radio-group>
-                        <ng-container *ngIf="radioFlag">
+                        <ng-container *ngIf="radioFlag && !this.frm.value.blogType">
                             <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')"><p>Please select blog type</p>
                             </mat-error>
                         </ng-container>
@@ -42,7 +42,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Blog Category</mat-label>
-                            <mat-select formControlName="Enter blog_categary_Id">
+                            <mat-select formControlName="blog_categary_Id">
                                 <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
                                     categories.categoryName }}</mat-option>
                             </mat-select>
@@ -85,6 +85,7 @@
                                 </button>
                             </div>
                         </div>
+                        <small> (Note: Allowed only png, jpg, jfif img)</small>
                     </div>
                     <div class="mb-3">
                         <div class="card card-body form-card border">
@@ -212,8 +213,11 @@
                             </button>
                         </td>
                     </ng-container>
+                    <tr class="mat-row p-2 w-100" *matNoDataRow col>
+                        <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found !</td>
+                    </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlightedRow':selRow == row.id}"></tr>
                 </table>
                 <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons

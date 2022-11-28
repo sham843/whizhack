@@ -125,6 +125,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         }
       }),
       error: (error: any) => {
+        this.dataSource = [];
         this.ngxSpinner.hide();
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
@@ -231,7 +232,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
             }
           }),
           error: (error: any) => {
-            this.errorService.handelError(error.statusMessage)
+            this.errorService.handelError(error.statusMessage);
+            this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
           }
         })
       } else {
@@ -281,7 +283,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
           }
         }),
         error: (error: any) => {
-          this.errorService.handelError(error.statusMessage)
+          this.errorService.handelError(error.statusMessage);
+          this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
         }
       })
     }
