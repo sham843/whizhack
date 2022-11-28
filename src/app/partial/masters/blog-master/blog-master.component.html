@@ -34,7 +34,7 @@
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
-                                description</mat-error>
+                                Description</mat-error>
                                 <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Description
                                 </mat-error>
                         </mat-form-field>
@@ -100,7 +100,7 @@
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)">
                                             <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter
-                                                blog sub-title</mat-error>
+                                                Blog Sub-Title</mat-error>
                                                 <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Title
                                                 </mat-error>
                                         </mat-form-field>
@@ -114,7 +114,7 @@
                                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
                                             <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please
                                                 Enter Blog Sub-Description</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog sub-description
+                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Description
                                                 </mat-error>
                                         </mat-form-field>
                                     </div>
