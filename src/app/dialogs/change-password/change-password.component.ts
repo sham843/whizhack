@@ -24,7 +24,7 @@ export class ChangePasswordComponent implements OnInit {
     private common: CommonMethodService,
     private router: Router,
     public dialogRef: MatDialogRef<ChangePasswordComponent>,
-    private webStorage:WebStorageService) { }
+    private webStorage:WebStorageService) {  dialogRef.disableClose = true;}
 
   ngOnInit(): void {
     this.defaultForm();
