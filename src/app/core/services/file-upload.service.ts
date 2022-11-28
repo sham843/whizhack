@@ -68,7 +68,7 @@ export class FileUploadService {
       if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
-          if (event.target.files[i].size > 104857) {
+          if (event.target.files[i].size > 10485760) {
             obj.error("Required file size should be less than " + 10 + " MB.");
             this.commonService.matSnackBar("Required file size should be less than " + 10 + " MB.", 1);
             docTypeCheckFlag = false;
