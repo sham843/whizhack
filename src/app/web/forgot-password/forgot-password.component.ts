@@ -29,12 +29,12 @@ export class ForgotPasswordComponent implements OnInit {
     "modifiedBy": 0,
     "createdDate": "2022-11-25T13:13:30.972Z",
     "modifiedDate": "2022-11-25T13:13:30.972Z",
-    "isDeleted": true,
+    "isDeleted": false,
     "id": 0,
-    "mobileNo": "string",
+    "mobileNo": "",
     "emailId": "",
-    "otp": "string",
-    "pageName": "string",
+    "otp": "",
+    "pageName": "",
     "otpExpireDate": "2022-11-25T13:13:30.972Z",
     "isUser": true
   }
@@ -75,9 +75,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), this.displayFields2 = false) : '';
-        res.statusCode == 404 ? this.common.matSnackBar(res.statusMessage, 1) : '';
-        res.statusCode == 200 ? (this.displayFields = true, this.otpStatus = true) : '';
+        res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), this.displayFields = true,this.displayFields2 = false,this.otpStatus = true) : '';
+        res.statusCode == 404 ? (this.common.matSnackBar(res.statusMessage, 1) ): '';
       }
     })
   }
@@ -89,16 +88,16 @@ export class ForgotPasswordComponent implements OnInit {
     this.stringOtp = otp.toString();
     this.obj.otp = this.stringOtp;
     this.timeLeft == 0 ? (this.obj.otp = this.stringOtp = '', this.common.matSnackBar('Please enter Valid OTP', 1)) : '';
+    this.fc['digitOne'].invalid ? this.common.matSnackBar('Please enter  OTP', 1) : ''
     if (this.obj.otp) {
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
           res.statusCode == 200 ? this.common.matSnackBar(res.statusMessage, 0) : '';
           res.statusCode == 200 ? (this.displayFields1 = true, this.startTimer(), this.displayFields = false) : false;
-          res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1), this.clearFormFields()) : '';
+          res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1), this.clearFormFields(), this.pauseTimer()) : '';
         }
-      })
-      // this.getUserName();
+      }) 
     }
   }
   startTimer() {
@@ -114,12 +113,11 @@ export class ForgotPasswordComponent implements OnInit {
 
   pauseTimer() {
     clearInterval(this.interval);
-    // clearInterval(this.interval);
   }
 
   getUserName() {
     let obj = this.registerForm.value;
-    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
         res.statusCode == 200 ? this.userName = res.responseData[0].userName : '';
@@ -135,7 +133,7 @@ export class ForgotPasswordComponent implements OnInit {
     obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('Password did not match', 1) : ''
     if (obj.passwordNew == obj.retypePassword) {
       this.getUserName();
-      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + this.userName + '&Password=' + obj.passwordNew + '&NewPassword=' + obj.retypePassword + '&MobileNo=' + obj.mobile, false, false, false, 'whizhackService');
+      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.newPassword+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
           res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
