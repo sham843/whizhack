@@ -227,8 +227,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     })
 
   }
+//#endregion
 
-  //#region  Onclick Update Button
+//#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
     this.showImagError = '';
