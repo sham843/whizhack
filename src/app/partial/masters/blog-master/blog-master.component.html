@@ -34,7 +34,11 @@
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
+<<<<<<< HEAD
                                 Description</mat-error>
+=======
+                                description</mat-error>
+>>>>>>> 62b138e5eebf4062f7da58a4efc4af095c9c7f79
                                 <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Description
                                 </mat-error>
                         </mat-form-field>
@@ -67,20 +71,20 @@
                             <div>
                                 <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
                                     #uploadDocument />
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">upload
-                                    blog image</button>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
+                                    Blog Image</button>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
                                     (click)="viewImage()">
                                     <span class="material-symbols-outlined">
-                                        description
+                                        Description
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
                                     (click)="deleteImage()">
                                     <span class="material-symbols-outlined">
-                                        delete
+                                        Delete
                                     </span>
                                 </button>
                             </div>
@@ -100,7 +104,11 @@
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)">
                                             <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter
+<<<<<<< HEAD
                                                 Blog Sub-Title</mat-error>
+=======
+                                                blog sub-title</mat-error>
+>>>>>>> 62b138e5eebf4062f7da58a4efc4af095c9c7f79
                                                 <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Title
                                                 </mat-error>
                                         </mat-form-field>
@@ -114,7 +122,11 @@
                                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
                                             <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please
                                                 Enter Blog Sub-Description</mat-error>
+<<<<<<< HEAD
                                                 <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Description
+=======
+                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog sub-description
+>>>>>>> 62b138e5eebf4062f7da58a4efc4af095c9c7f79
                                                 </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -124,7 +136,7 @@
                                                 class="btn-sm bg-danger bg-opacity-10 text-danger"
                                                 (click)="removeItem(i)">
                                                 <span class="material-symbols-outlined">
-                                                    remove
+                                                    Remove
                                                 </span>
                                                 Remove
                                             </button>
@@ -135,7 +147,7 @@
                             <button type="button" mat-stroked-button
                                 class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
                                 <span class="material-symbols-outlined">
-                                    add
+                                    Add
                                 </span>
                                 Add New
                             </button>
@@ -214,7 +226,7 @@
                         </td>
                     </ng-container>
                     <tr class="mat-row p-2 w-100" *matNoDataRow col>
-                        <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found !</td>
+                        <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No Data Found !</td>
                     </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlightedRow':selRow == row.id}"></tr>
