@@ -59,14 +59,14 @@ export class PostNewJobComponent implements OnInit {
     this.data ? this.editFlag = true : ''
     this.postNewJobFrm = this.fb.group({
       id: [this.editFlag ? this.data.jobpostId : 0],
-      job_Title: [this.editFlag ? this.data.job_Title : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'),Validators.maxLength(50)]],
-      job_Location: [this.editFlag ? this.data.job_Location : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'),Validators.maxLength(50)]],
-      date_of_Application: [this.editFlag ? this.data.date_of_Application : '', [Validators.required,Validators.maxLength(50)]],
-      job_Description: [this.editFlag ? this.data.job_Description : '', [Validators.required,Validators.maxLength(50)]],
-      roles_and_Responsibility: [this.editFlag ? this.data.roles_and_Responsibility : '', [Validators.required,Validators.maxLength(500)]],
-      qualification: [this.editFlag ? this.data.qualification : '', [Validators.required,Validators.maxLength(50)]],
-      experience: [this.editFlag ? this.data.experience : '', [Validators.required]],
-      skills_Required: [this.editFlag ? this.data.skills_Required : '', [Validators.required,Validators.maxLength(50)]],
+      job_Title: [this.editFlag ? this.data.job_Title : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'), Validators.maxLength(150)]],
+      job_Location: [this.editFlag ? this.data.job_Location : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'), Validators.maxLength(150)]],
+      date_of_Application: [this.editFlag ? this.data.date_of_Application : '', [Validators.required, Validators.maxLength(50)]],
+      job_Description: [this.editFlag ? this.data.job_Description : '', [Validators.required, Validators.maxLength(500)]],
+      roles_and_Responsibility: [this.editFlag ? this.data.roles_and_Responsibility : '', [Validators.required, Validators.maxLength(1500)]],
+      qualification: [this.editFlag ? this.data.qualification : '', [Validators.required, Validators.maxLength(300)]],
+      experience: [this.editFlag ? this.data.experience : '', [Validators.required, , Validators.maxLength(300)]],
+      skills_Required: [this.editFlag ? this.data.skills_Required : '', [Validators.required, Validators.maxLength(1500)]],
       publish: [this.editFlag ? true : false]
     });
   }

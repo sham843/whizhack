@@ -41,8 +41,8 @@
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
-                            <input matInput placeholder="Enter Course Duration" formControlName="duration" maxlength="10"
-                                (keypress)="vadations.onlyDigits($event)">
+                            <input matInput placeholder="Enter Course Duration" formControlName="duration" maxlength="50"
+                                (keypress)="vadations.noFirstSpaceAllow($event);vadations.alphaNumericWithSpacesWithSomeSpecChars($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
                                 Course Duration is Required
                             </mat-error>
@@ -118,7 +118,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Discount Price</mat-label>
                             <input matInput placeholder="Enter Discount Price" formControlName="actual_price" maxlength="10"
-                                (keypress)="vadations.onlyDigits($event)">
+                                (keypress)="vadations.onlydigitsWithDec($event)">
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
                             </mat-error>
@@ -151,8 +151,8 @@
     <div class="col-sm-8">
         <div class="card form-card">
             <div class="card-header">Course List</div>
-            <div class="row">
-                <div class="col-4">
+            <div class="row justify-content-end">
+                <div class="col-4 text-end">
 
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Search By Course Title</mat-label>
