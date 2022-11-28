@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+// import { WebStorageService } from 'src/app/core/services/web-storage.service';
 
 
 @Component({
@@ -142,6 +143,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.timeLeft = --this.timeLeft
       }
     }, 1000);
+
   }
 
   pauseTimer() {
