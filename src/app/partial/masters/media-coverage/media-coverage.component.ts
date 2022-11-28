@@ -48,7 +48,7 @@ export class MediaCoverageComponent implements OnInit {
       url: ['', [Validators.required,Validators.pattern('^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$')]],
     })
   }
-
+  //^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$ (https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?
   onClickPaginatior(event: any) {
     this.currentPage = event.pageIndex;
     this.getMediaList();
@@ -118,7 +118,7 @@ export class MediaCoverageComponent implements OnInit {
   deleteMediaRecord(data: any, formDirective?: any) {
     let dialoObj = {
       header: 'Delete',
-      title: 'Do you want to delete the selected record ?',
+      title: 'Are you sure, you want to Delete ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
     }
