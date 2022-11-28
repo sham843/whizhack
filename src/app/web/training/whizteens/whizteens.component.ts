@@ -35,10 +35,8 @@ whizteenexclusiveArray=new Array();
       this.getAllCoursesData.forEach((ele:any)=>{
         if(ele.pageName=='WhizTeens '){
           ele.exclusive_offer==0?this.whizteenArray.push(ele):this.whizteenexclusiveArray.push(ele);
-          
         }
       })
     })
-    console.log("whit",this.whizteenArray,"exclu",this.whizteenexclusiveArray)
   }
 }
