@@ -322,3 +322,7 @@ a.text-main:hover{
 .mat-paginator-page-size {
   display: none !important;
 }
+.textareaheight{
+  resize:none !important;
+  height: 20vh !important;
+}

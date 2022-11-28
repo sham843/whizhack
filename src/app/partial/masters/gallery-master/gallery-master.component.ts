@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-gallery-master',
@@ -54,10 +55,10 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   UpdateObj: any;
 
   //#region selected Row variables
-  highlightedRow:any;
+  highlightedRow: any;
 
-//#region light box variables
-items!: GalleryItem[];
+  //#region light box variables
+  items!: GalleryItem[];
 
   constructor(private fb: FormBuilder,
     public vs: FormValidationService,
@@ -67,6 +68,7 @@ items!: GalleryItem[];
     public _webStorageService: WebStorageService,
     private api: ApiService,
     public gallery: Gallery,
+    private spinner: NgxSpinnerService,
     public lightbox: Lightbox,
     public dialog: MatDialog) { }
 
@@ -78,8 +80,8 @@ items!: GalleryItem[];
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
-      gallery_description: ['', [Validators.required,Validators.pattern(this.vs.valDescription)]],
+      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription)]],
+      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription)]],
       uploadImages: [''],
     })
   }
@@ -120,25 +122,29 @@ items!: GalleryItem[];
 
   //#region   GalleryList
   getGalleryList() {
+    this.spinner.show();
     let serachValue = this._commonMethodService.checkDataType(this.searchFilter.value?.trim()) ? this.searchFilter.value : '';
     this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery?' + "pageno=" + this.currentPage + "&pagesize=" + this.perPage + "&gallery_Title=" + serachValue, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          this.dataSource = new MatTableDataSource(res.responseData);
-          this.totalCount = res.responseData1.pageCount;
+          this.spinner.hide();
+          this.dataSource = new MatTableDataSource(res.responseData.responseData1);
+          this.totalCount = res.responseData.responseData2?.pageCount;
           this.currentPage == 1 ? this.paginator?.firstPage() : '';
+
         } else {
+
           this.dataSource = [];
           this.totalCount = 0
           if (res.statusCode != 404) {
             this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
           }
-
+          this.spinner.hide();
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this._errorService.handelError(error.status); this.spinner.hide();
       }
     })
   }
@@ -183,7 +189,7 @@ items!: GalleryItem[];
       !this.imageArray.length ? this.showImagError = "Images is required" : this.showImagError = '';
       return;
     }
-
+    this.spinner.show();
     let formData = this.frmGallery.value;
     let imagepath: string = '';
     this.imageArray.map((ele: any) => { imagepath += ele + "," });
@@ -205,20 +211,23 @@ items!: GalleryItem[];
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
+          this.spinner.hide();
           this._commonMethodService.matSnackBar(res.statusMessage, 0);
           formType == 'post' ? this.currentPage = 1 : '';
           this.clearGalleryForm();
           this.getGalleryList();
         } else {
+          this.spinner.hide();
           this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this._errorService.handelError(error.status); this.spinner.hide();
       }
     })
 
   }
+//#endregion
 
 //#region  Onclick Update Button
   editGalleryRecord(data: any) {
@@ -231,9 +240,9 @@ items!: GalleryItem[];
     });
     this.imageArray = data.imagepaths;
   }
-//#endregion
+  //#endregion
 
-//#region delete Record
+  //#region delete Record
   deleteGalleryRecord(data: any) {
     this.createMediaForm();
     this.imageArray = [];
@@ -255,26 +264,28 @@ items!: GalleryItem[];
           "id": data.galleryId,
           "modifiedBy": this._webStorageService.getUserId(),
         }
-
+        this.spinner.show();
         this.api.setHttp('delete', 'whizhack_cms/Gallery/Delete', false, deleteObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
+              this.spinner.hide();
               this._commonMethodService.matSnackBar(res.statusMessage, 0);
               this.getGalleryList();
             } else {
+              this.spinner.hide();
               this._commonMethodService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this._commonMethodService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
-            console.log(error);
+            this._errorService.handelError(error.status); this.spinner.hide();
           }
         })
       }
     });
 
   }
-//#endregion
+  //#endregion
 
   //#region Clear Form And Validation
   clearGalleryForm() {
@@ -284,14 +295,14 @@ items!: GalleryItem[];
     this.showImagError = '';
     this.imageArray = [];
     this.UpdateObj = '';
-    this.highlightedRow='';
+    this.highlightedRow = '';
   }
   //#endregion
 
   //#region light box code start here
-  openBox(data:any){
+  openBox(data: any) {
     this.lightbox.open(0, 'lightbox')
-    this.items = data.imagepaths.map((item:any) =>  new ImageItem({ src: item, thumb: item }));
+    this.items = data.imagepaths.map((item: any) => new ImageItem({ src: item, thumb: item }));
     this.basicLightboxExample();
     this.withCustomGalleryConfig()
   }

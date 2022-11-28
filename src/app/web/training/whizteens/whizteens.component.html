@@ -40,7 +40,48 @@
                     from home.
                 </p>
                 <div class="row gx-3 courses">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" *ngFor="let whizteen of whizteenArray">
+                        <div class="card h-100">
+                            <img src="{{whizteen.imagePath}}" alt="Product" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="course-name">
+                                    {{whizteen.course_Title}}
+                                </h5>
+                                <p class="course-type fw-bold">
+                                    {{whizteen.course_Caption}}
+                                </p>
+                                <p class="duration">
+                                    {{whizteen.course_Description}}
+                                </p>
+                                <h6 class="duration-label">
+                                    Duration:
+                                </h6>
+                                <p class="duration">
+                                    {{whizteen.duration}}
+                                </p>
+                                <h6 class="duration-label">
+                                    Syllabus :
+                                </h6>
+                                <div class="duration">
+                                    {{whizteen.syllabus_Summary}} 
+                                </div>
+
+                            </div>
+                            <div class="card-footer p-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h6 class="duration-label">Price:</h6>
+                                        <h6 class="price">Rs.  {{whizteen.price}}/- <br> <small>({{whizteen.price_Terms}})</small></h6>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-more" (click)="openDialog(whizteen)">Register
+                                            Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
                         <div class="card h-100">
                             <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
                             <div class="card-body">
@@ -80,7 +121,7 @@
                                         <h6 class="price">Rs. 999/- <br> <small>(inclusive of all taxes)</small></h6>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-more" (click)="openDialog(1)">Register
+                                        <button type="button" class="btn btn-more" (click)="openDialog('1')">Register
                                             Now</button>
                                     </div>
                                 </div>
@@ -196,7 +237,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -215,7 +256,34 @@
                     from home.
                 </p> -->
                 <div class="row gx-5 courses">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" *ngFor="let exclusiveData of whizteenexclusiveArray">
+                        <div class="card h-100">
+                            <img src="{{exclusiveData.imagePath}}" alt="Product" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="course-name">
+                                    {{exclusiveData.course_Title}}
+                                </h5>
+                                <p class="course-type">
+                                    {{exclusiveData.course_Caption}}
+                                </p>
+
+                                <p class="course-type mb-0">
+                                    Combo Total without discount -
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h6 class="price">Rs. {{exclusiveData.price}}/-</h6>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-more" (click)="openDialog(exclusiveData.course_Title)">
+                                            Register Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
                         <div class="card h-100">
                             <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
                             <div class="card-body">
@@ -273,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
