@@ -32,7 +32,7 @@
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             Email ID is Required.</span>
                         <span class="text-danger" *ngIf="f.email.errors?.pattern">
-                            Please enter Valid Email ID</span>
+                            Please Enter Valid Email ID</span>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -43,7 +43,7 @@
                         (keypress)="validator.acceptedOnlyNumbers($event)" maxlength="10">
                     <mat-error class="mt-2" *ngIf="f.mobileNo.errors">
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.required">
-                            Mobile No is required.</span>
+                            Mobile No is Required.</span>
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
                             Please Enter Valid Mobile No</span>
                     </mat-error>
