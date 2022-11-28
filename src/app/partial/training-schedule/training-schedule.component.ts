@@ -67,9 +67,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       duration: ['', Validators.required],
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
-      price: ['', [Validators.required,Validators.pattern(/^\d*(\.)?(\d{0,3})?$/), Validators.maxLength(10)]],
+      price: ['', [Validators.required, Validators.pattern(/^\d*(\.)?(\d{0,3})?$/), Validators.maxLength(10)]],
       price_Terms: ['', [Validators.required, Validators.maxLength(10)]],
-      imagePath: ['',Validators.required],
+      imagePath: ['', Validators.required],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
   }
@@ -89,16 +89,19 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       debounceTime(1000),
       distinctUntilChanged())
       .subscribe(() => {
-          this.currentPage = 0;
-          this.imgSrc = '';
-          this.file.nativeElement.value = '';
-          this.editFlag = false;
-          this.courseManageFormData();
-          this.getAllCourseList();
+        // this.selRow = 0
+        // this.currentPage = 0;
+        // this.imgSrc = '';
+        // this.file.nativeElement.value = '';
+        // this.editFlag = false;
+        this.clearForm()
+        this.courseManageFormData();
+        this.getAllCourseList();
       })
   }
 
   clearSearchFilter() {
+    this.selRow = 0
     this.searchFilter.setValue('');
   }
 
@@ -117,7 +120,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         }
       }),
       error: (error: any) => {
-        this.dataSource = [];        
+        this.dataSource = [];
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
     })
@@ -129,7 +132,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.pageNameArray = res.responseData;
-          this.editFlag ?  this.courseManageForm.controls['pageName'].setValue(this.globalObj?.pageName):'';
+          this.editFlag ? this.courseManageForm.controls['pageName'].setValue(this.globalObj?.pageName) : '';
         } else {
           this.pageNameArray = []
         }
@@ -259,7 +262,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         ... this.courseManageForm.value
       }
       submitObj.exclusive_offer = this.offer ? 1 : 0;
-      submitObj.actual_price  =  submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
+      submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
       let url = this.editFlag ? 'whizhack_cms/course/Update' : 'whizhack_cms/course/Insert'
 
       this.api.setHttp(this.editFlag ? 'put' : 'post', url, false, submitObj, false, 'whizhackService');
