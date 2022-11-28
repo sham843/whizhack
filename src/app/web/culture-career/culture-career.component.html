@@ -110,11 +110,12 @@
                     <div class="albums-tab">
                         <div class="albums-tab-thumb sim-anim-1">
                             <ng-container *ngFor="let x of item?.imageArray">
-                                <img src="{{x}}" class="all studio" />
+                                <img src="{{x}}" class="all studio"  loading="lazy"/>
                             </ng-container>
                         </div>
                     </div>
                 </div>
+
             </ng-container>
         </div>
 
