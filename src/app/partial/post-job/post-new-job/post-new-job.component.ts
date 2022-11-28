@@ -79,10 +79,10 @@ export class PostNewJobComponent implements OnInit {
       return;
     } else {
       let data = this.postNewJobFrm.value;
-      data.publish = false;
+       data.publish = false;
       data.date_of_Posting = new Date();
       this.editFlag ? '' : data.id = 0;
-
+     
       let obj = {
         "createdBy": this.webStorageService.getUserId(),
         "modifiedBy": this.webStorageService.getUserId(),
@@ -90,7 +90,7 @@ export class PostNewJobComponent implements OnInit {
         "modifiedDate": new Date(),
         "isDeleted": false,
       }
-      let mainData = { ...obj, ...data };
+      let mainData = { ...obj, ...data};
       let url
       this.editFlag ? url = 'whizhack_cms/postjobs/Update' : url = 'whizhack_cms/postjobs/Insert'
 
@@ -98,6 +98,7 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
+            console.log("response",res);
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();

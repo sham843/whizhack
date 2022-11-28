@@ -83,9 +83,7 @@
                             <mat-error class="mt-2">
                                 <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited">
                                     Roles & Responsibility is Required</div>
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['roles_and_Responsibility'].hasError('maxlength')">
-                                Please Enter Maximum 50 Character
+                                <div *ngIf="f['roles_and_Responsibility'].hasError('maxlength') && submited">Please Enter Maximum 1500 Character</div>
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
@@ -93,8 +91,9 @@
                             <angular-editor formControlName="experience" [config]="editorConfig"
                                 placeholder="Enter Experience Here...">
                             </angular-editor>
-                            <mat-error class="mt-2" *ngIf="f['experience'].hasError('required') && submited">
-                                Experience Is Required
+                            <mat-error class="mt-2" >
+                                <div *ngIf="f['experience'].hasError('required') && submited">Experience Is Required</div>
+                                <div *ngIf="f['experience'].hasError('maxlength') && submited">Please Enter Maximum 300 Character</div>
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
@@ -102,11 +101,9 @@
                             <angular-editor formControlName="qualification" [config]="editorConfig"
                                 placeholder="Enter Qualifications Here...">
                             </angular-editor>
-                            <mat-error class="mt-2" *ngIf="f['qualification'].hasError('required') && submited">
-                                Qualification Is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['qualification'].hasError('maxlength')">
-                                Please Enter Maximum 50 Character
+                            <mat-error class="mt-2" >
+                                <div *ngIf="f['qualification'].hasError('required') && submited">Qualification Is Required</div>
+                                <div *ngIf="f['qualification'].hasError('maxlength') && submited">Please Enter Maximum 300 Character</div>
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
@@ -114,13 +111,10 @@
                             <angular-editor formControlName="skills_Required" [config]="editorConfig"
                                 placeholder="Enter Skills Here...">
                             </angular-editor>
-                            <mat-error class="mt-2" *ngIf="f['skills_Required'].hasError('required') && submited">
-                                Skills Is Required
+                            <mat-error class="mt-2">
+                                <div *ngIf="f['skills_Required'].hasError('required') && submited">Skills Is Required</div>
+                                <div *ngIf="f['skills_Required'].hasError('maxlength') && submited">Please Enter Maximum 1500 Character</div>
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['skills_Required'].hasError('maxlength')">
-                                Please Enter Maximum 50 Character
-                            </mat-error>
-
                         </div>
                     </div>
                 </div>
