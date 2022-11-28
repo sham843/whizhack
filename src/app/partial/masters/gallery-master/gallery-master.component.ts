@@ -186,7 +186,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Images is required" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Images Is Required" : this.showImagError = '';
       return;
     }
     this.spinner.show();
