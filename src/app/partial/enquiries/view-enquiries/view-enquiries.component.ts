@@ -13,7 +13,7 @@ export class ViewEnquiriesComponent implements OnInit {
 
   constructor(private errorSer: ErrorHandlerService, private service: ApiService, public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private common: CommonMethodService,
     private http: HttpClient) { }
-    viewData: any
+    viewData:any
     deviceDataarray = new Array();
     deviceIpAddress: any;
     ipAddress: any;
