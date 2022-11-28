@@ -299,7 +299,6 @@ export class BlogMasterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.selRow = 0
       if (result == 'yes') {
          this.deleteBlogregister();
       } else {
