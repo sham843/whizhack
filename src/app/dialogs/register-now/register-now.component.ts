@@ -31,11 +31,11 @@ export class RegisterNowComponent implements OnInit {
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$')]],
-      email: ['', [Validators.required, Validators.email]],
+      fullName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$'),Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$')]],
       mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
       courseId: [this.data == 1 ? 'Cyber Ninja' : this.data == 2 ? 'Cyber Samurai' : this.data == 3 ? 'Cyber Guru' : this.data == 4 ? 'Cyber Security Training Program' : 'Cyber Security Training Program'],
-      message: ['', [Validators.required]],
+      message: ['', [Validators.required,Validators.maxLength(500)]],
       pageName: ['']
     })
   }
