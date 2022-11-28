@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
-                            <input matInput placeholder="Enter Course Title" formControlName="course_Title" maxlength="20"
+                            <input matInput placeholder="Enter Course Title" formControlName="course_Title" maxlength="50"
                             (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Course Title is Required
@@ -102,7 +102,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
-                            <input matInput placeholder="Enter Price" formControlName="price"
+                            <input matInput placeholder="Enter Price" formControlName="price" maxlength="10"
                                 (keypress)="vadations.onlydigitsWithDec($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Price is Required
@@ -117,7 +117,7 @@
                     <div class="mb-3" *ngIf="offer">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Discount Price</mat-label>
-                            <input matInput placeholder="Enter Actual Price" formControlName="actual_price" maxlength="10"
+                            <input matInput placeholder="Enter Discount Price" formControlName="actual_price" maxlength="10"
                                 (keypress)="vadations.onlyDigits($event)">
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
