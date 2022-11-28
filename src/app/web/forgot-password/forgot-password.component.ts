@@ -44,6 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.defaultForm();
+    this.startTimer();
   }
 
   defaultForm() {
@@ -101,14 +102,25 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
   startTimer() {
-    this.interval = setInterval(() => {
+  /*   this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
         this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false) : ''
       } else {
         this.timeLeft = 60;
       }
-    }, 1000)
+    }, 1000) */
+    this.timeLeft = 60;
+    const resendOtpInterval = setInterval(() => {
+      if (this.timeLeft < 1) {
+        clearInterval(resendOtpInterval);
+        this.otpStatus = false
+      }
+      else {
+        this.otpStatus = true;
+        this.timeLeft= --this.timeLeft 
+      }
+    }, 1000);
   }
 
   pauseTimer() {

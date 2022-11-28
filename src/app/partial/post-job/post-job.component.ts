@@ -103,7 +103,7 @@ export class PostJobComponent implements OnInit {
           "publish": element.publish ? false : true
         }
 
-        this.service.setHttp('put', 'whizhack_cms/postjobs/UpdatePublish', false, isPublishFlag, false, 'whizhackService');
+        this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish', false, isPublishFlag, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
@@ -145,7 +145,7 @@ export class PostJobComponent implements OnInit {
           "modifiedBy": 0,
         }
 
-        this.service.setHttp('delete', 'whizhack_cms/postjobs/Delete', false, deleteObj, false, 'whizhackService');
+        this.service.setHttp('delete','whizhack_cms/postjobs/Delete', false, deleteObj, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
