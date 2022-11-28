@@ -125,8 +125,8 @@ items!: GalleryItem[];
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-          this.dataSource = new MatTableDataSource(res.responseData);
-          this.totalCount = res.responseData1.pageCount;
+          this.dataSource = new MatTableDataSource(res.responseData.responseData1);
+          this.totalCount = res.responseData.responseData2?.pageCount;
           this.currentPage == 1 ? this.paginator?.firstPage() : '';
         } else {
           this.dataSource = [];

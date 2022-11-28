@@ -71,12 +71,12 @@
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.action}}
-                            <button mat-icon-button class="text-warning" (click)="editMediaRecord(element)">
+                            <button mat-icon-button class="text-warning" (click)="editMediaRecord(element)" matTooltip="Edit">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger" (click)="deleteMediaRecord(element)">
+                            <button mat-icon-button class="text-danger" (click)="deleteMediaRecord(element)" matTooltip="Delete">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
