@@ -26,9 +26,11 @@
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailRegex($event)">
+                    <input matInput placeholder="Enter Email ID" formControlName="email">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
+                            *Email Id is Required.</span>
+                        <span class="text-danger" *ngIf="f.email.errors?.pattern">
                             *Please Enter Valid Email ID</span>
                     </mat-error>
                 </mat-form-field>
