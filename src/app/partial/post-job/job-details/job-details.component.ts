@@ -8,9 +8,9 @@ import {MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class JobDetailsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<JobDetailsComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: any
-              ) { }
-newArray = [this.data];
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  newArray = [this.data];
   ngOnInit(): void {
     //  console.log("data",this.data)
   }

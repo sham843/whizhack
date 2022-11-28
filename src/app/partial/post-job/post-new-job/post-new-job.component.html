@@ -14,15 +14,14 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Job Title</mat-label>
-                            <input matInput placeholder="Enter Job Title Here..." formControlName="job_Title" maxlength="50"
-                                [value]="postNewJobFrm.get('job_Title')?.value | titlecase"
+                            <input matInput placeholder="Enter Job Title Here..." formControlName="job_Title"
+                                maxlength="50" [value]="postNewJobFrm.get('job_Title')?.value | titlecase"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2">
                                 <div
                                     *ngIf="(f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')) && submited">
                                     Job Title Is Required</div>
-                                <div
-                                    *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">
+                                <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">
                                     Please Enter Valid Job Title.
                                 </div>
                             </mat-error>
@@ -42,7 +41,7 @@
                                     Please Enter Valid Job Location
                                 </div>
                             </mat-error>
-                           </mat-form-field>
+                        </mat-form-field>
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
@@ -81,8 +80,7 @@
                                 <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited">
                                     Roles & Responsibility is Required</div>
                             </mat-error>
-                            <mat-error class="mt-2"
-                                *ngIf="f['roles_and_Responsibility'].hasError('maxlength')">
+                            <mat-error class="mt-2" *ngIf="f['roles_and_Responsibility'].hasError('maxlength')">
                                 Please Enter Maximum 50 Character
                             </mat-error>
                         </div>
@@ -91,8 +89,7 @@
                             <angular-editor formControlName="experience" [config]="editorConfig"
                                 placeholder="Enter Experience Here...">
                             </angular-editor>
-                            <mat-error class="mt-2"
-                                *ngIf="f['experience'].hasError('required') && submited">
+                            <mat-error class="mt-2" *ngIf="f['experience'].hasError('required') && submited">
                                 Experience Is Required
                             </mat-error>
                         </div>
@@ -101,13 +98,11 @@
                             <angular-editor formControlName="qualification" [config]="editorConfig"
                                 placeholder="Enter Qualifications Here...">
                             </angular-editor>
-                            <mat-error class="mt-2"
-                                *ngIf="f['qualification'].hasError('required') && submited">
+                            <mat-error class="mt-2" *ngIf="f['qualification'].hasError('required') && submited">
                                 Qualification Is Required
                             </mat-error>
-                            <mat-error class="mt-2"
-                                *ngIf="f['qualification'].hasError('maxlength')">
-                                Please Enter Maximum 50  Character
+                            <mat-error class="mt-2" *ngIf="f['qualification'].hasError('maxlength')">
+                                Please Enter Maximum 50 Character
                             </mat-error>
                         </div>
                         <div class="col-sm-6">
@@ -115,13 +110,11 @@
                             <angular-editor formControlName="skills_Required" [config]="editorConfig"
                                 placeholder="Enter Skills Here...">
                             </angular-editor>
-                            <mat-error class="mt-2"
-                                *ngIf="f['skills_Required'].hasError('required') && submited">
+                            <mat-error class="mt-2" *ngIf="f['skills_Required'].hasError('required') && submited">
                                 Skills Is Required
                             </mat-error>
-                            <mat-error class="mt-2"
-                                *ngIf="f['skills_Required'].hasError('maxlength')">
-                                Please Enter Maximum 50  Character
+                            <mat-error class="mt-2" *ngIf="f['skills_Required'].hasError('maxlength')">
+                                Please Enter Maximum 50 Character
                             </mat-error>
 
                         </div>
@@ -130,11 +123,9 @@
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-between p-3">
-            <button mat-stroked-button class="btn-main-outline" type="button"
-                (click)="clearForm()">Clear</button>
+            <button mat-stroked-button class="btn-main-outline" type="button" (click)="clearForm()">Clear</button>
             <button mat-stroked-button class="btn-main" type="submit" (click)="onSubmit()">{{editFlag ?
                 'Update':'Submit'}}</button>
-           </div>
+        </div>
     </form>
 </div>
-
