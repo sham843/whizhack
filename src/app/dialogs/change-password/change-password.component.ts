@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { WebStorageService } from 'src/app/core/services/web-storage.service';
 
 @Component({
   selector: 'app-change-password',
@@ -12,21 +13,23 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-  hide = true;
-  hide1 = true;
-  hide2 = true;
-
+  hide: boolean = true;
+  hide1: boolean = true;
+  hide2: boolean = true;
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   registerForm!: FormGroup;
-  constructor(private fb: FormBuilder, private api: ApiService, 
-    public validations: FormValidationService, private common : CommonMethodService, private router : Router,
-    public dialogRef: MatDialogRef<ChangePasswordComponent>) { }
+  constructor(private fb: FormBuilder,
+    private api: ApiService,
+    public validations: FormValidationService,
+    private common: CommonMethodService,
+    private router: Router,
+    public dialogRef: MatDialogRef<ChangePasswordComponent>,
+    private webStorage:WebStorageService) { }
 
   ngOnInit(): void {
     this.defaultForm();
-  } 
+  }
   defaultForm() {
-    this.api;
-    this.common;
     this.registerForm = this.fb.group({
       currentPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
       newPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
@@ -36,37 +39,41 @@ export class ChangePasswordComponent implements OnInit {
 
   get fc() { return this.registerForm.controls };
 
-  
-  clearFields(){
-    this.fc['newPassword'].setValue('');
-    this.fc['retypePassword'].setValue('');
-  }
-
-
-  onCancel(clear: any) {
-    clear.resetForm();
-  }
-
-  onSumbit() {
-    // sessionStorage.clear();
-    // localStorage.clear();
-    // this.dialogRef.close();
-    // this.router.navigate(['/login']);   
-    let obj = this.registerForm.value;
-    obj.newPassword != obj.retypePassword ? this.common.matSnackBar('Password Did Not Match',1): '';
-    if (obj.newPassword == obj.retypePassword && this.registerForm.valid && obj.currentPassword != obj.newPassword) {
-      let loginObj = JSON.parse(localStorage.getItem('loggedInData') || '');
-      let id = loginObj.responseData[0].id;
-      this.api.setHttp('get', 'whizhack_cms/login/change-password/'+obj.currentPassword +'?UserId='+id+'&NewPassword=' + obj.newPassword , false, false, false, 'whizhackService');
-      this.api.getHttp().subscribe({
-        next: (res: any) => {
-             
-              res.responseData =='Password Changed Successfully...'? (this.common.matSnackBar(res.responseData, 0), sessionStorage.clear(), localStorage.clear(), this.dialogRef.close(), this.router.navigate(['/login'])) : (this.common.matSnackBar(res.responseData, 1), this.clearFields());
-        }
-      })
+  onSumbit(formDirective: any) {
+    if (this.registerForm.invalid) {
+      return
     }
     else {
-      return;
-    }
+      if(this.registerForm.value.currentPassword == this.registerForm.value.newPassword){
+        this.common.matSnackBar("New Password must be different from Current Password.", 1);
+        return
+      }
+      else if (this.registerForm.value.newPassword != this.registerForm.value.retypePassword){
+        this.common.matSnackBar('New Password and Confirm Password does not match', 1)
+        return
+      }
+      else{
+        let obj = this.registerForm.value;
+        this.api.setHttp('get', 'whizhack_cms/login/change-password/' + obj.currentPassword + '?UserId=' +this.webStorage.getUserId()+ '&NewPassword=' + obj.newPassword, false, false, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: (res: any) => {
+            if (res.responseData == 'Password Changed Successfully...') {
+              this.common.matSnackBar(res.responseData, 0);
+              this.dialogRef.close(); 
+              sessionStorage.clear(); localStorage.clear();
+              this.router.navigate(['/login']);
+              formDirective.resetForm();
+            } else {
+              this.common.matSnackBar(res.responseData, 1);
+              formDirective.resetForm();
+            }
+          }
+        })
+      }
+    }  
+  }
+  clearFields(formDirective?: any) {
+    this.defaultForm();
+    formDirective.resetForm();
   }
 }
