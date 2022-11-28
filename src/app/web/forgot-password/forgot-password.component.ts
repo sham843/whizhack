@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
@@ -17,13 +18,15 @@ export class ForgotPasswordComponent implements OnInit {
   userId: number = 0;
   userName: string = '';
   otpStatus: boolean = false;
-  registerForm!: FormGroup;
-  displayFields: boolean = false;
-  displayFields1: boolean = false;
-  displayFields2: boolean = true;
-
+  emailVerifyForm!: FormGroup;
+  otpVerifyForm!: FormGroup;
+  passwordForm!: FormGroup;
+  verifyOTPField: boolean = false;
+  passwordField: boolean = false;
+  emailField: boolean = true;
   timeLeft: number = 60;
   interval: any;
+  emailId:any;
   obj = {
     "createdBy": 0,
     "modifiedBy": 0,
@@ -39,77 +42,95 @@ export class ForgotPasswordComponent implements OnInit {
     "isUser": true
   }
   stringOtp: string = '';
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   constructor(private fb: FormBuilder, private api: ApiService,
-    public validations: FormValidationService, private common: CommonMethodService) { }
+    public validations: FormValidationService, private common: CommonMethodService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.defaultForm();
-    this.startTimer();
   }
 
   defaultForm() {
-    this.registerForm = this.fb.group({
+    this.emailVerifyForm = this.fb.group({
       "mobile": [""],
       "email": ["", [Validators.required, Validators.pattern(this.validations.valEmailId)]],
+    })
+    this.otpVerifyForm = this.fb.group({
       "digitOne": ["", Validators.required],
       "digitTwo": ["", Validators.required],
       "digitThree": ["", Validators.required],
       "digitFour": ["", Validators.required],
       "digitFive": ["", Validators.required],
+    })
+    this.passwordForm = this.fb.group({
       "passwordNew": ["", [Validators.required, Validators.pattern(this.validations.valPassword)]],
       "retypePassword": ["", [Validators.required, Validators.pattern(this.validations.valPassword)]]
     })
   }
 
-  get fc() { return this.registerForm.controls };
+  get fe() { return this.emailVerifyForm.controls };
+  get fo() { return this.otpVerifyForm.controls };
+  get fp() { return this.passwordForm.controls };
 
   clearFormFields() {
-    this.fc['digitOne'].setValue(''); this.fc['digitTwo'].setValue(''); this.fc['digitThree'].setValue('');
-    this.fc['digitFour'].setValue(''), this.fc['digitFive'].setValue('')
+    this.fo['digitOne'].setValue(''); this.fo['digitTwo'].setValue(''); this.fo['digitThree'].setValue('');
+    this.fo['digitFour'].setValue(''), this.fo['digitFive'].setValue('')
   }
 
-  sendOTP() {
-    let objj = this.registerForm.value;
-    objj.email.length < 1 ? this.common.matSnackBar('Please Enter Email Id', 1) : '';
-    this.obj.emailId = objj.email;
-    if (this.fc['email'].valid){
-      this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
-    this.api.getHttp().subscribe({
-      next: (res: any) => {
-        res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), this.displayFields = true,this.displayFields2 = false,this.otpStatus = true) : '';
-        res.statusCode == 404 ? (this.common.matSnackBar(res.statusMessage, 1) ): '';
+  sendOTP(formDirective?: any) {
+    if (this.emailVerifyForm.value.email.invalid) {
+      return
+    }
+    else {
+      this.obj.emailId = this.emailVerifyForm.value.email;
+      if (this.fe['email'].valid) {
+        this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: (res: any) => {
+            if (res.statusCode == 200) {
+              this.common.matSnackBar(res.statusMessage, 0);
+              this.emailId=this.obj.emailId;
+              this.verifyOTPField = true; this.emailField = false, this.otpStatus = true;
+              this.startTimer();
+              // formDirective.resetForm();
+            }
+            else {
+              this.common.matSnackBar(res.statusMessage, 1);
+              formDirective.resetForm();
+            }
+          }
+        })
       }
-    })
+    }
   }
-}
-
-  verifyOTP() {
-    let obj = this.registerForm.value;
-    let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
-    this.stringOtp = otp.toString();
-    this.obj.otp = this.stringOtp;
-    this.timeLeft == 0 ? (this.obj.otp = this.stringOtp = '', this.common.matSnackBar('Please enter Valid OTP', 1)) : '';
-    this.fc['digitOne'].invalid ? this.common.matSnackBar('Please enter  OTP', 1) : ''
-    if (this.obj.otp) {
+  verifyOTP(formDirective:any) {
+    if (this.otpVerifyForm.value.digitOne.invalid || this.otpVerifyForm.value.digitTwo.invalid || this.otpVerifyForm.value.digitThree.invalid ||
+      this.otpVerifyForm.value.digitFour.invalid || this.otpVerifyForm.value.digitFive.invalid) {
+      return
+    }
+    else {
+      let otp = this.otpVerifyForm.value.digitOne + this.otpVerifyForm.value.digitTwo + this.otpVerifyForm.value.digitThree + this.otpVerifyForm.value.digitFour + this.otpVerifyForm.value.digitFive;
+      this.obj.otp = otp.toString();
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 ? this.common.matSnackBar(res.statusMessage, 0) : '';
-          res.statusCode == 200 ? (this.displayFields1 = true, this.startTimer(), this.displayFields = false) : false;
-          res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1), this.clearFormFields(), this.pauseTimer()) : '';
+          if (res.statusCode == '200') {
+            this.common.matSnackBar(res.statusMessage, 0);
+            this.passwordField = true; this.startTimer(); this.verifyOTPField = false;
+            formDirective.resetForm();
+          }
+          else {
+            this.common.matSnackBar(res.statusMessage, 1);
+            this.clearFormFields();
+            this.timeLeft = 0;
+            formDirective.resetForm();
+          }
         }
-      }) 
+      })
     }
   }
   startTimer() {
-  /*   this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
-        this.timeLeft == 0 ? (this.pauseTimer(), this.otpStatus = false) : ''
-      } else {
-        this.timeLeft = 60;
-      }
-    }, 1000) */
     this.timeLeft = 60;
     const resendOtpInterval = setInterval(() => {
       if (this.timeLeft < 1) {
@@ -118,7 +139,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
       else {
         this.otpStatus = true;
-        this.timeLeft= --this.timeLeft 
+        this.timeLeft = --this.timeLeft
       }
     }, 1000);
   }
@@ -127,31 +148,33 @@ export class ForgotPasswordComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  getUserName() {
-    let obj = this.registerForm.value;
-    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
+  getUserName(formDirective:any) {
+    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + this.emailId, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
         res.statusCode == 200 ? this.userName = res.responseData[0].userName : '';
+        this.onSumbit(formDirective);
       }
     })
   }
 
-  onSumbit(clear: any) {
-    let obj = this.registerForm.value;
-    let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
-    this.stringOtp = otp.toString();
-    obj.otp = this.stringOtp;
-    obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1) : ''
-    if (obj.passwordNew == obj.retypePassword) {
-      this.getUserName();
-      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.newPassword+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
-      this.api.getHttp().subscribe({
-        next: (res: any) => {
-          res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
-          res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 1) : '';
-        }
-      })
+  onSumbit(formDirective: any) {
+    if(this.passwordForm.value.passwordNew != this.passwordForm.value.retypePassword){
+      this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1);
+      return
+    }else{
+      let obj = this.passwordForm.value;
+        this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + 'anand@gmail.com' + '&Password=' + 'Admin@123' + '&NewPassword=' + obj.retypePassword + '&EmailId=' + this.emailId, false, false, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: (res: any) => {
+            if(res.statusCode == '200'){
+              this.common.matSnackBar(res.statusMessage, 0);formDirective.resetForm();this.verifyOTPField = false;this.passwordField = false;
+              this.router.navigate(['../login'])
+            }else{
+              this.common.matSnackBar(res.statusMessage, 1);
+            }
+          }
+        })
     }
   }
 }
