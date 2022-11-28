@@ -69,6 +69,8 @@ export class FormValidationService {
   }
 
   onlydigitsWithDec(event: any) {
+    if (event.target.selectionStart === 0 && (event.keyCode == 46)) return false;  // starting .Dot not accept
+    if (event.currentTarget.value.split('.').length - 1 == 1 && (event.keyCode == 46)) return false;  // double .Dot not accept
     const maskSeperator = new RegExp('^([0-9.])', 'g');
     return maskSeperator.test(event.key);
   }
