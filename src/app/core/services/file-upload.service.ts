@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { CommonMethodService } from './common-method.service';
@@ -11,6 +12,7 @@ export class FileUploadService {
 
   constructor(
     private apiService: ApiService,
+    private spinner: NgxSpinnerService,
     private commonService: CommonMethodService,
     private error: ErrorHandlerService) { }
 
@@ -61,7 +63,7 @@ export class FileUploadService {
 
 
   uploadMultipleDocument(event: any, _folderName?: any, allowedDocTypes?: any) {
-
+    this.spinner.show();
     let docTypeCheckFlag = true;
     return new Observable(obj => {
       const formData = new FormData();
@@ -72,40 +74,43 @@ export class FileUploadService {
             obj.error("Required file size should be less than " + 10 + " MB.");
             this.commonService.matSnackBar("Required file size should be less than " + 10 + " MB.", 1);
             docTypeCheckFlag = false;
+          } else {
+            formData.append("files", event.target.files[i]);
+            let nameText = event.target.files[i].name;
+            const selResult = nameText.split('.');
+            const docExt = selResult.pop();
+            const docExtLowerCase = docExt.toLowerCase();
+            if (allowedDocTypes.match(docExtLowerCase)) { }
+            else {
+              docTypeCheckFlag = false;
+            }
           }
         }
-        for (let j = 0; j < filesAmount; j++) {
 
-          console.log(event.target.files[j].size);
-          formData.append("files", event.target.files[j]);
-          let nameText = event.target.files[j].name;
-          const selResult = nameText.split('.');
-          const docExt = selResult.pop();
-          const docExtLowerCase =  docExt.toLowerCase();
-          if (allowedDocTypes.match(docExtLowerCase)) { }
-          else {
-            docTypeCheckFlag = false;
-          }
-        }
+
       }
 
       if (docTypeCheckFlag == true) {
-        this.apiService.setHttp('post', 'whizhack_cms/upload/upload-multiple-photos' , false, formData, false, 'whizhackService');
+        this.apiService.setHttp('post', 'whizhack_cms/upload/upload-multiple-photos', false, formData, false, 'whizhackService');
         this.apiService.getHttp().subscribe({
           next: (res: any) => {
             if (res.statusCode === "200") {
+              this.spinner.hide();
               obj.next(res);
             }
             else {
-              this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) :''// this.toastrService.error(res.statusMessage);
+              this.spinner.hide();
+              this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : ''// this.toastrService.error(res.statusMessage);
             }
           },
           error: ((error: any) => {
+            this.spinner.hide();
             this.error.handelError(error.status);
           })
         })
       }
       else {
+        this.spinner.hide();
         obj.error("Only " + allowedDocTypes + " file format allowed.");
         this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.", 1);
       }
