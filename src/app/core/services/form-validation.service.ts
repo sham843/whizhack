@@ -49,6 +49,12 @@ export class FormValidationService {
     return maskSeperator.test(event.key);
   }
 
+  alphaNumericWithSpacesWithSomeSpecChars(event: any) {
+    const maskSeperator = new RegExp('^([a-zA-Z0-9 /(,)&.+-])', 'g');
+    return maskSeperator.test(event.key);
+  }
+
+
   alphaNumericWithSpacesAndSpecChars(event: any) {
     if (!this.noSpacesAtStart(event)) {
       return false

@@ -142,7 +142,7 @@ export class ForgotPasswordComponent implements OnInit {
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
     obj.otp = this.stringOtp;
-    obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('Password did not match', 1) : ''
+    obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1) : ''
     if (obj.passwordNew == obj.retypePassword) {
       this.getUserName();
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.newPassword+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
