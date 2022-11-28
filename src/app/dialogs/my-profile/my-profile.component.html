@@ -15,9 +15,9 @@
                     (keypress)="validation.noSpaceAllow($event)">
                 <mat-error *ngIf="f.firstName.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.firstName.errors?.required">
-                        First Name is required.</span>
+                        First Name is Required.</span>
                     <span class="text-danger" *ngIf="f.firstName.errors?.pattern">
-                        Please enter Valid First Name</span>
+                        Please Enter Valid First Name</span>
                 </mat-error>
             </mat-form-field>
         </div>
@@ -28,9 +28,9 @@
                     (keypress)="validation.noSpaceAllow($event)">
                 <mat-error *ngIf="f.lastName.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.lastName.errors?.required">
-                        Last Name is required.</span>
+                        Last Name is Required.</span>
                     <span class="text-danger" *ngIf="f.lastName.errors?.pattern">
-                        Please enter Valid Last Name</span>
+                        Please Enter Valid Last Name</span>
                 </mat-error>
             </mat-form-field>
         </div>
@@ -41,9 +41,9 @@
                     (keypress)="validation.emailRegex($event)" maxlength="50">
                 <mat-error *ngIf="f.emailId.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.emailId.errors?.required">
-                        Email ID is required.</span>
+                        Email ID is Required.</span>
                     <span class="text-danger" *ngIf="f.emailId.errors?.pattern">
-                        Please enter Valid Email ID</span>
+                        Please Enter Valid Email ID</span>
                 </mat-error>
             </mat-form-field>
         </div>
@@ -54,9 +54,9 @@
                     (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
                 <mat-error *ngIf="f.contactNo.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.contactNo.errors?.required">
-                        Mobile No. is required.</span>
+                        Mobile No. is Required.</span>
                     <span class="text-danger" *ngIf="f.contactNo.errors?.pattern">
-                        Please enter Valid Mobile No.</span>
+                        Please Enter Valid Mobile No.</span>
                 </mat-error>
             </mat-form-field>
         </div>

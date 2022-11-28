@@ -67,7 +67,7 @@ export class PostJobComponent implements OnInit {
   }
   //----------------------------End Bind Table Logic Here------------------------
 
-  //----------------------------view logic start Here------------------------
+  //----------------------------View Logic Start Here------------------------
   openDialog1(obj?: any) {
     const dialogRef = this.dialog.open(JobDetailsComponent, {
       // height: '80%',
@@ -79,9 +79,9 @@ export class PostJobComponent implements OnInit {
       // console.log(`Dialog result: ${result}`);
     });
   }
-  //----------------------------view logic End Here------------------------
+  //----------------------------View Logic End Here------------------------
 
-  //----------------------------Publish Button Logic start Here--------------
+  //----------------------------Publish Button Logic Start Here--------------
   onClickToggle(element: any) {
     let dialoObj = {
       header: element.publish ? 'Unpublish' : 'Publish',
@@ -103,7 +103,7 @@ export class PostJobComponent implements OnInit {
           "publish": element.publish ? false : true
         }
 
-        this.service.setHttp('put', 'whizhack_cms/postjobs/UpdatePublish', false, isPublishFlag, false, 'whizhackService');
+        this.service.setHttp('put','whizhack_cms/postjobs/UpdatePublish', false, isPublishFlag, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
@@ -145,7 +145,7 @@ export class PostJobComponent implements OnInit {
           "modifiedBy": 0,
         }
 
-        this.service.setHttp('delete', 'whizhack_cms/postjobs/Delete', false, deleteObj, false, 'whizhackService');
+        this.service.setHttp('delete','whizhack_cms/postjobs/Delete', false, deleteObj, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
@@ -159,7 +159,7 @@ export class PostJobComponent implements OnInit {
       }
     });
   }
-  // ----------------------------End Delete Logic Here---------------------------
+  //----------------------------End Delete Logic Here---------------------------
 
  //-------------------------Add Button Dialog Box start---------------------------
  openPostJobDialog(obj?: any) {
@@ -174,17 +174,20 @@ export class PostJobComponent implements OnInit {
   }
 //-------------------------Add Button Dialog Box End-----------------------------
 
-  //------------------------------------Pagination Logic Start------------------------
+  //-----------------------Pagination Logic Start Here---------------------------
   paginationEvent(event: any) {
     // this.clearForm();
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.bindTable();
   }
+ //------------------------Pagination Logic End Here------------------------------
 
+ //------------------------Clear Form Logic Start Here----------------------------
   clearForm() {
     this.formDirective && this.formDirective.resetForm();
     this.editFlag = false;
     this.submited = false;
+//------------------------Clear Form Logic End  Here----------------------------
   }
 }

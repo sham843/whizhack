@@ -85,21 +85,17 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     let formValue = this.searchFilter.valueChanges;
-    console.log('formValue',formValue);
     formValue.pipe(
       filter(() => this.searchFilter.valid),
       debounceTime(1000),
       distinctUntilChanged())
-      .subscribe((res: any) => {
-        if (res !=' ') {
+      .subscribe(() => {
           this.currentPage = 0;
           this.imgSrc = '';
           this.file.nativeElement.value = '';
           this.editFlag = false;
           this.courseManageFormData();
           this.getAllCourseList();
-        }
-
       })
   }
 
@@ -232,7 +228,6 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
             }
           }),
           error: (error: any) => {
-            this.errorService.handelError(error.statusMessage);
             this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
           }
         })
@@ -283,7 +278,6 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
           }
         }),
         error: (error: any) => {
-          this.errorService.handelError(error.statusMessage);
           this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
         }
       })
