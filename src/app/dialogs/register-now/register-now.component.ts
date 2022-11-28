@@ -31,12 +31,11 @@ export class RegisterNowComponent implements OnInit {
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
-      // Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z.\\s]+$')
-      fullName: ['', [Validators.required]],
-      email: ['', [Validators.required,Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
+      fullName: ['', [Validators.required,Validators.maxLength(50)]],
+      email: ['', [Validators.required,Validators.email]],
       mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
       courseId: [this.data.course_Title],
-      message: ['', [Validators.required]]
+      message: ['', [Validators.required,Validators.maxLength(500)]]
     })
   }
   //#endregion----------------------------------------------FormData Method End---------------------------------------------------------

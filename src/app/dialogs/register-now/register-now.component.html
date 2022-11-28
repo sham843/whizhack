@@ -17,9 +17,9 @@
                         (keypress)="validator.noFirstSpaceAllow($event)">
                     <mat-error class="mt-2" *ngIf="f.fullName.errors">
                         <span class="text-danger" *ngIf="f.fullName.errors?.required">
-                            Full Name is Required.</span>
+                            *Full Name is Required.</span>
                         <span class="text-danger" *ngIf="f.fullName.errors?.pattern">
-                            Please Enter Valid Full Name</span>
+                            *Please Enter Valid Full Name</span>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -29,9 +29,7 @@
                     <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailRegex($event)">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
-                            Email ID is Required.</span>
-                        <span class="text-danger" *ngIf="f.email.errors?.pattern">
-                            Please Enter Valid Email ID</span>
+                            *Please Enter Valid Email ID</span>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -42,9 +40,9 @@
                         (keypress)="validator.acceptedOnlyNumbers($event)" maxlength="10">
                     <mat-error class="mt-2" *ngIf="f.mobileNo.errors">
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.required">
-                            Mobile No is Required.</span>
+                            *Mobile No is Required.</span>
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
-                            Please Enter Valid Mobile No</span>
+                            *Please Enter Valid Mobile No</span>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -58,7 +56,7 @@
                 <mat-form-field appearance="legacy" class="w-100">
                     <mat-label>Message</mat-label>
                     <textarea matInput placeholder="Enter Message" rows="5" maxlength="200" formControlName="message" class="textareaheight scrollbar"
-                        (keypress)="validator.noFirstSpaceAllow($event)"></textarea>
+                        (keypress)="validator.noFirstSpaceAllow($event)" maxlength="500"></textarea>
                     <mat-error *ngIf="registerForm.controls['message'].hasError('required')" class="mt-2">*Message is Required.</mat-error>
                 </mat-form-field>
             </div>
