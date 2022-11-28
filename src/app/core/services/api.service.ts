@@ -19,7 +19,6 @@ export class ApiService {
   getBaseurl(url: string) {
     switch (url) {
       case 'whizhackService': return 'https://whizhackwebapi.mahamining.com/'; break;
-
       default: return ''; break;
     }
   }
@@ -31,6 +30,7 @@ export class ApiService {
   }
 
   setHttp(type: string, url: string, isHeader: Boolean, obj: any, params: any, baseUrl: any) {
+
     try {
 
     } catch (e) { }
