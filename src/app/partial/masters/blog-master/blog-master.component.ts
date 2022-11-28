@@ -67,7 +67,7 @@ export class BlogMasterComponent implements OnInit {
   controlForm() {
     this.frm = this.fb.group({
       id: [0],
-      title: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+      title: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
       description: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
       blog_categary_Id: [, Validators.required],
       author: ['', [Validators.required, Validators.pattern(this.validation.alphabetsWithSpace)]],
@@ -84,7 +84,7 @@ export class BlogMasterComponent implements OnInit {
         this.fb.group({
           id: [0],
           blog_Register_Id: [0],
-          title: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+          title: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
           description: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
           key: [0],
           createdBy: [this.webService.getUserId()],
@@ -125,8 +125,8 @@ export class BlogMasterComponent implements OnInit {
   addItem() {
     let fg = this.fb.group({
       blog_Register_Id: [0],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+      description: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
       key: [0],
       createdBy: [0],
       modifiedBy: [0],
@@ -253,7 +253,8 @@ export class BlogMasterComponent implements OnInit {
   }
 
   onClickEdit(editObj: any) {
-    this.itemsForm.removeAt(0);
+    this.itemsForm.clear()
+    // this.itemsForm.removeAt(0);
     this.selRow = editObj.id;
     this.imgSrc = editObj?.imagePath;
     this.editFlag = true;
@@ -265,9 +266,9 @@ export class BlogMasterComponent implements OnInit {
       blog_categary_Id: editObj.blog_categary_Id,
       author: editObj.author,
       imagePath: editObj?.imagePath,
-      blogRegisterDetailsModel: editObj.blogRegisterDetailsModel
+      // blogRegisterDetailsModel: editObj.blogRegisterDetailsModel
     });
-    this.itemsForm.removeAt(0);
+    // this.itemsForm.removeAt(0);
     editObj.blogRegisterDetailsModel.map((element: any) => {
       let fg = this.fb.group({
         createdBy: element?.createdBy,
@@ -275,10 +276,10 @@ export class BlogMasterComponent implements OnInit {
         createdDate: new Date(),
         modifiedDate: new Date(),
         isDeleted: true,
-        blog_Register_Id: 0,
+        blog_Register_Id: element?.blog_Register_Id,
         id: [element.id],
-        title: [element.title, [Validators.maxLength(100)]],
-        description: [element.description, [Validators.maxLength(1000)]],
+        title: [element.title, [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
+        description: [element.description, [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
       });
       this.itemsForm.push(fg);
     })

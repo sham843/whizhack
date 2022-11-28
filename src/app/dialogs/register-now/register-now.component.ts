@@ -23,7 +23,6 @@ export class RegisterNowComponent implements OnInit {
     private snack: CommonMethodService) { }
 
   ngOnInit(): void {
-    console.log("data",this.data)
     this.getFormData();
   }
 
