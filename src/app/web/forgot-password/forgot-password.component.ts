@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+// import { WebStorageService } from 'src/app/core/services/web-storage.service';
 
 
 @Component({
@@ -121,6 +122,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.timeLeft= --this.timeLeft 
       }
     }, 1000);
+
   }
 
   pauseTimer() {
@@ -129,9 +131,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   getUserName() {
     let obj = this.registerForm.value;
-    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
+    this.api.setHttp('get', ' whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
+        console.log(res);
         res.statusCode == 200 ? this.userName = res.responseData[0].userName : '';
       }
     })
@@ -142,14 +145,13 @@ export class ForgotPasswordComponent implements OnInit {
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
     obj.otp = this.stringOtp;
+    obj.currentPassword == obj.passwordNew || obj.currentPassword == obj.retypePassword ? this.common.matSnackBar('Current Password Can,t Be Used As New Password',1) :'';
     obj.passwordNew != obj.retypePassword ? this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1) : ''
     if (obj.passwordNew == obj.retypePassword) {
-      this.getUserName();
-      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.newPassword+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
+      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.passwordNew+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : '';
-          res.statusCode == 409 ? this.common.matSnackBar(res.statusMessage, 1) : '';
+          res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : this.common.matSnackBar(res.statusMessage, 1);
         }
       })
     }
