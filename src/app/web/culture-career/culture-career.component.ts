@@ -52,13 +52,12 @@ export class CultureCareerComponent implements OnInit {
         }
       }),
       error: (error: any) => {
-        console.log(error);
+        this.error.handelError(error.statusCode);
       }
     })
   }
 
   openLightBox(imgArray:any){
-    console.log(imgArray);
     this.lightbox.open(0, 'lightbox')
     this.items = imgArray.map((item:any) => new ImageItem({ src: item, thumb: item }));
     this.basicLightboxExample();
