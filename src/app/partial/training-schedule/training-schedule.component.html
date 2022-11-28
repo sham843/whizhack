@@ -156,7 +156,7 @@
 
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Search By Course Title</mat-label>
-                        <input matInput placeholder="Search By Course Title" [formControl]="searchFilter" maxlength="20"
+                        <input matInput placeholder="Enter Course Title" [formControl]="searchFilter" maxlength="20"
                         (keypress)="vadations.noFirstSpaceAllow($event)">
 
                         <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close"
@@ -217,7 +217,7 @@
                     </ng-container>
                     <tr class="mat-row p-2 w-100" *matNoDataRow col>
                         <td class="alert alert-danger text-center m-2 mt-2" colspan="8">
-                            No data found </td>
+                            No Data Found </td>
                     </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlightedRow':selRow == row.courseId}"></tr>
