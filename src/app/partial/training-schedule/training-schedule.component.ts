@@ -291,6 +291,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   }
 
   setOffer(event: any) {
+    this.courseManageForm.controls['actual_price'].setValue('')
     this.offer = event.checked
   }
 
