@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
@@ -19,9 +20,9 @@ export class ForgotPasswordComponent implements OnInit {
   userName: string = '';
   otpStatus: boolean = false;
   registerForm!: FormGroup;
-  displayFields: boolean = false;
-  displayFields1: boolean = false;
-  displayFields2: boolean = true;
+  displayOtpField: boolean = false;
+  displayPasswordField: boolean = false;
+  displayEmailField: boolean = true;
 
   timeLeft: number = 60;
   interval: any;
@@ -40,7 +41,7 @@ export class ForgotPasswordComponent implements OnInit {
     "isUser": true
   }
   stringOtp: string = '';
-  constructor(private fb: FormBuilder, private api: ApiService,
+  constructor(private fb: FormBuilder, private api: ApiService, private router : Router,
     public validations: FormValidationService, private common: CommonMethodService) { }
 
   ngOnInit(): void {
@@ -77,8 +78,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), this.displayFields = true,this.displayFields2 = false,this.otpStatus = true) : '';
-        res.statusCode == 404 ? (this.common.matSnackBar(res.statusMessage, 1) ): '';
+        res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), this.displayOtpField = true,this.displayEmailField = false,this.otpStatus = true) : this.common.matSnackBar(res.statusMessage, 1);
+      //   res.statusCode == 404 ? ( ): '';
       }
     })
   }
@@ -96,7 +97,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.getHttp().subscribe({
         next: (res: any) => {
           res.statusCode == 200 ? this.common.matSnackBar(res.statusMessage, 0) : '';
-          res.statusCode == 200 ? (this.displayFields1 = true, this.startTimer(), this.displayFields = false) : false;
+          res.statusCode == 200 ? (this.displayPasswordField = true, this.startTimer(), this.displayOtpField = false) : false;
           res.statusCode == 409 ? (this.common.matSnackBar(res.statusMessage, 1), this.clearFormFields(), this.pauseTimer()) : '';
         }
       }) 
@@ -129,18 +130,18 @@ export class ForgotPasswordComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  getUserName() {
+  getUserName(clear: any) {
     let obj = this.registerForm.value;
-    this.api.setHttp('get', ' whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + obj.email, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
-        console.log(res);
-        res.statusCode == 200 ? this.userName = res.responseData[0].userName : '';
+        console.log("response of username", res);
+        res.statusCode == 200 ? (this.userName = res.responseData[0].userName, this.onSumbit(clear)): '';
       }
     })
   }
 
-  onSumbit(clear: any) {
+  onSumbit(clear:any) {
     let obj = this.registerForm.value;
     let otp = obj.digitOne + obj.digitTwo + obj.digitThree + obj.digitFour + obj.digitFive;
     this.stringOtp = otp.toString();
@@ -151,7 +152,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName='+this.userName+'&Password='+obj.passwordNew+'&NewPassword='+obj.retypePassword+'&EmailId=' + obj.email, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.displayFields = false, this.displayFields1 = false) : this.common.matSnackBar(res.statusMessage, 1);
+          res.statusCode == 200 ? (this.common.matSnackBar(res.statusMessage, 0), clear.resetForm(), this.router.navigate(['/login'])) : this.common.matSnackBar(res.statusMessage, 1);
         }
       })
     }
