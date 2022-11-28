@@ -13,7 +13,7 @@
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery Title Is Required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern') ">
-                 Please Enter Valid Gallery Title </span>
+                  Please Enter Valid Gallery Title </span>
 
               </mat-error>
             </mat-form-field>
@@ -21,26 +21,31 @@
           <div class="mb-3">
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
-              <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5" formControlName="gallery_description" rows="20"
-               (keypress)="vs.noFirstSpaceAllow($event)"
+              <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5"
+                formControlName="gallery_description" rows="20" (keypress)="vs.noFirstSpaceAllow($event)"
                 maxlength="500"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
-                <span
-                  *ngIf="g['gallery_description']?.hasError('required') ">
+                <span *ngIf="g['gallery_description']?.hasError('required') ">
                   Gallery Description Is Required</span>
-                <span
-                  *ngIf="g['gallery_description']?.hasError('pattern')">
-                Please Enter Valid Gallery Description </span>
+                <span *ngIf="g['gallery_description']?.hasError('pattern')">
+                  Please Enter Valid Gallery Description </span>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="mb-5">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
+
+            <span class="mt-2"> (Note: Allowed only png, jpg, jfif img)</span>
+
             <mat-error *ngIf="showImagError" class="mt-2">
               <span>{{showImagError}}</span>
             </mat-error>
+
           </div>
+
+
+
           <div class="mb-3">
             <div class="d-flex  flex-wrap gap-4">
               <ng-container *ngFor="let item of imageArray; let i = index">
@@ -95,7 +100,8 @@
           </ng-container>
           <ng-container matColumnDef="gallery_Title">
             <th mat-header-cell *matHeaderCellDef> Gallery Title </th>
-            <td mat-cell *matCellDef="let element" matTooltip="{{element.gallery_Title | titlecase}}"> {{element.gallery_Title | titlecase}} </td>
+            <td mat-cell *matCellDef="let element" matTooltip="{{element.gallery_Title | titlecase}}">
+              {{element.gallery_Title | titlecase}} </td>
           </ng-container>
           <!-- <ng-container matColumnDef="gallery">
                         <th mat-header-cell *matHeaderCellDef> Article Source </th>

@@ -231,6 +231,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
 //#region  Onclick Update Button
   editGalleryRecord(data: any) {
+    this.spinner.show();
     this.UpdateObj = data;
     this.showImagError = '';
     this.highlightedRow = data.galleryId;
@@ -238,7 +239,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
       gallery_description: data?.description,
       gallery_title: data?.gallery_Title,
     });
+
     this.imageArray = data.imagepaths;
+    this.spinner.hide();
   }
   //#endregion
 
