@@ -8,8 +8,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LazyImgDirectiveDirective } from 'src/app/core/directive/lazy-img-directive.directive';
 @NgModule({
   declarations: [
-    CultureCareerComponent,
-    LazyImgDirectiveDirective
+    CultureCareerComponent,LazyImgDirectiveDirective
   ],
   imports: [
     CommonModule,

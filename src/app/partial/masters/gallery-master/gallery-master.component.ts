@@ -177,8 +177,27 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
-    this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+//     let dialoObj = {
+//       header: 'Delete',
+//       title: 'Do you want to delete image ?',
+//       cancelButton: 'No',
+//       okButton: 'Yes'
+//     }
+//     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+//       width: '300px',
+//       data: dialoObj
+//     });
+
+//     dialogRef.afterClosed().subscribe(result => {
+//       if (result == 'yes') {
+//         this.imageArray.splice(ind, 1);
+//         !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+//       }
+//     })
+// this.spinner.hide();
+this.imageArray.splice(ind, 1);
+!this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+
   }
 
   //#endregion
