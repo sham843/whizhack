@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     let dialoObj = {
       header: 'Logout',
-      title:'Are you sure?',
+      title:'Are your sure, you want to Logout ?',
       cancelButton:'Cancel',
       okButton:'Logout'
     }
