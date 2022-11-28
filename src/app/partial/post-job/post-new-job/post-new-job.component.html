@@ -78,7 +78,7 @@
                                 placeholder="Enter  Roles & Responsibilities Here...">
                             </angular-editor>
                             <mat-error class="mt-2">
-                                <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited">
+                                <div *ngIf="f['roles_and_Responsibility'].hasError('required') && submited == true">
                                     Roles & Responsibility is Required</div>
                             </mat-error>
                             <mat-error class="mt-2"
@@ -92,7 +92,7 @@
                                 placeholder="Enter Experience Here...">
                             </angular-editor>
                             <mat-error class="mt-2"
-                                *ngIf="f['experience'].hasError('required') && submited">
+                                *ngIf="f['experience'].hasError('required') && submited == true">
                                 Experience Is Required
                             </mat-error>
                         </div>
@@ -102,7 +102,7 @@
                                 placeholder="Enter Qualifications Here...">
                             </angular-editor>
                             <mat-error class="mt-2"
-                                *ngIf="f['qualification'].hasError('required') && submited">
+                                *ngIf="f['qualification'].hasError('required') && submited == true">
                                 Qualification Is Required
                             </mat-error>
                             <mat-error class="mt-2"
@@ -116,7 +116,7 @@
                                 placeholder="Enter Skills Here...">
                             </angular-editor>
                             <mat-error class="mt-2"
-                                *ngIf="f['skills_Required'].hasError('required') && submited">
+                                *ngIf="f['skills_Required'].hasError('required') && submited == true">
                                 Skills Is Required
                             </mat-error>
                             <mat-error class="mt-2"
