@@ -68,9 +68,17 @@ export class FileUploadService {
       if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
-          formData.append("files", event.target.files[i]);
-          let nameText = event.target.files[i].name;
-          console.log(nameText,'444')
+          if (event.target.files[i].size > 10485760) {
+            obj.error("Required file size should be less than " + 10 + " MB.");
+            this.commonService.matSnackBar("Required file size should be less than " + 10 + " MB.", 1);
+            docTypeCheckFlag = false;
+          }
+        }
+        for (let j = 0; j < filesAmount; j++) {
+
+          console.log(event.target.files[j].size);
+          formData.append("files", event.target.files[j]);
+          let nameText = event.target.files[j].name;
           const selResult = nameText.split('.');
           const docExt = selResult.pop();
           const docExtLowerCase =  docExt.toLowerCase();
@@ -99,7 +107,7 @@ export class FileUploadService {
       }
       else {
         obj.error("Only " + allowedDocTypes + " file format allowed.");
-        this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.",1);
+        this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.", 1);
       }
     })
   }
