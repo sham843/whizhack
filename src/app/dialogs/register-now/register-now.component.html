@@ -13,7 +13,7 @@
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Full Name</mat-label>
                     <input matInput placeholder="Enter Full Name" formControlName="fullName"
-                        [value]="registerForm.get('fullName')?.value | titlecase" maxlength="30"
+                        [value]="registerForm.get('fullName')?.value | titlecase" maxlength="50"
                         (keypress)="validator.noFirstSpaceAllow($event)">
                     <mat-error class="mt-2" *ngIf="f.fullName.errors">
                         <span class="text-danger" *ngIf="f.fullName.errors?.required">
@@ -26,8 +26,7 @@
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="email"
-                        (keypress)="validator.emailRegex($event)">
+                    <input matInput placeholder="Enter Email ID" formControlName="email">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             Email ID is required.</span>
@@ -59,7 +58,7 @@
                 <mat-form-field appearance="legacy" class="w-100">
                     <mat-label>Message</mat-label>
                     <textarea matInput placeholder="Enter Message" rows="5" maxlength="200" formControlName="message"
-                        (keypress)="validator.noFirstSpaceAllow($event)"></textarea>
+                        (keypress)="validator.noFirstSpaceAllow($event)"  maxlength="500"></textarea>
                     <mat-error *ngIf="registerForm.controls['message'].hasError('required')" class="mt-2">*Please Enter
                         Message</mat-error>
                 </mat-form-field>
