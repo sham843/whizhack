@@ -13,7 +13,7 @@
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery title is required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern') ">
-                 Please enter Valid gallery title </span>
+                 Please Enter Valid Gallery Title </span>
 
               </mat-error>
             </mat-form-field>
@@ -21,16 +21,16 @@
           <div class="mb-3">
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
-              <textarea matInput placeholder="Enter Gallery Description" rows="5" formControlName="gallery_description" rows="20"
+              <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5" formControlName="gallery_description" rows="20"
                (keypress)="vs.noFirstSpaceAllow($event)"
                 maxlength="200"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
                 <span
                   *ngIf="g['gallery_description']?.hasError('required') ">
-                  Gallery description is required</span>
+                  Gallery Description is Required</span>
                 <span
                   *ngIf="g['gallery_description']?.hasError('pattern')">
-                Please enter valid gallery description </span>
+                Please Enter Valid Gallery Description </span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -124,7 +124,7 @@
             </td>
           </ng-container>
           <tr class="mat-row p-2 w-100" *matNoDataRow col>
-            <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No data found </td>
+            <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No Data Found </td>
           </tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"

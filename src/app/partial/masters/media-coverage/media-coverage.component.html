@@ -9,7 +9,7 @@
                             <mat-label>Article Title</mat-label>
                             <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
                             <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
-                                <span *ngIf="f['article_Title']?.hasError('required')"> Article title is required</span>
+                                <span *ngIf="f['article_Title']?.hasError('required')"> Article Title is Required</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -18,7 +18,7 @@
                             <mat-label>Article Source</mat-label>
                             <input matInput placeholder="Enter Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
                             <mat-error *ngIf="f['source']?.errors" class="mt-2">
-                                <span *ngIf="f['source']?.hasError('required')"> Article source is required</span>
+                                <span *ngIf="f['source']?.hasError('required')"> Article Source is Required</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -27,8 +27,8 @@
                             <mat-label>Article URL</mat-label>
                             <input matInput placeholder="Enter Article URL" formControlName="url" (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphaNumericWithSpacesAndSpecChars($event)">
                             <mat-error *ngIf="f['url']?.errors" class="mt-2">
-                                <span *ngIf="f['url']?.hasError('required')"> Article url is required</span>
-                                <span *ngIf="f['url']?.hasError('pattern')">Please enter valid Article url</span>
+                                <span *ngIf="f['url']?.hasError('required')"> Article URL is Required</span>
+                                <span *ngIf="f['url']?.hasError('pattern')">Please Enter Valid Article URL</span>
                             </mat-error>
                         </mat-form-field>
                     </div>   
@@ -63,7 +63,7 @@
                         <th mat-header-cell *matHeaderCellDef> Article URL </th>
                         <td mat-cell *matCellDef="let element"> 
                             <a href="{{element.url}}" target="_blank" matTooltip="Open Article URL">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-main"></i>
                             </a>
                         </td>
                     </ng-container>

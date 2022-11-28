@@ -178,7 +178,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Images is required' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Images Is Required' : this.showImagError = '';
   }
 
   //#endregion
@@ -186,7 +186,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Images is required" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Images Is Required" : this.showImagError = '';
       return;
     }
     this.spinner.show();
@@ -227,8 +227,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     })
 
   }
+//#endregion
 
-  //#region  Onclick Update Button
+//#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.UpdateObj = data;
     this.showImagError = '';
