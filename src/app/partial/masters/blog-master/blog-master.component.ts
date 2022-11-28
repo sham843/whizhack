@@ -209,6 +209,11 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
+
+  get blogRegisterCtr():any{
+    return  this.frm.controls['blogRegisterDetailsModel']as FormArray 
+  }
+
   onClickSubmit(formDirective?: any) {
       this.radioFlag = true;
    if (this.frm.value.imagePath == '') {
