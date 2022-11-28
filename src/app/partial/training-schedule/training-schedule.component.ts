@@ -78,7 +78,6 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   openDialog(obj: any) {
     this.dialog.open(ViewTrainingScheduleComponent, {
-      width: '750px',
       data: obj
     });
   }
