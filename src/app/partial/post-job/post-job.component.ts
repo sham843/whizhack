@@ -70,8 +70,8 @@ export class PostJobComponent implements OnInit {
   //----------------------------view logic start Here------------------------
   openDialog1(obj?: any) {
     const dialogRef = this.dialog.open(JobDetailsComponent, {
-      height: '80%',
-      width: '80%',
+      // height: '80%',
+      width: '40vw',
       data: obj,
       disableClose: true
     });
@@ -84,7 +84,7 @@ export class PostJobComponent implements OnInit {
   //----------------------------Publish Button Logic start Here--------------
   onClickToggle(element: any) {
     let dialoObj = {
-      header: element.publish ? 'isPublish' : 'Publish',
+      header: element.publish ? 'Unpublish' : 'Publish',
       title: 'Do you want to change the status ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
@@ -92,7 +92,8 @@ export class PostJobComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '300px',
-      data: dialoObj
+      data: dialoObj,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -110,7 +111,7 @@ export class PostJobComponent implements OnInit {
             }
           }),
           error: (error: any) => {
-            console.log(error);
+            this.error.handelError(error.status);
           }
         })
       }
@@ -124,6 +125,7 @@ export class PostJobComponent implements OnInit {
 //---------------------------Start Delete Logic Here--------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
+      header:'Delete',
       title: 'Do you want to delete the selected course ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
@@ -131,7 +133,8 @@ export class PostJobComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '300px',
-      data: dialoObj
+      data: dialoObj,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -150,7 +153,7 @@ export class PostJobComponent implements OnInit {
             }
           }),
           error: (error: any) => {
-            console.log(error);
+            this.error.handelError(error.status);
           }
         })
       }
@@ -162,7 +165,6 @@ export class PostJobComponent implements OnInit {
  openPostJobDialog(obj?: any) {
     const dialogRef = this.dialog.open(PostNewJobComponent, {
       width: '90vw',
-      height: '80vw',
       data: obj,
       disableClose: true
     });

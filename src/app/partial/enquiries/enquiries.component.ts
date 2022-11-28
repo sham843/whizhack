@@ -30,21 +30,17 @@ export class EnquiriesComponent implements OnInit {
   currentPage: number = 0;
   getpage: any;
   @ViewChild(MatSort) sortheader!: MatSort;
-
-  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService,private snack:CommonMethodService) { }
-
+  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService, private snack: CommonMethodService) { }
   ngOnInit(): void {
     this.getTableData();
   }
-
-//#region-----------------------------------------------Get Table Data Method Starts------------------------------------------- 
+  //#region-----------------------------------------------Get Table Data Method Starts------------------------------------------- 
   getTableData() {
     this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.dataSource = new MatTableDataSource(res.responseData.responseData);
-          this.snack.matSnackBar(res.statusMessage,0)
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
         }
@@ -53,18 +49,18 @@ export class EnquiriesComponent implements OnInit {
       }
     })
   }
-//#endregion--------------------------------------------Get Table Data Method Ends---------------------------------------------
+  //#endregion--------------------------------------------Get Table Data Method Ends---------------------------------------------
 
-//#region ----------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+  //#region ----------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
   openDialog(ele?: any): void {
     this.dialog.open(ViewEnquiriesComponent, {
       data: ele,
       width: '1024px'
     });
   }
-//#endregion--------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
+  //#endregion--------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
 
-//#region-----------------------------------------------Delete Enquiry Data Method---------------------------------------------
+  //#region-----------------------------------------------Delete Enquiry Data Method---------------------------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
       title: 'Do you want to delete the selected course ?',
@@ -86,7 +82,7 @@ export class EnquiriesComponent implements OnInit {
           next: ((res: any) => {
             if (res.statusCode === '200') {
               this.getTableData();
-              this.snack.matSnackBar(res.statusMessage,0)
+              this.snack.matSnackBar(res.statusMessage, 0)
             }
           }),
           error: (error: any) => {
@@ -98,9 +94,9 @@ export class EnquiriesComponent implements OnInit {
       }
     });
   }
-//#endregion--------------------------------------------Delete Enquiry Data Method---------------------------------------------
+  //#endregion--------------------------------------------Delete Enquiry Data Method---------------------------------------------
 
-//#region-----------------------------------------------Get Pagenation Method-------------------------------------------------- 
+  //#region-----------------------------------------------Get Pagenation Method-------------------------------------------------- 
   pageChanged(event?: any) {
     this.currentPage = event.pageIndex;
     this.getTableData();

@@ -89,7 +89,7 @@ export class MyProfileComponent implements OnInit {
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close();
           } else {
-            this.commonService.matSnackBar(res.statusMessage, 1);
+            this.commonService.checkDataType(res.statusMessage) == false ? this.error.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {

@@ -319,3 +319,10 @@ a.text-main:hover{
 .fixed-top {
   background-color: #000 !important;
 }
+.mat-paginator-page-size {
+  display: none !important;
+}
+.textareaheight{
+  resize:none !important;
+  height: 20vh !important;
+}
