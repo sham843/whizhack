@@ -32,19 +32,14 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="mb-5">
+          <div class="mb-1">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
-
-            <span class="mt-2"> (Note: Allowed only png, jpg, jfif img)</span>
-
             <mat-error *ngIf="showImagError" class="mt-2">
               <span>{{showImagError}}</span>
             </mat-error>
-
           </div>
-
-
+          <small class="mt-2"> (Note: Allowed only png, jpg, jfif img)</small>
 
           <div class="mb-3">
             <div class="d-flex  flex-wrap gap-4">
