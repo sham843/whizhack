@@ -157,7 +157,7 @@ export class BlogMasterComponent implements OnInit {
 
   displayData() {
     this.ngxspinner.show();
-    this.service.setHttp('get', 'whizhack_cms/Blogregister/GetAllBlogRegisterByPasgination?pageno=' + (this.currentPage + 1) + '&pagesize=10&blogtype=' + this.filterFrm.value.blogType, false, false, false,
+    this.service.setHttp('get', 'whizhack_cms/Blogregister/GetAllBlogRegisterByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10&blogtype=' + this.filterFrm.value.blogType, false, false, false,
       'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
