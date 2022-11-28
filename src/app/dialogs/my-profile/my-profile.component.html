@@ -11,7 +11,7 @@
         <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>First Name</mat-label>
-                <input matInput placeholder="First Name" formControlName="firstName" maxlength="30"
+                <input matInput placeholder="Enter First Name" formControlName="firstName" maxlength="30"
                     (keypress)="validation.noSpaceAllow($event)">
                 <mat-error *ngIf="f.firstName.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.firstName.errors?.required">
@@ -24,7 +24,7 @@
         <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Last Name" formControlName="lastName" maxlength="30"
+                <input matInput placeholder="Enter Last Name" formControlName="lastName" maxlength="30"
                     (keypress)="validation.noSpaceAllow($event)">
                 <mat-error *ngIf="f.lastName.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.lastName.errors?.required">
@@ -37,7 +37,7 @@
         <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Email ID</mat-label>
-                <input matInput placeholder="Email ID" formControlName="emailId"
+                <input matInput placeholder="Enter Email ID" formControlName="emailId"
                     (keypress)="validation.emailRegex($event)" maxlength="50">
                 <mat-error *ngIf="f.emailId.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.emailId.errors?.required">
@@ -50,7 +50,7 @@
         <div class="mb-3">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Mobile No.</mat-label>
-                <input matInput placeholder="Mobile No." formControlName="contactNo"
+                <input matInput placeholder="Enter Mobile No." formControlName="contactNo"
                     (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
                 <mat-error *ngIf="f.contactNo.errors" class="mt-2">
                     <span class="text-danger" *ngIf="f.contactNo.errors?.required">

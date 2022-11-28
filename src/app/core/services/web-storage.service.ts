@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class WebStorageService {
 
-  constructor() { }
+  constructor() { 
+  }
 
   checkUserIsLoggedIn() { // check user isLoggedIn or not
     let sessionData: any = sessionStorage.getItem('loggedIn');
