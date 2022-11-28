@@ -10,7 +10,7 @@
                                 options.name }}</mat-radio-button>
                         </mat-radio-group>
                         <ng-container *ngIf="radioFlag && !this.frm.value.blogType">
-                            <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')"><p>Please select blog type</p>
+                            <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')"><p>Please Select Blog Type</p>
                             </mat-error>
                         </ng-container>
                     </div>
@@ -20,9 +20,9 @@
                             <input maxlength="100" matInput placeholder="Enter Blog Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please enter blog title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog title
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Title
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -33,9 +33,9 @@
                                 formControlName="description"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please enter blog
-                                description</mat-error>
-                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog description
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
+                                Description</mat-error>
+                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Description
                                 </mat-error>
                         </mat-form-field>
                     </div>
@@ -46,8 +46,8 @@
                                 <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
                                     categories.categoryName }}</mat-option>
                             </mat-select>
-                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">please select
-                                blog category</mat-error>
+                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select
+                                Blog Category</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -56,9 +56,9 @@
                             <input maxlength="50" matInput placeholder="Enter Blog Author" formControlName="author"
                                 (keypress)="validation.alphabetsWithSpaces($event)"
                                 (keyup)="validation.removeSpaceAtBegining($event)">
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please enter author name
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid author name
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -99,9 +99,9 @@
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)">
-                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please enter
-                                                blog sub-title</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog sub-title
+                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter
+                                                Blog Sub-Title</mat-error>
+                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Title
                                                 </mat-error>
                                         </mat-form-field>
                                     </div>
@@ -113,8 +113,8 @@
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keyup)="validation.removeSpaceAtBegining($event)"></textarea>
                                             <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please
-                                                enter blog sub-description</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid blog sub-description
+                                                Enter Blog Sub-Description</mat-error>
+                                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Sub-Description
                                                 </mat-error>
                                         </mat-form-field>
                                     </div>
