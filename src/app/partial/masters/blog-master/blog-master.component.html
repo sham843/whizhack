@@ -10,7 +10,8 @@
                                 options.name }}</mat-radio-button>
                         </mat-radio-group>
                         <ng-container *ngIf="radioFlag && !this.frm.value.blogType">
-                            <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')"><p>Please Select Blog Type</p>
+                            <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')">
+                                <p>Please Select Blog Type</p>
                             </mat-error>
                         </ng-container>
                     </div>
@@ -65,9 +66,9 @@
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
                                     Blog Image</button>
-                                    <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
-                                        <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
-                                    </ng-container>
+                                <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
+                                    <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
+                                </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
@@ -94,55 +95,59 @@
                         <small> ( Note: Optional )</small>
                     </div> -->
                     <!-- ----- -->
-                        <div class="mb-3">
-                            <div class="card card-body form-card border">
-                                <div formArrayName="blogRegisterDetailsModel"
-                                    *ngFor="let item of itemsForm.controls; let i = index;">
-                                    <div [formGroupName]="i">
-                                        <div class="mb-3">
-                                            <mat-form-field appearance="outline" class="w-100">
-                                                <mat-label>Blog Sub-Title</mat-label>
-                                                <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
-                                                    formControlName="title"
-                                                    (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
-                                                    (keypress)="validation.noFirstSpaceAllow($event)">
-                                                <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
-                                                    Blog Sub-Title</mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="mb-3">
-                                            <mat-form-field appearance="legacy" class="w-100">
-                                                <mat-label>Blog Sub-Description</mat-label>
-                                                <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
-                                                    rows="5" formControlName="description"
-                                                    (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                                                <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
-                                                    Enter Blog Sub-Description</mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="text-end mb-2">
-                                            <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
-                                                <button type="button" mat-stroked-button
-                                                    class="btn-sm bg-danger bg-opacity-10 text-danger"
-                                                    (click)="removeItem(i)">
-                                                    <span class="material-symbols-outlined">
-                                                        Remove
-                                                    </span>
+                    <div class="mb-3">
+                        <div class="card card-body form-card border">
+                            <div formArrayName="blogRegisterDetailsModel"
+                                *ngFor="let item of itemsForm.controls; let i = index;">
+                                <div [formGroupName]="i">
+                                    <div class="mb-3">
+                                        <mat-form-field appearance="outline" class="w-100">
+                                            <mat-label>Blog Sub-Title</mat-label>
+                                            <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
+                                                formControlName="title"
+                                                (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
+                                                (keypress)="validation.noFirstSpaceAllow($event)">
+                                            <mat-error class="mt-2"
+                                                *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">
+                                                Please Enter
+                                                Blog Sub-Title</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="mb-3">
+                                        <mat-form-field appearance="legacy" class="w-100">
+                                            <mat-label>Blog Sub-Description</mat-label>
+                                            <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
+                                                rows="5" formControlName="description"
+                                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
+                                            <mat-error class="mt-2"
+                                                *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">
+                                                Please
+                                                Enter Blog Sub-Description</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="text-end mb-2">
+                                        <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
+                                            <button type="button" mat-stroked-button
+                                                class="btn-sm bg-danger bg-opacity-10 text-danger"
+                                                (click)="removeItem(i)">
+                                                <span class="material-symbols-outlined">
                                                     Remove
-                                                </button>
-                                            </span>
-                                        </div>
+                                                </span>
+                                                Remove
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
-                                <button type="button" mat-stroked-button
-                                    class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
-                                    <span class="material-symbols-outlined">
-                                        Add
-                                    </span>
-                                    Add New
-                                </button>
                             </div>
+                            <button type="button" mat-stroked-button
+                                class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
+                                <span class="material-symbols-outlined">
+                                    Add
+                                </span>
+                                Add New
+                            </button>
                         </div>
+                    </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <button type="button" mat-stroked-button class="btn-main-outline"
                             (click)="clearForm(formDirective)">Cancel</button>
@@ -187,39 +192,46 @@
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element?.blogType == 1 ? 'Blog' : element?.blogType == 2
+                        <td mat-cell *matCellDef="let element"> {{element?.blogType == 1 ? 'Blog' : element?.blogType ==
+                            2
                             ? 'White Paper' : 'Case Study'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="blog_categary_Id">
                         <th mat-header-cell *matHeaderCellDef> Category </th>
-                        <td mat-cell *matCellDef="let element"> {{element?.blog_categary_Id == 1 ? 'Training' : 'Products'}}
+                        <td mat-cell *matCellDef="let element"> {{element?.blog_categary_Id == 1 ? 'Training' :
+                            'Products'}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog(element)" matTooltip="View">
-                                <span class="material-symbols-outlined">
-                                    visibility
-                                </span>
-                            </button>
-                            <button mat-icon-button class="text-warning" (click)="onClickEdit(element)" matTooltip="Edit">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </button>
-                            <button mat-icon-button class="text-danger" (click)="onClickDelete(element?.id)" matTooltip="Delete">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
+                            <div class="d-flex align-items">
+                                <button mat-icon-button (click)="openDialog(element)" matTooltip="View">
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+                                </button>
+                                <button mat-icon-button class="text-warning" (click)="onClickEdit(element)"
+                                    matTooltip="Edit">
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+                                </button>
+                                <button mat-icon-button class="text-danger" (click)="onClickDelete(element?.id)"
+                                    matTooltip="Delete">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
                         </td>
                     </ng-container>
                     <tr class="mat-row p-2 w-100" *matNoDataRow col>
                         <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No Data Found !</td>
                     </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlightedRow':selRow == row?.id}"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                        [ngClass]="{'highlightedRow':selRow == row?.id}"></tr>
                 </table>
                 <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
