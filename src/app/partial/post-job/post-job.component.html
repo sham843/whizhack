@@ -65,17 +65,18 @@
                             </button>
                         </td>
                     </ng-container>
+                    <tr class="mat-row p-2 w-100" *matNoDataRow col>
+                        <td class="alert alert-danger text-center m-2 mt-2" colspan="9">No Data Found </td>
+                      </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
 
 
             </div>
-
-            <ng-container>
-                <mat-paginator [length]="totalCount" [pageSize]="10" (page)="paginationEvent($event)"
-                    showFirstLastButtons aria-label="Select page">
-                </mat-paginator>
+            <ng-container *ngIf="totalCount > 10">
+                <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
+                (page)="paginationEvent($event)" aria-label="Select page of GitHub search results"></mat-paginator>
             </ng-container>
         </div>
     </div>
