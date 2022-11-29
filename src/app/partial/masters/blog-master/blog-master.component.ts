@@ -31,6 +31,7 @@ export class BlogMasterComponent implements OnInit {
   editFlag: boolean = false;
   radioFlag: boolean = false;
   imageFlag: boolean = false;
+  optionalFlag: boolean = false;
   optionsArray: any[] = [{ id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   optionsFilterArray: any[] = [{ id: 0, name: 'All' }, { id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   blogCategoryArray = new Array();
@@ -69,7 +70,7 @@ export class BlogMasterComponent implements OnInit {
     this.frm = this.fb.group({
       id: [0],
       title: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      description: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+      description: ['', Validators.required],
       blog_categary_Id: [, Validators.required],
       author: ['', [Validators.required, Validators.pattern(this.validation.alphabetsWithSpace)]],
       isPublish: [false],
@@ -85,8 +86,8 @@ export class BlogMasterComponent implements OnInit {
         this.fb.group({
           id: [0],
           blog_Register_Id: [0],
-          title: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-          description: ['', [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+          title: ['', Validators.required],
+          description: ['',Validators.required],
           key: [0],
           createdBy: [this.webService.getUserId()],
           modifiedBy: [0],
@@ -123,11 +124,18 @@ export class BlogMasterComponent implements OnInit {
     })
   }
 
+  // checkbox changes
+  // onClickOptionalCheck(event:any){
+  //   console.log(event.checked);
+  //   event.checked ? this.optionalFlag = true : this.optionalFlag = false;
+  // }
+  // --
+
   addItem() {
     let fg = this.fb.group({
       blog_Register_Id: [0],
-      title: ['', [Validators.required,Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      description: ['', [Validators.required,Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+      title: ['', Validators.required],
+      description: ['',Validators.required],
       key: [0],
       createdBy: [0],
       modifiedBy: [0],
@@ -287,8 +295,8 @@ export class BlogMasterComponent implements OnInit {
         isDeleted: true,
         blog_Register_Id: element?.blog_Register_Id,
         id: [element.id],
-        title: [element.title, [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-        description: [element.description, [Validators.required, Validators.pattern(this.validation.alphaNumericWithSpaceAndSpecialChar)]],
+        title: [element.title,Validators.required],
+        description: [element.description, Validators.required],
       });
       this.itemsForm.push(fg);
     })
@@ -298,7 +306,7 @@ export class BlogMasterComponent implements OnInit {
     this.selRow = id;
     let dialoObj = {
       header: 'Delete',
-      title: 'Do you want to delete the selected blog ?',
+      title: 'Do You Want To Delete The Selected Blog ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
     }
