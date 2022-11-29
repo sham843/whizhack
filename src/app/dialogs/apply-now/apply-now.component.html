@@ -9,7 +9,7 @@
 <form [formGroup]="postApplayForm" #formDirective="ngForm">
     <div class="dialog-body form-container">
         <div class="row g-4 mb-4">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>First Name</mat-label>
                     <input matInput placeholder="First Name" formControlName="firstName"
@@ -22,7 +22,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Last Name</mat-label>
                     <input matInput placeholder="Last Name" formControlName="lastName"
@@ -35,7 +35,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
                     <input matInput placeholder="Email ID" formControlName="emailId" (keypress)="validation.emailRegex($event)" maxlength="50">
@@ -47,7 +47,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mobile No.</mat-label>
                     <input matInput placeholder="Mobile No." formControlName="contactNo"
@@ -83,10 +83,12 @@
                         </button>
                     </div>
                 </div>
+                
                 <div *ngIf="resumeSubmit && !resumePath" class="mt-4">
                     <div class="text-danger" style="font-size: 0.80rem;">Please upload Resume</div>
                 </div>
             </div>
+            <small class="mt-3"> (Note: Allowed only .pdf & word doc)</small>
 
         </div>
     </div>

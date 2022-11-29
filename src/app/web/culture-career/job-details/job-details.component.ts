@@ -69,7 +69,7 @@ export class JobDetailsComponent implements OnInit {
 
   openDialog(dialoObj: any): void {
     this.dialog.open(ApplyNowComponent, {
-      width: '700px',
+      width: '480px',
       disableClose: true,
       data: dialoObj
     });
