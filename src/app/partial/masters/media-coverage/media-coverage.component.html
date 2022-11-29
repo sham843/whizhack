@@ -7,18 +7,21 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Title</mat-label>
-                            <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
+                            <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5">
                             <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
                                 <span *ngIf="f['article_Title']?.hasError('required')"> Article Title is Required</span>
+                                <span *ngIf="f['article_Title']?.hasError('maxlength')">Please Enter Maximum 100 Character</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Source</mat-label>
-                            <input matInput placeholder="Enter Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5" maxlength="100">
+                            <input matInput placeholder="Enter Article Source" formControlName="source" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5">
                             <mat-error *ngIf="f['source']?.errors" class="mt-2">
                                 <span *ngIf="f['source']?.hasError('required')"> Article Source is Required</span>
+                                <span *ngIf="f['source']?.hasError('maxlength')">Please Enter Maximum 100 Character</span>
+                                <!-- <span *ngIf="f['source']?.hasError('minlength')">Please Enter Minimum 5 Character</span> -->
                             </mat-error>
                         </mat-form-field>
                     </div>

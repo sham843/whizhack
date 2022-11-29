@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
-                            <textarea maxlength="1000" matInput placeholder="Enter Blog Description" rows="5"
+                            <textarea maxlength="5000" matInput placeholder="Enter Blog Description" rows="5"
                                 formControlName="description"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
@@ -98,7 +98,7 @@
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required') ||  this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
+                                            <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
                                                 Blog Sub-Title</mat-error>
                                                 <!-- <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
                                                 </mat-error> -->
@@ -107,11 +107,11 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="1000" matInput placeholder="Enter Blog Sub-Description"
+                                            <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                                            <mat-error class="mt-2" *ngIf="f['description'].hasError('required') || this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
+                                            <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
                                                 Enter Blog Sub-Description</mat-error>
                                                 <!-- <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
                                                 </mat-error> -->
@@ -180,22 +180,22 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Blog Title </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title | titlecase}} </td>
+                        <td mat-cell *matCellDef="let element" class="text-break"> {{element?.title | titlecase}} </td>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>
-                        <td mat-cell *matCellDef="let element"> {{element.blogType == 1 ? 'Blog' : element.blogType == 2
+                        <td mat-cell *matCellDef="let element"> {{element?.blogType == 1 ? 'Blog' : element?.blogType == 2
                             ? 'White Paper' : 'Case Study'}} </td>
                     </ng-container>
                     <ng-container matColumnDef="blog_categary_Id">
                         <th mat-header-cell *matHeaderCellDef> Category </th>
-                        <td mat-cell *matCellDef="let element"> {{element.blog_categary_Id == 1 ? 'Training' : 'Products'}}
+                        <td mat-cell *matCellDef="let element"> {{element?.blog_categary_Id == 1 ? 'Training' : 'Products'}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog(element.id)" matTooltip="View">
+                            <button mat-icon-button (click)="openDialog(element)" matTooltip="View">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
@@ -205,7 +205,7 @@
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger" (click)="onClickDelete(element.id)" matTooltip="Delete">
+                            <button mat-icon-button class="text-danger" (click)="onClickDelete(element?.id)" matTooltip="Delete">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
@@ -216,7 +216,7 @@
                         <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No Data Found !</td>
                     </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlightedRow':selRow == row.id}"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'highlightedRow':selRow == row?.id}"></tr>
                 </table>
                 <ng-container *ngIf="totalCount > 10">
                     <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons

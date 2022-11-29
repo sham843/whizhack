@@ -80,8 +80,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription)]],
-      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription)]],
+      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription),Validators.maxLength(50)]],
+      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription),Validators.maxLength(500)]],
       uploadImages: [''],
     })
   }
