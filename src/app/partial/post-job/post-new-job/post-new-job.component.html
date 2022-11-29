@@ -63,7 +63,7 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                 <!-- maxlength="500" -->
                             <mat-error class="mt-2"
-                                *ngIf="(f['job_Description'].hasError('required') || f['job_Description'].hasError('touched')) && submited">
+                                *ngIf="(f['job_Description'].hasError('required') || f['job_Description'].hasError('touched'))">
                                 Description Is Required
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['job_Description'].hasError('maxlength')">
