@@ -7,7 +7,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Article Title</mat-label>
-                            <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="5">
+                            <input matInput placeholder="Enter Article Title" formControlName="article_Title" (keyup)="vs.removeSpaceAtBegining($event)" minlength="1">
                             <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
                                 <span *ngIf="f['article_Title']?.hasError('required')"> Article Title is Required</span>
                                 <span *ngIf="f['article_Title']?.hasError('maxlength')">Please Enter Maximum 100 Character</span>

@@ -62,8 +62,8 @@ export class ForgotPasswordComponent implements OnInit {
     this.fo['digitFour'].setValue(''), this.fo['digitFive'].setValue('')
   }
 
-  sendOTP(formDirective?: any) {
-    if (this.emailVerifyForm.value.email.invalid) {
+  sendOTP(flag:any,formDirective?: any) {
+    if (this.emailVerifyForm.value.email.invalid && flag!='resend') {
       return
     }
     else {
@@ -75,13 +75,12 @@ export class ForgotPasswordComponent implements OnInit {
         "isDeleted": false,
         "id": 0,
         "mobileNo": "",
-        "emailId": this.emailVerifyForm.value.email,
+        "emailId":flag=='resend'?this.emailId:this.emailVerifyForm.value.email,
         "otp": "",
         "pageName": "",
         "otpExpireDate": "2022-11-25T13:13:30.972Z",
         "isUser": true
       }
-      if (this.fe['email'].valid) {
         this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, obj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: (res: any) => {
@@ -89,7 +88,8 @@ export class ForgotPasswordComponent implements OnInit {
               this.common.matSnackBar(res.statusMessage, 0);
               this.emailId = obj.emailId;
               this.verifyOTPField = true; this.emailField = false, this.otpStatus = true;
-              this.startTimer();formDirective.resetForm();
+              this.startTimer();
+              // formDirective.resetForm();
             }
             else {
               this.common.matSnackBar(res.statusMessage, 1);
@@ -100,7 +100,6 @@ export class ForgotPasswordComponent implements OnInit {
             this.errorSer.handelError(error.statusMessage)
           }
         })
-      }
     }
   }
   verifyOTP(formDirective: any) {
@@ -121,15 +120,15 @@ export class ForgotPasswordComponent implements OnInit {
       this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
-          if (res.statusCode == '200') {
-            this.common.matSnackBar(res.statusMessage, 0);
+          if (res.responseData.statusCode == '200') {
+            this.common.matSnackBar(res.responseData.statusMessage, 0);
             this.emailId=res.responseData.responseData.emailId;
             clearInterval(this.interval);
             this.passwordField = true; this.startTimer(); this.verifyOTPField = false;
             formDirective.resetForm();
           }
           else {
-            this.common.matSnackBar(res.statusMessage, 1);
+            this.common.matSnackBar(res.responseData.statusMessage, 1);
             this.clearFormFields();
             this.timeLeft = 0;
             formDirective.resetForm();
@@ -158,6 +157,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   pauseTimer() {
     clearInterval(this.interval);
+    this.emailVerifyForm.value.email.setValue('');
   }
 /* 
   getUserName(formDirective: any) {
