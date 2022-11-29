@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { WebStorageService } from 'src/app/core/services/web-storage.service';
 
@@ -23,6 +24,7 @@ export class ChangePasswordComponent implements OnInit {
     public validations: FormValidationService,
     private common: CommonMethodService,
     private router: Router,
+     private errorSer : ErrorHandlerService,
     public dialogRef: MatDialogRef<ChangePasswordComponent>,
     private webStorage:WebStorageService) {  dialogRef.disableClose = true;}
 
@@ -67,6 +69,9 @@ export class ChangePasswordComponent implements OnInit {
               this.common.matSnackBar(res.responseData, 1);
               formDirective.resetForm();
             }
+          },
+          error: (error: any) => {
+            this.errorSer.handelError(error.statusMessage)
           }
         })
       }

@@ -20,9 +20,11 @@ export class RegisterNowComponent implements OnInit {
     private service: ApiService,
     private errorSer: ErrorHandlerService,
     public validator: FormValidationService,
-    private snack: CommonMethodService) { }
+    private snack: CommonMethodService,
+    ) { }
 
   ngOnInit(): void {
+    console.log('data',this.data)
     this.getFormData();
   }
 
@@ -51,7 +53,7 @@ export class RegisterNowComponent implements OnInit {
       return
     } else {
       let obj = this.registerForm.value;
-      obj.pageName = this.data.pageName;
+      obj.pageName = this.data.pageName
       obj.courseId = this.data.courseId;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
