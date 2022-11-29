@@ -75,3 +75,8 @@ section{
     color: #FFFFFF;
     padding-left: 47px;
 }
+.courses img{
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+}
