@@ -58,8 +58,8 @@ export class PostNewJobComponent implements OnInit {
   formData() {
     this.data ? this.editFlag = true : ''
     this.postNewJobFrm = this.fb.group({
-      id: [this.editFlag ? this.data.jobpostId : 0],
-      job_Title: [this.editFlag ? this.data.job_Title : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'), Validators.maxLength(150)]],
+      id: [this.editFlag ? this.data.jobpostId : 0], 
+      job_Title: [this.editFlag ? this.data.job_Title : '', [Validators.required, Validators.pattern(this.validation.title), Validators.maxLength(150)]],
       job_Location: [this.editFlag ? this.data.job_Location : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'), Validators.maxLength(150)]],
       date_of_Application: [this.editFlag ? this.data.date_of_Application : '', [Validators.required, Validators.maxLength(50)]],
       job_Description: [this.editFlag ? this.data.job_Description : '', [Validators.required, Validators.maxLength(500)]],
@@ -67,7 +67,7 @@ export class PostNewJobComponent implements OnInit {
       qualification: [this.editFlag ? this.data.qualification : '', [Validators.required, Validators.maxLength(300)]],
       experience: [this.editFlag ? this.data.experience : '', [Validators.required, , Validators.maxLength(300)]],
       skills_Required: [this.editFlag ? this.data.skills_Required : '', [Validators.required, Validators.maxLength(1500)]],
-      publish: [this.editFlag ? true : false]
+      publish: [this.editFlag ? this.data.publish : false]
     });
   }
 
@@ -79,7 +79,6 @@ export class PostNewJobComponent implements OnInit {
       return;
     } else {
       let data = this.postNewJobFrm.value;
-       data.publish = false;
       data.date_of_Posting = new Date();
       this.editFlag ? '' : data.id = 0;
      
@@ -98,7 +97,7 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            console.log("response",res);
+            // console.log("response",res);
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();

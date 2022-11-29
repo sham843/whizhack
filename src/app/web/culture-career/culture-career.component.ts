@@ -107,7 +107,7 @@ export class CultureCareerComponent implements OnInit {
 
   getAllPostJobs() {
 
-    this.service.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?'+'pageno='+this.jobPostPageNo+'&pagesize=6', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/getALlPublishDetails?'+'pageno='+this.jobPostPageNo+'&pagesize=6', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {

@@ -12,29 +12,25 @@
               <mat-error *ngIf="g['gallery_title']?.errors" class="mt-2">
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery Title Is Required</span>
-                <span *ngIf="g['gallery_title']?.hasError('pattern') ">
-                  Please Enter Valid Gallery Title </span>
-                <span *ngIf="g['gallery_title']?.hasError('maxlength') ">
-                  Please Enter Maximum 50 Character</span>
+                <span *ngIf="g['gallery_title']?.hasError('pattern') || g['gallery_title']?.hasError('maxlength')">
+                  {{g['gallery_title']?.hasError('pattern')?'Please Enter Valid Gallery Title':'Please Enter Maximum 50 Character'}}</span>
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 d-none">
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
               <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5"
                 formControlName="gallery_description" rows="20" (keypress)="vs.noFirstSpaceAllow($event)"></textarea>
-              <mat-error *ngIf="g['gallery_description']?.errors">
+             <!--  <mat-error *ngIf="g['gallery_description']?.errors">
                 <span *ngIf="g['gallery_description']?.hasError('required') ">
                   Gallery Description Is Required</span>
-                <span *ngIf="g['gallery_description']?.hasError('pattern')">
-                  Please Enter Valid Gallery Description </span>
-                <span *ngIf="g['gallery_description']?.hasError('maxlength')">
-                  Please Enter Maximum 500 Character</span>
-              </mat-error>
+                <span *ngIf="g['gallery_description']?.hasError('pattern') || g['gallery_description']?.hasError('maxlength')">
+                 {{ g['gallery_description']?.hasError('pattern') ? "Please Enter Valid Gallery Description":" Please Enter Maximum 500 Character" }} </span>
+              </mat-error> -->
             </mat-form-field>
           </div>
-          <div class="mb-1">
+          <div class="mb-3">
             <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput
               (change)="mediaFileUpload($event)" />
             <mat-error *ngIf="showImagError" class="mt-2">

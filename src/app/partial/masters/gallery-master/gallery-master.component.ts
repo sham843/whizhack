@@ -81,7 +81,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this.frmGallery = this.fb.group({
       id: [0],
       gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(50)]],
-      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(500)]],
+      // gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(500)]],
+      gallery_description: [''],
       uploadImages: [''],
     })
   }

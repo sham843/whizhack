@@ -22,7 +22,7 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Title
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -31,12 +31,9 @@
                             <mat-label>Blog Description</mat-label>
                             <textarea maxlength="5000" matInput placeholder="Enter Blog Description" rows="5"
                                 formControlName="description"
-                                (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
                                 Description</mat-error>
-                                <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Description
-                                </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -68,6 +65,9 @@
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
                                     Blog Image</button>
+                                    <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
+                                        <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
+                                    </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
@@ -84,62 +84,65 @@
                                 </button>
                             </div>
                         </div>
-                        <small> (Note: Allowed only png, jpg, jfif image)</small>
+                        <small> ( Note: Allowed only png, jpg, jfif image )</small>
                     </div>
-                    <div class="mb-3">
-                        <div class="card card-body form-card border">
-                            <div formArrayName="blogRegisterDetailsModel"
-                                *ngFor="let item of itemsForm.controls; let i = index;">
-                                <div [formGroupName]="i">
-                                    <div class="mb-3">
-                                        <mat-form-field appearance="outline" class="w-100">
-                                            <mat-label>Blog Sub-Title</mat-label>
-                                            <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
-                                                formControlName="title"
-                                                (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
-                                                (keypress)="validation.noFirstSpaceAllow($event)">
-                                            <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
-                                                Blog Sub-Title</mat-error>
-                                                <!-- <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
-                                                </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="mb-3">
-                                        <mat-form-field appearance="legacy" class="w-100">
-                                            <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
-                                                rows="5" formControlName="description"
-                                                (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
-                                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                                            <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
-                                                Enter Blog Sub-Description</mat-error>
-                                                <!-- <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
-                                                </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="text-end mb-2">
-                                        <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
-                                            <button type="button" mat-stroked-button
-                                                class="btn-sm bg-danger bg-opacity-10 text-danger"
-                                                (click)="removeItem(i)">
-                                                <span class="material-symbols-outlined">
+                    <!-- checkbox changes -->
+                    <!-- <div class="mb-3">
+                        <section class="example-section">
+                            <mat-checkbox class="example-margin" (change)="onClickOptionalCheck($event)">Sub-Details</mat-checkbox>
+                        </section>
+                        <small> ( Note: Optional )</small>
+                    </div> -->
+                    <!-- ----- -->
+                        <div class="mb-3">
+                            <div class="card card-body form-card border">
+                                <div formArrayName="blogRegisterDetailsModel"
+                                    *ngFor="let item of itemsForm.controls; let i = index;">
+                                    <div [formGroupName]="i">
+                                        <div class="mb-3">
+                                            <mat-form-field appearance="outline" class="w-100">
+                                                <mat-label>Blog Sub-Title</mat-label>
+                                                <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
+                                                    formControlName="title"
+                                                    (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
+                                                    (keypress)="validation.noFirstSpaceAllow($event)">
+                                                <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
+                                                    Blog Sub-Title</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="mb-3">
+                                            <mat-form-field appearance="legacy" class="w-100">
+                                                <mat-label>Blog Sub-Description</mat-label>
+                                                <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
+                                                    rows="5" formControlName="description"
+                                                    (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
+                                                <mat-error class="mt-2" *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
+                                                    Enter Blog Sub-Description</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="text-end mb-2">
+                                            <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
+                                                <button type="button" mat-stroked-button
+                                                    class="btn-sm bg-danger bg-opacity-10 text-danger"
+                                                    (click)="removeItem(i)">
+                                                    <span class="material-symbols-outlined">
+                                                        Remove
+                                                    </span>
                                                     Remove
-                                                </span>
-                                                Remove
-                                            </button>
-                                        </span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
+                                <button type="button" mat-stroked-button
+                                    class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
+                                    <span class="material-symbols-outlined">
+                                        Add
+                                    </span>
+                                    Add New
+                                </button>
                             </div>
-                            <button type="button" mat-stroked-button
-                                class="btn-sm bg-success bg-opacity-10 text-success" (click)="addItem()">
-                                <span class="material-symbols-outlined">
-                                    Add
-                                </span>
-                                Add New
-                            </button>
                         </div>
-                    </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <button type="button" mat-stroked-button class="btn-main-outline"
                             (click)="clearForm(formDirective)">Cancel</button>
