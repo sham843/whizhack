@@ -6,6 +6,7 @@ import { CultureCareerComponent } from './culture-career.component';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { LazyImgDirectiveDirective } from 'src/app/core/directive/lazy-img-directive.directive';
+import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 @NgModule({
   declarations: [
     CultureCareerComponent,LazyImgDirectiveDirective
@@ -15,6 +16,7 @@ import { LazyImgDirectiveDirective } from 'src/app/core/directive/lazy-img-direc
     CultureCareerRoutingModule,
     GalleryModule,
     LightboxModule,
+    MaterialModule,
 
   ]
 })

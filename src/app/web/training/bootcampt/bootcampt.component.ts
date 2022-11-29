@@ -31,12 +31,12 @@ export class BootcamptComponent implements OnInit {
     this.apiService.getHttp().subscribe((res:any)=>{
       this.getAllCoursesData=res.responseData;
       this.getAllCoursesData.forEach((ele:any)=>{
-        if(ele.pageName=='WhizTeens '){
+        if(ele.pageName=='Bootcamp '){
           this.bootCamptArray.push(ele);
         }
       })
     })
-    console.log(this.bootCamptArray)
+    console.log("bootCamptArray",this.bootCamptArray)
   }
 }
 

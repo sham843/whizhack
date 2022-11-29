@@ -156,7 +156,7 @@ export class MediaCoverageComponent implements OnInit {
   clearMediaForm(formDirective?: any) {
     this.submitBtnTxt = 'Submit';
     formDirective.resetForm();
-    this.frmMedia.reset();
+    // this.frmMedia.reset();
     this.createMediaForm();
   }
 

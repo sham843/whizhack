@@ -47,7 +47,7 @@
                     format with both on campus learning and online self-paced activities.
                 </p>
                 <div class="row courses mb-5">
-                    <div class="col-sm-4" *ngFor="let bootData of bootCamptArray">
+                    <div class="col-sm-4 mb-3" *ngFor="let bootData of bootCamptArray">
                         <div class="card">
                             <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top">
                             <div class="card-body">
@@ -64,14 +64,16 @@
                                 <div class="price mb-3">
                                     INR <strong>{{bootData.price}}</strong> + GST<br>
                                 </div>
-                                <h6 class="duration-label">EMI Available Starting at Rs. {{bootData.actual_price}}/-({{bootData.price_Terms}})</h6>
+                                <h6 class="duration-label">EMI Available Starting at Rs.
+                                    {{bootData.actual_price}}/-({{bootData.price_Terms}})</h6>
                             </div>
                             <div class="card-footer text-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <button mat-stroked-button class="btn btn-main-outline rounded-pill"><i
-                                                class="fa-solid fa-file-pdf text-danger me-1"></i> Download
-                                            Brochure</button>
+                                        <button mat-stroked-button class="btn btn-main-outline rounded-pill">
+                                            <i  class="fa-solid fa-file-pdf text-danger me-1"></i>
+                                            Download Brochure
+                                        </button>
                                     </div>
                                     <div>
                                         <button class="btn btn-main-outline rounded-pill px-4"

@@ -41,7 +41,7 @@
               <span>{{showImagError}}</span>
             </mat-error>
           </div>
-          <small class="mt-2"> (Note: Allowed only png, jpg, jfif image)</small>
+          <small class="mt-2"> (Note:Allowed Only png, jpg, jpeg, hevc, jfif Image)</small>
 
           <div class="my-4">
             <div class="d-flex  flex-wrap gap-4">
@@ -111,7 +111,7 @@
             <td mat-cell *matCellDef="let element">
               <div class="d-flex align-items-center">
 
-                <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos">
+                <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos" matTooltip="View">
                   <span class="material-symbols-outlined">
                     photo_library
                   </span>

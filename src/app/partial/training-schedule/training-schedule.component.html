@@ -108,8 +108,6 @@
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Price is Required
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('pattern')">
-                                Enter Only Number</mat-error>
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('maxlength')">
                                 Maximum 10 Number</mat-error>
                         </mat-form-field>
@@ -123,8 +121,6 @@
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('pattern')">
-                                Enter Only Number</mat-error>
                         </mat-form-field>
 
                     </div>
