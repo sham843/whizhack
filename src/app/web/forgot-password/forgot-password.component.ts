@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
-// import { WebStorageService } from 'src/app/core/services/web-storage.service';
-
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +13,6 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class ForgotPasswordComponent implements OnInit {
   hide = true;
   hide1 = true;
-
   userId: number = 0;
   userName: string = '';
   otpStatus: boolean = false;
