@@ -120,7 +120,7 @@ export class MediaCoverageComponent implements OnInit {
       header: 'Delete',
       title: 'Are you sure, you want to Delete ?',
       cancelButton: 'Cancel',
-      okButton: 'Ok'
+      okButton: 'Delete'
     }
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
