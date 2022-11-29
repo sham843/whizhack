@@ -13,10 +13,10 @@ export class BootcamptComponent implements OnInit {
   bootCamptArray=new Array();
   constructor(public dialog: MatDialog,private apiService:ApiService) { }
 
-  openDialog(flag:any) {
+  openDialog(bootData:any) {
     const dialogRef = this.dialog.open(RegisterNowComponent,{
       width: '500px',
-      data:flag
+      data:bootData
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
@@ -31,7 +31,7 @@ export class BootcamptComponent implements OnInit {
     this.apiService.getHttp().subscribe((res:any)=>{
       this.getAllCoursesData=res.responseData;
       this.getAllCoursesData.forEach((ele:any)=>{
-        if(ele.pageName=='Bootcamp '){
+        if(ele.pageName== 'Bootcamp'){
           this.bootCamptArray.push(ele);
         }
       })

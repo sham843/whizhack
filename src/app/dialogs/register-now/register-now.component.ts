@@ -26,6 +26,7 @@ export class RegisterNowComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFormData();
+    console.log("data",this.data);
   }
 
   //#region ------------------------------------------------FormData Method Start------------------------------------------------------
