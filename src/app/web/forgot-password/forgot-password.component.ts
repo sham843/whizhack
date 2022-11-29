@@ -31,8 +31,8 @@ export class ForgotPasswordComponent implements OnInit {
   obj = {
     "createdBy": 0,
     "modifiedBy": 0,
-    "createdDate": "2022-11-25T13:13:30.972Z",
-    "modifiedDate": "2022-11-25T13:13:30.972Z",
+    "createdDate": new Date(),
+    "modifiedDate": new Date(),
     "isDeleted": false,
     "id": 0,
     "mobileNo": "",

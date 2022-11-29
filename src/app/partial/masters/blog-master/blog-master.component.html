@@ -84,7 +84,7 @@
                                 </button>
                             </div>
                         </div>
-                        <small> (Note: Allowed only png, jpg, jfif img)</small>
+                        <small> (Note: Allowed only png, jpg, jfif image)</small>
                     </div>
                     <div class="mb-3">
                         <div class="card card-body form-card border">
@@ -100,8 +100,8 @@
                                                 (keypress)="validation.noFirstSpaceAllow($event)">
                                             <mat-error class="mt-2" *ngIf="f['title'].hasError('required') ||  this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
                                                 Blog Sub-Title</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
-                                                </mat-error>
+                                                <!-- <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
+                                                </mat-error> -->
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
@@ -113,8 +113,8 @@
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                             <mat-error class="mt-2" *ngIf="f['description'].hasError('required') || this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
                                                 Enter Blog Sub-Description</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
-                                                </mat-error>
+                                                <!-- <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
+                                                </mat-error> -->
                                         </mat-form-field>
                                     </div>
                                     <div class="text-end mb-2">

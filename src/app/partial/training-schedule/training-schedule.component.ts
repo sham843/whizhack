@@ -26,7 +26,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
   courseManageForm!: FormGroup;
-  displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
+  displayedColumns: string[] = ['srno',  'course_Title', 'duration', 'price', 'action'];
   dataSource: any;
   pageNameArray = new Array();
   totalCount: number = 0;
@@ -138,7 +138,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
           this.pageNameArray = res.responseData;
           this.editFlag ? this.courseManageForm.controls['pageName'].setValue(this.globalObj?.pageName) : '';
         } else {
-          this.pageNameArray = []
+          this.pageNameArray = [];
         }
       }),
       error: (error: any) => {
@@ -151,20 +151,20 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe((res: any) => {
       if (res.statusCode == '200') {
         this.imgSrc = res.responseData;
-        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
-        this.comMethods.matSnackBar(res.statusMessage, 0)
+        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
+        this.comMethods.matSnackBar(res.statusMessage, 0);
       } else {
         this.imgSrc = '';
-        this.file.nativeElement.value = ''
+        this.file.nativeElement.value = '';
       }
 
     })
   }
 
   deleteImage() {
-    this.imgSrc = ''
-    this.file.nativeElement.value = ''
-    this.courseManageForm.controls['imagePath'].setValue('')
+    this.imgSrc = '';
+    this.file.nativeElement.value = '';
+    this.courseManageForm.controls['imagePath'].setValue('');
   }
 
   onClickViewImage() {
@@ -189,12 +189,12 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     })
     this.getPageName();
     obj?.exclusive_offer == 1 ? this.offer = true : false;
-    this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath)
+    this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath);
     this.imgSrc = obj?.imagePath;
   }
 
   pageChanged(event: any) {
-    this.clearForm()
+    this.clearForm();
     this.currentPage = event.pageIndex;
     this.getAllCourseList();
   }
@@ -255,7 +255,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     if (!this.courseManageForm.valid) {
       if (!this.imgSrc) {
         this.comMethods.matSnackBar('Please Upload Course Image', 1)
-        return
+        return;
       }
       return;
     }
@@ -275,11 +275,11 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
           if (res.statusCode == '200') {
             this.ngxSpinner.hide();
             this.selRow = 0;
-            this.comMethods.matSnackBar(res.statusMessage, 0)
+            this.comMethods.matSnackBar(res.statusMessage, 0);
             this.getAllCourseList();
             this.clearForm(clear);
           } else {
-            this.comMethods.matSnackBar(res.statusMessage, 1)
+            this.comMethods.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {
@@ -290,8 +290,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   }
 
   setOffer(event: any) {
-    this.courseManageForm.controls['actual_price'].setValue('')
-    this.offer = event.checked
+    this.courseManageForm.controls['actual_price'].setValue('');
+    this.offer = event.checked;
   }
 
   updateValidation() {
