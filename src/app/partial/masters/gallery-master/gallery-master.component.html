@@ -14,8 +14,8 @@
                   Gallery Title Is Required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern') ">
                   Please Enter Valid Gallery Title </span>
-                  <span *ngIf="g['gallery_title']?.hasError('maxlength') ">
-                    Please Enter Maximum 50 Character</span>
+                <span *ngIf="g['gallery_title']?.hasError('maxlength') ">
+                  Please Enter Maximum 50 Character</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -23,15 +23,14 @@
             <mat-form-field appearance="legacy" class="w-100">
               <mat-label>Gallery Description</mat-label>
               <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5"
-                formControlName="gallery_description" rows="20" (keypress)="vs.noFirstSpaceAllow($event)"
-                ></textarea>
+                formControlName="gallery_description" rows="20" (keypress)="vs.noFirstSpaceAllow($event)"></textarea>
               <mat-error *ngIf="g['gallery_description']?.errors">
                 <span *ngIf="g['gallery_description']?.hasError('required') ">
                   Gallery Description Is Required</span>
                 <span *ngIf="g['gallery_description']?.hasError('pattern')">
                   Please Enter Valid Gallery Description </span>
-                  <span *ngIf="g['gallery_description']?.hasError('maxlength')">
-                    Please Enter Maximum 500 Character</span>
+                <span *ngIf="g['gallery_description']?.hasError('maxlength')">
+                  Please Enter Maximum 500 Character</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -44,7 +43,7 @@
           </div>
           <small class="mt-2"> (Note: Allowed only png, jpg, jfif image)</small>
 
-          <div class="mb-3">
+          <div class="my-4">
             <div class="d-flex  flex-wrap gap-4">
               <ng-container *ngFor="let item of imageArray; let i = index">
                 <div class="gallery">
@@ -110,21 +109,24 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos">
-                <span class="material-symbols-outlined">
-                  photo_library
-                </span>
-              </button>
-              <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)" matTooltip="Edit">
-                <span class="material-symbols-outlined">
-                  edit
-                </span>
-              </button>
-              <button mat-icon-button class="text-danger" (click)="deleteGalleryRecord(element)" matTooltip="Delete">
-                <span class="material-symbols-outlined">
-                  delete
-                </span>
-              </button>
+              <div class="d-flex align-items-center">
+
+                <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos">
+                  <span class="material-symbols-outlined">
+                    photo_library
+                  </span>
+                </button>
+                <button mat-icon-button class="text-warning" (click)="editGalleryRecord(element)" matTooltip="Edit">
+                  <span class="material-symbols-outlined">
+                    edit
+                  </span>
+                </button>
+                <button mat-icon-button class="text-danger" (click)="deleteGalleryRecord(element)" matTooltip="Delete">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </div>
             </td>
           </ng-container>
           <tr class="mat-row p-2 w-100" *matNoDataRow col>
