@@ -25,8 +25,6 @@ export class ForgotPasswordComponent implements OnInit {
   timeLeft: number = 60;
   interval: any;
   emailId: any;
-  stringOtp: string = '';
-  obj:any
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   constructor(private fb: FormBuilder, private api: ApiService,
     public validations: FormValidationService, private common: CommonMethodService,
@@ -76,13 +74,12 @@ export class ForgotPasswordComponent implements OnInit {
         "isDeleted": false,
         "id": 0,
         "mobileNo": "",
-        "emailId": "",
+        "emailId": this.emailVerifyForm.value.email,
         "otp": "",
         "pageName": "",
         "otpExpireDate": "2022-11-25T13:13:30.972Z",
         "isUser": true
       }
-      obj.emailId = this.emailVerifyForm.value.email;
       if (this.fe['email'].valid) {
         this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, obj, false, 'whizhackService');
         this.api.getHttp().subscribe({
@@ -91,7 +88,7 @@ export class ForgotPasswordComponent implements OnInit {
               this.common.matSnackBar(res.statusMessage, 0);
               this.emailId = obj.emailId;
               this.verifyOTPField = true; this.emailField = false, this.otpStatus = true;
-              this.startTimer();
+              this.startTimer();formDirective.resetForm();
             }
             else {
               this.common.matSnackBar(res.statusMessage, 1);
@@ -103,26 +100,26 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
   verifyOTP(formDirective: any) {
-    /*  {
-       "userId": 0,
-       "userName": "string",
-       "mobileNo": "string",
-       "emailId": "string",
-       "otp": "string",
-       "pageName": "string"
-     } */
     if (this.otpVerifyForm.value.digitOne.invalid || this.otpVerifyForm.value.digitTwo.invalid || this.otpVerifyForm.value.digitThree.invalid ||
       this.otpVerifyForm.value.digitFour.invalid || this.otpVerifyForm.value.digitFive.invalid) {
       return
     }
     else {
       let otp = this.otpVerifyForm.value.digitOne + this.otpVerifyForm.value.digitTwo + this.otpVerifyForm.value.digitThree + this.otpVerifyForm.value.digitFour + this.otpVerifyForm.value.digitFive;
-      this.obj.otp = otp.toString();
-      this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, this.obj, false, 'whizhackService');
+      let obj = {
+        "userId": 0,
+        "userName": "",
+        "mobileNo": "",
+        "emailId": this.emailId,
+        "otp":otp,
+        "pageName": ""
+      }
+      this.api.setHttp('post', 'whizhack_cms/login/VerifyOTP', false, obj, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
           if (res.statusCode == '200') {
             this.common.matSnackBar(res.statusMessage, 0);
+            this.emailId=res.responseData.responseData.emailId;
             clearInterval(this.interval);
             this.passwordField = true; this.startTimer(); this.verifyOTPField = false;
             formDirective.resetForm();
@@ -155,7 +152,7 @@ export class ForgotPasswordComponent implements OnInit {
   pauseTimer() {
     clearInterval(this.interval);
   }
-
+/* 
   getUserName(formDirective: any) {
     this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + this.emailId, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
@@ -164,7 +161,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.onSumbit(formDirective);
       }
     })
-  }
+  } */
 
   onSumbit(formDirective: any) {
 
@@ -173,8 +170,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1);
       return
     } else {
-      let obj = this.passwordForm.value;
-      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + 'anand@gmail.com' + '&NewPassword=' + obj.retypePassword + '&EmailId=' + this.emailId, false, false, false, 'whizhackService');
+      // let obj = this.passwordForm.value;
+      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=&NewPassword='+ this.passwordForm.value.retypePassword + '&EmailId=' + this.emailId, false, false, false, 'whizhackService');
       this.api.getHttp().subscribe({
         next: (res: any) => {
           if (res.statusCode == '200') {
