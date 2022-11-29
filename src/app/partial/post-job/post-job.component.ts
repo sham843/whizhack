@@ -145,7 +145,7 @@ export class PostJobComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {
-        this.clearForm();
+      this.clearForm();
         let deleteObj = {
           "id": id,
           "modifiedBy": 0,
@@ -155,7 +155,11 @@ export class PostJobComponent implements OnInit {
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
+              this.commonService.matSnackBar(res.statusMessage, 0);
               this.bindTable();
+            }
+            else {
+              this.commonService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
