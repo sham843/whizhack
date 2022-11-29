@@ -84,7 +84,7 @@
                                 </button>
                             </div>
                         </div>
-                        <small> (Note: Allowed only png, jpg, jfif img)</small>
+                        <small> (Note: Allowed only png, jpg, jfif image)</small>
                     </div>
                     <div class="mb-3">
                         <div class="card card-body form-card border">
@@ -98,23 +98,23 @@
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter
+                                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required') ||  this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">Please Enter
                                                 Blog Sub-Title</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
-                                                </mat-error>
+                                                <!-- <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Sub-Title
+                                                </mat-error> -->
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
                                             <textarea maxlength="1000" matInput placeholder="Enter Blog Sub-Description"
-                                                rows="5" formControlName="description" 
+                                                rows="5" formControlName="description"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                                            <mat-error class="mt-2" *ngIf="f['description'].hasError('required')">Please
+                                            <mat-error class="mt-2" *ngIf="f['description'].hasError('required') || this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">Please
                                                 Enter Blog Sub-Description</mat-error>
-                                                <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
-                                                </mat-error>
+                                                <!-- <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Sub-Description
+                                                </mat-error> -->
                                         </mat-form-field>
                                     </div>
                                     <div class="text-end mb-2">
@@ -180,7 +180,7 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Blog Title </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title | titlecase}} </td>
+                        <td mat-cell *matCellDef="let element" class="text-break"> {{element.title | titlecase}} </td>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>

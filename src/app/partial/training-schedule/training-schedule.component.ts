@@ -26,7 +26,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
   courseManageForm!: FormGroup;
-  displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
+  displayedColumns: string[] = ['srno',  'course_Title', 'duration', 'price', 'action'];
   dataSource: any;
   pageNameArray = new Array();
   totalCount: number = 0;
@@ -67,9 +67,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       duration: ['', Validators.required],
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
-      price: ['', [Validators.required,Validators.pattern(/^\d*(\.)?(\d{0,3})?$/), Validators.maxLength(10)]],
-      price_Terms: ['', [Validators.required, Validators.maxLength(10)]],
-      imagePath: ['',Validators.required],
+      price: ['', [Validators.required, Validators.pattern(/^\d*(\.)?(\d{0,3})?$/), Validators.maxLength(10)]],
+      price_Terms: ['', Validators.required],
+      imagePath: ['', Validators.required],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
   }
@@ -89,35 +89,42 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       debounceTime(1000),
       distinctUntilChanged())
       .subscribe(() => {
-          this.currentPage = 0;
-          this.imgSrc = '';
-          this.file.nativeElement.value = '';
-          this.editFlag = false;
-          this.courseManageFormData();
-          this.getAllCourseList();
+        // this.selRow = 0
+        // this.currentPage = 0;
+        // this.imgSrc = '';
+        // this.file.nativeElement.value = '';
+        // this.editFlag = false;
+        this.clearForm()
+        this.courseManageFormData();
+        this.getAllCourseList();
       })
   }
 
   clearSearchFilter() {
+    this.selRow = 0
     this.searchFilter.setValue('');
   }
 
   getAllCourseList() {
+    this.ngxSpinner.show();
     let search = this.searchFilter.value ? this.searchFilter.value.trim() : ''
     this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=' + search, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
+          this.ngxSpinner.hide();
           this.dataSource = new MatTableDataSource(res.responseData);
           this.dataSource.sort = this.sort;
           this.totalCount = res.responseData1.pageCount;
         } else {
+          this.ngxSpinner.hide();
           this.dataSource = [];
           this.totalCount = 0
         }
       }),
       error: (error: any) => {
-        this.dataSource = [];        
+        this.ngxSpinner.hide();
+        this.dataSource = [];
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
     })
@@ -129,9 +136,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.pageNameArray = res.responseData;
-          this.editFlag ?  this.courseManageForm.controls['pageName'].setValue(this.globalObj?.pageName):'';
+          this.editFlag ? this.courseManageForm.controls['pageName'].setValue(this.globalObj?.pageName) : '';
         } else {
-          this.pageNameArray = []
+          this.pageNameArray = [];
         }
       }),
       error: (error: any) => {
@@ -144,20 +151,20 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe((res: any) => {
       if (res.statusCode == '200') {
         this.imgSrc = res.responseData;
-        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc)
-        this.comMethods.matSnackBar(res.statusMessage, 0)
+        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
+        this.comMethods.matSnackBar(res.statusMessage, 0);
       } else {
         this.imgSrc = '';
-        this.file.nativeElement.value = ''
+        this.file.nativeElement.value = '';
       }
 
     })
   }
 
   deleteImage() {
-    this.imgSrc = ''
-    this.file.nativeElement.value = ''
-    this.courseManageForm.controls['imagePath'].setValue('')
+    this.imgSrc = '';
+    this.file.nativeElement.value = '';
+    this.courseManageForm.controls['imagePath'].setValue('');
   }
 
   onClickViewImage() {
@@ -182,12 +189,12 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     })
     this.getPageName();
     obj?.exclusive_offer == 1 ? this.offer = true : false;
-    this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath)
+    this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath);
     this.imgSrc = obj?.imagePath;
   }
 
   pageChanged(event: any) {
-    this.clearForm()
+    this.clearForm();
     this.currentPage = event.pageIndex;
     this.getAllCourseList();
   }
@@ -248,7 +255,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     if (!this.courseManageForm.valid) {
       if (!this.imgSrc) {
         this.comMethods.matSnackBar('Please Upload Course Image', 1)
-        return
+        return;
       }
       return;
     }
@@ -259,7 +266,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         ... this.courseManageForm.value
       }
       submitObj.exclusive_offer = this.offer ? 1 : 0;
-      submitObj.actual_price  =  submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
+      submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
       let url = this.editFlag ? 'whizhack_cms/course/Update' : 'whizhack_cms/course/Insert'
 
       this.api.setHttp(this.editFlag ? 'put' : 'post', url, false, submitObj, false, 'whizhackService');
@@ -268,11 +275,11 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
           if (res.statusCode == '200') {
             this.ngxSpinner.hide();
             this.selRow = 0;
-            this.comMethods.matSnackBar(res.statusMessage, 0)
+            this.comMethods.matSnackBar(res.statusMessage, 0);
             this.getAllCourseList();
             this.clearForm(clear);
           } else {
-            this.comMethods.matSnackBar(res.statusMessage, 1)
+            this.comMethods.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {
@@ -283,8 +290,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   }
 
   setOffer(event: any) {
-    this.courseManageForm.controls['actual_price'].setValue('')
-    this.offer = event.checked
+    this.courseManageForm.controls['actual_price'].setValue('');
+    this.offer = event.checked;
   }
 
   updateValidation() {

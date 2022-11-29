@@ -5,7 +5,6 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
-
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -14,7 +13,6 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class ForgotPasswordComponent implements OnInit {
   hide = true;
   hide1 = true;
-
   userId: number = 0;
   userName: string = '';
   otpStatus: boolean = false;
@@ -94,7 +92,6 @@ export class ForgotPasswordComponent implements OnInit {
               this.emailId = obj.emailId;
               this.verifyOTPField = true; this.emailField = false, this.otpStatus = true;
               this.startTimer();
-              // formDirective.resetForm();
             }
             else {
               this.common.matSnackBar(res.statusMessage, 1);
