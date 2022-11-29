@@ -48,17 +48,17 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog1(element)">
+                            <button mat-icon-button (click)="openDialog1(element)" matTooltip="View">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-warning" (click)="openPostJobDialog(element)">
+                            <button mat-icon-button class="text-warning" (click)="openPostJobDialog(element)" matTooltip="Edit">
                                 <span class="material-symbols-outlined">
                                     edit
                                 </span>
                             </button>
-                            <button mat-icon-button class="text-danger" (click)="openDeleteDialog(element.jobpostId)">
+                            <button mat-icon-button class="text-danger" (click)="openDeleteDialog(element.jobpostId)" matTooltip="Delete">
                                 <span class="material-symbols-outlined">
                                     delete
                                 </span>
