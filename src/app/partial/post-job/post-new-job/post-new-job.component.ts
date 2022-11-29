@@ -98,7 +98,7 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            console.log("response",res);
+            // console.log("response",res);
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();
