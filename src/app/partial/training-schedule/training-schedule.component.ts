@@ -26,7 +26,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
   courseManageForm!: FormGroup;
-  displayedColumns: string[] = ['srno', 'image', 'course_Title', 'duration', 'price', 'action'];
+  displayedColumns: string[] = ['srno',  'course_Title', 'duration', 'price', 'action'];
   dataSource: any;
   pageNameArray = new Array();
   totalCount: number = 0;
