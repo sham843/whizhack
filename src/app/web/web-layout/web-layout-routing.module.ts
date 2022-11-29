@@ -25,8 +25,6 @@ const routes: Routes = [
   { path: 'job-details', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: {title: 'Job Details'}  },
   { path: 'job-details/:id', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: {title: 'Job Details'}  },
 ];
-// breadcrumb: [{ title: 'Culture & Career', active: true }] 
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
