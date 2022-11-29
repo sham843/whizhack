@@ -31,7 +31,7 @@ export class BootcamptComponent implements OnInit {
     this.apiService.getHttp().subscribe((res:any)=>{
       this.getAllCoursesData=res.responseData;
       this.getAllCoursesData.forEach((ele:any)=>{
-        if(ele.pageName=='Bootcamp '){
+        if(ele.pageName== 'Bootcamp'){
           this.bootCamptArray.push(ele);
         }
       })

@@ -10,8 +10,8 @@ import { RegisterNowComponent } from 'src/app/dialogs/register-now/register-now.
 })
 export class WhizteensComponent implements OnInit {
   getAllCoursesData=new Array();
-whizteenArray=new Array();
-whizteenexclusiveArray=new Array();
+  whizteenArray=new Array();
+  whizteenexclusiveArray=new Array();
   constructor(public dialog: MatDialog,private apiService:ApiService) { }
 
   openDialog(title: any) {
@@ -33,7 +33,7 @@ whizteenexclusiveArray=new Array();
     this.apiService.getHttp().subscribe((res:any)=>{
       this.getAllCoursesData=res.responseData;
       this.getAllCoursesData.forEach((ele:any)=>{
-        if(ele.pageName=='WhizTeens '){
+        if(ele.pageName=='WhizTeens'){
           ele.exclusive_offer==0?this.whizteenArray.push(ele):this.whizteenexclusiveArray.push(ele);
         }
       })
