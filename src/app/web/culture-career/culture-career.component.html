@@ -105,49 +105,28 @@
         <h2 class="mb-5">Life at WhizHack</h2>
 
         <div class="row" id="culture">
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="albums-tab">
-                    <div class="albums-tab-thumb sim-anim-1">
-                        <img src="assets/image/culture-career/Pratnership-Program.png" class="img-fluid">
-                    </div>
-                </div>
-            </div>
+          <ng-container *ngFor="let item of this.imageArray">
+            <div class="col-sm-2" (click)="openLightBox(item?.imagepaths)">
+              <div class="albums-tab mb-2">
+                  <div class="albums-tab-thumb sim-anim-1">
+                    <ng-container *ngFor="let x of item?.imagepaths; let i =index">
+                      <ng-container *ngIf="i ==0 || i == 1">
+                        <img src="{{x}}" class="all studio"  loading="lazy" class="img-fluid"/>
+                      </ng-container>
+                  </ng-container>
+                  </div>
+              </div>
+              <p class="text-center">{{item.gallery_Title | titlecase}} </p>
+          </div>
+          </ng-container>
+
+
         </div>
+        <ng-container *ngIf="totalCount > 6">
+          <mat-paginator [length]="totalCount" [pageSize]="6" showFirstLastButtons (page)="onClickPaginatior($event)" #paginator>
+          </mat-paginator>
+        </ng-container>
+
         <!-- <div class="row align-items-center" id="culture">
             <ng-container *ngFor="let item of this.imageArray">
                 <div class="col-sm-3" (click)="openLightBox(item?.imageArray)">
@@ -160,7 +139,7 @@
                     </div>
                 </div>
             </ng-container>
-        </div>
+        </div>-->
         <section>
             <div class="container" style="display: none;">
 
@@ -170,7 +149,7 @@
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section>
 
 
     </div>
@@ -204,6 +183,11 @@
                             </div>
                         </div>
                     </div>
+                    <ng-container>
+                      <mat-paginator [length]="jobPostTotalCount" [pageSize]="12" showFirstLastButtons (page)="onClickJobPaginatior($event)" #jobPaginator>
+                      </mat-paginator>
+                    </ng-container>
+
                     <!-- <div class="col-sm-4">
                         <div class="card h-100">
                             <div class="card-header">

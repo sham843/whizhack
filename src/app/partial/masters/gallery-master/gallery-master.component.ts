@@ -154,7 +154,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region multiple Image Upload Code Start here
 
   mediaFileUpload(event: any) {
-    this._fileUploadService.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg').subscribe((res: any) => {
+    this._fileUploadService.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,jfif').subscribe((res: any) => {
       if (res.statusCode === "200") {
         this.imagepath = res.responseData;
         if (this.imageArray.length) {
