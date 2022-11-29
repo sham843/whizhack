@@ -31,8 +31,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Job Location</mat-label>
                             <input matInput placeholder="Enter Job Location Here..." formControlName="job_Location"
-                                maxlength="150" (keypress)="validation.noFirstSpaceAllow($event)"><br>
-                            <mat-error class="mt-2">
+                                maxlength="150" (keypress)="validation.noFirstSpaceAllow($event)"><br>    <mat-error class="mt-2">
                                 <div
                                     *ngIf="(f['job_Location'].hasError('required') || f['job_Location'].hasError('touched')) && submited">
                                     Job Location is Required</div>
