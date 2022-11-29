@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Blog Description</mat-label>
-                            <textarea maxlength="1000" matInput placeholder="Enter Blog Description" rows="5"
+                            <textarea maxlength="5000" matInput placeholder="Enter Blog Description" rows="5"
                                 formControlName="description"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
@@ -107,7 +107,7 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="1000" matInput placeholder="Enter Blog Sub-Description"
+                                            <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
