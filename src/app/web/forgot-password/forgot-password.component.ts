@@ -106,8 +106,12 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
   verifyOTP(formDirective:any) {
-    if (this.otpVerifyForm.value.digitOne.invalid || this.otpVerifyForm.value.digitTwo.invalid || this.otpVerifyForm.value.digitThree.invalid ||
-      this.otpVerifyForm.value.digitFour.invalid || this.otpVerifyForm.value.digitFive.invalid) {
+    // if (this.otpVerifyForm.value.digitOne.invalid || this.otpVerifyForm.value.digitTwo.invalid || this.otpVerifyForm.value.digitThree.invalid ||
+    //   this.otpVerifyForm.value.digitFour.invalid || this.otpVerifyForm.value.digitFive.invalid) {
+    //   return
+    // }
+    if(this.otpVerifyForm.invalid){
+      this.common.matSnackBar('Please Enter OTP',1);
       return
     }
     else {
