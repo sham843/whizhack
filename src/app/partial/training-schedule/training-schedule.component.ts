@@ -68,7 +68,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       course_Description: ['', Validators.required],
       syllabus_Summary: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(/^\d*(\.)?(\d{0,3})?$/), Validators.maxLength(10)]],
-      price_Terms: ['', [Validators.required, Validators.maxLength(10)]],
+      price_Terms: ['', Validators.required],
       imagePath: ['', Validators.required],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
@@ -106,20 +106,24 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   }
 
   getAllCourseList() {
+    this.ngxSpinner.show();
     let search = this.searchFilter.value ? this.searchFilter.value.trim() : ''
     this.api.setHttp('get', 'whizhack_cms/course/GetAllCourses?pageno=' + (this.currentPage + 1) + '&pagesize=10&course_Title=' + search, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
+          this.ngxSpinner.hide();
           this.dataSource = new MatTableDataSource(res.responseData);
           this.dataSource.sort = this.sort;
           this.totalCount = res.responseData1.pageCount;
         } else {
+          this.ngxSpinner.hide();
           this.dataSource = [];
           this.totalCount = 0
         }
       }),
       error: (error: any) => {
+        this.ngxSpinner.hide();
         this.dataSource = [];
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }

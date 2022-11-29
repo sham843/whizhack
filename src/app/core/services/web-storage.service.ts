@@ -33,7 +33,7 @@ export class WebStorageService {
 
   getUserTypeId() {
     let data = this.getLoggedInLocalstorageData();
-    return data.responseData[0].userTypeId
+    return data.responseData.userTypeId
   }
 
   getUserName() {
