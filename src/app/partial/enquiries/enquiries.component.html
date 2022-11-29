@@ -22,9 +22,7 @@
                     </ng-container>
                     <ng-container matColumnDef="courseId">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Course Selected </th>
-                        <td mat-cell *matCellDef="let element"> {{element.courseId == 1 ? 'Cyber Ninja' :
-                            element.courseId == 2 ? 'Cyber Samurai' : element.courseId == 3 ? 'Cyber Guru' :
-                            element.courseId == 4 ? 'Cyber Security Training Program':'Cyber Security Training Programm'}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.course_Title || '-' }} </td>
                     </ng-container>
                     <ng-container matColumnDef="pageName">
                         <th mat-header-cell *matHeaderCellDef> Page </th>

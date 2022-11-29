@@ -166,6 +166,7 @@ a.text-main:hover{
   color: #fff !important;
   padding: 15px;
   border-radius: 20px;
+  height: 100%;
 }
 .courses .course-name{
   font-size: 1.4rem;
