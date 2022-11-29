@@ -30,6 +30,7 @@ export class BlogMasterComponent implements OnInit {
   currentPage: number = 0;
   editFlag: boolean = false;
   radioFlag: boolean = false;
+  imageFlag: boolean = false;
   optionsArray: any[] = [{ id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   optionsFilterArray: any[] = [{ id: 0, name: 'All' }, { id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   blogCategoryArray = new Array();
@@ -185,6 +186,7 @@ export class BlogMasterComponent implements OnInit {
     formDirective?.resetForm();
     this.editFlag = false;
     this.radioFlag = false;
+    this.imageFlag = false;
   }
 
   fileUpload(event: any) {
@@ -217,7 +219,8 @@ export class BlogMasterComponent implements OnInit {
   onClickSubmit(formDirective?: any) {
       this.radioFlag = true;
    if (this.frm.value.imagePath == '') {
-      this.commonMethod.matSnackBar('Please Upload Image !', 1)
+      // this.commonMethod.matSnackBar('Please Upload Image !', 1)
+      this.imageFlag = true;
     }
     else if (!this.frm.valid) {
       if (this.itemsForm.controls[this.itemsForm.length - 1].status == 'INVALID') {
@@ -245,6 +248,7 @@ export class BlogMasterComponent implements OnInit {
             this.commonMethod.matSnackBar(res.statusMessage, 0)
             this.editFlag = false;
             this.radioFlag = false;
+            this.imageFlag = false;
           } else {
             this.commonMethod.checkDataType(res.statusMessage) == false ? this.errorHandler.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 1);
           }
