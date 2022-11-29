@@ -51,7 +51,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   getAllPostJob() {
-    this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs?', false, false, false, 'whizhackService');
+    this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetAllPostJobs', false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {

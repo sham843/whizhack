@@ -14,11 +14,11 @@ whizteenArray=new Array();
 whizteenexclusiveArray=new Array();
   constructor(public dialog: MatDialog,private apiService:ApiService) { }
 
-  openDialog(title: any) {
+  openDialog(data: any) {
     const dialogRef = this.dialog.open(RegisterNowComponent, {
       width: '500px',
       disableClose: true,
-      data: title
+      data: data
     });
     dialogRef.afterClosed().subscribe({
      

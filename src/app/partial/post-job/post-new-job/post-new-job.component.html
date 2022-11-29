@@ -15,7 +15,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Job Title</mat-label>
                             <input matInput placeholder="Enter Job Title Here..." formControlName="job_Title"
-                                maxlength="150" [value]="postNewJobFrm.get('job_Title')?.value | titlecase"
+                                maxlength="150" [value]="postNewJobFrm.get('job_Title')?.value"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2">
                                 <div

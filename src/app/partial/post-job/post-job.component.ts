@@ -10,6 +10,7 @@ import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/c
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PostNewJobComponent } from './post-new-job/post-new-job.component';
+import { CommonMethodService } from 'src/app/core/services/common-method.service';
 
 @Component({
   selector: 'app-post-job',
@@ -36,6 +37,7 @@ export class PostJobComponent implements OnInit {
     private error: ErrorHandlerService,
     public validation: FormValidationService,
     private ngxSpinner: NgxSpinnerService,
+    private commonService: CommonMethodService
   ) { }
 
   ngOnInit(): void {
@@ -107,7 +109,11 @@ export class PostJobComponent implements OnInit {
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
+              this.commonService.matSnackBar(res.statusMessage, 0);
               this.bindTable();
+            }
+            else {
+              this.commonService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
@@ -139,7 +145,7 @@ export class PostJobComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {
-        this.clearForm();
+      this.clearForm();
         let deleteObj = {
           "id": id,
           "modifiedBy": 0,
@@ -149,7 +155,11 @@ export class PostJobComponent implements OnInit {
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
+              this.commonService.matSnackBar(res.statusMessage, 0);
               this.bindTable();
+            }
+            else {
+              this.commonService.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
