@@ -164,7 +164,7 @@ export class PostJobComponent implements OnInit {
   //-------------------------Add Button Dialog Box start---------------------------
   openPostJobDialog(obj?: any) {
     const dialogRef = this.dialog.open(PostNewJobComponent, {
-      height:'80%',
+      // height:'80%',
       width: '90vw',
       data: obj,
       disableClose: true

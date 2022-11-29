@@ -75,7 +75,7 @@
 
             </div>
             <ng-container *ngIf="totalCount > 10">
-                <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
+                <mat-paginator [length]="totalCount" [pageSize]="10" showFirstLastButtons
                 (page)="paginationEvent($event)" aria-label="Select page of GitHub search results"></mat-paginator>
             </ng-container>
         </div>

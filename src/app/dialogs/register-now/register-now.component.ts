@@ -14,6 +14,7 @@ export class RegisterNowComponent implements OnInit {
   @ViewChild('formDirective')
   private formDirective!: NgForm;
   registerForm!: FormGroup | any;
+  courseName:any;
   constructor(
     public dialogRef: MatDialogRef<RegisterNowComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -24,7 +25,6 @@ export class RegisterNowComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log('data',this.data)
     this.getFormData();
   }
 
@@ -55,6 +55,7 @@ export class RegisterNowComponent implements OnInit {
       let obj = this.registerForm.value;
       obj.pageName = this.data.pageName
       obj.courseId = this.data.courseId;
+      obj.courseName=this.data.course_Title;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
@@ -66,7 +67,7 @@ export class RegisterNowComponent implements OnInit {
           this.errorSer.handelError(error.status);
         }
       })
-    }
+    }    
   }
   //#endregion-------------------------------------------------Submit Form Data Method Ends-----------------------------------------------
   clearForm() {
