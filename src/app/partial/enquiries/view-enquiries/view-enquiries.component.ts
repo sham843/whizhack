@@ -18,7 +18,6 @@ export class ViewEnquiriesComponent implements OnInit {
     deviceIpAddress: any;
     ipAddress: any;
     address: any
-
   ngOnInit(): void {
     this.getDataById();
     this.getDevice();
@@ -44,7 +43,6 @@ export class ViewEnquiriesComponent implements OnInit {
     this.common.getDeviceInfo()
     this.deviceDataarray = [this.common]
   }
-
   getdeviceIpAddress() {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
       this.deviceIpAddress = res

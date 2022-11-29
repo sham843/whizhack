@@ -35,7 +35,7 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
                                 Description</mat-error>
-                                <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Blog Description
+                                <mat-error class="mt-2" *ngIf="f['description'].hasError('pattern')">Invalid Blog Description
                                 </mat-error>
                         </mat-form-field>
                     </div>

@@ -40,7 +40,7 @@ export class EnquiriesComponent implements OnInit {
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          this.dataSource = new MatTableDataSource(res.responseData.responseData);
+          this.dataSource = new MatTableDataSource(res.responseData.responseData);          
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
         }

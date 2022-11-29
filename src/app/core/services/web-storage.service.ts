@@ -50,4 +50,11 @@ export class WebStorageService {
       "isDeleted": false
     }
   }
+
+  tokenExpireRefreshString() {
+    let loginObj: any = localStorage.getItem('loggedInData');
+    let sessionData = JSON.parse(loginObj).responseData1;
+    return sessionData.refreshToken.tokenString;
+  }
+
 }
