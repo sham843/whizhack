@@ -67,7 +67,7 @@ export class PostNewJobComponent implements OnInit {
       qualification: [this.editFlag ? this.data.qualification : '', [Validators.required, Validators.maxLength(300)]],
       experience: [this.editFlag ? this.data.experience : '', [Validators.required, , Validators.maxLength(300)]],
       skills_Required: [this.editFlag ? this.data.skills_Required : '', [Validators.required, Validators.maxLength(1500)]],
-      publish: [this.editFlag ? true : false]
+      publish: [this.editFlag ? this.data.publish : false]
     });
   }
 
@@ -79,7 +79,6 @@ export class PostNewJobComponent implements OnInit {
       return;
     } else {
       let data = this.postNewJobFrm.value;
-       data.publish = false;
       data.date_of_Posting = new Date();
       this.editFlag ? '' : data.id = 0;
      
@@ -98,7 +97,7 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            console.log("response",res);
+            // console.log("response",res);
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();

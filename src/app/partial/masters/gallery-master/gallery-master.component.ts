@@ -80,8 +80,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription),Validators.maxLength(50)]],
-      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription),Validators.maxLength(500)]],
+      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(50)]],
+      gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(500)]],
       uploadImages: [''],
     })
   }
@@ -177,26 +177,8 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
 
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
-//     let dialoObj = {
-//       header: 'Delete',
-//       title: 'Do you want to delete image ?',
-//       cancelButton: 'No',
-//       okButton: 'Yes'
-//     }
-//     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
-//       width: '300px',
-//       data: dialoObj
-//     });
-
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result == 'yes') {
-//         this.imageArray.splice(ind, 1);
-//         !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
-//       }
-//     })
-// this.spinner.hide();
-this.imageArray.splice(ind, 1);
-!this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+    this.imageArray.splice(ind, 1);
+    !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
 
   }
 
@@ -246,9 +228,9 @@ this.imageArray.splice(ind, 1);
     })
 
   }
-//#endregion
+  //#endregion
 
-//#region  Onclick Update Button
+  //#region  Onclick Update Button
   editGalleryRecord(data: any) {
     this.spinner.show();
     this.UpdateObj = data;
@@ -259,7 +241,7 @@ this.imageArray.splice(ind, 1);
       gallery_title: data?.gallery_Title,
     });
 
-    this.imageArray = data.imagepaths;
+    this.imageArray = JSON.parse(JSON.stringify(data.imagepaths));
     this.spinner.hide();
   }
   //#endregion

@@ -68,6 +68,9 @@
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
                                     Blog Image</button>
+                                    <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
+                                        <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
+                                    </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
