@@ -43,7 +43,7 @@
                                 <div class="col-sm col-7">
                                     <mat-form-field appearance="outline" class="w-100">
                                         <mat-label> Captcha</mat-label>
-                                        <input matInput placeholder="Enter Captcha"
+                                        <input matInput placeholder="Enter Captcha" (keyup.enter)="onClickLogin(formDirective)"
                                             (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="4"
                                             autocomplete="off" formControlName="captcha">
                                         <mat-error class="mt-2" *ngIf="f['captcha'].hasError('required')">Captcha required</mat-error>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" mat-raised-button class="btn-main w-100 text-dark mb-2">LOGIN</button>
+                        <button type="submit"  mat-raised-button class="btn-main w-100 text-dark mb-2">LOGIN</button>
                         <div class="text-end">
                             <a routerLink="../forgot-password" class="text-main">Forgot Password?</a>
                         </div>
