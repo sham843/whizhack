@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class ForgotPasswordComponent implements OnInit {
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   constructor(private fb: FormBuilder, private api: ApiService,
     public validations: FormValidationService, private common: CommonMethodService,
-    private router: Router) { }
+    private router: Router, private errorSer : ErrorHandlerService ) { }
 
   ngOnInit(): void {
     this.defaultForm();
@@ -94,6 +95,9 @@ export class ForgotPasswordComponent implements OnInit {
               this.common.matSnackBar(res.statusMessage, 1);
               formDirective.resetForm();
             }
+          },
+          error: (error: any) => {
+            this.errorSer.handelError(error.statusMessage)
           }
         })
       }
@@ -130,6 +134,9 @@ export class ForgotPasswordComponent implements OnInit {
             this.timeLeft = 0;
             formDirective.resetForm();
           }
+        },
+        error: (error: any) => {
+          this.errorSer.handelError(error.statusMessage)
         }
       })
     }
@@ -160,6 +167,9 @@ export class ForgotPasswordComponent implements OnInit {
         res.statusCode == 200 ? this.userName = res.responseData[0].userName : '';
         this.onSumbit(formDirective);
       }
+      , error: (error: any) => {
+            this.errorSer.handelError(error.statusMessage)
+          }
     })
   } */
 
@@ -180,6 +190,9 @@ export class ForgotPasswordComponent implements OnInit {
           } else {
             this.common.matSnackBar(res.statusMessage, 1);
           }
+        },
+        error: (error: any) => {
+          this.errorSer.handelError(error.statusMessage)
         }
       })
     }
