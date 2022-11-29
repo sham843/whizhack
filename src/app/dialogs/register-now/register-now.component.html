@@ -30,9 +30,8 @@
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             *Email Id is Required.</span>
-                        <span class="text-danger" *ngIf="f.email.errors?.pattern">
-                            *Please Enter Valid Email ID</span>
                     </mat-error>
+                    <mat-error *ngIf="registerForm.controls['email'].hasError('pattern')">*Please Enter Valid Email ID</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">

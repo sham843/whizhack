@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-now',
   templateUrl: './register-now.component.html',
@@ -20,9 +21,12 @@ export class RegisterNowComponent implements OnInit {
     private service: ApiService,
     private errorSer: ErrorHandlerService,
     public validator: FormValidationService,
-    private snack: CommonMethodService) { }
+    private snack: CommonMethodService,
+    private route:Router
+    ) { }
 
   ngOnInit(): void {
+    console.log('data',this.data)
     this.getFormData();
   }
 
@@ -51,7 +55,8 @@ export class RegisterNowComponent implements OnInit {
       return
     } else {
       let obj = this.registerForm.value;
-      obj.pageName = this.data.pageName;
+      obj.pageName = this.route.url.split('/')[1];
+      console.log('pgName',obj.pageName);
       obj.courseId = this.data.courseId;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
