@@ -13,7 +13,7 @@
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery Title Is Required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern') || g['gallery_title']?.hasError('maxlength')">
-                  {{g['gallery_title']?.hasError('pattern')?'Please Enter Valid Gallery Title':'Please Enter Maximum 50 Character'}}</span>
+                  {{g['gallery_title'].hasError('pattern')?'Please Enter Valid Gallery Title':'Please Enter Maximum 50 Character'}}</span>
               </mat-error>
             </mat-form-field>
           </div>
