@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
-// import { WebStorageService } from 'src/app/core/services/web-storage.service';
-
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +13,6 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class ForgotPasswordComponent implements OnInit {
   hide = true;
   hide1 = true;
-
   userId: number = 0;
   userName: string = '';
   otpStatus: boolean = false;
@@ -27,26 +24,13 @@ export class ForgotPasswordComponent implements OnInit {
   emailField: boolean = true;
   timeLeft: number = 60;
   interval: any;
-  emailId:any;
-  obj = {
-    "createdBy": 0,
-    "modifiedBy": 0,
-    "createdDate": "2022-11-25T13:13:30.972Z",
-    "modifiedDate": "2022-11-25T13:13:30.972Z",
-    "isDeleted": false,
-    "id": 0,
-    "mobileNo": "",
-    "emailId": "",
-    "otp": "",
-    "pageName": "",
-    "otpExpireDate": "2022-11-25T13:13:30.972Z",
-    "isUser": true
-  }
+  emailId: any;
   stringOtp: string = '';
+  obj:any
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   constructor(private fb: FormBuilder, private api: ApiService,
     public validations: FormValidationService, private common: CommonMethodService,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.defaultForm();
@@ -84,14 +68,28 @@ export class ForgotPasswordComponent implements OnInit {
       return
     }
     else {
-      this.obj.emailId = this.emailVerifyForm.value.email;
+      let obj = {
+        "createdBy": 0,
+        "modifiedBy": 0,
+        "createdDate": "2022-11-25T13:13:30.972Z",
+        "modifiedDate": "2022-11-25T13:13:30.972Z",
+        "isDeleted": false,
+        "id": 0,
+        "mobileNo": "",
+        "emailId": "",
+        "otp": "",
+        "pageName": "",
+        "otpExpireDate": "2022-11-25T13:13:30.972Z",
+        "isUser": true
+      }
+      obj.emailId = this.emailVerifyForm.value.email;
       if (this.fe['email'].valid) {
-        this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, this.obj, false, 'whizhackService');
+        this.api.setHttp('post', 'whizhack_cms/login/AddOTP', false, obj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: (res: any) => {
             if (res.statusCode == 200) {
               this.common.matSnackBar(res.statusMessage, 0);
-              this.emailId=this.obj.emailId;
+              this.emailId = obj.emailId;
               this.verifyOTPField = true; this.emailField = false, this.otpStatus = true;
               this.startTimer();
             }
@@ -104,9 +102,17 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }
   }
-  verifyOTP(formDirective:any) {
-    if(this.otpVerifyForm.invalid){
-      this.common.matSnackBar('Please Enter OTP',1);
+  verifyOTP(formDirective: any) {
+    /*  {
+       "userId": 0,
+       "userName": "string",
+       "mobileNo": "string",
+       "emailId": "string",
+       "otp": "string",
+       "pageName": "string"
+     } */
+    if (this.otpVerifyForm.value.digitOne.invalid || this.otpVerifyForm.value.digitTwo.invalid || this.otpVerifyForm.value.digitThree.invalid ||
+      this.otpVerifyForm.value.digitFour.invalid || this.otpVerifyForm.value.digitFive.invalid) {
       return
     }
     else {
@@ -117,6 +123,7 @@ export class ForgotPasswordComponent implements OnInit {
         next: (res: any) => {
           if (res.statusCode == '200') {
             this.common.matSnackBar(res.statusMessage, 0);
+            clearInterval(this.interval);
             this.passwordField = true; this.startTimer(); this.verifyOTPField = false;
             formDirective.resetForm();
           }
@@ -132,9 +139,9 @@ export class ForgotPasswordComponent implements OnInit {
   }
   startTimer() {
     this.timeLeft = 60;
-    const resendOtpInterval = setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.timeLeft < 1) {
-        clearInterval(resendOtpInterval);
+        clearInterval(this.interval);
         this.otpStatus = false
       }
       else {
@@ -149,7 +156,7 @@ export class ForgotPasswordComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  getUserName(formDirective:any) {
+  getUserName(formDirective: any) {
     this.api.setHttp('get', 'whizhack_cms/login/GetOtpByMobileNo?EmailId=' + this.emailId, false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: (res: any) => {
@@ -160,22 +167,24 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSumbit(formDirective: any) {
-    if(this.passwordForm.value.passwordNew != this.passwordForm.value.retypePassword){
+
+    /* username,new password ,email id */
+    if (this.passwordForm.value.passwordNew != this.passwordForm.value.retypePassword) {
       this.common.matSnackBar('new Password And Confirm Password Does Not Match', 1);
       return
-    }else{
+    } else {
       let obj = this.passwordForm.value;
-        this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + 'anand@gmail.com' + '&Password=' + 'Admin@123' + '&NewPassword=' + obj.retypePassword + '&EmailId=' + this.emailId, false, false, false, 'whizhackService');
-        this.api.getHttp().subscribe({
-          next: (res: any) => {
-            if(res.statusCode == '200'){
-              this.common.matSnackBar(res.statusMessage, 0);formDirective.resetForm();this.verifyOTPField = false;this.passwordField = false;
-              this.router.navigate(['../login'])
-            }else{
-              this.common.matSnackBar(res.statusMessage, 1);
-            }
+      this.api.setHttp('put', 'whizhack_cms/login/ForgotPassword?UserName=' + 'anand@gmail.com' + '&NewPassword=' + obj.retypePassword + '&EmailId=' + this.emailId, false, false, false, 'whizhackService');
+      this.api.getHttp().subscribe({
+        next: (res: any) => {
+          if (res.statusCode == '200') {
+            this.common.matSnackBar(res.statusMessage, 0); formDirective.resetForm(); this.verifyOTPField = false; this.passwordField = false;
+            this.router.navigate(['../login'])
+          } else {
+            this.common.matSnackBar(res.statusMessage, 1);
           }
-        })
+        }
+      })
     }
   }
 }
