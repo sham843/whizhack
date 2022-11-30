@@ -228,7 +228,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
               this.getAllCourseList();
               this.comMethods.matSnackBar(res.statusMessage, 0);
             } else {
-              this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+              this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
@@ -278,19 +278,17 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
             this.getAllCourseList();
             this.clearForm(clear);
           } else {
-            this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+            this.ngxSpinner.hide();
+            this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {
+          this.ngxSpinner.hide();
           this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
         }
       })
     }
   }
-
-  // public cleanForm(formGroup: FormGroup) {
-  //   Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
-  // }
 
   setOffer(event: any) {
     this.courseManageForm.controls['actual_price'].setValue('');
