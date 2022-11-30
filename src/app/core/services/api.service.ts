@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CommonMethodService } from './common-method.service';
-import { WebStorageService } from './web-storage.service';
+// import { CommonMethodService } from './common-method.service';
+// import { WebStorageService } from './web-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     // private webStorageService:WebStorageService,
-    private commonService:CommonMethodService
+    // private commonService:CommonMethodService
     ) {}
 
   getBaseurl(url: string) {
