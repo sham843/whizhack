@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CommonMethodService } from './common-method.service';
-import { WebStorageService } from './web-storage.service';
+// import { CommonMethodService } from './common-method.service';
+// import { WebStorageService } from './web-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private webStorageService:WebStorageService,
-    private commonService:CommonMethodService
+    // private webStorageService:WebStorageService,
+    // private commonService:CommonMethodService
     ) {}
 
   getBaseurl(url: string) {
@@ -38,29 +38,29 @@ export class ApiService {
 
   setHttp(type: string, url: string, isHeader: Boolean, obj: any, params: any, baseUrl: any) {
 
-    let checkLOginData: any = localStorage.getItem('loggedInData');
-    if (checkLOginData && this.tokanExpiredFlag == false && isHeader) {
-      let tokenExp = JSON.parse(checkLOginData);
-      let expireAccessToken: any = (Math.round(new Date(tokenExp.responseData1.expireAccessToken).getTime() / 1000));
-      let tokenExpireDateTime: any = (Math.round(new Date(tokenExp.responseData1.refreshToken.expireAt).getTime() / 1000));
-      let currentDateTime: any = (Math.round(new Date().getTime() / 1000));
-      if (currentDateTime >= expireAccessToken) {
-        if (currentDateTime <= tokenExpireDateTime) {
-          this.tokanExpiredFlag = true
-          let obj = {
-            userId: this.webStorageService.getUserId(),
-            refreshToken: this.webStorageService.tokenExpireRefreshString()
-          }
-          this.tokenExpiredAndRefresh(obj);
-        } else {
-          localStorage.clear();
-          this.commonService.routerLinkRedirect('login');
-          this.commonService.matSnackBar("Your Session Has Expired. Please Re-Login Again.", 1);
-          return;
-        }
+    // let checkLOginData: any = localStorage.getItem('loggedInData');
+    // if (checkLOginData && this.tokanExpiredFlag == false && isHeader) {
+    //   let tokenExp = JSON.parse(checkLOginData);
+    //   let expireAccessToken: any = (Math.round(new Date(tokenExp.responseData1.expireAccessToken).getTime() / 1000));
+    //   let tokenExpireDateTime: any = (Math.round(new Date(tokenExp.responseData1.refreshToken.expireAt).getTime() / 1000));
+    //   let currentDateTime: any = (Math.round(new Date().getTime() / 1000));
+    //   if (currentDateTime >= expireAccessToken) {
+    //     if (currentDateTime <= tokenExpireDateTime) {
+    //       this.tokanExpiredFlag = true
+    //       let obj = {
+    //         userId: this.webStorageService.getUserId(),
+            // refreshToken: this.webStorageService.tokenExpireRefreshString()
+    //       }
+    //       this.tokenExpiredAndRefresh(obj);
+    //     } else {
+    //       localStorage.clear();
+    //       this.commonService.routerLinkRedirect('login');
+    //       this.commonService.matSnackBar("Your Session Has Expired. Please Re-Login Again.", 1);
+    //       return;
+    //     }
 
-      }
-    }
+    //   }
+    // }
 
   try {
     } catch (e) { }
@@ -83,25 +83,25 @@ export class ApiService {
     this.httpObj.options = {};
   }
 
-  tokenExpiredAndRefresh(obj: any) {
-    let callRefreshTokenAPI = this.http.post('http://whizhackwebapi.mahamining.com/whizhack_cms/login/refresh-token', obj);
-    callRefreshTokenAPI.subscribe((res: any) => {
-      if (res.statusCode === "200") {
-        let loginObj: any = localStorage.getItem('loggedInData');
-        loginObj = JSON.parse(loginObj);
-        loginObj.responseData3 = res.responseData;
-        localStorage.setItem('loggedInData', JSON.stringify(loginObj));
-        this.tokanExpiredFlag = false;
-      }
-      else if (res.statusCode === "409") {
-        this.commonService.matSnackBar(res.statusMessage, 1);
-      }
-      else {
-        localStorage.clear();
-        this.commonService.routerLinkRedirect('login');
-        this.commonService.matSnackBar("Your Session Has Expired. Please Re-Login Again.", 1);
-      }
-    })
-  }
+  // tokenExpiredAndRefresh(obj: any) {
+  //   let callRefreshTokenAPI = this.http.post('http://whizhackwebapi.mahamining.com/whizhack_cms/login/refresh-token', obj);
+  //   callRefreshTokenAPI.subscribe((res: any) => {
+  //     if (res.statusCode === "200") {
+  //       let loginObj: any = localStorage.getItem('loggedInData');
+  //       loginObj = JSON.parse(loginObj);
+  //       loginObj.responseData3 = res.responseData;
+  //       localStorage.setItem('loggedInData', JSON.stringify(loginObj));
+  //       this.tokanExpiredFlag = false;
+  //     }
+  //     else if (res.statusCode === "409") {
+  //       this.commonService.matSnackBar(res.statusMessage, 1);
+  //     }
+  //     else {
+  //       localStorage.clear();
+  //       this.commonService.routerLinkRedirect('login');
+  //       this.commonService.matSnackBar("Your Session Has Expired. Please Re-Login Again.", 1);
+  //     }
+  //   })
+  // }
 
 }
