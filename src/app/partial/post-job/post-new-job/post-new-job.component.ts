@@ -61,7 +61,7 @@ export class PostNewJobComponent implements OnInit {
       id: [this.editFlag ? this.data.jobpostId : 0], 
       job_Title: [this.editFlag ? this.data.job_Title : '', [Validators.required, Validators.pattern(this.validation.title), Validators.maxLength(150)]],
       job_Location: [this.editFlag ? this.data.job_Location : '', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$'), Validators.maxLength(150)]],
-      date_of_Application: [this.editFlag ? this.data.date_of_Application : '', [Validators.required, Validators.maxLength(50)]],
+      date_of_Application: [this.editFlag ? new Date(this.data.date_of_Application) : '', [Validators.required, Validators.maxLength(50)]],
       job_Description: [this.editFlag ? this.data.job_Description : '', [Validators.required, Validators.maxLength(500)]],
       roles_and_Responsibility: [this.editFlag ? this.data.roles_and_Responsibility : '', [Validators.required, Validators.maxLength(1500)]],
       qualification: [this.editFlag ? this.data.qualification : '', [Validators.required, Validators.maxLength(300)]],
@@ -79,9 +79,10 @@ export class PostNewJobComponent implements OnInit {
       return;
     } else {
       let data = this.postNewJobFrm.value;
-      data.date_of_Posting = new Date();
+      data.date_of_Posting = new Date(); 
       this.editFlag ? '' : data.id = 0;
-     
+      data.date_of_Application = this.commonService.setDate(data.date_of_Application);
+
       let obj = {
         "createdBy": this.webStorageService.getUserId(),
         "modifiedBy": this.webStorageService.getUserId(),
@@ -97,7 +98,6 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
-            // console.log("response",res);
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();
