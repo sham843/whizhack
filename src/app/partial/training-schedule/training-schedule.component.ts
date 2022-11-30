@@ -288,6 +288,10 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // public cleanForm(formGroup: FormGroup) {
+  //   Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
+  // }
+
   setOffer(event: any) {
     this.courseManageForm.controls['actual_price'].setValue('');
     this.offer = event.checked;
