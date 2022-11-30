@@ -17,4 +17,5 @@ section {
     /* height: 70vh !important; */
     max-height: 100vh !important;
     overflow: auto !important;
+    cursor: pointer;
 }
