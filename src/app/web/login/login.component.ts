@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
               formDirective.resetForm();
               this.clearForm();
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
-              console.log(this.loginForm.value);
             }
             else{
               this.captcha();
