@@ -306,7 +306,7 @@ export class BlogMasterComponent implements OnInit {
     this.selRow = id;
     let dialoObj = {
       header: 'Delete',
-      title: 'Do You Want To Delete The Selected Blog ?',
+      title: 'Do You Want To Delete The Selected Content ?',
       cancelButton: 'Cancel',
       okButton: 'Ok'
     }
