@@ -118,4 +118,11 @@ export class CommonMethodService {
     ],
   };
 
+  setDate(date:Date){
+    let d=date;
+    d.setHours(d.getHours() + 5);
+    d.setMinutes(d.getMinutes() + 30);
+    return new Date(d)
+  }
+
 }
