@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   controlLoginForm() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['',[ Validators.required,Validators.minLength(8),Validators.maxLength(20)]],
       captcha: ['',Validators.required]
     })
   }
@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit {
   clearForm() {
     this.controlLoginForm();
   }
+
+  clearSpace(){
+    let replaceName=this.loginForm.value.username.replace(/\s/g, "");
+    this.loginForm.controls['username'].setValue(replaceName);
+   }
 
   onClickLogin(formDirective?:any) {
     let userId = this.loginForm.value.username;
@@ -61,12 +66,14 @@ export class LoginComponent implements OnInit {
               console.log(this.loginForm.value);
             }
             else{
+              this.captcha();
               this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
         })
       }
       else {
+        this.captcha();
         this.commonMethodService.matSnackBar('Invalid Captcha !', 1)
       }
     }
