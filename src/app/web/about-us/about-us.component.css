@@ -16,18 +16,33 @@ section{
 }
 #founders .card{
     border-radius: 20px;
-    border: 1px solid var(--main-color);
 }
 #founders .card img{
-    height: 300px;
     object-fit: cover;
     object-position: top;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
+    margin: 10px;
 }
 #founders .card p{
     margin-top: 15px;
     font-size: 0.85rem;
+}
+#founders .card a{
+    margin-inline: 15px;
+    font-size: 0.85rem;
+    color:var(--main-color);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    display:flex;
+    align-items: center;
+}
+#founders .card a i{
+    font-size: 1.1rem;
+    margin-left: 5px;
+}
+#founders .card a:hover{
+    color:#fff;
 }
 #founders .card .card-footer a{
     background-color:var(--main-color);
