@@ -56,6 +56,7 @@ a.text-main:hover{
 .about-text{
   line-height: 2.3rem;
   font-weight: 300;
+  font-size: 1.2rem;
 }
 .products .card{
   padding: 15px;
@@ -233,11 +234,13 @@ a.text-main:hover{
   font-size: 0.85rem;
   font-weight: 600;
   background-color: #111;
+  padding-inline: 10px !important;
 }
 .dashboard-table td{
   font-size: 0.85rem;
   background-color: var(--card-bg-color);
   padding-block: 5px !important;
+  padding-inline: 10px !important;
 }
 .dashboard-table .srno{
   width: 90px;
