@@ -110,7 +110,7 @@
               <div class="albums-tab mb-2">
                   <div class="albums-tab-thumb sim-anim-1">
                     <ng-container *ngFor="let x of item?.imagepaths; let i =index">
-                      <ng-container *ngIf="i ==0 || i == 1">
+                      <ng-container *ngIf="i ==0 ">
                         <img src="{{x}}" class="all studio"  loading="lazy" class="img-fluid"/>
                       </ng-container>
                   </ng-container>
@@ -122,8 +122,8 @@
 
 
         </div>
-        <ng-container *ngIf="totalCount > 6">
-          <mat-paginator [length]="totalCount" [pageSize]="6" showFirstLastButtons (page)="onClickPaginatior($event)" #paginator>
+        <ng-container *ngIf="totalCount > 5">
+          <mat-paginator [length]="totalCount" [pageSize]="5" showFirstLastButtons (page)="onClickPaginatior($event)" #paginator>
           </mat-paginator>
         </ng-container>
 

@@ -14,6 +14,7 @@
                                 <input matInput placeholder="Enter Username" formControlName="username" maxlength="255"
                                     (keypress)="validation.alphaNumericWithSpacesAndSpecChars($event)" (blur)="clearSpace()"                                    >
                                     <mat-error class="mt-2" *ngIf="f['username'].hasError('required')">Username Required</mat-error>
+                                    <mat-error class="mt-2" *ngIf="f['username'].hasError('maxlength')">Maximum Username Length Should be 50</mat-error>
                             </mat-form-field>
                         </div>
                         <div class="mb-3">
