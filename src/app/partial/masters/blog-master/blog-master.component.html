@@ -17,13 +17,13 @@
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Blog Title</mat-label>
-                            <input maxlength="100" matInput placeholder="Enter Blog Title" formControlName="title"
+                            <mat-label>Enter Title</mat-label>
+                            <input maxlength="100" matInput placeholder="Enter Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Title
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Title
                             </mat-error>
                         </mat-form-field>
                     </div>
