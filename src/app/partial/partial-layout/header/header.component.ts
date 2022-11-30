@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(ChangePasswordComponent, {
-      width: '700px',
+      width: '350px',
     });
   }
 
