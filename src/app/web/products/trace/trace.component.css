@@ -2,10 +2,6 @@ section {
     padding-block: 4rem;
     color: #fff;
 }
-.about-text {
-    line-height: 2.3rem;
-    font-weight: 300;
-}
 #solutions .card{
     background-color:#0E1526;
     padding: 30px;

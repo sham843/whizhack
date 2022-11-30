@@ -20,7 +20,7 @@
                             <mat-error class="mt-2">
                                 <div
                                     *ngIf="f['job_Title'].hasError('required') || f['job_Title'].hasError('touched')">
-                                    Job Title Is Required</div>
+                                    Job Title is Required</div>
                                 <div *ngIf="f['job_Title'].hasError('pattern') || f['job_Title'].hasError('touched')">
                                     Please Enter Valid Job Title.
                                 </div>
@@ -51,7 +51,7 @@
                             <mat-datepicker #picker1></mat-datepicker>
                             <mat-error class="mt-2"
                                 *ngIf="f['date_of_Application'].hasError('required') || f['date_of_Application'].hasError('touched')">
-                                Last Date of Application Is Required
+                                Last Date of Application is Required
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -64,7 +64,7 @@
                                 <!-- maxlength="500" -->
                             <mat-error class="mt-2"
                                 *ngIf="(f['job_Description'].hasError('required') || f['job_Description'].hasError('touched'))">
-                                Description Is Required
+                                Description is Required
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['job_Description'].hasError('maxlength')">
                                 Please Enter Maximum 500 Character
