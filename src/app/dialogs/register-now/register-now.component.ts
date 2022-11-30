@@ -28,7 +28,7 @@ export class RegisterNowComponent implements OnInit {
     this.getFormData();
   }
 
-  //#region ------------------------------------------------FormData Method Start------------------------------------------------------
+  //#region  ------------------------------------------------FormData Method Start------------------------------------------------------
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
