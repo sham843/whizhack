@@ -40,6 +40,11 @@ export class LoginComponent implements OnInit {
     this.controlLoginForm();
   }
 
+  clearSpace(){
+    let replaceName=this.loginForm.value.username.replace(/\s/g, "");
+    this.loginForm.controls['username'].setValue(replaceName);
+   }
+
   onClickLogin(formDirective?:any) {
     let userId = this.loginForm.value.username;
     let userPassword = this.loginForm.value.password;
@@ -61,12 +66,14 @@ export class LoginComponent implements OnInit {
               console.log(this.loginForm.value);
             }
             else{
+              this.captcha();
               this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
         })
       }
       else {
+        this.captcha();
         this.commonMethodService.matSnackBar('Invalid Captcha !', 1)
       }
     }
