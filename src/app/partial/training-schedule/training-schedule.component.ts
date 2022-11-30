@@ -62,13 +62,13 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.courseManageForm = this.fb.group({
       id: 0,
       pageName: ['', Validators.required],
-      course_Title: ['', Validators.required],
-      course_Caption: ['', Validators.required],
-      duration: ['', Validators.required],
-      course_Description: ['', Validators.required],
-      syllabus_Summary: ['', Validators.required],
+      course_Title: ['', [Validators.required,Validators.maxLength(50)]],
+      course_Caption: ['', [Validators.required,Validators.maxLength(500)]],
+      duration: ['', [Validators.required,Validators.maxLength(50)]],
+      course_Description: ['', [Validators.required,Validators.maxLength(500)]],
+      syllabus_Summary: ['', [Validators.required,Validators.maxLength(500)]],
       price: ['', [Validators.required, Validators.maxLength(10)]],
-      price_Terms: ['', Validators.required],
+      price_Terms: ['', [Validators.required, Validators.maxLength(50)]],
       imagePath: ['', Validators.required],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
@@ -114,9 +114,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         } else {
           this.ngxSpinner.hide();
           this.dataSource = [];
-         if(res.statusCode != '404'){
-          this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
-         }
+          if (res.statusCode != '404') {
+            this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+          }
           this.totalCount = 0
         }
       }),
@@ -147,15 +147,24 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   }
 
   fileUpload(event: any) {
-    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe((res: any) => {
-      if (res.statusCode == '200') {
-        this.imgSrc = res.responseData;
-        this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
-        this.comMethods.matSnackBar(res.statusMessage, 0);
-      } else {
-        this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe({
+      next: ((res: any) => {
+        if (res.statusCode == '200') {
+          this.imgSrc = res.responseData;
+          this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
+          this.comMethods.matSnackBar(res.statusMessage, 0);
+        } else {
+          this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
+          this.imgSrc = '';
+          this.file.nativeElement.value = '';
+          this.courseManageForm.controls['imagePath'].setValue('');
+        }
+      }),
+      error: (error: any) => {
         this.imgSrc = '';
         this.file.nativeElement.value = '';
+        this.courseManageForm.controls['imagePath'].setValue('');
+        this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
 
     })
@@ -228,7 +237,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
               this.getAllCourseList();
               this.comMethods.matSnackBar(res.statusMessage, 0);
             } else {
-              this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+              this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
             }
           }),
           error: (error: any) => {
@@ -278,19 +287,17 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
             this.getAllCourseList();
             this.clearForm(clear);
           } else {
-            this.comMethods.checkDataType(res.statusText) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusText, 1);
+            this.ngxSpinner.hide();
+            this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {
+          this.ngxSpinner.hide();
           this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
         }
       })
     }
   }
-
-  // public cleanForm(formGroup: FormGroup) {
-  //   Object.keys(formGroup.controls).forEach((key) => formGroup.get(key).setValue(formGroup.get(key).value.trim()));
-  // }
 
   setOffer(event: any) {
     this.courseManageForm.controls['actual_price'].setValue('');
