@@ -46,6 +46,7 @@ a.text-main:hover{
   background-color:transparent;
   color: var(--main-color);
   border: 1px solid var(--main-color) !important;
+  font-size: 0.85rem;
 }
 .btn-main-outline:hover{
   background-color:var(--main-color);
