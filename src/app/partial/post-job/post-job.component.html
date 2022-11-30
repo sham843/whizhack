@@ -22,7 +22,7 @@
                     </ng-container>
                     <ng-container matColumnDef="job_Title">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Title </th>
-                        <td mat-cell *matCellDef="let element" class="text-break"> {{element.job_Title | titlecase}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.job_Title | titlecase}} </td>
                     </ng-container>
                     <ng-container matColumnDef="job_Location">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Location </th>
@@ -40,7 +40,7 @@
                     <ng-container matColumnDef="publish">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish </th>
                         <td mat-cell *matCellDef="let element">
-                            <mat-slide-toggle [checked]="element.publish" (click)="onClickToggle(element)"
+                            <mat-slide-toggle [checked]="element.publish && (element.flag == 1)" (click)="onClickToggle(element)"
                             matTooltip="{{ element.publish == true ? 'Publish' : 'Unpublish'}}">
                             </mat-slide-toggle>
                         </td>

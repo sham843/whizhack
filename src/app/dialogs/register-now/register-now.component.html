@@ -14,13 +14,10 @@
                     <mat-label>Full Name</mat-label>
                     <input matInput placeholder="Enter Full Name" formControlName="fullName"
                         [value]="registerForm.get('fullName')?.value | titlecase" maxlength="50"
-                        (keypress)="validator.noFirstSpaceAllow($event)">
-                    <mat-error class="mt-2" *ngIf="f.fullName.errors">
-                        <span class="text-danger" *ngIf="f.fullName.errors?.required">
-                            *Full Name is Required.</span>
-                        <span class="text-danger" *ngIf="f.fullName.errors?.pattern">
-                            *Please Enter Valid Full Name</span>
-                    </mat-error>
+                        (keypress)="validator.alphabetsWithSpaces($event)" 
+                        (keyup)="validator.noFirstSpaceAllow($event)">
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('pattern')" class="mt-2">*Enter Valid Full Name.</mat-error>
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('required')" class="mt-2">*Full Name is Required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">
@@ -29,7 +26,7 @@
                     <input matInput placeholder="Enter Email ID" formControlName="email">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
-                            *Email Id is Required.</span>
+                            *Email ID is Required.</span>
                     </mat-error>
                     <mat-error *ngIf="registerForm.controls['email'].hasError('pattern')">*Please Enter Valid Email ID</mat-error>
                 </mat-form-field>

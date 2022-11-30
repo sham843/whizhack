@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <span>Enquiries Details</span>
+    <span>Enquiry Details</span>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -14,38 +14,38 @@
                     <span class="form-label">Name :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">Mr. {{viewData.fullName || '-' | titlecase}}</span>
+                    <span class="form-data">Mr. {{viewData?.fullName || '-' | titlecase}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Email ID :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{viewData.email || '-'}}</span>
+                    <span class="form-data">{{viewData?.email || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Contact No. :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{viewData.mobileNo || '-'}}</span>
+                    <span class="form-data">{{viewData?.mobileNo || '-'}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Course :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{data.course_Title || '-' }}</span>
+                    <span class="form-data">{{data?.course_Title || '-' }}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Page :</span>
                 </div>
                 <div class="col-sm-9">
-                    <span class="form-data">{{viewData.pageName || '-' | titlecase}}</span>
+                    <span class="form-data">{{viewData?.pageName || '-' | titlecase}}</span>
                 </div>
                 <div class="col-sm-3">
                     <span class="form-label">Message :</span>
                 </div>
                 <div class="col-sm-9">
                     <span class="form-data">
-                        {{viewData.message || '-'}}
+                        {{viewData?.message || '-'}}
                     </span>
                 </div>
             </div>
