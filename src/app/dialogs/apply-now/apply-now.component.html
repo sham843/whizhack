@@ -68,7 +68,7 @@
                         formControlName="resume_Path" #fileInput>
                     <div *ngIf="resumePath">
                         <a target="_blank" [href]="resumePath">
-                        <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2">
+                        <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2" matTooltip="View">
                              
                             <span class="material-symbols-outlined">
                                 description 
@@ -76,7 +76,7 @@
                             </span>
                         </button>
                     </a>
-                        <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger" (click)="removeDocument()">
+                        <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger" (click)="removeDocument()" matTooltip="Delete">
                             <span class="material-symbols-outlined">
                                 delete
                             </span>
