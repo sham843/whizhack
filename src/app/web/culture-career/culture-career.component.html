@@ -104,27 +104,26 @@
     <div class="container">
         <h2 class="mb-5">Life at WhizHack</h2>
 
-        <div class="row" id="culture">
-          <ng-container *ngFor="let item of this.imageArray">
-            <div class="col-sm-2" (click)="openLightBox(item?.imagepaths)">
-              <div class="albums-tab mb-2">
-                  <div class="albums-tab-thumb sim-anim-1">
-                    <ng-container *ngFor="let x of item?.imagepaths; let i =index">
-                      <ng-container *ngIf="i ==0 || i == 1">
-                        <img src="{{x}}" class="all studio"  loading="lazy" class="img-fluid"/>
-                      </ng-container>
-                  </ng-container>
-                  </div>
-              </div>
-              <p class="text-center">{{item.gallery_Title | titlecase}} </p>
-          </div>
-          </ng-container>
+        <div class="row">
+            <ng-container *ngFor="let item of this.imageArray">
+                <div class="col-sm" (click)="openLightBox(item?.imagepaths)">
+                    <div class="image-container">
+                        <ng-container *ngFor="let x of item?.imagepaths; let i =index">
+                            <ng-container *ngIf="i ==0 ">
+                                <img src="{{x}}" class="all studio" loading="lazy" class="img-fluid" />
+                            </ng-container>
+                        </ng-container>
+                        <div class="image-title">{{item.gallery_Title | titlecase}} </div>
+                    </div>
+                </div>
+            </ng-container>
 
 
         </div>
-        <ng-container *ngIf="totalCount > 6">
-          <mat-paginator [length]="totalCount" [pageSize]="6" showFirstLastButtons (page)="onClickPaginatior($event)" #paginator>
-          </mat-paginator>
+        <ng-container *ngIf="totalCount > 5">
+            <mat-paginator [length]="totalCount" [pageSize]="5" showFirstLastButtons (page)="onClickPaginatior($event)"
+                #paginator>
+            </mat-paginator>
         </ng-container>
 
         <!-- <div class="row align-items-center" id="culture">
@@ -173,8 +172,9 @@
                         </div>
                     </div>
                     <ng-container *ngIf="jobPostTotalCount > 6">
-                      <mat-paginator [length]="jobPostTotalCount" [pageSize]="6" showFirstLastButtons (page)="onClickJobPaginatior($event)" #jobPaginator>
-                      </mat-paginator>
+                        <mat-paginator [length]="jobPostTotalCount" [pageSize]="6" showFirstLastButtons
+                            (page)="onClickJobPaginatior($event)" #jobPaginator>
+                        </mat-paginator>
                     </ng-container>
 
                     <!-- <div class="col-sm-4">

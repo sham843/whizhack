@@ -54,7 +54,7 @@ export class CultureCareerComponent implements OnInit {
 
   getAllImages() {
 
-    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery'+ "?pageno=" + this.imagePageNo + "&pagesize=6" , false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery'+ "?pageno=" + this.imagePageNo + "&pagesize=5" , false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
