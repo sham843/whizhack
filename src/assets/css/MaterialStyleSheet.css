@@ -126,3 +126,6 @@ mat-error{
     font-size: 0.75rem;
     font-family: 'Lato', sans-serif !important;
 }
+mat-dialog-close:focus{
+    background-color: transparent;
+}
