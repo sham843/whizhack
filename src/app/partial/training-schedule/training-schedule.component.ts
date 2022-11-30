@@ -62,13 +62,13 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.courseManageForm = this.fb.group({
       id: 0,
       pageName: ['', Validators.required],
-      course_Title: ['', Validators.required],
-      course_Caption: ['', Validators.required],
-      duration: ['', Validators.required],
-      course_Description: ['', Validators.required],
-      syllabus_Summary: ['', Validators.required],
+      course_Title: ['', [Validators.required,Validators.maxLength(50)]],
+      course_Caption: ['', [Validators.required,Validators.maxLength(500)]],
+      duration: ['', [Validators.required,Validators.maxLength(50)]],
+      course_Description: ['', [Validators.required,Validators.maxLength(500)]],
+      syllabus_Summary: ['', [Validators.required,Validators.maxLength(500)]],
       price: ['', [Validators.required, Validators.maxLength(10)]],
-      price_Terms: ['', Validators.required],
+      price_Terms: ['', [Validators.required, Validators.maxLength(50)]],
       imagePath: ['', Validators.required],
       actual_price: ['', [Validators.required, Validators.maxLength(10)]]
     })
