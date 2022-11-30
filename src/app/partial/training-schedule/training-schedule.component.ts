@@ -64,7 +64,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       pageName: ['', Validators.required],
       course_Title: ['', [Validators.required,Validators.maxLength(50)]],
       course_Caption: ['', [Validators.required,Validators.maxLength(500)]],
-      duration: ['', [Validators.required,Validators.maxLength(50)]],
+      duration: ['', [Validators.required,Validators.maxLength(100)]],
       course_Description: ['', [Validators.required,Validators.maxLength(500)]],
       syllabus_Summary: ['', [Validators.required,Validators.maxLength(500)]],
       price: ['', [Validators.required, Validators.maxLength(10)]],
