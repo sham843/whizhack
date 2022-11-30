@@ -14,13 +14,10 @@
                     <mat-label>Full Name</mat-label>
                     <input matInput placeholder="Enter Full Name" formControlName="fullName"
                         [value]="registerForm.get('fullName')?.value | titlecase" maxlength="50"
-                        (keypress)="validator.noFirstSpaceAllow($event)">
-                    <mat-error class="mt-2" *ngIf="f.fullName.errors">
-                        <span class="text-danger" *ngIf="f.fullName.errors?.required">
-                            *Full Name is Required.</span>
-                        <span class="text-danger" *ngIf="f.fullName.errors?.pattern">
-                            *Please Enter Valid Full Name</span>
-                    </mat-error>
+                        (keypress)="validator.alphabetsWithSpaces($event)" 
+                        (keyup)="validator.noFirstSpaceAllow($event)">
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('pattern')" class="mt-2">*Enter Valid Full Name.</mat-error>
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('required')" class="mt-2">*Full Name is Required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">

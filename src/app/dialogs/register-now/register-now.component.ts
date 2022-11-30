@@ -26,14 +26,13 @@ export class RegisterNowComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFormData();
-    console.log("data",this.data);
   }
 
-  //#region ------------------------------------------------FormData Method Start------------------------------------------------------
+  //#region  ------------------------------------------------FormData Method Start------------------------------------------------------
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(50)]],
+      fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$')]],
       mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
       courseId: [this.data.course_Title],
