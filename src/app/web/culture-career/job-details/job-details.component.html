@@ -8,10 +8,12 @@
                         <i class="fa-solid fa-location-dot me-1"></i> {{postJobArray?.job_Location}}
                     </div>
                     <div class="mx-5">
-                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Posting | date: 'dd-MM-yyyy'}}
+                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Posting | date:
+                        'dd-MM-yyyy'}}
                     </div>
                     <div>
-                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Application | date: 'dd-MM-yyyy'}}
+                        <i class="fa-regular fa-calendar-days me-1"></i> {{postJobArray?.date_of_Application | date:
+                        'dd-MM-yyyy'}}
                     </div>
                 </div>
             </div>
@@ -36,11 +38,12 @@
                 <p class="about-text mb-4" innerHTML="{{postJobArray?.qualification}}">
                 </p>
                 <h5 class="mb-2">Skills Required</h5>
-                <p class="about-text mb-4" innerHTML="{{postJobArray?.skills_Required}}">   
+                <p class="about-text mb-4" innerHTML="{{postJobArray?.skills_Required}}">
                 </p>
 
                 <div class="text-center">
-                    <button mat-stroked-button type="button" (click)="openDialog(postJobArray)" class="btn-main-outline rounded-pill px-5 py-3">Apply Now</button>
+                    <button mat-stroked-button type="button" (click)="openDialog(postJobArray)"
+                        class="btn-main-outline rounded-pill px-5 py-3">Apply Now</button>
                 </div>
             </div>
 
@@ -49,11 +52,17 @@
                     <div class="card-header py-4">
                         <h5 class="mb-0">Other Jobs</h5>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" *ngFor="let allPost of allPostJobArray">
-                            <a [class.text-secondary]="allPost?.jobpostId==JobPostId" (click)="JobPostId = allPost?.jobpostId;getByIdPostJobs()">{{allPost?.job_Title}}</a>
-                        </li>
-                    </ul>
+                    <div class="card-body scrollbar jobs-card-height">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let allPost of allPostJobArray">
+                                <a [class.text-secondary]="allPost?.jobpostId==JobPostId"
+                                    (click)="JobPostId = allPost?.jobpostId;getByIdPostJobs()">
+                                    <i class="fa-solid fa-briefcase me-2"></i>
+                                    {{allPost?.job_Title}}</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>

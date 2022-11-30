@@ -13,3 +13,9 @@ section {
 .list-group .list-group-item a:hover{
     color:var(--main-color);
 }
+.jobs-card-height{
+    /* height: 70vh !important; */
+    max-height: 100vh !important;
+    overflow: auto !important;
+    cursor: pointer;
+}
