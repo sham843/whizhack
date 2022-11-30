@@ -185,7 +185,7 @@
                                     He has headed all possible
                                     business units including Enterprise, Government, Consulting, SME etc
                                     though he particularly thrived on starting new divisions or
-                                    significantly turning around stagnant ones. 
+                                    significantly turning around stagnant ones.
                                 </p>
                                 <p class="card-text">
                                     He was the recipient of
@@ -524,7 +524,7 @@
                 <img src="../../../assets/image/about-us/advisors/SomitraSanadhya.png" class="">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                     type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                    Prof. Somitra Sanadhya 
+                    Prof. Somitra Sanadhya
                     <p class="small mb-0">Dean</p>
                     <small>Digital Transformations and Professor - Deptt of CSE
                         IIT Jodhpur</small>
@@ -689,7 +689,8 @@
                 </p>
                 <p class="about-text">
                     We seek partners in key geographies across the World to provide our entire range of security
-                    products and custom training and security services. Please write to <a href="mailto:partnership@whizhack.com" class="text-main">partnership@whizhack.com</a>
+                    products and custom training and security services. Please write to <a
+                        href="mailto:partnership@whizhack.com" class="text-main">partnership@whizhack.com</a>
                 </p>
             </div>
         </div>
@@ -698,6 +699,34 @@
 <section id="media-converage">
     <div class="container">
         <h2 class="mb-4">MEDIA COVERAGE</h2>
+        <div id="MediaCoverageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row" *ngFor="let mediaData of mediaCoverageData">
+                        <div class="col-sm-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>{{mediaData.article_Title}}</h5>
+                                    <p>{{mediaData.source}}
+                                    </p>
+                                    <a class="text-main" href="{{mediaData.url}}" target="_blank">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#MediaCoverageCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#MediaCoverageCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
         <!-- <div class="row">
             <div class="col-sm-4">
                 <div class="card">
@@ -730,17 +759,6 @@
                 </div>
             </div>
         </div> -->
-        <div class="row">
-            <div class="col-sm-4 mb-3" *ngFor="let mediaData of mediaCoverageData">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>{{mediaData.article_Title}}</h5>
-                        <p>{{mediaData.source}}
-                        </p>
-                        <a class="text-main" href="{{mediaData.url}}" target="_blank">View More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </section>

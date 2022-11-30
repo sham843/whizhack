@@ -179,7 +179,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Gallery Images is Required' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
 
   }
 
@@ -188,7 +188,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Gallery Images is Required" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Gallery Images is required" : this.showImagError = '';
       return;
     }
     this.spinner.show();
@@ -253,9 +253,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this.imageArray = [];
     let dialoObj = {
       header: 'Delete',
-      title: 'Are you sure, you want to Delete ?',
-      cancelButton: 'No',
-      okButton: 'Yes'
+      title: 'Do you want to delete the selected course ?',
+      cancelButton: 'Cancel',
+      okButton: 'Ok'
     }
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
