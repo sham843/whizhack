@@ -41,7 +41,7 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish </th>
                         <td mat-cell *matCellDef="let element">
                             <mat-slide-toggle [checked]="element.publish" (click)="onClickToggle(element)"
-                                matTooltip="Publish">
+                            matTooltip="{{ element.publish == true ? 'Publish' : 'Unpublish'}}">
                             </mat-slide-toggle>
                         </td>
                     </ng-container>
