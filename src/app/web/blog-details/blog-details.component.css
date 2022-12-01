@@ -32,3 +32,6 @@ section {
 #blog-details .details span{
     color:#fff;
 }
+.pointer-link{
+    cursor: pointer;
+}
