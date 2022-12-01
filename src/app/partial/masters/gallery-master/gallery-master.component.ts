@@ -179,7 +179,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Gallery Images is Required' : this.showImagError = '';
 
   }
 

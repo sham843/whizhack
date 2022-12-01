@@ -11,7 +11,7 @@
                 (keypress)="vs.noFirstSpaceAllow($event)">
               <mat-error *ngIf="g['gallery_title']?.errors" class="mt-2">
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
-                  Gallery Title Is Required</span>
+                  Gallery Title is Required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern') || g['gallery_title']?.hasError('maxlength')">
                   {{g['gallery_title'].hasError('pattern')?'Please Enter Valid Gallery Title':'Please Enter Maximum 50 Character'}}</span>
               </mat-error>
