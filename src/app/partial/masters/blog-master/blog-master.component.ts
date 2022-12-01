@@ -276,7 +276,7 @@ export class BlogMasterComponent implements OnInit {
 
   onClickEdit(editObj: any) {
     this.itemsForm.clear()
-    // this.itemsForm.removeAt(0);
+    this.imgTooltip = editObj.imagePath.substring(editObj.imagePath.lastIndexOf('/')+1);
     this.selRow = editObj.id;
     this.imgSrc = editObj?.imagePath;
     this.editFlag = true;
