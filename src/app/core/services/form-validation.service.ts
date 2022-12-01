@@ -23,9 +23,9 @@ export class FormValidationService {
   valDescription = '^[^\\s\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z@#$%^&*()0-9.,\\s]+$'; // Description or commit
   // valEmailId = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   valEmailId='^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$';
+  authorName = '^[a-zA-Z. ]*$'
 
   constructor() { }
-
 
   onlyAlphabets(event: any) {
     if (!this.noSpacesAtStart(event)) {
