@@ -36,22 +36,24 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="position-relative">
-                        <img src="{{blogPostArray[0]?.imagePath}}" alt="blog" class="main-blog-img w-100">
-                        <div class="card card-body main-blog-body mx-3">
-                            <p class="mb-2">{{blogPostArray[0]?.createdDate| date}}</p>
-                            <hr>
-                            <p>
-                                {{blogPostArray[0]?.description}}
-                            </p>
-                            <div class="text-start">
-                                <button type="button" class="btn btn-outline-light rounded-pill" (click)="blogDetails(blogPostArray[0].id)">Read More</button>
-                            </div>
+                    <img src="{{blogPostArray[0]?.imagePath}}" alt="blog" class="main-blog-img w-100">
+                    <div class="card card-body main-blog-body mx-3">
+                        <p class="mb-2">{{blogPostArray[0]?.createdDate| date}}</p>
+                        <hr>
+                        <h5>{{blogPostArray[0]?.title}}</h5>
+                        <p class="description">
+                            {{blogPostArray[0]?.description}}
+                        </p>
+                        <div class="text-start">
+                            <button type="button" class="btn btn-outline-light rounded-pill"
+                                (click)="blogDetails(blogPostArray[0].id)">Read More</button>
                         </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-5">
                 <div class="card blogs-all">
-                   <!--  <div class="card-header p-3">
+                    <!--  <div class="card-header p-3">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search Blogs">
                             <button class="btn" type="button" id="button-addon2">
@@ -61,12 +63,12 @@
                     </div> -->
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                         <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray">
+                        <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray">
                             <div class="flex-shrink-0">
                                 <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id)">
                             </div>
                             <div class="flex-grow-1 ms-3">
-                                <p>{{blogData.title}}</p> 
+                                <p>{{blogData.title}}</p>
                                 <small>{{blogData.createdDate| date}}</small>
                             </div>
                         </a>
@@ -81,17 +83,14 @@
         <h2 class="mb-4">White Papers</h2>
         <div class="row gx-5 products">
             <div class="col-sm-4 mb-4" *ngFor="let papers of whitePaperArray">
-                <a class="card h-100">
+                <a class="card h-100" (click)="blogDetails(papers.id)">
                     <img src="{{papers?.imagePath}}" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
-                          {{papers.title}}
+                            {{papers.title}}
                         </h5>
-                        <p class="card-text">
-                          {{papers.description}}
-                        </p>
-                        <div>
-                            <button type="button" class="btn btn-main-outline btn-sm" (click)="blogDetails(papers.id)">Read More</button>
+                        <div class="card-text description">
+                                {{papers.description}}
                         </div>
                     </div>
                 </a>
@@ -142,45 +141,16 @@
                         aria-selected="false">Marketing</button>
                 </li>
             </ul> -->
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-All" role="tabpanel" aria-labelledby="pills-All-tab"
-                    tabindex="0">
-                    <div class="row">
-                        <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
-                            <div class="card pointer-link">
-                                <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id)"
-                                alt="...">
-                            <div class="card-overlay">
-                                <h5>{{caseData.title}}</h5>
-                                <p>{{caseData.description}}</p>
-                            </div>
-                            </div>
+            <div class="row">
+                <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
+                    <div class="card h-100">
+                        <img src="{{caseData.imagePath}}" class="card-img-top"
+                            (click)="blogDetails(caseData.id)" alt="...">
+                        <div class="card-body">
+                            <h5>{{caseData.title}}</h5>
+                            <p class="description">{{caseData.description}}</p>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="pills-Business" role="tabpanel" aria-labelledby="pills-Business-tab"
-                    tabindex="0">
-                    <p class="text-white">hello</p>
-                </div>
-                <div class="tab-pane fade" id="pills-Financial" role="tabpanel" aria-labelledby="pills-Financial-tab"
-                    tabindex="0">
-                    <p class="text-white">hello1</p>
-
-                </div>
-                <div class="tab-pane fade" id="pills-Environment" role="tabpanel"
-                    aria-labelledby="pills-Environment-tab" tabindex="0">
-                    <p class="text-white">hello2</p>
-
-                </div>
-                <div class="tab-pane fade" id="pills-Investment" role="tabpanel" aria-labelledby="pills-Investment-tab"
-                    tabindex="0">
-                    <p class="text-white">hello3</p>
-
-                </div>
-                <div class="tab-pane fade" id="pills-Marketing" role="tabpanel" aria-labelledby="pills-Marketing-tab"
-                    tabindex="0">
-                    <p class="text-white">hello4</p>
-
                 </div>
             </div>
         </div>
