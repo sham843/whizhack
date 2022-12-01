@@ -237,7 +237,7 @@
                                 {{blogPostArray[0]?.title}}
                             </p>
                             <small>{{blogPostArray[0]?.description}}</small>
-                            <div class="text-start">
+                            <div class="text-end">
                                 <button type="button" class="btn btn-outline-light rounded-pill"
                                     (click)="blogDetails(blogPostArray[0].id)">Read More</button>
                             </div>
@@ -257,12 +257,11 @@
                     </div>
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog" *ngFor="let blogData of blogPostArray">
+                        <a class="d-flex blog" *ngFor="let blogData of blogPostArray" (click)="blogDetails(blogData.id)">
                             <div class="flex-shrink-0">
-                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id)"
-                                    class="pointer-link">
+                                <img src="{{blogData.imagePath}}" alt="..."  class="pointer-link">
                             </div>
-                            <div class="flex-grow-1 ms-3">
+                            <div class="flex-grow-1 ms-3 pointer-link">
                                 <p>{{blogData.title}}</p>
                                 <small>{{blogData.createdDate| date}}</small>
                             </div>
