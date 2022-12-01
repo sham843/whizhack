@@ -45,7 +45,7 @@ export class ApplyNowComponent implements OnInit {
         firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
         lastName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
         contactNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
-        emailId: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        emailId: ['', [Validators.required, Validators.email]],
         resume_Path: ['']
       });
     }

@@ -69,10 +69,10 @@ export class BlogMasterComponent implements OnInit {
   controlForm() {
     this.frm = this.fb.group({
       id: [0],
-      title: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z-(),.0-9\\s]+$')]],
-      description: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', [Validators.required,Validators.maxLength(10000)]],
       blog_categary_Id: [, Validators.required],
-      author: ['', [Validators.required, Validators.pattern(this.validation.alphabetsWithSpace)]],
+      author: ['', [Validators.required, Validators.pattern(this.validation.authorName)]],
       isPublish: [false],
       imagePath: ['', Validators.required],
       blogType: ['', Validators.required],
