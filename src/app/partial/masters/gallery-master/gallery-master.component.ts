@@ -188,7 +188,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Gallery Images is required" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Gallery Images is Required" : this.showImagError = '';
       return;
     }
     this.spinner.show();
@@ -253,7 +253,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this.imageArray = [];
     let dialoObj = {
       header: 'Delete',
-      title: 'Do you want to delete the selected course ?',
+      title: 'Are you sure, you want to Delete ?',
       cancelButton: 'Cancel',
       okButton: 'Delete'
     }
