@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
   defaultForm() {
     this.emailVerifyForm = this.fb.group({
       "mobile": [""],
-      "email": ["", [Validators.required, Validators.pattern(this.validations.valEmailId)]],
+      "email": ["", [Validators.required, Validators.email]],
     })
     this.otpVerifyForm = this.fb.group({
       "digitOne": ["", Validators.required],
