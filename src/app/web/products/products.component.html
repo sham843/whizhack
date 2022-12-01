@@ -1,16 +1,21 @@
 <div class="page-header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-10">
                 <h1>products</h1>
-                <h3>
+                <!-- <h3>
                     Next-generation security products for risk mitigation and training.
-                </h3>
+                </h3> -->
+                <p class="about-text">
+                    Whizhack product portfolio is creating a secure digital cyberspace, ranging from surveillance tools
+                    that predict impending advanced attacks and also remediation engines post attacks. All our solutions
+                    are built for massive scale and efficiency.
+                </p>
             </div>
         </div>
     </div>
 </div>
-<section>
+<!-- <section>
     <div class="container">
         <div class="row py-4">
             <div class="col-sm-12">
@@ -22,7 +27,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <section>
     <div class="container">
         <h2 class="mb-4">PRODUCTS</h2>
@@ -138,7 +143,8 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('papers')">View More</button>
+                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('papers')">View
+                                More</button>
                         </div>
                     </div>
                 </a>
@@ -156,7 +162,8 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('caseStudy')">View More</button>
+                            <button type="button" class="btn btn-main-outline"
+                                (click)="resourceDetails('caseStudy')">View More</button>
                         </div>
                     </div>
                 </a>
@@ -174,7 +181,8 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('blogs')">View More</button>
+                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('blogs')">View
+                                More</button>
                         </div>
                     </div>
                 </a>
@@ -200,8 +208,8 @@
                     <div class="row">
                         <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
                             <div class="card pointer-link">
-                                <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id)"
-                                    alt="...">
+                                <img src="{{caseData.imagePath}}" class="card-img-top"
+                                    (click)="blogDetails(caseData.id)" alt="...">
                                 <div class="card-overlay">
                                     <h5>{{caseData.title}}</h5>
                                     <p>{{caseData.description}}</p>
