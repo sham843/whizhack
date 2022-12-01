@@ -22,14 +22,13 @@ export class BlogDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((ele: any) => {
       this.blogId = ele.params.id;
     })
-    this.getBlogDetails();
+    this.getBlogDetails(this.blogId);
     setTimeout(() => {
       this.getAllBlogsDetails();
     }, 500);
   }
-  getBlogDetails() {
-    this.blogId!=undefined?this.blogId:'';
-    this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetById?id="+this.blogId, false, false, false, 'whizhackService');
+  getBlogDetails(blogIds:any) {
+    this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetById?id="+blogIds, false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe((res: any) => {
      this.blogArray=res.responseData;
      this.blogTypeId=this.blogArray.blogType;
@@ -42,7 +41,7 @@ export class BlogDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.getAllBlog = res.responseData.responseData1;
-          console.log(this.getAllBlog)
+          console.log(this.getAllBlog);
         } else {
           this.getAllBlog = [];
         }
