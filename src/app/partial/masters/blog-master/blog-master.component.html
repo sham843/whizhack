@@ -32,7 +32,6 @@
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter
                                 Description</mat-error>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('maxlength')">Maximum Description Length Should be 10000</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -112,7 +111,7 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Sub-Description</mat-label>
-                                            <textarea maxlength="5000" matInput placeholder="Enter Sub-Description"
+                                            <textarea matInput placeholder="Enter Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                             <mat-error class="mt-2"

@@ -70,7 +70,7 @@ export class BlogMasterComponent implements OnInit {
     this.frm = this.fb.group({
       id: [0],
       title: ['', Validators.required],
-      description: ['', [Validators.required,Validators.maxLength(10000)]],
+      description: ['', Validators.required],
       blog_categary_Id: [, Validators.required],
       author: ['', [Validators.required, Validators.pattern(this.validation.authorName)]],
       isPublish: [false],
