@@ -42,7 +42,7 @@
                     <mat-error *ngIf="f.emailId.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.emailId.errors?.required">
                             Email ID is required.</span>
-                        <span class="text-danger" *ngIf="f.emailId.errors?.pattern">
+                        <span class="text-danger" *ngIf="f.emailId.errors?.email">
                             Please enter Valid Email ID</span>
                     </mat-error>
                 </mat-form-field>
