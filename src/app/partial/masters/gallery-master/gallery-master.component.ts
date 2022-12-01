@@ -255,7 +255,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
       header: 'Delete',
       title: 'Do you want to delete the selected course ?',
       cancelButton: 'Cancel',
-      okButton: 'Ok'
+      okButton: 'Delete'
     }
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
