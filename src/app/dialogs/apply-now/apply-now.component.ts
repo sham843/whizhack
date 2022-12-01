@@ -45,7 +45,7 @@ export class ApplyNowComponent implements OnInit {
         firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
         lastName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
         contactNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
-        emailId: ['', [Validators.required, Validators.email]],
+        emailId: ['', [Validators.required, Validators.email,Validators.pattern(this.validation.valEmailId)]],
         resume_Path: ['']
       });
     }
@@ -102,7 +102,7 @@ export class ApplyNowComponent implements OnInit {
    //................................... Resume Upload code Start Here...............................//
 
    resumeUpload(event: any) { //Single Image Upload
-    let documentUrl: any = this.fileUploadService.uploadMultipleDocument(event, "Resume", "docx,pdf");
+    let documentUrl: any = this.fileUploadService.uploadMultipleDocument(event, "Resume", "doc,docx,pdf");
     documentUrl.subscribe({
       next: (ele: any) => {
         this.resumePath = ele.responseData;
