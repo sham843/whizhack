@@ -21,7 +21,7 @@
                             <input maxlength="100" matInput placeholder="Enter Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Valid Title
                             </mat-error>
                         </mat-form-field>
                     </div>
