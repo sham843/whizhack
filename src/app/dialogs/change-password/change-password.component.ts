@@ -67,7 +67,7 @@ export class ChangePasswordComponent implements OnInit {
               formDirective.resetForm();
             } else {
               this.common.matSnackBar(res.responseData, 1);
-              formDirective.resetForm();
+              // formDirective.resetForm();
             }
           },
           error: (error: any) => {
