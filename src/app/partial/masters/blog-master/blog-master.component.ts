@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
-
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -36,6 +35,7 @@ export class BlogMasterComponent implements OnInit {
   optionsFilterArray: any[] = [{ id: 0, name: 'All' }, { id: 1, name: 'Blog' }, { id: 2, name: 'White Paper' }, { id: 3, name: 'Case Study' }];
   blogCategoryArray = new Array();
   selRow: number = 0;
+  imgTooltip!:any;
   get f() { return this.frm.controls }
 
   get itemsForm(): FormArray {
@@ -195,6 +195,7 @@ export class BlogMasterComponent implements OnInit {
     this.editFlag = false;
     this.radioFlag = false;
     this.imageFlag = false;
+    this.imgTooltip = '';
   }
 
   fileUpload(event: any) {
@@ -202,6 +203,8 @@ export class BlogMasterComponent implements OnInit {
     this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jfif').subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
+          let uploadedUrl = res.responseData;
+          this.imgTooltip = uploadedUrl.substring(uploadedUrl.lastIndexOf('/')+1);
           this.ngxspinner.hide();
           this.imgSrc = res.responseData
           this.frm.controls['imagePath'].setValue(this.imgSrc);
@@ -258,6 +261,7 @@ export class BlogMasterComponent implements OnInit {
             this.editFlag = false;
             this.radioFlag = false;
             this.imageFlag = false;
+            this.imgTooltip = '';
           } else {
             this.commonMethod.checkDataType(res.statusMessage) == false ? this.errorHandler.handelError(res.statusCode) : this.commonMethod.matSnackBar(res.statusMessage, 1);
           }
@@ -354,6 +358,7 @@ export class BlogMasterComponent implements OnInit {
     this.imgSrc = ''
     this.file.nativeElement.value = ''
     this.frm.controls['imagePath'].setValue('');
+    this.imgTooltip = '';
   }
 
   onClickPaginatior(event: any) {

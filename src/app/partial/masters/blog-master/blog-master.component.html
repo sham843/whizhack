@@ -61,7 +61,8 @@
                             <div>
                                 <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
                                     #uploadDocument />
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Image</button>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()"
+                                data-toggle="tooltip" data-placement="right" title="{{imgTooltip}}">Upload Image</button>
                                 <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
                                     <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
                                 </ng-container>
