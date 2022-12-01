@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4">
         <div class="card form-card">
-            <div class="card-header">Blog Register</div>
+            <div class="card-header">Content Register</div>
             <form [formGroup]="frm" (ngSubmit)="onClickSubmit(formDirective)" #formDirective="ngForm">
                 <div class="card-body">
                     <div class="mb-3">
@@ -11,48 +11,45 @@
                         </mat-radio-group>
                         <ng-container *ngIf="radioFlag && !this.frm.value.blogType">
                             <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')">
-                                <p>Please Select Blog Type</p>
+                                <p>Please Select Content Type</p>
                             </mat-error>
                         </ng-container>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Blog Title</mat-label>
-                            <input maxlength="100" matInput placeholder="Enter Blog Title" formControlName="title"
+                            <mat-label>Title</mat-label>
+                            <input maxlength="100" matInput placeholder="Enter Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Blog Title
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('pattern')">Invalid Blog Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Title
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
-                            <mat-label>Blog Description</mat-label>
-                            <textarea maxlength="5000" matInput placeholder="Enter Blog Description" rows="5"
-                                formControlName="description"
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter Blog
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter
                                 Description</mat-error>
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('maxlength')">Maximum Description Length Should be 10000</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Blog Category</mat-label>
+                            <mat-label>Select Category</mat-label>
                             <mat-select formControlName="blog_categary_Id">
                                 <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
                                     categories.categoryName }}</mat-option>
                             </mat-select>
-                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select
-                                Blog Category</mat-error>
+                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select Category</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Blog Author</mat-label>
-                            <input maxlength="50" matInput placeholder="Enter Blog Author" formControlName="author"
-                                (keypress)="validation.alphabetsWithSpaces($event);validation.noFirstSpaceAllow($event)">
+                            <mat-label>Author</mat-label>
+                            <input maxlength="50" matInput placeholder="Enter Author Name" formControlName="author"
+                                (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
@@ -64,8 +61,7 @@
                             <div>
                                 <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
                                     #uploadDocument />
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
-                                    Blog Image</button>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Image</button>
                                 <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
                                     <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
                                 </ng-container>
@@ -102,27 +98,26 @@
                                 <div [formGroupName]="i">
                                     <div class="mb-3">
                                         <mat-form-field appearance="outline" class="w-100">
-                                            <mat-label>Blog Sub-Title</mat-label>
-                                            <input maxlength="100" matInput placeholder="Enter Blog Sub-Title"
+                                            <mat-label>Sub-Title</mat-label>
+                                            <input maxlength="100" matInput placeholder="Enter Sub-Title"
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)">
                                             <mat-error class="mt-2"
                                                 *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">
-                                                Please Enter
-                                                Blog Sub-Title</mat-error>
+                                                Please Enter Sub-Title</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
-                                            <mat-label>Blog Sub-Description</mat-label>
-                                            <textarea maxlength="5000" matInput placeholder="Enter Blog Sub-Description"
+                                            <mat-label>Sub-Description</mat-label>
+                                            <textarea maxlength="5000" matInput placeholder="Enter Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                             <mat-error class="mt-2"
                                                 *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">
                                                 Please
-                                                Enter Blog Sub-Description</mat-error>
+                                                Enter Sub-Description</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="text-end mb-2">
@@ -164,7 +159,7 @@
                 <form [formGroup]="filterFrm">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-sm-3">
-                            <span>Blogs List</span>
+                            <span>Content List</span>
                         </div>
                         <div class="col-sm-3">
                             <mat-form-field appearance="outline" class="w-100">
@@ -187,7 +182,7 @@
                             1)-10}}</td>
                     </ng-container>
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef> Blog Title </th>
+                        <th mat-header-cell *matHeaderCellDef> Title </th>
                         <td mat-cell *matCellDef="let element" class="text-break"> {{element?.title | titlecase}} </td>
                     </ng-container>
                     <ng-container matColumnDef="type">

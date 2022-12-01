@@ -24,15 +24,21 @@
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Course Title is Required
                             </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('maxlength')">
+                                Please Enter Maximum 50 Character
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Enter Course Caption" formControlName="course_Caption"
-                                maxlength="500" (keypress)="vadations.noFirstSpaceAllow($event)">
+                                 (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
                                 Course Caption is Required
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('maxlength')">
+                                Please Enter Maximum 500 Character
                             </mat-error>
                         </mat-form-field>
 
@@ -40,8 +46,7 @@
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
-                            <input matInput placeholder="Enter Course Duration" formControlName="duration"
-                                maxlength="50"
+                            <input matInput placeholder="Enter Course Duration" formControlName="duration"                                
                                 (keypress)="vadations.noFirstSpaceAllow($event);vadations.alphaNumericWithSpacesWithSomeSpecChars($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
                                 Course Duration is Required
@@ -55,11 +60,14 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Course Description</mat-label>
-                            <textarea matInput placeholder="Enter Course Description" rows="4" maxlength="500"
+                            <textarea matInput placeholder="Enter Course Description" rows="4"
                                 formControlName="course_Description"
                                 (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['course_Description'].hasError('required')">
                                 Course Description is Required
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['course_Description'].hasError('maxlength')">
+                                Please Enter Maximum 500 Character
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -91,11 +99,14 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4" maxlength="500"
+                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4" 
                                 formControlName="syllabus_Summary"
                                 (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
                                 Syllabus Summary is Required
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['syllabus_Summary'].hasError('maxlength')">
+                                Please Enter Maximum 500 Character
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -134,6 +145,9 @@
                                 (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('maxlength')">
+                                Please Enter Maximum 50 Character
                             </mat-error>
                         </mat-form-field>
 
