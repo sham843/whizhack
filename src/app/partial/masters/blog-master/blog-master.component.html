@@ -30,11 +30,11 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Description</mat-label>
-                            <textarea maxlength="5000" matInput placeholder="Enter Description" rows="5"
-                                formControlName="description"
+                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter
                                 Description</mat-error>
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('maxlength')">Maximum Description Length Should be 10000</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -51,7 +51,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Author</mat-label>
                             <input maxlength="50" matInput placeholder="Enter Author Name" formControlName="author"
-                                (keypress)="validation.alphabetsWithSpaces($event);validation.noFirstSpaceAllow($event)">
+                                (keypress)="validation.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
