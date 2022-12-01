@@ -2,32 +2,53 @@ section {
     padding-block: 4rem;
     color: #fff;
 }
-.contact-img{
+
+.contact-img {
     box-shadow: 20px 20px 0px 7px #0e1526;
     border-radius: 15px;
 }
-.social-icon{
+
+.social-icon {
     margin-right: 10px;
-    background-color:var(--main-color);
+    background-color: var(--main-color);
     width: 30px;
     height: 30px;
     line-height: 30px;
     text-align: center;
     border-radius: 5px;
 }
-.social-icon a{
+
+.social-icon a {
     color: #0E1526;
 }
-.social-icon:hover{
+
+.social-icon:hover {
     background-color: var(--card-bg-color);
 }
-.social-icon:hover a{
+
+.social-icon:hover a {
     color: var(--main-color);
 }
-.contact{
+
+.contact {
     color: var(--main-color);
     text-decoration: none;
 }
-.contact:hover{
+
+.contact:hover {
     color: #fff;
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    height: 500px;
+    width: 100%;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 500px;
+    width: 100%;
 }
