@@ -239,6 +239,7 @@ export class BlogMasterComponent implements OnInit {
 
       this.ngxspinner.show();
       let postObj = this.frm.value;
+      postObj.title = this.frm.value.title.replace(/  +/g, ' ');
 
       let url;
       this.editFlag ? url = 'whizhack_cms/Blogregister/UpdateBlogRegister' : url = 'whizhack_cms/Blogregister/InsertBlogRegister'
