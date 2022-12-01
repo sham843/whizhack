@@ -69,13 +69,13 @@
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
-                                    (click)="viewImage()">
+                                    (click)="viewImage()" matTooltip="View Document">
                                     <span class="material-symbols-outlined">
                                         Description
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
-                                    (click)="deleteImage()">
+                                    (click)="deleteImage()" matTooltip="Delete Document">
                                     <span class="material-symbols-outlined">
                                         Delete
                                     </span>

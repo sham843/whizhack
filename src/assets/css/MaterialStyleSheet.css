@@ -129,3 +129,9 @@ mat-error{
 mat-dialog-close:focus{
     background-color: transparent;
 }
+
+/* my csss */
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    /* color: #c2185b; */
+    color: #fff !important;
+  }
