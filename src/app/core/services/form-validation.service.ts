@@ -15,7 +15,7 @@ export class FormValidationService {
   onlyNumbers = '^[0-9]*$';
   numbersWithDot = '^[0-9\s]*\.?[0-9\s]+$'
   valUserName = '^[^\\s\\[\\[`&-._@#%*!-+"\'\/\\]\\]{}][a-zA-Z@0-9.\\s]+$';
-  valPassword = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z0-9\d@$!%*?&]{8,20}$';
+  valPassword = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$!%^*?&])[A-Za-z0-9\d@#$!%^*?&]{8,20}$';
   valMobileNo = '[6-9]\\d{9}';
   valOtp = '[0-9]\\d{6}';
 
@@ -23,9 +23,9 @@ export class FormValidationService {
   valDescription = '^[^\\s\\[\\[`&._@#%*!+"\'\/\\]\\]{}][a-zA-Z@#$%^&*()0-9.,\\s]+$'; // Description or commit
   // valEmailId = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   valEmailId='^[a-zA-Z0-9._%+-]+@([a-z0-9.-]+[.])+[a-z]{2,5}$';
+  authorName = '^[a-zA-Z. ]*$'
 
   constructor() { }
-
 
   onlyAlphabets(event: any) {
     if (!this.noSpacesAtStart(event)) {
@@ -167,7 +167,7 @@ export class FormValidationService {
 
   emailRegex(event: any) { //Email Validation
     if (!this.noSpacesAtStart(event)) return false; // First Space not Accept
-    if (event.currentTarget.value.split('.').length - 1 == 1 && (event.keyCode == 46)) return false;  // double .Dot not accept
+    if (event.currentTarget.value.split('..').length - 1 == 1 && (event.keyCode == 46)) return false;  // double .Dot not accept
     if (event.currentTarget.value.split('@').length - 1 == 1 && (event.keyCode == 64)) return false;  // double @ not accept
     if (event.target.selectionStart === 0 && (event.keyCode == 46)) return false;  // starting .Dot not accept
     if (event.target.selectionStart === 0 && (event.keyCode == 64)) return false;  // starting @ not accept

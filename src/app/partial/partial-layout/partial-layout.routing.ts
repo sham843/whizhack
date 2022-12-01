@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const PartialLayoutRoutes: Routes = [
   { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule), data: { title: 'Dashboard' } },
-  { path: 'blog-master', loadChildren: () => import('../../partial/masters/blog-master/blog-master.module').then(m => m.BlogMasterModule), data: { title: 'Blog Master' } },
+  { path: 'content-master', loadChildren: () => import('../../partial/masters/blog-master/blog-master.module').then(m => m.BlogMasterModule), data: { title: 'Content Master' } },
   { path: 'gallery-master', loadChildren: () => import('../../partial/masters/gallery-master/gallery-master.module').then(m => m.GalleryMasterModule), data: { title: 'Gallery Master' } },
   { path: 'media-coverage', loadChildren: () => import('../../partial/masters/media-coverage/media-coverage.module').then(m => m.MediaCoverageModule), data: { title: 'Media Coverage' } },
   { path: 'enquiries', loadChildren: () => import('../../partial/enquiries/enquiries.module').then(m => m.EnquiriesModule), data: { title: 'Enquiries' } },
