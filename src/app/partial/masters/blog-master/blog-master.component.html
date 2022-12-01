@@ -50,7 +50,7 @@
                             <mat-label>Author Name</mat-label>
                             <input maxlength="50" matInput placeholder="Enter Author Name" formControlName="author"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Valid Author Name
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
                             </mat-error>
