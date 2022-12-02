@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 interface Food {
   value: string;
@@ -12,6 +12,7 @@ interface Food {
   styleUrls: ['./bootcamp-registration.component.css']
 })
 export class BootcampRegistrationComponent {
+  personalInfoForm!:FormGroup;
   foods: Food[] = [
     {value: 'steak-0', viewValue: 'Steak'},
     {value: 'pizza-1', viewValue: 'Pizza'},
@@ -37,4 +38,10 @@ export class BootcampRegistrationComponent {
   ngOnInit(): void {
   }
 
+  getFormControl(){
+    // this.personalInfoForm=
+  }
+  personalInfo(){
+
+  }
 }

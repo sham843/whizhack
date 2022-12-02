@@ -12,13 +12,13 @@
   </button>
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup" class="pt-3 mt-3">
-      <form [formGroup]="firstFormGroup">
+      <form [formGroup]="personalInfoForm">
         <ng-template matStepLabel>Personal Information</ng-template>
         <div class="row g-3 mb-4">
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Full Name</mat-label>
-              <input matInput placeholder="Full Name">
+              <input matInput placeholder="Full Name" >
             </mat-form-field>
           </div>
           <div class="col-sm-6">
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button mat-button matStepperNext class="btn-main">Next</button>
+          <button mat-button matStepperNext class="btn-main" (click)="personalInfo()">Next</button>
         </div>
       </form>
     </mat-step>
