@@ -40,7 +40,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Date Of Birth</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="date_of_Birth"
+              <input matInput [matDatepicker]="picker" placeholder="Enter Date of birth" formControlName="date_of_Birth"
                [readOnly]="true" (click)="picker.open()" [max]="max">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker startView="multi-year"></mat-datepicker>
@@ -103,11 +103,9 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="text-center">
+        <div class="d-flex align-items-center justify-content-between">
+          <button mat-button class="btn-main" matStepperNext >Cancel</button>
           <button mat-button class="btn-main"  (click)="personalInfo()">Next</button>
-         <!--  <div class="d-flex align-items-center justify-content-between">
-            <button mat-button class="btn-main" matStepperNext >Cancel</button>
-            <button mat-button class="btn-main" matStepperNext (click)="personalInfo()">Next</button> -->
         </div>
       </form>
     </mat-step>
