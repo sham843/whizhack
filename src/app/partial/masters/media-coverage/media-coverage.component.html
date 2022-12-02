@@ -11,8 +11,6 @@
                                 (keyup)="vs.removeSpaceAtBegining($event)" minlength="2">
                             <mat-error *ngIf="f['article_Title']?.errors" class="mt-2">
                                 <span *ngIf="f['article_Title']?.hasError('required')"> Article Title is Required</span>
-                                <span *ngIf="f['article_Title']?.hasError('maxlength')">Please Enter Maximum 100
-                                    Character</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -23,8 +21,6 @@
                                 (keyup)="vs.removeSpaceAtBegining($event)" minlength="2">
                             <mat-error *ngIf="f['source']?.errors" class="mt-2">
                                 <span *ngIf="f['source']?.hasError('required')"> Article Source is Required</span>
-                                <span *ngIf="f['source']?.hasError('maxlength')">Please Enter Maximum 100
-                                    Character</span>
                                 <!-- <span *ngIf="f['source']?.hasError('minlength')">Please Enter Minimum 5 Character</span> -->
                             </mat-error>
                         </mat-form-field>
