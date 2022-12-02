@@ -34,8 +34,8 @@ export class ChangePasswordComponent implements OnInit {
   defaultForm() {
     this.registerForm = this.fb.group({
       currentPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
-      newPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
-      retypePassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]]
+      newPassword: ['', [Validators.required]],
+      retypePassword: ['', [Validators.required]]
     })
   }
 
@@ -55,8 +55,12 @@ export class ChangePasswordComponent implements OnInit {
         return
       }
       else{
-        let obj = this.registerForm.value;
-        this.api.setHttp('get', 'whizhack_cms/login/change-password/' + obj.currentPassword + '?UserId=' +this.webStorage.getUserId()+ '&NewPassword=' + obj.newPassword, false, false, false, 'whizhackService');
+        let changePasswordObj = {
+          userId: this.webStorage.getUserId(),
+          newPassword: this.registerForm.value.newPassword,
+          oldPassword: this.registerForm.value.currentPassword
+        };
+        this.api.setHttp('post', 'whizhack_cms/login/change-password', false, changePasswordObj, false, 'whizhackService');
         this.api.getHttp().subscribe({
           next: (res: any) => {
             if (res.responseData == 'Password Changed Successfully...') {
