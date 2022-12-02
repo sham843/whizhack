@@ -11,55 +11,61 @@
     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
   </button>
   <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup" class="pt-3 mt-3">
+    <mat-step [stepControl]="personalInfoForm" class="pt-3 mt-3">
       <form [formGroup]="personalInfoForm">
         <ng-template matStepLabel>Personal Information</ng-template>
         <div class="row g-3 mb-4">
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Full Name</mat-label>
-              <input matInput placeholder="Full Name" >
+              <input matInput placeholder="Full Name" formControlName="fullName">
+              <mat-error *ngIf="personal.fullName.errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal.fullName.errors?.required">
+                  FullName Name is Required.</span>
+                <span class="text-danger" *ngIf="personal.fullName.errors?.pattern">
+                    Please Enter Valid FullName Name</span>
+            </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email ID</mat-label>
-              <input matInput placeholder="Email ID">
+              <input matInput placeholder="Email ID" formControlName="emailId">
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Date Of Birth</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Date of birth">
+              <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dof">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-          </div>
+          </div>  
           <div class="col-sm-6">
             <div class="d-flex align-items-center">
               <mat-label class="me-4">Gender :</mat-label>
               <mat-radio-group>
-                <mat-radio-button value="1" class="me-3">Male</mat-radio-button>
-                <mat-radio-button value="2">Female</mat-radio-button>
+                <mat-radio-button value="1" class="me-3" formControlName="gender">Male</mat-radio-button>
+                <mat-radio-button value="2" formControlName="gender">Female</mat-radio-button>
               </mat-radio-group>
             </div>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Enter Country</mat-label>
-              <input matInput placeholder="Enter Country">
+              <input matInput placeholder="Enter Country" formControlName="country">
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>City</mat-label>
-              <input matInput placeholder="City">
+              <input matInput placeholder="City" formControlName="city">
             </mat-form-field>
           </div>
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Phone Number</mat-label>
-              <input matInput placeholder="Phone Number">
+              <input matInput placeholder="Phone Number" formControlName="phoneNo">
             </mat-form-field>
           </div>
         </div>
@@ -68,7 +74,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Educational Qualification">
+    <!-- <mat-step [stepControl]="secondFormGroup" label="Educational Qualification">
       <form [formGroup]="secondFormGroup">
         <div class="row g-3 mb-4">
           <div class="col-sm-6">
@@ -142,12 +148,12 @@
       <div>
         <!-- <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button> -->
-        <div class="d-flex align-items-center justify-content-between">
+        <!-- <div class="d-flex align-items-center justify-content-between">
           <button type="button" mat-button class="btn-main-outline">Cancel</button>
           <button type="submit" mat-button class="btn-main">Submit Data</button>
         </div>
       </div>
-    </mat-step>
+    </mat-step> -->
   </mat-stepper>
 
 </div>
