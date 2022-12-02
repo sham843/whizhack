@@ -50,7 +50,8 @@ export class BlogMasterComponent implements OnInit {
     private fileUpl: FileUploadService,
     private commonMethod: CommonMethodService,
     private ngxspinner: NgxSpinnerService,
-    public validation: FormValidationService) { }
+    public validation: FormValidationService,
+    private webStrorage: WebStorageService) { }
 
 
   ngOnInit(): void {
@@ -332,7 +333,7 @@ export class BlogMasterComponent implements OnInit {
   deleteBlogregister(){
     let deleteObj = {
       "id": this.selRow,
-      "modifiedBy": 0
+      "modifiedBy": this.webStrorage.getUserId()
     }
 
     this.service.setHttp('delete', 'whizhack_cms/Blogregister/DeleteById', false, deleteObj, false, 'whizhackService');
