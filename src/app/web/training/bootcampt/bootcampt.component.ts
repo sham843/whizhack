@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
-import { RegisterNowComponent } from 'src/app/dialogs/register-now/register-now.component';
+// import { RegisterNowComponent } from 'src/app/dialogs/register-now/register-now.component';
+import { BootcampRegistrationComponent } from './bootcamp-registration/bootcamp-registration.component';
 
 @Component({
   selector: 'app-bootcampt',
@@ -14,8 +15,8 @@ export class BootcamptComponent implements OnInit {
   constructor(public dialog: MatDialog,private apiService:ApiService) { }
 
   openDialog(bootData:any) {
-    const dialogRef = this.dialog.open(RegisterNowComponent,{
-      width: '500px',
+    const dialogRef = this.dialog.open(BootcampRegistrationComponent,{
+      width: '1024px',
       data:bootData
       });
       dialogRef.afterClosed().subscribe(result => {
