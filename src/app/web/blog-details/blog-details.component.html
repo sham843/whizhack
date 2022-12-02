@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog" *ngFor="let blogData of getAllBlog" (click)="getBlogDetails(blogData.id)">
+                        <a class="d-flex blog" *ngFor="let blogData of getAllBlog" (click)="getBlogDetails(blogData.id,blogData.title)">
                             <div class="flex-shrink-0 pointer-link">
                                 <img src="{{blogData.imagePath}}" alt="...">
                             </div>

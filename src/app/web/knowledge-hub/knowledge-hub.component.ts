@@ -24,13 +24,13 @@ export class KnowledgeHubComponent implements OnInit {
     this.paramsSubscription=this.activated.params.subscribe((ele: any) => {
       this.scrollId = ele.name;
     })
-   setTimeout(() => {
+  /*  setTimeout(() => {
     this.scrollId? document.getElementById(this.scrollId)?.scrollIntoView({    
       behavior: "smooth",
       block: "start",
       inline: "start"
     }):'';
-   }, 1000);
+   }, 1000); */
   }
 
   getBlog() {
@@ -49,9 +49,10 @@ export class KnowledgeHubComponent implements OnInit {
       },
     })
   }
-  blogDetails(blogId: any) {
-    // this.router.navigate(['../blog-details']);
-    this.router.navigateByUrl('/blog-details', { state:blogId});
+  blogDetails(blogId: any,title:any) {
+    let joinString=title.split(' ').join('-')
+    // let joinString =str.substring(0, str.length-1)
+     this.router.navigateByUrl('/blog-details/'+blogId.toString()+'-'+joinString);
   }
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
