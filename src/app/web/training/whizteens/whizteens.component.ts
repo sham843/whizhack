@@ -21,7 +21,6 @@ export class WhizteensComponent implements OnInit {
       data: data
     });
     dialogRef.afterClosed().subscribe({
-
     });
   }
 
@@ -34,7 +33,6 @@ export class WhizteensComponent implements OnInit {
       this.getAllCoursesData = res.responseData;
       this.getAllCoursesData.forEach((ele: any) => {
         if (ele.pageName == "WhizTeens ") {
-          ele.exclusive_offer == 0 ? this.whizteenArray.push(ele) : this.whizteenexclusiveArray.push(ele);
           ele.exclusive_offer == 0 ? this.whizteenArray.push(ele) : this.whizteenexclusiveArray.push(ele);
         }
       })

@@ -16,10 +16,10 @@
             <div class="col-sm-8" id="blog-details">
                 <div class="d-flex align-items-center justify-content-between details">
                     <div>
-                        By - <span>{{blogArray?.userName}}</span>
+                        By - <span>{{blogArray?.author}}</span>
                     </div>
                     <div>
-                        Date : <span>{{blogArray?.createdDate |date:'dd/MM/yyyy'}}</span> 
+                        Date : <span>{{blogArray?.blogRegisterDetailsModel[0].createdDate |date:'dd/MM/yyyy'}}</span> 
                     </div>
                 </div>
                 <img src="{{blogArray?.imagePath}}" class="img-fluid rounded">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -22,9 +22,9 @@ export class JobDetailsComponent implements OnInit {
     public commonService: CommonMethodService,
     private error: ErrorHandlerService,
     private apiService: ApiService,
-    private route: ActivatedRoute,
+    private router:Router
   ) {
-    this.JobPostId = this.route.snapshot.params['id'];
+    this.JobPostId = this.router.getCurrentNavigation()?.extras.state;
   }
 
   ngOnInit(): void {

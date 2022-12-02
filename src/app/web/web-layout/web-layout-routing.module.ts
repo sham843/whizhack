@@ -19,11 +19,11 @@ const routes: Routes = [
   { path: 'knowledge-hub', loadChildren: () => import('../../web/knowledge-hub/knowledge-hub.module').then(m => m.KnowledgeHubModule), data: {title: 'Knowledge Hub'} },
   { path: 'knowledge-hub/:name', loadChildren: () => import('../../web/knowledge-hub/knowledge-hub.module').then(m => m.KnowledgeHubModule), data: {title: 'Knowledge Hub'} },
   { path: 'blog-details', loadChildren: () => import('../../web/blog-details/blog-details.module').then(m => m.BlogDetailsModule), data: {title: 'Blog Details'}  },
-  { path: 'blog-details/:id', loadChildren: () => import('../../web/blog-details/blog-details.module').then(m => m.BlogDetailsModule), data: {title: 'Blog Details'}  },
+  // { path: 'blog-details/:id', loadChildren: () => import('../../web/blog-details/blog-details.module').then(m => m.BlogDetailsModule), data: {title: 'Blog Details'}  },
   { path: 'contact-us', loadChildren: () => import('../../web/contact-us/contact-us.module').then(m => m.ContactUsModule), data: {title: 'Contact Us'} },
   { path: 'culture-and-career', loadChildren: () => import('../../web/culture-career/culture-career.module').then(m => m.CultureCareerModule), data: {title: 'Culture & Career'} },
   { path: 'job-details', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: {title: 'Job Details'}  },
-  { path: 'job-details/:id', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: {title: 'Job Details'}  },
+  // { path: 'job-details/:id', loadChildren: () => import('../../web/culture-career/job-details/job-details.module').then(m => m.JobDetailsModule), data: {title: 'Job Details'}  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
