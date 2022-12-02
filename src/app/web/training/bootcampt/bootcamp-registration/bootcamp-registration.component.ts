@@ -179,7 +179,7 @@ export class BootcampRegistrationComponent {
         "percentage": parseInt(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
         "courseId": 0,
-        "pageName": "",
+        "pageName": "Bootcamp ",
         "desc_program": "",
         "iP_address": "",
         "operating_System": "",
