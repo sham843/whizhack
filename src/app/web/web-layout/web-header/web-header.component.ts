@@ -7,8 +7,10 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
   styleUrls: ['./web-header.component.css']
 })
 export class WebHeaderComponent implements OnInit {
-
-  constructor(@Inject(DOCUMENT) private document: any) { }
+  headerOPenFlag:boolean = false;
+  constructor(@Inject(DOCUMENT) private document: any) { 
+    console.log(this.document)
+  }
 
   ngOnInit(): void {
   }
@@ -23,11 +25,16 @@ export class WebHeaderComponent implements OnInit {
       }
     }
   openNav(){
-    this.document.getElementById("myNav").style.width = "100%";
+    // this.document.getElementById("myNav").style.width = "100%";
+    this.headerOPenFlag = true;
   }
 
   closeNav(){
-    this.document.getElementById("myNav").style.width = "0%";
+    // this.document.getElementById("myNav").style.width = "0%";
+    this.headerOPenFlag = false;
+  }
+  routerChange(){
+    
   }
 
 }
