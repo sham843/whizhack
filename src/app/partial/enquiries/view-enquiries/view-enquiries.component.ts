@@ -13,19 +13,19 @@ export class ViewEnquiriesComponent implements OnInit {
 
   constructor(private errorSer: ErrorHandlerService, private service: ApiService, public dialogRef: MatDialogRef<ViewEnquiriesComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private common: CommonMethodService,
     private http: HttpClient) { }
-    viewData:any
-    deviceDataarray = new Array();
-    deviceIpAddress: any;
-    ipAddress: any;
-    address: any
+  viewData: any
+  deviceDataarray = new Array();
+  deviceIpAddress: any;
+  ipAddress: any;
+  address: any
   ngOnInit(): void {
     this.getDataById();
     this.getDevice();
     this.getdeviceIpAddress();
   }
-//#region ---------------------------------------------------------Get View Data By Id-----------------------------------------------------
+  //#region ---------------------------------------------------------Get View Data By Id-----------------------------------------------------
   getDataById() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetById?id='+this.data.registerId, false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetById?id=' + this.data.registerId, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
@@ -36,9 +36,9 @@ export class ViewEnquiriesComponent implements OnInit {
       }
     })
   }
-//#endregion ---------------------------------------------------------Get View Data By Id---------------------------------------------------
+  //#endregion ---------------------------------------------------------Get View Data By Id---------------------------------------------------
 
-//#region------------------------------------------------------------Get Device Information------------------------------------------------
+  //#region------------------------------------------------------------Get Device Information------------------------------------------------
   getDevice() {
     this.common.getDeviceInfo()
     this.deviceDataarray = [this.common]
@@ -50,7 +50,7 @@ export class ViewEnquiriesComponent implements OnInit {
       this.address = arr.slice(7, 22);
     })
   }
-//#endregion------------------------------------------------------------Get Device Information------------------------------------------------
+  //#endregion------------------------------------------------------------Get Device Information------------------------------------------------
 
 
 
