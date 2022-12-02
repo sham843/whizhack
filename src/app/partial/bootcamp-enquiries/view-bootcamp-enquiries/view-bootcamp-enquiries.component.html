@@ -1,1 +1,117 @@
-<p>view-bootcamp-enquiries works!</p>
+<div class="dialog-header">
+    <span>Bootcamp Enquiry Details</span>
+    <button mat-icon-button mat-dialog-close>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </button>
+</div>
+<div class="dialog-body form-container">
+    <div class="row mb-4">
+        <div class="col-sm-4">
+            <div class="row gy-3">
+                <h4 class="text-main">Personal Information</h4>
+                <div class="col-sm-4">
+                    <span class="form-label">Full Name :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">Mr.sudhir mahajan </span>
+                </div>   
+                <div class="col-sm-4">
+                    <span class="form-label">Email ID :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">abc@g.com</span>
+                </div>  
+                <div class="col-sm-4">
+                    <span class="form-label">Date of Birth :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">15-03-1997</span>
+                </div>   
+                <div class="col-sm-4">
+                    <span class="form-label">Country :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">India</span>
+                </div> 
+                <div class="col-sm-4">
+                    <span class="form-label">City :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">Pune</span>
+                </div>   
+                <div class="col-sm-4">
+                    <span class="form-label">Phone Number :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">86692647678</span>
+                </div>    
+                <div class="col-sm-4">
+                    <span class="form-label">Gender :</span>
+                </div>
+                <div class="col-sm-8">
+                    <span class="form-data">Male</span>
+                </div>                
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row gy-3">
+                <h4 class="text-main">Educational Information</h4>
+                <div class="col-sm-5">
+                    <span class="form-label">Qualification :</span>
+                </div>
+                <div class="col-sm-7">
+                    <span class="form-data">Enginner </span>
+                </div>  
+                <div class="col-sm-5">
+                    <span class="form-label">Degree :</span>
+                </div>
+                <div class="col-sm-7">
+                    <span class="form-data">Enginner </span>
+                </div>  
+                <div class="col-sm-5">
+                    <span class="form-label">Institute Name:</span>
+                </div>
+                <div class="col-sm-7">
+                    <span class="form-data">STPL </span>
+                </div>  
+                <div class="col-sm-5">
+                    <span class="form-label">Year of Passing:</span>
+                </div>
+                <div class="col-sm-7">
+                    <span class="form-data">STPL </span>
+                </div>  
+                <div class="col-sm-5">
+                    <span class="form-label">Percentage:</span>
+                </div>
+                <div class="col-sm-7">
+                    <span class="form-data">99.99% </span>
+                </div>  
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row gy-3">
+                <h4 class="text-main">Professional Qualification</h4>
+                <div class="col-sm-7">
+                    <span class="form-label">Total Years of Experience :</span>
+                </div>
+                <div class="col-sm">
+                    <span class="form-data">5 </span>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h4 class="text-main">Why Join ?</h4>
+        <mat-form-field appearance="legacy" class="w-100">
+            <mat-label>Why do you want to join this program?</mat-label>
+            <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="Programs"></textarea>
+          </mat-form-field>
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-between p-3">
+    <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn-main">OK</button>
+</div>
