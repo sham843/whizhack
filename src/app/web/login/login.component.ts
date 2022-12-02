@@ -46,14 +46,16 @@ export class LoginComponent implements OnInit {
    }
 
   onClickLogin(formDirective?:any) {
-    let userId = this.loginForm.value.username;
-    let userPassword = this.loginForm.value.password;
+    let loginObj = {
+      userName : this.loginForm.value.username,
+      password : this.loginForm.value.password
+    }
     if (this.loginForm.invalid) {
       return;
     }
     else {
       if (this.loginForm.value.captcha == this.commonMethodService.checkvalidateCaptcha()) {
-        this.service.setHttp('get', 'whizhack_cms/login/CheckLogin/' + userId + '/' + userPassword, false, false, false, 'whizhackService');
+        this.service.setHttp('post', 'whizhack_cms/login/CheckLogin', false, loginObj, false, 'whizhackService');
         this.service.getHttp().subscribe({
           next: (res: any) => {
             if (res.statusCode == '200') {
