@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/core/services/api.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { MatStepper } from '@angular/material/stepper';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-bootcamp-registration',
   templateUrl: './bootcamp-registration.component.html',
@@ -25,6 +25,7 @@ export class BootcampRegistrationComponent {
     public validation: FormValidationService,
     private commonService: CommonMethodService,
     public dialogRef: MatDialogRef<BootcampRegistrationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private error: ErrorHandlerService) { }
 
   ngOnInit(): void {
@@ -179,7 +180,7 @@ export class BootcampRegistrationComponent {
         "percentage": parseInt(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
         "courseId": 0,
-        "pageName": "Bootcamp ",
+        "pageName": this.data,
         "desc_program": "",
         "iP_address": "",
         "operating_System": "",
