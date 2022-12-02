@@ -99,7 +99,7 @@ a.text-main:hover{
  margin-right: 3px;
 }
 .page-header{
-  background-image: url('/assets/image/Comman-Banner.png');
+  background-image: url('../../../assets/image/Comman-Banner.png');
   height: 60vh;
   margin-top: 87px;
   color: #fff;
