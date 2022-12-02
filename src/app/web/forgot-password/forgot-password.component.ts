@@ -63,7 +63,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   sendOTP(flag:any,formDirective?: any) {
-    if (this.emailVerifyForm.value.email.invalid && flag!='resend') {
+    if (this.emailVerifyForm.invalid && flag=='send') {
       return
     }
     else {
