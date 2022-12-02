@@ -1,32 +1,24 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/core/services/api.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-interface Food {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'app-bootcamp-registration',
   templateUrl: './bootcamp-registration.component.html',
   styleUrls: ['./bootcamp-registration.component.css']
 })
 export class BootcampRegistrationComponent {
-
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
   isLinear = false;
 
-  constructor(private fb: FormBuilder, public validator: FormValidationService, private apiService: ApiService, private error: ErrorHandlerService) { }
+  constructor(private fb: FormBuilder, public validator: FormValidationService, private apiService: ApiService,
+    private error: ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getpersonal();
     this.getQualification();
     this.getExperianceForm();
+    this.getProgram();
   }
   //-----------------------------------------------------------personal Information Form------------------------------------------------
   personalInfoForm: FormGroup | any;
@@ -43,7 +35,12 @@ export class BootcampRegistrationComponent {
     })
   }
   personalInfo() {
-
+    if (this.personalInfoForm.invalid) {
+      return
+    }
+    else{
+      console.log(this.personalInfoForm.value)
+    }
   }
 
 
@@ -103,7 +100,7 @@ export class BootcampRegistrationComponent {
 
   getExperianceForm() {
     this.experianceForm = this.fb.group({
-      experianceYr: ['',Validators.required]
+      experianceYr: ['', Validators.required]
     })
     this.experianceYearList();
   }
@@ -124,7 +121,15 @@ export class BootcampRegistrationComponent {
   }
 
   // 
-  whyProgram=new FormControl('',[Validators.required]);
+  whyProgram!: FormGroup;
+  get program() { return this.whyProgram.controls }
+  getProgram() {
+    this.whyProgram = this.fb.group({
+      Programs: ['', [Validators.required]]
+    })
+  }
+  submitForm() {
 
+  }
 
 }

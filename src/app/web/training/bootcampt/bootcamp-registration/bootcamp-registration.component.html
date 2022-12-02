@@ -55,9 +55,9 @@
           <div class="col-sm-6">
             <div class="d-flex align-items-center">
                 <mat-label class="me-4">Gender :</mat-label>
-              <mat-radio-group>
-                <mat-radio-button value="1" class="me-3" formControlName="gender">Male</mat-radio-button>
-                <mat-radio-button value="2" formControlName="gender">Female</mat-radio-button>
+              <mat-radio-group  formControlName="gender">
+                <mat-radio-button value="1" class="me-3">Male</mat-radio-button>
+                <mat-radio-button value="2">Female</mat-radio-button>
               </mat-radio-group>
             </div>
           </div>
@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button mat-button matStepperNext class="btn-main" (click)="personalInfo()">Next</button>
+          <button mat-button class="btn-main" matStepperNext (click)="personalInfo()">Next</button>
         </div>
       </form>
     </mat-step>
@@ -188,22 +188,24 @@
       </form>
     </mat-step>
    <mat-step [stepControl]="whyProgram" label="Why Join?">
-      <mat-form-field appearance="legacy" class="w-100">
-        <mat-label>Why do you want to join this program?</mat-label>
-        <textarea matInput placeholder="Why do you want to join this program?" rows="10" [formControl]="whyProgram"></textarea>
-        <mat-error class="mt-2">
-          <span class="text-danger">
-            Reason is Required.</span>
-        </mat-error>
-      </mat-form-field>
-      <div>
-        <!-- <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button> -->
-    <div class="d-flex align-items-center justify-content-between">
-          <button type="button" mat-button class="btn-main-outline">Cancel</button>
-          <button type="submit" mat-button class="btn-main">Submit Data</button>
+      <form [formGroup]="whyProgram" (ngSubmit)="submitForm()">
+        <mat-form-field appearance="legacy" class="w-100">
+          <mat-label>Why do you want to join this program?</mat-label>
+          <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="Programs"></textarea>
+          <mat-error *ngIf="program['Programs'].errors" class="mt-2">
+            <span class="text-danger" *ngIf="program['Programs'].errors['required']">
+              Reason for Join Program is Required.</span>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <!-- <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button> -->
+      <div class="d-flex align-items-center justify-content-between">
+            <button type="button" mat-button class="btn-main-outline">Cancel</button>
+            <button type="submit" mat-button class="btn-main">Submit Data</button>
+          </div>
         </div>
-      </div>
+      </form>
     </mat-step>
   </mat-stepper>
 
