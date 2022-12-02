@@ -128,7 +128,7 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
-                            <input matInput placeholder="Enter Terms" formControlName="price_Terms"
+                            <input matInput placeholder="Enter Price Terms" formControlName="price_Terms"
                                 (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required

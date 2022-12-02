@@ -63,9 +63,9 @@
                     </div> -->
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray">
+                        <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray" (click)="blogDetails(blogData.id,blogData.title)">
                             <div class="flex-shrink-0">
-                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id,blogData.title)">
+                                <img src="{{blogData.imagePath}}" alt="..." >
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <p>{{blogData.title}}</p>
