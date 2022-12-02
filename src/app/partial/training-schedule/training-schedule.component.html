@@ -19,13 +19,10 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Title</mat-label>
-                            <input matInput placeholder="Enter Course Title" formControlName="course_Title" 
-                            (keypress)="vadations.noFirstSpaceAllow($event)">
+                            <input matInput placeholder="Enter Course Title" formControlName="course_Title"
+                                (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('required')">
                                 Course Title is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['course_Title'].hasError('maxlength')">
-                                Please Enter Maximum 50 Character
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -33,12 +30,9 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Enter Course Caption" formControlName="course_Caption"
-                                 (keypress)="vadations.noFirstSpaceAllow($event)">
+                                (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
                                 Course Caption is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('maxlength')">
-                                Please Enter Maximum 500 Character
                             </mat-error>
                         </mat-form-field>
 
@@ -46,13 +40,10 @@
                     <div class="mb-1">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Course Duration</mat-label>
-                            <input matInput placeholder="Enter Course Duration" formControlName="duration"                                
+                            <input matInput placeholder="Enter Course Duration" formControlName="duration"
                                 (keypress)="vadations.noFirstSpaceAllow($event);vadations.alphaNumericWithSpacesWithSomeSpecChars($event)">
                             <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('required')">
                                 Course Duration is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['duration'].hasError('maxlength')">
-                                Please Enter Maximum 100 Character
                             </mat-error>
                         </mat-form-field>
 
@@ -66,9 +57,6 @@
                             <mat-error *ngIf="formControls['course_Description'].hasError('required')">
                                 Course Description is Required
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['course_Description'].hasError('maxlength')">
-                                Please Enter Maximum 500 Character
-                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-1">
@@ -78,6 +66,9 @@
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
                                     Course Image</button>
+                                <ng-container *ngIf="imgFlag && !courseManageForm.value.imagePath">
+                                    <p class="text-danger" style="font-size: 13px;">Please Upload Image!</p>
+                                </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button type="button" mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2"
@@ -95,18 +86,16 @@
                             </div>
                         </div>
                         <small> (Note: Allowed only png, jpg, jpeg, hevc, jfif image)</small>
+
                     </div>
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4" 
+                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4"
                                 formControlName="syllabus_Summary"
                                 (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
                                 Syllabus Summary is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['syllabus_Summary'].hasError('maxlength')">
-                                Please Enter Maximum 500 Character
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -117,13 +106,11 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price</mat-label>
-                            <input matInput placeholder="Enter Price" formControlName="price" maxlength="10"
+                            <input matInput placeholder="Enter Price" formControlName="price"
                                 (keypress)="vadations.onlydigitsWithDec($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price'].hasError('required')">
                                 Price is Required
                             </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['price'].hasError('maxlength')">
-                                Maximum 10 Number</mat-error>
                         </mat-form-field>
 
                     </div>
@@ -131,7 +118,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Discount Price</mat-label>
                             <input matInput placeholder="Enter Discount Price" formControlName="actual_price"
-                                maxlength="10" (keypress)="vadations.onlydigitsWithDec($event)">
+                                (keypress)="vadations.onlydigitsWithDec($event)">
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
                             </mat-error>
@@ -141,13 +128,10 @@
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Price Terms</mat-label>
-                            <input matInput placeholder="Enter Terms" formControlName="price_Terms" maxlength="50"
+                            <input matInput placeholder="Enter Terms" formControlName="price_Terms"
                                 (keypress)="vadations.noFirstSpaceAllow($event)">
                             <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required
-                            </mat-error>
-                            <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('maxlength')">
-                                Please Enter Maximum 50 Character
                             </mat-error>
                         </mat-form-field>
 

@@ -40,6 +40,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   searchFilter = new FormControl();
   globalObj: any;
+  imgFlag: boolean =false;
 
   constructor(
     public dialog: MatDialog,
@@ -62,15 +63,15 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.courseManageForm = this.fb.group({
       id: 0,
       pageName: ['', Validators.required],
-      course_Title: ['', [Validators.required,Validators.maxLength(50)]],
-      course_Caption: ['', [Validators.required,Validators.maxLength(500)]],
-      duration: ['', [Validators.required,Validators.maxLength(100)]],
-      course_Description: ['', [Validators.required,Validators.maxLength(500)]],
-      syllabus_Summary: ['', [Validators.required,Validators.maxLength(500)]],
-      price: ['', [Validators.required, Validators.maxLength(10)]],
-      price_Terms: ['', [Validators.required,Validators.maxLength(50)]],
+      course_Title: ['', [Validators.required]],
+      course_Caption: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      course_Description: ['', [Validators.required]],
+      syllabus_Summary: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      price_Terms: ['', [Validators.required]],
       imagePath: ['', Validators.required],
-      actual_price: ['', [Validators.required, Validators.maxLength(10)]]
+      actual_price: ['', [Validators.required]]
     })
   }
 
@@ -257,13 +258,14 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.offer = false;
     this.courseManageFormData();
     this.selRow = 0;
+    this.imgFlag = false;
   }
 
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
       if (!this.imgSrc) {
-        this.comMethods.matSnackBar('Please Upload Course Image', 1)
+        this.imgFlag = true;
         return;
       }
       return;
