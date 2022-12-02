@@ -1,1 +1,61 @@
-<p>bootcamp-enquiries works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card form-card">
+            <div class="card-header">Enquiries</div>
+            <div class="card-body">
+                <table mat-table [dataSource]="dataSource" class="dashboard-table">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                  
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef> Weight </th>
+                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="symbol">
+                      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <button mat-icon-button  matTooltip="View">
+                                <span class="material-symbols-outlined">
+                                    visibility
+                                </span>
+                            </button>
+                            <button mat-icon-button class="text-danger"  matTooltip="Delete">
+                                <span class="material-symbols-outlined" >
+                                    delete
+                                </span>
+                            </button>    
+                        </td>
+                      </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  
+                  
+                  
+                  
+            </div>
+        </div>
+    </div>
+</div>
