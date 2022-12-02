@@ -11,5 +11,18 @@ export class BootcampEnquiriesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
+  dataSource = ELEMENT_DATA;
 }
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  action: any;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H',action:''}
+]
