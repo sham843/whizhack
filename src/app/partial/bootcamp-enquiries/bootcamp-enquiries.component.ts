@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewBootcampEnquiriesComponent } from './view-bootcamp-enquiries/view-bootcamp-enquiries.component';
 
 @Component({
   selector: 'app-bootcamp-enquiries',
@@ -7,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BootcampEnquiriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog){}
 
   ngOnInit(): void {
   }
+
+  opendialog(){
+    this.dialog.open(ViewBootcampEnquiriesComponent, {
+      width: '1024px'
+    });
+  }
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
   dataSource = ELEMENT_DATA;
 }
