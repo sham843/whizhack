@@ -44,9 +44,9 @@
                         <p class="description">
                             {{blogPostArray[0]?.description}}
                         </p>
-                        <div class="text-start">
+                        <div class="text-end">
                             <button type="button" class="btn btn-outline-light rounded-pill"
-                                (click)="blogDetails(blogPostArray[0].id)">Read More</button>
+                                (click)="blogDetails(blogPostArray[0].id,blogPostArray[0]?.title)">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
                         <a class="d-flex blog pointer-link" *ngFor="let blogData of blogPostArray">
                             <div class="flex-shrink-0">
-                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id)">
+                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id,blogData.title)">
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <p>{{blogData.title}}</p>
@@ -83,7 +83,7 @@
         <h2 class="mb-4">White Papers</h2>
         <div class="row gx-5 products">
             <div class="col-sm-4 mb-4" *ngFor="let papers of whitePaperArray">
-                <a class="card h-100" (click)="blogDetails(papers.id)">
+                <a class="card h-100" (click)="blogDetails(papers.id,papers.title)">
                     <img src="{{papers?.imagePath}}" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
                     <div class="card h-100" data-aos="fade-up" data-aos-delay="500" data-aos-easing="ease-in-sine">
-                        <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id)"
+                        <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id,caseData.title)"
                             alt="...">
                         <div class="card-body">
                             <h5>{{caseData.title}}</h5>

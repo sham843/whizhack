@@ -34,10 +34,12 @@ export class ProductsComponent implements OnInit {
       },
     })
   }
-  resourceDetails(flag:any) {
-    this.router.navigate(['../knowledge-hub',flag]);
+  resourceDetails() {
+    this.router.navigate(['../knowledge-hub']);
   }
-  blogDetails(blogId: number) {
-    this.router.navigate(['../blog-details', blogId]);
+  blogDetails(blogId: any,title:any) {
+    let joinString=title.split(' ').join('-')
+  //  let joinString =str.substring(0, str.length-1)
+    this.router.navigateByUrl('/blog-details/'+blogId.toString()+'-'+joinString);
   }
 }

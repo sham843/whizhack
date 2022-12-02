@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -22,9 +22,13 @@ export class JobDetailsComponent implements OnInit {
     public commonService: CommonMethodService,
     private error: ErrorHandlerService,
     private apiService: ApiService,
+    private route: ActivatedRoute,
     private router:Router
   ) {
-    this.JobPostId = this.router.getCurrentNavigation()?.extras.state;
+    this.route.paramMap.subscribe((ele: any) => {
+      this.JobPostId=ele.params.id.split('-')[0];
+    })
+    // this.JobPostId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
@@ -32,7 +36,12 @@ export class JobDetailsComponent implements OnInit {
     this.getAllPostJob();
   }
 
-  getByIdPostJobs() {
+  getByIdPostJobs(title?:any) {
+    if(title){
+      let str=title.split(' ').join('-')
+      let joinString =str.substring(0, str.length-1)
+       this.router.navigateByUrl('blog-details/'+this.JobPostId.toString()+'-'+joinString);
+     }
     this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetById?Id=' + this.JobPostId, false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe({
       next: (res: any) => {
