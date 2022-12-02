@@ -7,6 +7,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationModalComponent } from 'src/app/dialogs/confirmation-modal/confirmation-modal.component';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { FormControl } from '@angular/forms';
+import { filter, debounceTime, distinctUntilChanged } from 'rxjs';
+import { FormValidationService } from 'src/app/core/services/form-validation.service';
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -29,20 +32,49 @@ export class EnquiriesComponent implements OnInit {
   totalCount: number = 0;
   currentPage: number = 0;
   getpage: any;
+  searchFilter = new FormControl();
+
   @ViewChild(MatSort) sortheader!: MatSort;
-  constructor(public dialog: MatDialog, private service: ApiService, private errorSer: ErrorHandlerService, private snack: CommonMethodService) { }
+  constructor(public dialog: MatDialog, private service: ApiService,
+    public vadations: FormValidationService,
+     private errorSer: ErrorHandlerService, private snack: CommonMethodService) { }
   ngOnInit(): void {
     this.getTableData();
   }
+
+  ngAfterViewInit() {
+    let formValue = this.searchFilter.valueChanges;
+    formValue.pipe(
+      filter(() => this.searchFilter.valid),
+      debounceTime(1000),
+      distinctUntilChanged())
+      .subscribe(() => {
+        this.currentPage =0;
+        this.getTableData();
+      })
+  }
+
+  clearSearchFilter() {
+    this.searchFilter.setValue('');
+  }
+
+
+  // whizhack_cms/register/GetAllByPagination?pageno=1&pagesize=10&searchText=l
+
+
+
   //#region-----------------------------------------------Get Table Data Method Starts------------------------------------------- 
   getTableData() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10', false, false, false, 'whizhackService');
+    let search = this.searchFilter.value ? this.searchFilter.value.trim() : ''
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?pageno=' + (this.currentPage + 1) + '&pagesize=10&searchText='+search, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
           this.dataSource = new MatTableDataSource(res.responseData.responseData);          
           this.dataSource.sort = this.sortheader;
           this.totalCount = res.responseData.responseData1.pageCount;
+        }else{
+          this.dataSource = []
         }
       }), error: (error: any) => {
         this.errorSer.handelError(error.status);

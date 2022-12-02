@@ -15,7 +15,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Full Name</mat-label>
-              <input matInput placeholder="Full Name" formControlName="fullName"
+              <input matInput placeholder="Enter Full Name" formControlName="fullName"
                 (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['fullName'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['fullName'].errors['required']">
@@ -28,7 +28,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email ID</mat-label>
-              <input matInput placeholder="Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
+              <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
               <mat-error *ngIf="personal['email'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['email'].errors['required']">
                   EmailId is Required.</span>
@@ -81,7 +81,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>City</mat-label>
-              <input matInput placeholder="City" formControlName="city" (keypress)="validator.noFirstSpaceAllow($event)">
+              <input matInput placeholder="Enter City" formControlName="city" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['city'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['city']?.errors['required']">
                   City Name is Required.</span>
@@ -93,7 +93,7 @@
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Phone Number</mat-label>
-              <input matInput placeholder="Phone Number" formControlName="mobileNo" (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
+              <input matInput placeholder="Enter Phone Number" formControlName="mobileNo" (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
               <mat-error *ngIf="personal['mobileNo'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['mobileNo']?.errors['required']">
                   Phone Number is Required.</span>
@@ -105,6 +105,9 @@
         </div>
         <div class="text-center">
           <button mat-button class="btn-main"  (click)="personalInfo()">Next</button>
+         <!--  <div class="d-flex align-items-center justify-content-between">
+            <button mat-button class="btn-main" matStepperNext >Cancel</button>
+            <button mat-button class="btn-main" matStepperNext (click)="personalInfo()">Next</button> -->
         </div>
       </form>
     </mat-step>

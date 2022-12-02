@@ -1,7 +1,28 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card form-card">
-            <div class="card-header">Enquiries</div>
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+
+                        <span>Enquiries</span>
+                    </div>
+                    <div class="text-end">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput placeholder="Search by page name" [formControl]="searchFilter"
+                            (keypress)="vadations.noFirstSpaceAllow($event)"
+                            maxlength="50">
+                            
+                            <button mat-icon-button matSuffix *ngIf="searchFilter.value"  matTooltip="close" aria-label="tooltip"
+                            (click)="clearSearchFilter()">
+                                <span class="material-symbols-outlined">
+                                    close
+                                </span>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
                     <ng-container matColumnDef="srNo">
