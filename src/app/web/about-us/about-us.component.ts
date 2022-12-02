@@ -26,22 +26,28 @@ export class AboutUsComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.mediaCoverageData = res.responseData?.responseData;
+
          let tempArray:any  =[];
           let count = 0;
-          this.mediaCoverageData.forEach((ele:any)=>{
-            count ++ ;
-            if(count == 4){
-              let obj ={
-                name : ele.article_Title,
-                isArray : tempArray
+          if(3 >= this.mediaCoverageData.length){
+            this.mediaCoverageData.forEach((res:any)=>{ tempArray.push(res)})
+            this.mainArray.push({'name':this.mediaCoverageData[0].article_Title,isArray:tempArray});
+          }else {
+            this.mediaCoverageData.forEach((ele:any)=>{
+              count ++ ;
+              if(count == 4){
+                let obj ={
+                  name : ele.article_Title,
+                  isArray : tempArray
+                }
+                this.mainArray.push(obj)
+                tempArray=[];
+                count = 0;
+              }else{
+                tempArray.push(ele)
               }
-              this.mainArray.push(obj)
-              tempArray=[];
-              count = 0;
-            }else{
-              tempArray.push(ele)
-            }
-          })
+            })
+          }
         } else {
           this.mediaCoverageData = [];
         }

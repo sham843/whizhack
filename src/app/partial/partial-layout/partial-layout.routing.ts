@@ -6,6 +6,7 @@ export const PartialLayoutRoutes: Routes = [
   { path: 'gallery-master', loadChildren: () => import('../../partial/masters/gallery-master/gallery-master.module').then(m => m.GalleryMasterModule), data: { title: 'Gallery Master' } },
   { path: 'media-coverage', loadChildren: () => import('../../partial/masters/media-coverage/media-coverage.module').then(m => m.MediaCoverageModule), data: { title: 'Media Coverage' } },
   { path: 'enquiries', loadChildren: () => import('../../partial/enquiries/enquiries.module').then(m => m.EnquiriesModule), data: { title: 'Enquiries' } },
+  { path: 'bootcamp-enquiries', loadChildren: () => import('../../partial/bootcamp-enquiries/bootcamp-enquiries.module').then(m => m.BootcampEnquiriesModule), data: { title: 'Enquiries' } },
   { path: 'training-schedule', loadChildren: () => import('../../partial/training-schedule/training-schedule.module').then(m => m.TrainingScheduleModule), data: { title: 'Training Schedule' } },
   { path: 'post-job', loadChildren: () => import('../../partial/post-job/post-job.module').then(m => m.PostJobModule), data: { title: 'Post Job' } },
 ];
