@@ -1,16 +1,21 @@
 <div class="page-header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-10">
                 <h1>products</h1>
-                <h3>
+                <!-- <h3>
                     Next-generation security products for risk mitigation and training.
-                </h3>
+                </h3> -->
+                <p class="about-text">
+                    Whizhack product portfolio is creating a secure digital cyberspace, ranging from surveillance tools
+                    that predict impending advanced attacks and also remediation engines post attacks. All our solutions
+                    are built for massive scale and efficiency.
+                </p>
             </div>
         </div>
     </div>
 </div>
-<section>
+<!-- <section>
     <div class="container">
         <div class="row py-4">
             <div class="col-sm-12">
@@ -22,13 +27,13 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <section>
     <div class="container">
         <h2 class="mb-4">PRODUCTS</h2>
         <div class="row gx-5 products">
             <div class="col-sm-4">
-                <a class="card h-100" routerLink="../products/zero-hack">
+                <a class="card h-100" routerLink="../products/zero-hack" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product3.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -46,7 +51,7 @@
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100" routerLink="../products/trace">
+                <a class="card h-100" routerLink="../products/trace" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product2.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -63,7 +68,7 @@
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100" routerLink="../products/cyber-range">
+                <a class="card h-100" routerLink="../products/cyber-range" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -126,7 +131,7 @@
         <h2 class="mb-4">Featured Resources</h2>
         <div class="row gx-5 products">
             <div class="col-sm-4">
-                <a class="card h-100">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -138,13 +143,14 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('papers')">View More</button>
+                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails()">View
+                                More</button>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product2.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -156,13 +162,14 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('caseStudy')">View More</button>
+                            <button type="button" class="btn btn-main-outline"
+                                (click)="resourceDetails()">View More</button>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine">
                     <img src="../../../assets/image/home/Product3.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -174,7 +181,8 @@
                             traffic to detect threats in the hybrid cloud.
                         </p>
                         <div>
-                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails('blogs')">View More</button>
+                            <button type="button" class="btn btn-main-outline" (click)="resourceDetails()">View
+                                More</button>
                         </div>
                     </div>
                 </a>
@@ -183,25 +191,25 @@
     </div>
 </section>
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Case Studies</h2>
-        <div class="text-center">
+        <div class="text-center" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
             <h4>Our Successful Casestudies</h4>
-            <p>
+            <!-- <p>
                 Lorem Ipsum is simply dummy text of the printing and <br>typesetting industry. Lorem Ipsum is simply
                 dummy
                 text of the printing and typesetting industry.
-            </p>
+            </p> -->
         </div>
-        <div class="case-studies">
+        <div class="case-studies" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-All" role="tabpanel" aria-labelledby="pills-All-tab"
                     tabindex="0">
                     <div class="row">
                         <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
                             <div class="card pointer-link">
-                                <img src="{{caseData.imagePath}}" class="card-img-top" (click)="blogDetails(caseData.id)"
-                                    alt="...">
+                                <img src="{{caseData.imagePath}}" class="card-img-top"
+                                    (click)="blogDetails(caseData.id,caseData.title)" alt="...">
                                 <div class="card-overlay">
                                     <h5>{{caseData.title}}</h5>
                                     <p>{{caseData.description}}</p>
@@ -215,7 +223,7 @@
     </div>
 </section>
 <section id="blog">
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Blogs</h2>
         <div class="row">
             <div class="col-sm-7">
@@ -229,9 +237,9 @@
                                 {{blogPostArray[0]?.title}}
                             </p>
                             <small>{{blogPostArray[0]?.description}}</small>
-                            <div class="text-start">
+                            <div class="text-end">
                                 <button type="button" class="btn btn-outline-light rounded-pill"
-                                    (click)="blogDetails(blogPostArray[0].id)">Read More</button>
+                                    (click)="blogDetails(blogPostArray[0].id,blogPostArray[0]?.title)">Read More</button>
                             </div>
                         </div>
                     </a>
@@ -247,14 +255,13 @@
                             </button>
                         </div> -->
                     </div>
-                    <div class="card-body scrollbar blog-list">
+                    <div class="card-body scrollbar blog-list" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine" >
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog" *ngFor="let blogData of blogPostArray">
+                        <a class="d-flex blog" *ngFor="let blogData of blogPostArray" (click)="blogDetails(blogData.id,blogData.title)">
                             <div class="flex-shrink-0">
-                                <img src="{{blogData.imagePath}}" alt="..." (click)="blogDetails(blogData.id)"
-                                    class="pointer-link">
+                                <img src="{{blogData.imagePath}}" alt="..."  class="pointer-link">
                             </div>
-                            <div class="flex-grow-1 ms-3">
+                            <div class="flex-grow-1 ms-3 pointer-link">
                                 <p>{{blogData.title}}</p>
                                 <small>{{blogData.createdDate| date}}</small>
                             </div>

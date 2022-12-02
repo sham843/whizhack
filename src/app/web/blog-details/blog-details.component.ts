@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -16,20 +16,27 @@ export class BlogDetailsComponent implements OnInit {
   getBlogArray=new Array();
   getpapersArray=new Array();
   getcaseData=new Array();
-  constructor(private route: ActivatedRoute, private apiService: ApiService,private spinner:NgxSpinnerService) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService,private spinner:NgxSpinnerService,private router:Router) {
+// this.this.router.getCurrentNavigation()?.extras.state;
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((ele: any) => {
-      this.blogId = ele.params.id;
+      this.blogId=ele.params.id.split('-')[0];
     })
-    this.getBlogDetails();
+    this.getBlogDetails(this.blogId);
     setTimeout(() => {
       this.getAllBlogsDetails();
     }, 500);
   }
-  getBlogDetails() {
-    this.blogId!=undefined?this.blogId:'';
-    this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetById?id="+this.blogId, false, false, false, 'whizhackService');
+  getBlogDetails(blogIds:any,title?:any) {
+   if(title){
+    let joinString=title.split(' ').join('-');
+    // let joinString =str.substring(0, str.length-1);
+     this.router.navigateByUrl('blog-details/'+blogIds.toString()+'-'+joinString);
+   }
+
+    this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetById?id="+blogIds, false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe((res: any) => {
      this.blogArray=res.responseData;
      this.blogTypeId=this.blogArray.blogType;
@@ -42,7 +49,7 @@ export class BlogDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.getAllBlog = res.responseData.responseData1;
-          console.log(this.getAllBlog)
+          console.log(this.getAllBlog);
         } else {
           this.getAllBlog = [];
         }

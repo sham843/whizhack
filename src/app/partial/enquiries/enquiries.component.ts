@@ -65,7 +65,7 @@ export class EnquiriesComponent implements OnInit {
     let dialoObj = {
       title: 'Do you want to delete the selected course ?',
       cancelButton: 'Cancel',
-      okButton: 'Ok'
+      okButton: 'Delete'
     }
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '300px',

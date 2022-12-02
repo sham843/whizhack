@@ -16,22 +16,22 @@
             <div class="col-sm-8" id="blog-details">
                 <div class="d-flex align-items-center justify-content-between details">
                     <div>
-                        By - <span>{{blogArray?.userName}}</span>
+                        By - <span>{{blogArray?.author}}</span>
                     </div>
                     <div>
-                        Date : <span>{{blogArray?.createdDate |date:'dd/MM/yyyy'}}</span> 
+                        Date : <span>{{blogArray?.blogRegisterDetailsModel[0].createdDate |date:'dd/MM/yyyy'}}</span> 
                     </div>
                 </div>
                 <img src="{{blogArray?.imagePath}}" class="img-fluid rounded">
                 <p class="about-text">
                     {{blogArray?.description}}
                 </p>
-               <div *ngFor="let data of blogArray?.blogRegisterDetailsModel">
+               <!-- <div *ngFor="let data of blogArray?.blogRegisterDetailsModel">
                 <h5>Sub Title : {{data.title}}</h5>
                 <p class="about-text">
                    Sub Title Description : {{data.description}}
                 </p>
-               </div>
+               </div> -->
             </div>
             <div class="col-sm-4">
                 <div class="card blogs-all">
@@ -40,12 +40,12 @@
                     </div>
                     <div class="card-body scrollbar blog-list">
                         <p class="border-bottom pb-2 mb-4">Recent Posts</p>
-                        <a class="d-flex blog" routerLink="../blog-details" *ngFor="let blogData of getAllBlog">
-                            <div class="flex-shrink-0">
+                        <a class="d-flex blog" *ngFor="let blogData of getAllBlog" (click)="getBlogDetails(blogData.id,blogData.title)">
+                            <div class="flex-shrink-0 pointer-link">
                                 <img src="{{blogData.imagePath}}" alt="...">
                             </div>
-                            <div class="flex-grow-1 ms-3">
-                                <p>{{blogData.description}}</p>
+                            <div class="flex-grow-1 ms-3 pointer-link">
+                                <p>{{blogData.title}}</p>
                                 <small>{{blogData.createdDate| date}}</small>
                             </div>
                         </a>

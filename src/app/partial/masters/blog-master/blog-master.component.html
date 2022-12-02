@@ -21,18 +21,17 @@
                             <input maxlength="100" matInput placeholder="Enter Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Valid Title
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Description</mat-label>
-                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
+                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description" class="textareaheight scrollbar"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                             <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter
                                 Description</mat-error>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('maxlength')">Maximum Description Length Should be 10000</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -47,10 +46,10 @@
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Author</mat-label>
+                            <mat-label>Author Name</mat-label>
                             <input maxlength="50" matInput placeholder="Enter Author Name" formControlName="author"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Author Name
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Valid Author Name
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
                             </mat-error>
@@ -61,27 +60,28 @@
                             <div>
                                 <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
                                     #uploadDocument />
-                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload Image</button>
+                                <button type="button" id="fileupload-button" (click)="uploadDocument.click()"
+                                data-toggle="tooltip" data-placement="right" title="{{imgTooltip}}">Upload Image</button>
                                 <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
                                     <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
                                 </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
-                                    (click)="viewImage()">
+                                    (click)="viewImage()" matTooltip="View Document">
                                     <span class="material-symbols-outlined">
                                         Description
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
-                                    (click)="deleteImage()">
+                                    (click)="deleteImage()" matTooltip="Delete Document">
                                     <span class="material-symbols-outlined">
                                         Delete
                                     </span>
                                 </button>
                             </div>
                         </div>
-                        <small> ( Note: Allowed only png, jpg, jfif image )</small>
+                        <small> ( Note: Allowed only png, jpg, jpeg, jfif image )</small>
                     </div>
                     <!-- checkbox changes -->
                     <!-- <div class="mb-3">
@@ -111,7 +111,7 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Sub-Description</mat-label>
-                                            <textarea maxlength="5000" matInput placeholder="Enter Sub-Description"
+                                            <textarea matInput placeholder="Enter Sub-Description"
                                                 rows="5" formControlName="description"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                             <mat-error class="mt-2"
@@ -183,7 +183,7 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Title </th>
-                        <td mat-cell *matCellDef="let element" class="text-break"> {{element?.title | titlecase}} </td>
+                        <td mat-cell *matCellDef="let element" class="text-break"> {{element?.title}} </td>
                     </ng-container>
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef> Type </th>

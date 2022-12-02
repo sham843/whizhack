@@ -80,7 +80,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   createMediaForm() {
     this.frmGallery = this.fb.group({
       id: [0],
-      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(50)]],
+      gallery_title: ['', [Validators.required, Validators.pattern(this.vs.valDescription)]],
       // gallery_description: ['', [Validators.required, Validators.pattern(this.vs.valDescription), Validators.maxLength(500)]],
       gallery_description: [''],
       uploadImages: [''],
@@ -179,7 +179,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region  Delete IMG Start Here
   deleteImage(ind: number) {
     this.imageArray.splice(ind, 1);
-    !this.imageArray.length ? this.showImagError = 'Gallery Images is required' : this.showImagError = '';
+    !this.imageArray.length ? this.showImagError = 'Gallery Images is Required' : this.showImagError = '';
 
   }
 
@@ -188,7 +188,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
   //#region save Update Data
   onMediaSubmit() {
     if (this.frmGallery.invalid || !this.imageArray.length) {
-      !this.imageArray.length ? this.showImagError = "Gallery Images is required" : this.showImagError = '';
+      !this.imageArray.length ? this.showImagError = "Gallery Images is Required" : this.showImagError = '';
       return;
     }
     this.spinner.show();
@@ -253,7 +253,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
     this.imageArray = [];
     let dialoObj = {
       header: 'Delete',
-      title: 'Do you want to delete the selected course ?',
+      title: 'Are you sure, you want to Delete ?',
       cancelButton: 'Cancel',
       okButton: 'Delete'
     }

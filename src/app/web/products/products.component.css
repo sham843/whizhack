@@ -68,6 +68,8 @@ section {
 
 .blog img {
     width: 100px;
+    height: 70px;
+    object-fit: contain;
     border-radius: 0.375rem;
 }
 

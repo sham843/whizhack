@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -17,12 +18,12 @@ export class CultureCareerComponent implements OnInit {
   imageArray = new Array();
   postJobArray: any;
 
-  imagePageNo:number =1;
-  totalCount !:number;
+  imagePageNo: number = 1;
+  totalCount !: number;
 
   //post Job Code
-  jobPostPageNo: number =1;
-  jobPostTotalCount !:number ;
+  jobPostPageNo: number = 1;
+  jobPostTotalCount !: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatPaginator) jobPaginator!: MatPaginator;
@@ -35,6 +36,7 @@ export class CultureCareerComponent implements OnInit {
     public lightbox: Lightbox,
     private service: ApiService,
     private error: ErrorHandlerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,23 +45,23 @@ export class CultureCareerComponent implements OnInit {
   }
 
 
-    //#region onclick pagination
-    onClickPaginatior(event: any) {
-      this.imagePageNo = event.pageIndex + 1;
-      this.getAllImages();
+  //#region onclick pagination
+  onClickPaginatior(event: any) {
+    this.imagePageNo = event.pageIndex + 1;
+    this.getAllImages();
 
-    }
-    //#endregion
+  }
+  //#endregion
 
 
   getAllImages() {
 
-    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery'+ "?pageno=" + this.imagePageNo + "&pagesize=5" , false, false, false, 'whizhackService');
+    this.api.setHttp('get', 'whizhack_cms/Gallery/GetAllGallery' + "?pageno=" + this.imagePageNo + "&pagesize=5", false, false, false, 'whizhackService');
     this.api.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode === '200') {
-         let dataFromServer = res.responseData.responseData1;
-         this.totalCount = res.responseData.responseData2?.pageCount;
+          let dataFromServer = res.responseData.responseData1;
+          this.totalCount = res.responseData.responseData2?.pageCount;
           this.imageArray = dataFromServer;
         } else {
           this.commonService.checkDataType(res.statusMessage) == false ? this._errorService.handelError(res.statusCode) : this.commonService.matSnackBar(res.statusMessage, 1);
@@ -71,9 +73,9 @@ export class CultureCareerComponent implements OnInit {
     })
   }
 
-  openLightBox(imgArray:any){
+  openLightBox(imgArray: any) {
     this.lightbox.open(0, 'lightbox')
-    this.items = imgArray.map((item:any) => new ImageItem({ src: item, thumb: item }));
+    this.items = imgArray.map((item: any) => new ImageItem({ src: item, thumb: item }));
     this.basicLightboxExample();
   }
 
@@ -107,7 +109,7 @@ export class CultureCareerComponent implements OnInit {
 
   getAllPostJobs() {
 
-    this.service.setHttp('get', 'whizhack_cms/postjobs/getALlPublishDetails?'+'pageno='+this.jobPostPageNo+'&pagesize=6', false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/postjobs/getALlPublishDetails?' + 'pageno=' + this.jobPostPageNo + '&pagesize=6', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: (res: any) => {
         if (res.statusCode == '200') {
@@ -126,8 +128,11 @@ export class CultureCareerComponent implements OnInit {
     })
   }
 
-  navigatePage(jobpostId: any) {
-    this.commonService.routerLinkRedirect('../job-details/' + jobpostId);
+  navigatePage(jobpostId: any, title: any) {
+    jobpostId
+    let joinString = title.split(' ').join('-');
+    // let joinString =str.substring(0, str.length-1);
+     this.router.navigateByUrl('/job-details/'+jobpostId.toString()+'-'+joinString);
   }
 
   //........................................post Job Code End Here..............................................//

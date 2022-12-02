@@ -4,7 +4,7 @@
 html,
 body {
     height: 100%;
-    background-color: #010204;
+    background-color: #0e0e0e;
 }
 
 body
@@ -120,6 +120,9 @@ a.text-main:hover{
 }
 #blog .main-blog-img{
   border-radius: 15px;
+  height: 416px;
+    object-fit: contain;
+    object-position: top;
 }
 #blog .main-blog-body{
   border-radius: 15px;
@@ -330,4 +333,12 @@ a.text-main:hover{
 .textareaheight{
   resize:none !important;
   height: 20vh !important;
+}
+.description{
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 4; /* number of lines to show */
+           line-clamp: 4;
+   -webkit-box-orient: vertical;
 }

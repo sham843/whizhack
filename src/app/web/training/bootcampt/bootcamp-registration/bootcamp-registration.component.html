@@ -1,0 +1,159 @@
+<div class="dialog-header">
+  <h5 class="text-main">Register Now</h5>
+  <button mat-icon-button mat-dialog-close>
+    <span class="material-symbols-outlined">
+      close
+    </span>
+  </button>
+</div>
+<div class="dialog-body form-container">
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="personalInfoForm" class="pt-3 mt-3">
+      <form [formGroup]="personalInfoForm">
+        <ng-template matStepLabel>Personal Information</ng-template>
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Full Name</mat-label>
+              <input matInput placeholder="Full Name" formControlName="fullName">
+             <!--  <mat-error *ngIf="personal.fullName.errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal.fullName.errors?.required">
+                  FullName Name is Required.</span>
+              <span class="text-danger" *ngIf="personal.fullName.errors?.pattern">
+                    Please Enter Valid FullName Name</span> 
+            </mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email ID</mat-label>
+              <input matInput placeholder="Email ID" formControlName="emailId">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Date Of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dof">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>  
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center">
+              <mat-label class="me-4">Gender :</mat-label>
+              <mat-radio-group>
+                <mat-radio-button value="1" class="me-3" formControlName="gender">Male</mat-radio-button>
+                <mat-radio-button value="2" formControlName="gender">Female</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Enter Country</mat-label>
+              <input matInput placeholder="Enter Country" formControlName="country">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Phone Number</mat-label>
+              <input matInput placeholder="Phone Number" formControlName="phoneNo">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperNext class="btn-main" (click)="personalInfo()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- <mat-step [stepControl]="secondFormGroup" label="Educational Qualification">
+      <form [formGroup]="secondFormGroup">
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Select Qualification</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Select Degree</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Enter Institute Name</mat-label>
+              <input matInput placeholder="Enter Institute Name">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Enter Year of Passing</mat-label>
+              <input matInput placeholder="Enter Year of Passing">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Percentage (Highet Qualification)</mat-label>
+              <input matInput placeholder="58.52%">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <button mat-button matStepperPrevious class="btn-main-outline">Back</button>
+          <button mat-button matStepperNext class="btn-main">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Professional Qualification">
+      <form [formGroup]="thirdFormGroup">
+        <div class="mb-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Total Years of Experience</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <button mat-button matStepperPrevious class="btn-main-outline">Back</button>
+          <button mat-button matStepperNext class="btn-main">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" label="Why Join?">
+      <mat-form-field appearance="legacy" class="w-100">
+        <mat-label>Why do you want to join this program?</mat-label>
+        <textarea matInput placeholder="Why do you want to join this program?" rows="10"></textarea>
+      </mat-form-field>
+      <div>
+        <!-- <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button> -->
+        <!-- <div class="d-flex align-items-center justify-content-between">
+          <button type="button" mat-button class="btn-main-outline">Cancel</button>
+          <button type="submit" mat-button class="btn-main">Submit Data</button>
+        </div>
+      </div>
+    </mat-step> -->
+  </mat-stepper>
+
+</div>
