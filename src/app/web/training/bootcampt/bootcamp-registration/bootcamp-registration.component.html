@@ -18,32 +18,43 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Full Name</mat-label>
-              <input matInput placeholder="Full Name" formControlName="fullName">
-             <!--  <mat-error *ngIf="personal.fullName.errors" class="mt-2">
-                <span class="text-danger" *ngIf="personal.fullName.errors?.required">
-                  FullName Name is Required.</span>
-              <span class="text-danger" *ngIf="personal.fullName.errors?.pattern">
-                    Please Enter Valid FullName Name</span> 
-            </mat-error> -->
+              <input matInput placeholder="Full Name" formControlName="fullName"
+                (keypress)="validator.noFirstSpaceAllow($event)">
+              <mat-error *ngIf="personal['fullName'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['fullName'].errors['required']">
+                  FullName is Required.</span>
+                <span class="text-danger" *ngIf="personal['fullName'].errors['pattern']">
+                  Please Enter Valid FullName Name</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email ID</mat-label>
               <input matInput placeholder="Email ID" formControlName="emailId">
+              <mat-error *ngIf="personal['emailId'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['emailId'].errors['required']">
+                  EmailId is Required.</span>
+                <span class="text-danger" *ngIf="personal['emailId'].errors['Email']">
+                  Please Enter Valid EmailId</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Date Of Birth</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dof">
+              <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dof" [readOnly]="true">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="personal['dof']?.errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['dof']?.errors['required']">
+                  Date Of Birth is Required.</span>
+              </mat-error>
             </mat-form-field>
-          </div>  
+          </div>
           <div class="col-sm-6">
             <div class="d-flex align-items-center">
-              <mat-label class="me-4">Gender :</mat-label>
+                <mat-label class="me-4">Gender :</mat-label>
               <mat-radio-group>
                 <mat-radio-button value="1" class="me-3" formControlName="gender">Male</mat-radio-button>
                 <mat-radio-button value="2" formControlName="gender">Female</mat-radio-button>
@@ -54,18 +65,30 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Enter Country</mat-label>
               <input matInput placeholder="Enter Country" formControlName="country">
+              <mat-error *ngIf="personal['country'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['country']?.errors['required']">
+                  Country Name is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>City</mat-label>
               <input matInput placeholder="City" formControlName="city">
+              <mat-error *ngIf="personal['city'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['city']?.errors['required']">
+                  City Name is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Phone Number</mat-label>
               <input matInput placeholder="Phone Number" formControlName="phoneNo">
+              <mat-error *ngIf="personal['phoneNo'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="personal['phoneNo']?.errors['required']">
+                  Phone Number is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -74,86 +97,114 @@
         </div>
       </form>
     </mat-step>
-    <!-- <mat-step [stepControl]="secondFormGroup" label="Educational Qualification">
-      <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="qualificationForm" label="Educational Qualification">
+      <form [formGroup]="qualificationForm">
         <div class="row g-3 mb-4">
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Select Qualification</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
+              <mat-select formControlName="qualification">
+                <mat-option *ngFor="let qualification of qualificationNameArr" [value]="qualification.qualificationId">
+                  {{qualification.qualificationName}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="qualification['qualification'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['qualification'].errors['required']">
+                  Qualification is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Select Degree</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
+              <mat-select formControlName="degree">
+                <mat-option *ngFor="let degree of degreeNameArr" [value]="degree.degreeId">
+                  {{degree.degreeName}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="qualification['degree'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['degree'].errors['required']">
+                  Degree Name is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Enter Institute Name</mat-label>
-              <input matInput placeholder="Enter Institute Name">
+              <input matInput placeholder="Enter Institute Name" formControlName="institude">
+              <mat-error *ngIf="qualification['institude'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['institude'].errors['required']">
+                  Institute Name is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Enter Year of Passing</mat-label>
-              <input matInput placeholder="Enter Year of Passing">
+              <input matInput placeholder="Enter Year of Passing" formControlName="passYear">
+              <mat-error *ngIf="qualification['passYear'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['passYear'].errors['required']">
+                  Year of Passing is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Percentage (Highet Qualification)</mat-label>
-              <input matInput placeholder="58.52%">
+              <input matInput placeholder="58.52%" formControlName="percentage">
+              <mat-error *ngIf="qualification['percentage'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['percentage'].errors['required']">
+                  Percentage is Required.</span>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
         <div class="d-flex align-items-center justify-content-between">
           <button mat-button matStepperPrevious class="btn-main-outline">Back</button>
-          <button mat-button matStepperNext class="btn-main">Next</button>
+          <button mat-button matStepperNext class="btn-main" (click)="qualificationInfo()">Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup" label="Professional Qualification">
-      <form [formGroup]="thirdFormGroup">
+    <mat-step [stepControl]="experianceForm" label="Professional Qualification">
+      <form [formGroup]="experianceForm">
         <div class="mb-4">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Total Years of Experience</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+            <mat-select formControlName="experianceYr">
+              <mat-option *ngFor="let year of experianceArray" [value]="year.percentageId">
+                {{year.percentageName}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="experiance['experianceYr'].errors" class="mt-2">
+              <span class="text-danger" *ngIf="experiance['experianceYr'].errors['required']">
+                Years of Experiance is Required.</span>
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="d-flex align-items-center justify-content-between">
           <button mat-button matStepperPrevious class="btn-main-outline">Back</button>
-          <button mat-button matStepperNext class="btn-main">Next</button>
+          <button mat-button matStepperNext class="btn-main" (click)="experianceYearInfo()">Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="fourthFormGroup" label="Why Join?">
+   <mat-step [stepControl]="whyProgram" label="Why Join?">
       <mat-form-field appearance="legacy" class="w-100">
         <mat-label>Why do you want to join this program?</mat-label>
-        <textarea matInput placeholder="Why do you want to join this program?" rows="10"></textarea>
+        <textarea matInput placeholder="Why do you want to join this program?" rows="10" [formControl]="whyProgram"></textarea>
+        <mat-error class="mt-2">
+          <span class="text-danger">
+            Reason is Required.</span>
+        </mat-error>
       </mat-form-field>
       <div>
         <!-- <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button> -->
-        <!-- <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between">
           <button type="button" mat-button class="btn-main-outline">Cancel</button>
           <button type="submit" mat-button class="btn-main">Submit Data</button>
         </div>
       </div>
-    </mat-step> -->
+    </mat-step>
   </mat-stepper>
 
 </div>
