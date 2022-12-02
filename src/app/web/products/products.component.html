@@ -194,7 +194,7 @@
     <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Case Studies</h2>
         <div class="text-center" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
-            <h4>Our Successful Casestudies</h4>
+            <h4 class="mb-4">Our Successful Casestudies</h4>
             <!-- <p>
                 Lorem Ipsum is simply dummy text of the printing and <br>typesetting industry. Lorem Ipsum is simply
                 dummy
@@ -202,19 +202,14 @@
             </p> -->
         </div>
         <div class="case-studies" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-All" role="tabpanel" aria-labelledby="pills-All-tab"
-                    tabindex="0">
-                    <div class="row">
-                        <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
-                            <div class="card pointer-link">
-                                <img src="{{caseData.imagePath}}" class="card-img-top"
-                                    (click)="blogDetails(caseData.id,caseData.title)" alt="...">
-                                <div class="card-overlay">
-                                    <h5>{{caseData.title}}</h5>
-                                    <p>{{caseData.description}}</p>
-                                </div>
-                            </div>
+            <div class="row">
+                <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
+                    <div class="card pointer-link">
+                        <img src="{{caseData.imagePath}}" class="card-img-top"
+                            (click)="blogDetails(caseData.id,caseData.title)" alt="...">
+                        <div class="card-overlay">
+                            <h5>{{caseData.title}}</h5>
+                            <!-- <p>{{caseData.description}}</p> -->
                         </div>
                     </div>
                 </div>

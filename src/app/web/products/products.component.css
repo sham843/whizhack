@@ -14,18 +14,18 @@ section {
     color: var(--main-color);
 }
 
-#pills-tabContent .card {
+.case-studies .card {
     position: relative;
     border-radius: 15px;
     border: none;
 }
 
-#pills-tabContent .card:hover .card-overlay {
+.case-studies .card:hover .card-overlay {
     opacity: 1;
     transition: all .3s ease-in-out 0s;
 }
 
-#pills-tabContent .card-overlay {
+.case-studies .card-overlay {
     background: linear-gradient(to bottom, #ffffff00 2%, #ffffff9e 43%, #ffffffc7 61%, #ffffff 100%);
     color: #000;
     text-align: center;

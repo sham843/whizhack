@@ -9,10 +9,12 @@
                     </div>
                     <div class="text-end">
                         <mat-form-field appearance="outline" class="w-100">
-                            <input matInput placeholder="Search by page name"
+                            <input matInput placeholder="Search by page name" [formControl]="searchFilter"
+                            (keypress)="vadations.noFirstSpaceAllow($event)"
                             maxlength="50">
                             
-                            <button mat-icon-button matSuffix  matTooltip="close" aria-label="tooltip">
+                            <button mat-icon-button matSuffix *ngIf="searchFilter.value"  matTooltip="close" aria-label="tooltip"
+                            (click)="clearSearchFilter()">
                                 <span class="material-symbols-outlined">
                                     close
                                 </span>

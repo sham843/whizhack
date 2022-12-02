@@ -277,7 +277,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         ... this.courseManageForm.value
       }
       submitObj.exclusive_offer = this.offer ? 1 : 0;
-      submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : submitObj.actual_price;
+      submitObj.actual_price = submitObj.exclusive_offer == 0 ? '' : submitObj.actual_price;
       let url = this.editFlag ? 'Update' : 'Insert';
       this.api.setHttp(this.editFlag ? 'put' : 'post', 'whizhack_cms/course/' + url, false, submitObj, false, 'whizhackService');
       this.api.getHttp().subscribe({
