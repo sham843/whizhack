@@ -72,7 +72,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <input matInput placeholder="Enter Gallery Title" [formControl]="searchFilter"
-                (keyup)="vs.removeSpaceAtBegining($event)" (keypress)="vs.alphabetsWithSpaces($event)" maxlength="50">
+                (keyup)="vs.removeSpaceAtBegining($event)" maxlength="50">
 
               <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close" aria-label="tooltip"
                 (click)="clearSearchFilter()">
