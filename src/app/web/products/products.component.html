@@ -223,21 +223,21 @@
         <div class="row">
             <div class="col-sm-7">
                 <div class="position-relative">
-                    <a>
+                    <div>
                         <img src="{{blogPostArray[0]?.imagePath}}" alt="blog" class="main-blog-img w-100">
                         <div class="card card-body main-blog-body mx-3">
                             <p class="mb-2">{{blogPostArray[0]?.createdDate| date}}</p>
                             <hr>
-                            <p>
+                            <h4>
                                 {{blogPostArray[0]?.title}}
-                            </p>
+                            </h4>
                             <small>{{blogPostArray[0]?.description}}</small>
                             <div class="text-end">
                                 <button type="button" class="btn btn-outline-light rounded-pill"
                                     (click)="blogDetails(blogPostArray[0].id,blogPostArray[0]?.title)">Read More</button>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-5">
