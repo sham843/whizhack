@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
 import { Lightbox } from '@ngx-gallery/lightbox';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -35,6 +36,7 @@ export class CultureCareerComponent implements OnInit {
     public lightbox: Lightbox,
     private service: ApiService,
     private error: ErrorHandlerService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -127,7 +129,8 @@ export class CultureCareerComponent implements OnInit {
   }
 
   navigatePage(jobpostId: any) {
-    this.commonService.routerLinkRedirect('../job-details/' + jobpostId);
+    // this.commonService.routerLinkRedirect('../job-details/' + jobpostId);
+    this.router.navigateByUrl('/job-details', { state:jobpostId});
   }
 
   //........................................post Job Code End Here..............................................//

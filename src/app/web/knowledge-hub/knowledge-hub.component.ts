@@ -49,8 +49,9 @@ export class KnowledgeHubComponent implements OnInit {
       },
     })
   }
-  blogDetails(blogId: number) {
-    this.router.navigate(['../blog-details', blogId]);
+  blogDetails(blogId: any) {
+    // this.router.navigate(['../blog-details']);
+    this.router.navigateByUrl('/blog-details', { state:blogId});
   }
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
