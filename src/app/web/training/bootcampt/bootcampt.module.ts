@@ -6,6 +6,7 @@ import { BootcamptComponent } from './bootcampt.component';
 import { BootcampRegistrationComponent } from './bootcamp-registration/bootcamp-registration.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BootcamptRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class BootcamptModule { }
