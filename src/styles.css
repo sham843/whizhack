@@ -342,3 +342,8 @@ a.text-main:hover{
            line-clamp: 4;
    -webkit-box-orient: vertical;
 }
+
+.w-0{
+  width:0% !important;
+}
+
