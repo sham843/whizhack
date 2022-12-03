@@ -48,7 +48,7 @@
                     format with both on campus learning and online self-paced activities.
                 </p>
                 <div class="row courses mb-5">
-                    <div class="col-sm-4 mb-3" *ngFor="let bootData of bootCamptArray">
+                    <!-- <div class="col-sm-4 mb-3" *ngFor="let bootData of bootCamptArray">
                         <div class="card">
                             <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top">
                             <div class="card-body px-0">
@@ -77,9 +77,72 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <!-- <button class="btn btn-main-outline rounded-pill px-4"
-                                            (click)="openDialog(bootData)">Register
-                                            Now</button> -->
+                                        <button class="btn btn-main-outline rounded-pill px-4"
+                                            (click)="openDialog('Bootcamp ')">Register
+                                            Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="col-sm-4 mb-3">
+                        <div class="card">
+                            <!-- <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top"> -->
+                            <img src="http://whizhack.mahamining.com//UploadDocuments/Upload/file_20221202122639713.png"
+                                alt="Product" class="card-img-top">
+
+                            <div class="card-body px-0">
+                                <!-- <h5 class="course-name mb-3">{{bootData.course_Title}}</h5> -->
+                                <h5 class="course-name mb-3">Dual Certification Program in Cyber Defense</h5>
+
+                                <h6 class="duration">Duration:</h6>
+                                <!-- <p class="duration">{{bootData.duration}}</p> -->
+                                <p class="duration">6 Months</p>
+
+                                <!-- <h6 class="price mb-3">{{bootData.course_Description}}</h6> -->
+                                <h6 class="price mb-3">
+                                    <ul class="px-0 list-unstyled">
+                                        <li> 6-month, 480-hour course with 1 year extended access to Israeli labs with
+                                            cyber attack and defense simulated projects. </li>
+                                        <li> Open to all graduates with strong passion for a career in cyber security.
+                                        </li>
+                                        <li> 100% placement support in most challenging projects with top employers.
+                                        </li>
+                                        <!-- <li> Blended training by top IIT faculty and Israeli experts. </li> -->
+                                    </ul>
+                                </h6>
+
+                                <!-- <h6 class="price mb-3"> {{bootData.course_Caption}} </h6> -->
+                                <h6 class="price mb-3"> Blended training by top IIT faculty and Israeli experts </h6>
+
+                                <h6 class="duration-label">Price:</h6>
+                                <div class="price mb-3">
+                                    INR
+                                    <!-- <strong>{{bootData.price}}</strong> -->
+                                    <strong>1,65,000</strong>
+
+                                    + GST<br>
+                                </div>
+                                <h6 class="duration-label">
+                                    <!-- {{bootData.actual_price}}/-({{bootData.price_Terms}}) -->
+                                    EMI Available Starting at Rs. 8,945/- (Subject to Finance Approval)
+                                </h6>
+                            </div>
+                            <div class="card-footer p-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a mat-stroked-button
+                                            href="../../../../assets/main brochure_latest_thrivedx_updated_course_fee_221203_213213.pdf"
+                                            class="btn btn-main-outline rounded-pill" download>
+                                            <!-- <button mat-stroked-button class=""> -->
+                                            <i class="fa-solid fa-file-pdf text-danger me-1"></i>
+                                            Download Brochure
+                                            <!-- </button> -->
+                                        </a>
+                                    </div>
+                                    <div>
+
                                         <button class="btn btn-main-outline rounded-pill px-4"
                                             (click)="openDialog('Bootcamp ')">Register
                                             Now</button>
@@ -88,6 +151,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!--  <div class="col-sm-4">
                         <div class="card">
                             <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
@@ -468,7 +532,8 @@
                 <h2 class="mb-4">What you can expect from the course?</h2>
                 <p class="about-text">
                     The dual certification program was developed around Israeli military training methodology and live
-                    mentoring by top faculties from IIT Jodhpur. 50% of pedagogy comprises of hands-on learning on live projects and
+                    mentoring by top faculties from IIT Jodhpur. 50% of pedagogy comprises of hands-on learning on live
+                    projects and
                     simulated scenarios.
                 </p>
                 <div class="row courses">
@@ -480,7 +545,7 @@
                                 <h5 class="course-name">During Bootcamp</h5>
                                 <ul>
                                     <!-- <li>Self-paced and flexible learning with instant feedback</li> -->
-                                    <li>Live Mentoring by IIT Jodhpur Professionals in 
+                                    <li>Live Mentoring by IIT Jodhpur Professionals in
                                         Virtual Mode for better conceptual understanding.</li>
                                     <li>Curriculum based on National Initiative for Cybersecurity Education (NICE).</li>
                                     <li> Access to faculties and industry experts.</li>
@@ -498,9 +563,10 @@
                                 <ul>
                                     <li>12 months of continued access to online learning platform.</li>
                                     <li>Connection to our alumni and career network.</li>
-                                    <li>Start your career as: Cyber Forensics Analyst, Network Operations Specialist, Cyber
+                                    <li>Start your career as Cyber Forensics Analyst, Network Operations Specialist,
+                                        Cyber
                                         Analyst, Cyber Incident Responder,
-                                        Cyber Infrastructure Support Specialist  & many more.</li>
+                                        Cyber Infrastructure Support Specialist & many more.</li>
 
                                 </ul>
                             </div>
