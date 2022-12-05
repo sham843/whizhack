@@ -179,15 +179,14 @@ export class BootcampRegistrationComponent {
         "year_of_passing": parseInt(qualiData.year_of_passing),
         "percentage": parseInt(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
-        "courseId": 0,
-        "pageName": this.data,
+        "courseId":this.data?this.data.courseId:0,
+        "pageName":this.data?this.data.pageName:'',
         "desc_program": "",
         "iP_address": "",
         "operating_System": "",
         "browser": "",
         "message": this.whyProgram.value.message,
       }
-
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {

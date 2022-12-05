@@ -1,5 +1,5 @@
 
-<ng-container *ngIf="viewData?.pageName != 'Bootcamp'; else elseBlock">
+<ng-container *ngIf="viewData?.pageName != 'Bootcamp '; else elseBlock">
     <div class="dialog-header">
         <span>Enquiry Details</span>
         <button mat-icon-button mat-dialog-close>
@@ -133,7 +133,7 @@
                         <span class="form-label">Gender :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.gender || '-'}}</span>
+                        <span class="form-data">{{viewData?.gender==2?'female':'male' || '-'}}</span>
                     </div>                
                 </div>
             </div>
@@ -188,7 +188,7 @@
             <h4 class="text-main">Why Join ?</h4>
             <mat-form-field appearance="legacy" class="w-100">
                 <mat-label>Why do you want to join this program?</mat-label>
-                <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="Programs"></textarea>
+                <textarea matInput class="textareaheight scrollbar" placeholder="Why do you want to join this program?" rows="10" formControlName="Programs" [readonly]="true">{{viewData?.message}}</textarea>
               </mat-form-field>
         </div>
     </div>
