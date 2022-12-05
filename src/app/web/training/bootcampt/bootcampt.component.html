@@ -78,6 +78,7 @@
                                     </div>
                                     <div>
                                         <button class="btn btn-main-outline rounded-pill px-4"
+                                        (click)="openDialog(bootData)">Register
                                             (click)="openDialog('Bootcamp ')">Register
                                             Now</button>
                                     </div>
@@ -102,7 +103,7 @@
 
                                 <!-- <h6 class="price mb-3">{{bootData.course_Description}}</h6> -->
                                 <h6 class="price mb-3">
-                                    <ul class="px-2">
+                                    <ul class="px-3">
                                         <li> 6-month, 480-hour course with 1 year extended access to Israeli labs with
                                             cyber attack and defense simulated projects. </li>
                                         <li> Open to all graduates with strong passion for a career in cyber security.
@@ -144,7 +145,7 @@
                                     <div>
 
                                         <button class="btn btn-main-outline rounded-pill px-4"
-                                            (click)="openDialog('Bootcamp ')">Register
+                                            (click)="openDialog('bootData')">Register
                                             Now</button>
                                     </div>
                                 </div>

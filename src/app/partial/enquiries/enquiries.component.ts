@@ -85,6 +85,7 @@ export class EnquiriesComponent implements OnInit {
 
   //#region ----------------------------------------------Open View Enquiries Component Dialogue Box-----------------------------
   openDialog(ele?: any): void {
+    console.log("ele",ele);
     this.dialog.open(ViewEnquiriesComponent, {
       data: ele,
       width: '1024px'
