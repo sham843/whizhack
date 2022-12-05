@@ -25,6 +25,8 @@ import { ViewTrainingScheduleComponent } from './view-training-schedule/view-tra
 export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadDocument') file!: ElementRef;
 
+  @ViewChild('uploadBrochure') brochure!: ElementRef;
+
   courseManageForm!: FormGroup;
   displayedColumns: string[] = ['srno', 'course_Title', 'duration', 'price', 'action'];
   dataSource: any;
@@ -40,7 +42,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   searchFilter = new FormControl();
   globalObj: any;
-  imgFlag: boolean =false;
+  imgFlag: boolean = false;
+  brochurePath: any;
 
   constructor(
     public dialog: MatDialog,
@@ -71,7 +74,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       price: ['', [Validators.required]],
       price_Terms: ['', [Validators.required]],
       imagePath: ['', Validators.required],
-      actual_price: ['', [Validators.required]]
+      actual_price: ['', [Validators.required]],
+      brochurePath: ['']
     })
   }
 
@@ -147,38 +151,67 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     })
   }
 
-  fileUpload(event: any) {
-    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jpeg,hevc,jfif').subscribe({
+  fileUpload(event: any, name: string) {
+    let fileType = name == 'img' ? 'png,jpg,jpeg,hevc,jfif' : 'pdf'
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', fileType).subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          this.imgSrc = res.responseData;
-          this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
+
+          if (name == 'img') {
+            this.imgSrc = res.responseData;
+            this.courseManageForm.controls['imagePath'].setValue(this.imgSrc);
+          } else {
+            this.brochurePath = res.responseData;
+            this.courseManageForm.controls['brochurePath'].setValue(this.brochurePath);
+          }
           this.comMethods.matSnackBar(res.statusMessage, 0);
         } else {
           this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
-          this.imgSrc = '';
-          this.file.nativeElement.value = '';
-          this.courseManageForm.controls['imagePath'].setValue('');
+
+          if (name == 'img') {
+            this.imgSrc = '';
+            this.file.nativeElement.value = '';
+            this.courseManageForm.controls['imagePath'].setValue('');
+          } else {
+            this.brochurePath = '';
+            this.brochure.nativeElement.value = '';
+            this.courseManageForm.controls['brochurePath'].setValue('');
+          }
+
         }
       }),
       error: (error: any) => {
+       if(name == 'img'){
         this.imgSrc = '';
         this.file.nativeElement.value = '';
         this.courseManageForm.controls['imagePath'].setValue('');
+       }else{
+        this.brochurePath = '';
+        this.brochure.nativeElement.value = '';
+        this.courseManageForm.controls['brochurePath'].setValue('');
+       }
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
 
     })
   }
 
-  deleteImage() {
-    this.imgSrc = '';
-    this.file.nativeElement.value = '';
-    this.courseManageForm.controls['imagePath'].setValue('');
+  deleteImage(name: string) {
+    if (name == 'img') {
+      this.imgSrc = '';
+      this.file.nativeElement.value = '';
+      this.courseManageForm.controls['imagePath'].setValue('');
+    } else {
+      this.brochurePath = '';
+      this.brochure.nativeElement.value = '';
+      this.courseManageForm.controls['brochurePath'].setValue('');
+    }
+
   }
 
-  onClickViewImage() {
-    window.open(this.imgSrc, '_blank');
+  onClickViewImage(name:string) {
+   name == 'img' ?  window.open(this.imgSrc, '_blank') : window.open(this.brochurePath, '_blank')
+   
   }
 
   editCourse(obj: any) {
@@ -195,11 +228,14 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       syllabus_Summary: obj?.syllabus_Summary,
       price: obj?.price,
       price_Terms: obj?.price_Terms,
-      actual_price: obj?.actual_price
+      actual_price: obj?.actual_price,
+      brochurePath : obj?.brochurePath
     })
     this.getPageName();
     obj?.exclusive_offer == 1 ? this.offer = true : false;
     this.courseManageForm.controls['imagePath'].setValue(obj?.imagePath);
+    this.courseManageForm.controls['brochurePath'].setValue(obj?.brochurePath);
+    this.brochurePath = obj?.brochurePath
     this.imgSrc = obj?.imagePath;
   }
 
@@ -253,6 +289,8 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.courseManageForm.reset()
     clear?.resetForm();
     this.imgSrc = '';
+    this.brochurePath = ''
+    this.brochure.nativeElement.value = '';
     this.file.nativeElement.value = '';
     this.editFlag = false;
     this.offer = false;
@@ -276,8 +314,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
         ...this.webStrorage.createdByProps(),
         ... this.courseManageForm.value
       }
+      submitObj.price = +submitObj.price
       submitObj.exclusive_offer = this.offer ? 1 : 0;
-      submitObj.actual_price = submitObj.exclusive_offer == 0 ? '' : submitObj.actual_price;
+      submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : +submitObj.actual_price;
       let url = this.editFlag ? 'Update' : 'Insert';
       this.api.setHttp(this.editFlag ? 'put' : 'post', 'whizhack_cms/course/' + url, false, submitObj, false, 'whizhackService');
       this.api.getHttp().subscribe({
