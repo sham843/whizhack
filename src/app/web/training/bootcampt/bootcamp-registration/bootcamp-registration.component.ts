@@ -187,7 +187,6 @@ export class BootcampRegistrationComponent {
         "browser": "",
         "message": this.whyProgram.value.message,
       }
-      console.log("object",obj);
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
