@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Bootcamp</h1>
+                <h4>Admissions Open for Nov-Dec 2022</h4>
                 <!-- <h3>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 </h3> -->
@@ -11,7 +12,7 @@
     </div>
 </div>
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row py-4">
             <div class="col-sm-12 mb-4">
                 <h4 class="d-flex">
@@ -30,7 +31,7 @@
 
 
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Bootcamp Program</h2>
@@ -47,7 +48,7 @@
                     format with both on campus learning and online self-paced activities.
                 </p>
                 <div class="row courses mb-5">
-                    <div class="col-sm-4 mb-3" *ngFor="let bootData of bootCamptArray">
+                    <!-- <div class="col-sm-4 mb-3" *ngFor="let bootData of bootCamptArray">
                         <div class="card">
                             <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top">
                             <div class="card-body px-0">
@@ -71,22 +72,87 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <button mat-stroked-button class="btn btn-main-outline rounded-pill">
-                                            <i  class="fa-solid fa-file-pdf text-danger me-1"></i>
+                                            <i class="fa-solid fa-file-pdf text-danger me-1"></i>
                                             Download Brochure
                                         </button>
                                     </div>
                                     <div>
-                                        <!-- <button class="btn btn-main-outline rounded-pill px-4"
-                                            (click)="openDialog(bootData)">Register
-                                            Now</button> -->
                                         <button class="btn btn-main-outline rounded-pill px-4"
                                         (click)="openDialog(bootData)">Register
+                                            (click)="openDialog('Bootcamp ')">Register
+                                            Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="col-sm-4 mb-3">
+                        <div class="card" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                            <!-- <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top"> -->
+                            <img src="http://whizhack.mahamining.com//UploadDocuments/Upload/file_20221202122639713.png"
+                                alt="Product" class="card-img-top">
+
+                            <div class="card-body px-0">
+                                <!-- <h5 class="course-name mb-3">{{bootData.course_Title}}</h5> -->
+                                <h5 class="course-name mb-3">Dual Certification Program in Cyber Defense</h5>
+
+                                <h6 class="duration">Duration:</h6>
+                                <!-- <p class="duration">{{bootData.duration}}</p> -->
+                                <p class="duration">6 Months</p>
+
+                                <!-- <h6 class="price mb-3">{{bootData.course_Description}}</h6> -->
+                                <h6 class="price mb-3">
+                                    <ul class="px-2">
+                                        <li> 6-month, 480-hour course with 1 year extended access to Israeli labs with
+                                            cyber attack and defense simulated projects. </li>
+                                        <li> Open to all graduates with strong passion for a career in cyber security.
+                                        </li>
+                                        <li> 100% placement support in most challenging projects with top employers.
+                                        </li>
+                                        <li> Blended training by top IIT faculty and Israeli experts. </li>
+                                    </ul>
+                                </h6>
+
+                                <!-- <h6 class="price mb-3"> {{bootData.course_Caption}} </h6> -->
+                                <!-- <h6 class="price mb-3"> Blended training by top IIT faculty and Israeli experts </h6> -->
+
+                                <h6 class="duration-label">Price:</h6>
+                                <div class="price mb-3">
+                                    INR
+                                    <!-- <strong>{{bootData.price}}</strong> -->
+                                    <strong>1,65,000</strong>
+
+                                    + GST<br>
+                                </div>
+                                <h6 class="duration-label">
+                                    <!-- {{bootData.actual_price}}/-({{bootData.price_Terms}}) -->
+                                    EMI Available Starting at Rs. 8,945/- (Subject to Finance Approval)
+                                </h6>
+                            </div>
+                            <div class="card-footer p-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a mat-stroked-button
+                                            href="https://drive.google.com/file/d/1akAfE5zeCxmEujQrSd_U0T1s9RXoBDJJ/view?usp=sharing" target="_blank"
+                                            class="btn btn-main-outline rounded-pill" download>
+                                            <!-- <button mat-stroked-button class=""> -->
+                                            <i class="fa-solid fa-file-pdf text-danger me-1"></i>
+                                            Download Brochure
+                                            <!-- </button> -->
+                                        </a>
+                                    </div>
+                                    <div>
+
+                                        <button class="btn btn-main-outline rounded-pill px-4"
+                                            (click)="openDialog('bootData')">Register
                                             Now</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!--  <div class="col-sm-4">
                         <div class="card">
                             <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top">
@@ -164,10 +230,10 @@
                         </div>
                     </div> -->
                 </div>
-                <h2 class="mb-4">Curriculum</h2>
+                <h2 class="mb-4" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">Curriculum</h2>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="accordion" id="accordionExample">
+                        <div class="accordion" id="accordionExample" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="accordion-item">
@@ -435,7 +501,7 @@
 </section>
 
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Who should choose this course?</h2>
@@ -443,7 +509,7 @@
                     The Cyber Defense Remote Bootcamp is for anyone interested in becoming a Global Cyber Defense
                     Expert. The training will ensure learners get the best blend of skill sets to tackle global
                     cyber
-                    threats and also a certification that’s valued in India and beyond.
+                    threats and also a certification that’s valued in India & Abroad.
                 </p>
                 <h4>Qualifications</h4>
                 <p class="about-text">
@@ -461,41 +527,47 @@
 </section>
 
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">What you can expect from the course?</h2>
                 <p class="about-text">
                     The dual certification program was developed around Israeli military training methodology and live
-                    mentoring by top faculties. 50% of pedagogy comprises of hands-on learning on live projects and
+                    mentoring by top faculties from IIT Jodhpur. 50% of pedagogy comprises of hands-on learning on live
+                    projects and
                     simulated scenarios.
                 </p>
                 <div class="row courses">
                     <div class="col-sm-4 d-flex align-items-strech">
-                        <div class="card p-3">
-                            <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top w-100">
+                        <div class="card p-3" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+                            <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png" alt="Product"
+                                class="card-img-top w-100">
                             <div class="card-body mb-3">
                                 <h5 class="course-name">During Bootcamp</h5>
                                 <ul>
-                                    <li>Self-paced and flexible learning with instant feedback</li>
-                                    <li>Curriculum based on National Initiative for Cybersecurity Education (NICE)</li>
-                                    <li> Access to faculties and industry experts</li>
-                                    <li> Guidance on job searching and resume building</li>
+                                    <!-- <li>Self-paced and flexible learning with instant feedback</li> -->
+                                    <li>Live Mentoring by IIT Jodhpur Professionals in
+                                        Virtual Mode for better conceptual understanding.</li>
+                                    <li>Curriculum based on National Initiative for Cybersecurity Education (NICE).</li>
+                                    <li> Access to faculties and industry experts.</li>
+                                    <li> Guidance on job searching and resume building.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4 d-flex align-items-strech">
-                        <div class="card p-3">
-                            <img src="../../../assets/image/home/Product1.png" alt="Product" class="card-img-top w-100">
+                        <div class="card p-3" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                            <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png" alt="Product"
+                                class="card-img-top w-100">
                             <div class="card-body">
-                                <h5 class="course-name mb-3">Upon Graduation</h5>
+                                <h5 class="course-name mb-3">After Graduation</h5>
                                 <ul>
-                                    <li>12 months of continued access to online learning platform</li>
-                                    <li>Connection to our alumni and career network</li>
-                                    <li>A new career in: Cyber Forensics Analyst, Network Operations Specialist, Cyber
+                                    <li>12 months of continued access to online learning platform.</li>
+                                    <li>Connection to our alumni and career network.</li>
+                                    <li>Start your career as Cyber Forensics Analyst, Network Operations Specialist,
+                                        Cyber
                                         Analyst, Cyber Incident Responder,
-                                        Cyber Infrastructure Support Specialist</li>
+                                        Cyber Infrastructure Support Specialist & many more.</li>
 
                                 </ul>
                             </div>
@@ -507,7 +579,7 @@
     </div>
 </section>
 
-<section>
+<!-- <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -519,7 +591,7 @@
                 <div class="card card-body ">
                     <div class="d-flex align-items-center mb-2">
                         <div class="flex-shrink-0">
-                            <img src="../../../assets/image/members-user.png" alt="...">
+                            <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="">Anubhav Choudhary</h6>
@@ -537,7 +609,7 @@
                 <div class="card card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="flex-shrink-0">
-                            <img src="../../../assets/image/members-user.png" alt="...">
+                            <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6>Deblina</h6>
@@ -554,9 +626,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
-<section class="py-5">
+<!-- <section class="py-5">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -585,7 +657,7 @@
                                     <div class="card card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h6>John Smith</h6>
@@ -614,69 +686,7 @@
                                     <div class="card card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>John Smith</h6>
-                                                <small>Lorem Ipsum</small>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing.
-                                        </p>
-                                        <div class="star-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="card card-body">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>John Smith</h6>
-                                                <small>Lorem Ipsum</small>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.
-                                            Lorem Ipsum is simply dummy text of the printing.
-                                        </p>
-                                        <div class="star-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card card-body">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h6>John Smith</h6>
@@ -709,7 +719,7 @@
                                     <div class="card card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h6>John Smith</h6>
@@ -738,7 +748,69 @@
                                     <div class="card card-body">
                                         <div class="d-flex align-items-center mb-2">
                                             <div class="flex-shrink-0">
-                                                <img src="../../../assets/image/members-user.png" alt="...">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6>John Smith</h6>
+                                                <small>Lorem Ipsum</small>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing.
+                                        </p>
+                                        <div class="star-rating">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card card-body">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="flex-shrink-0">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6>John Smith</h6>
+                                                <small>Lorem Ipsum</small>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry.
+                                            Lorem Ipsum is simply dummy text of the printing.
+                                        </p>
+                                        <div class="star-rating">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card card-body">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="flex-shrink-0">
+                                                <img src="https://whizhack.mahamining.com/assets/image/members-user.png" alt="...">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h6>John Smith</h6>
@@ -771,10 +843,10 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Frequently Asked Questions</h2>

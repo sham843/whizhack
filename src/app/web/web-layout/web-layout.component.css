@@ -34,6 +34,6 @@ footer {
     background-image:
             linear-gradient(45deg,
               rgba(0, 0, 0, 0.75),
-              rgba(0, 0, 0, 0.75)), url('../../../assets/image/footer-bg.png');
+              rgba(0, 0, 0, 0.75)), url('https://whizhack.mahamining.com/assets/image/footer-bg.png');
     background-size: cover;
 }
