@@ -109,7 +109,7 @@
                         <span class="form-label">Date of Birth :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.date_of_Birth || '-'}}</span>
+                        <span class="form-data">{{(viewData?.date_of_Birth | date : 'dd-MM-yyyy') || '-'}}</span>
                     </div>   
                     <div class="col-sm-4">
                         <span class="form-label">Country :</span>
@@ -124,7 +124,7 @@
                         <span class="form-data">{{viewData?.city || '-'  | titlecase}}</span>
                     </div>   
                     <div class="col-sm-4">
-                        <span class="form-label">Phone Number :</span>
+                        <span class="form-label">Contact Number :</span>
                     </div>
                     <div class="col-sm-8">
                         <span class="form-data">{{viewData?.mobileNo || '-' }}</span>
