@@ -24,7 +24,6 @@ export class EnergyProfessionalsComponent implements OnInit {
         }
       })
     })
-    console.log(this.energyArray)
   }
 }
 
