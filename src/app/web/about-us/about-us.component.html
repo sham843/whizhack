@@ -798,7 +798,7 @@
                 </ng-container>
             </div>
             <div class="text-center">
-                <button class="carousel-control-prev" type="button" data-bs-target="#MediaCoverageCarousel"
+                <button class="carousel-control-prev" type="button" (click)="onClickPaginatior($event)" data-bs-target="#MediaCoverageCarousel"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
