@@ -62,7 +62,7 @@
                     <div class="mb-1">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
+                                <input type="file" id="real-file" (change)="fileUpload($event,'img')" hidden="hidden"
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()">Upload
                                     Course Image</button>
@@ -72,13 +72,13 @@
                             </div>
                             <div *ngIf="imgSrc">
                                 <button type="button" mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2"
-                                    (click)="onClickViewImage()">
+                                    (click)="onClickViewImage('img')">
                                     <span class="material-symbols-outlined">
                                         description
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
-                                    (click)="deleteImage()">
+                                    (click)="deleteImage('img')">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
@@ -88,6 +88,35 @@
                         <small> (Note: Allowed only png, jpg, jpeg, hevc, jfif image)</small>
 
                     </div>
+
+                    <div class="mb-1">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <input type="file" id="real-file" (change)="fileUpload($event,'brochure')" hidden="hidden"
+                                    #uploadBrochure />
+                                <button type="button" id="fileupload-button" (click)="uploadBrochure.click()">Upload
+                                    Brochure</button>                              
+                            </div>
+                            <div *ngIf="brochurePath">
+                                <button type="button" mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2"
+                                    (click)="onClickViewImage('brochure')">
+                                    <span class="material-symbols-outlined">
+                                        description
+                                    </span>
+                                </button>
+                                <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
+                                    (click)="deleteImage('brochure')">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <small> (Note: Allowed only pdf)</small>
+
+                    </div>
+
+
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
