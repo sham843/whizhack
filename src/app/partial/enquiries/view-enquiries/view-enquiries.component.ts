@@ -25,7 +25,7 @@ export class ViewEnquiriesComponent implements OnInit {
   }
   //#region ---------------------------------------------------------Get View Data By Id-----------------------------------------------------
   getDataById() {
-    this.service.setHttp('get', 'whizhack_cms/register/GetById?id=' + this.data.registerId, false, false, false, 'whizhackService');
+    this.service.setHttp('get', 'whizhack_cms/register/GetById?id=' + this.data?.registerId, false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {

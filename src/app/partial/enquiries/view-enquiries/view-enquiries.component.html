@@ -34,7 +34,7 @@
                         <span class="form-label">Course :</span>
                     </div>
                     <div class="col-sm-9">
-                        <span class="form-data">{{data?.course_Title || '-' }}</span>
+                        <span class="form-data">{{data?.course_Title || '-'  | titlecase}}</span>
                     </div>
                     <div class="col-sm-3">
                         <span class="form-label">Page :</span>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-0">
                             <div class="form-label">Browser :</div>
-                            <div class="form-data">{{data.deviceService.browser || '-'}}</div>
+                            <div class="form-data">{{data.deviceService.browser || '-'  | titlecase}}</div>
                         </div>
                     </div>
                 </div>
@@ -115,25 +115,25 @@
                         <span class="form-label">Country :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.country || '-'}}</span>
+                        <span class="form-data">{{viewData?.country || '-'  | titlecase}}</span>
                     </div> 
                     <div class="col-sm-4">
                         <span class="form-label">City :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.city || '-'}}</span>
+                        <span class="form-data">{{viewData?.city || '-'  | titlecase}}</span>
                     </div>   
                     <div class="col-sm-4">
                         <span class="form-label">Phone Number :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.mobileNo || '-'}}</span>
+                        <span class="form-data">{{viewData?.mobileNo || '-' }}</span>
                     </div>    
                     <div class="col-sm-4">
                         <span class="form-label">Gender :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.gender==2?'female':'male' || '-'}}</span>
+                        <span class="form-data">{{viewData?.gender==2?'Female':'Male' || '-'  | titlecase}}</span>
                     </div>                
                 </div>
             </div>
@@ -156,7 +156,7 @@
                         <span class="form-label">Institute Name:</span>
                     </div>
                     <div class="col-sm-7">
-                        <span class="form-data">{{viewData?.instituteName || '-'}} </span>
+                        <span class="form-data">{{viewData?.instituteName || '-'  | titlecase}} </span>
                     </div>  
                     <div class="col-sm-5">
                         <span class="form-label">Year of Passing:</span>
@@ -186,10 +186,9 @@
         </div>
         <div class="row">
             <h4 class="text-main">Why Join ?</h4>
-            <mat-form-field appearance="legacy" class="w-100">
-                <mat-label>Why do you want to join this program?</mat-label>
-                <textarea matInput class="textareaheight scrollbar" placeholder="Why do you want to join this program?" rows="10" formControlName="Programs" [readonly]="true">{{viewData?.message}}</textarea>
-              </mat-form-field>
+            <div class="col-sm">
+                <span class="form-data">{{viewData?.message || '-'}}</span>
+            </div> 
         </div>
     </div>
     

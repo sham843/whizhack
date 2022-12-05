@@ -31,9 +31,9 @@
                             <mat-label>Course Caption</mat-label>
                             <input matInput placeholder="Enter Course Caption" formControlName="course_Caption"
                                 (keypress)="vadations.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
+                            <!-- <mat-error class="mt-2" *ngIf="formControls['course_Caption'].hasError('required')">
                                 Course Caption is Required
-                            </mat-error>
+                            </mat-error> -->
                         </mat-form-field>
 
                     </div>
@@ -159,9 +159,9 @@
                             <mat-label>Price Terms</mat-label>
                             <input matInput placeholder="Enter Price Terms" formControlName="price_Terms"
                                 (keypress)="vadations.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
+                            <!-- <mat-error class="mt-2" *ngIf="formControls['price_Terms'].hasError('required')">
                                 Price Terms is Required
-                            </mat-error>
+                            </mat-error> -->
                         </mat-form-field>
 
                     </div>
