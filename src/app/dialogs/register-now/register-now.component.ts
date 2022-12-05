@@ -35,7 +35,7 @@ export class RegisterNowComponent implements OnInit {
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       email: ['', [Validators.required, Validators.email]],
       mobileNo: ['', [Validators.required,Validators.maxLength(16)]],
-      courseId: [this.data.courseId],
+      courseId: [this.data.course_Title],
       message: ['', [Validators.required, Validators.maxLength(500)]],
       "createdBy": 1,
       "modifiedBy": 1,
