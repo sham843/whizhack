@@ -38,4 +38,7 @@ export class WhizteensComponent implements OnInit {
       })
     })
   }
+  openNewWindow(path: any) {
+    window.open(path);
+  }
 }
