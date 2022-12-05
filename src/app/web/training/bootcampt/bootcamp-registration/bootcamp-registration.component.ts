@@ -45,7 +45,7 @@ export class BootcampRegistrationComponent {
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]]
+      mobileNo: ['', [Validators.required,Validators.maxLength(16)]]
     })
   }
   personalInfo() {
@@ -69,9 +69,9 @@ export class BootcampRegistrationComponent {
     this.qualificationForm = this.fb.group({
       qualification: ['', [Validators.required]],
       degree: ['', [Validators.required]],
-      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
+      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.()]+$')]], 
       year_of_passing: ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
-      percentage: ['', [Validators.required]],
+      percentage: ['', [Validators.required,Validators.pattern('^[^[ ]+|[ ][gm]+$')]],
     })
     this.getQualificationList();
     this.getDegreeList();

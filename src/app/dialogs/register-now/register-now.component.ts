@@ -34,8 +34,8 @@ export class RegisterNowComponent implements OnInit {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       email: ['', [Validators.required, Validators.email]],
-      mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
-      courseId: [this.data.course_Title],
+      mobileNo: ['', [Validators.required,Validators.maxLength(16)]],
+      courseId: [this.data.courseId],
       message: ['', [Validators.required, Validators.maxLength(500)]],
       "createdBy": 1,
       "modifiedBy": 1,
