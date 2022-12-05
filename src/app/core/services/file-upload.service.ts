@@ -67,10 +67,15 @@ export class FileUploadService {
     let docTypeCheckFlag = true;
     return new Observable(obj => {
       const formData = new FormData();
+      const selResult1 = event.target.value.split('.');
+      const docExt1 = selResult1.pop();
+      let size = docExt1.toLowerCase() == 'pdf' ? 50485760 : 10485760;
+      console.log(size);
+      
       if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
-          if (event.target.files[i].size > 10485760) {
+          if (event.target.files[i].size > size) {
             obj.error("Required file size should be less than " + 10 + " MB.");
             this.commonService.matSnackBar("Required file size should be less than " + 10 + " MB.", 1);
             docTypeCheckFlag = false;
@@ -86,8 +91,6 @@ export class FileUploadService {
             }
           }
         }
-
-
       }
 
       if (docTypeCheckFlag == true) {
