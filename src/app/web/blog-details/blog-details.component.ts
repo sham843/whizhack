@@ -49,7 +49,6 @@ export class BlogDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.statusCode == 200) {
           this.getAllBlog = res.responseData.responseData1;
-          console.log(this.getAllBlog);
         } else {
           this.getAllBlog = [];
         }
