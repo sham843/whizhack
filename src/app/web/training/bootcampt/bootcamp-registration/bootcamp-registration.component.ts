@@ -45,7 +45,7 @@ export class BootcampRegistrationComponent {
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('^[0-9\)\(+-\\s]{10,16}$')]]
+      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{10,16})*[^\s]$')]]
     })
   }                  
   personalInfo() {
@@ -53,12 +53,11 @@ export class BootcampRegistrationComponent {
       this.genderValFlag=true;
       return
     } else {
-      console.log(this.personalInfoForm.value.mobileNo.length);
       this.genderValFlag=false;
-      this.myStepper.next();                                        
+      this.myStepper.next();                                                                
     }
   }
-                         
+                                            
 
   //------------------------------------------------------------- Qualification Form----------------------------------------------------------
   qualificationForm!: FormGroup;
