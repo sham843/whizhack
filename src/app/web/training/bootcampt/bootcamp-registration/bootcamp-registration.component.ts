@@ -40,24 +40,25 @@ export class BootcampRegistrationComponent {
   getpersonal() {
     this.personalInfoForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,Validators.pattern(this.validation.valEmailId)]],
       date_of_Birth: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('^[0-9\)\(+-\\s]{10,16}$')]]
     })
-  }
+  }                  
   personalInfo() {
     if (this.personalInfoForm.invalid) {
       this.genderValFlag=true;
       return
     } else {
+      console.log(this.personalInfoForm.value.mobileNo.length);
       this.genderValFlag=false;
-      this.myStepper.next();
+      this.myStepper.next();                                        
     }
   }
-
+                         
 
   //------------------------------------------------------------- Qualification Form----------------------------------------------------------
   qualificationForm!: FormGroup;

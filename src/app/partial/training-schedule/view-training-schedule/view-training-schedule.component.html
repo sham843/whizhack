@@ -43,10 +43,12 @@
                     <div class="form-data">{{showObj?.actual_price}} /-</div>
                 </div>
                </ng-container>
-               <div class="col-sm-4">
-                <div class="form-label">Price Terms</div>
-                <div class="form-data">{{showObj?.price_Terms}} /-</div>
-            </div>
+              <ng-container *ngIf="showObj?.price_Terms">
+                <div class="col-sm-4">
+                    <div class="form-label">Price Terms</div>
+                    <div class="form-data">{{showObj?.price_Terms}}</div>
+                </div>
+              </ng-container>
             </div>
         </div>
     </div>
