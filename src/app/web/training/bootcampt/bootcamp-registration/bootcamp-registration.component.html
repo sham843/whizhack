@@ -31,7 +31,7 @@
               <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
               <mat-error *ngIf="personal['email'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['email'].errors['required']">
-                  EmailId is Required.</span>
+                  Email ID is Required.</span>
                 <span class="text-danger" *ngIf="personal['email'].errors['email']">
                   Please Enter Valid Email Id</span>
             <span class="text-danger" *ngIf="!personal.email.errors?.email && personal.email.errors?.pattern">
@@ -70,7 +70,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Enter Country</mat-label>
+              <mat-label>Country</mat-label>
               <input matInput placeholder="Enter Country" formControlName="country" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['country'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['country']?.errors['required']">
@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="d-flex align-items-center justify-content-between">
-          <button mat-button class="btn-main" type="button" (click)="clearData(formDirective)">Cancel</button>
+          <button mat-button class="btn-main" type="button" (click)="clearData(formDirective)">Clear</button>
           <button mat-button class="btn-main"  (click)="personalInfo()">Next</button>
         </div>
       </form>

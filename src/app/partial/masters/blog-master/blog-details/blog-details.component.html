@@ -1,6 +1,6 @@
 <div class="dialog-header">
     <h5 class="text-main">{{ resValues?.title }}<small class="text-muted">&nbsp;&nbsp;[{{resValues?.blog_categary_Id ==
-            1 ? 'Training' : 'Products'}}]</small></h5>
+            1 ? 'Training' :  resValues?.blog_categary_Id == 2 ? 'Products' : 'General'}}]</small></h5>
     <span>{{ resValues?.blogType == 1 ? 'Author' : resValues?.blogType == 2 ? 'White Paper' : 'Case Study' }} - {{ resValues?.author }}</span>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
