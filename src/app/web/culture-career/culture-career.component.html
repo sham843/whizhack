@@ -106,8 +106,8 @@
 
         <div class="row" data-aos="fade-up"   data-aos-delay="500" data-aos-easing="ease-in-sine">
             <ng-container *ngFor="let item of this.imageArray">
-                <div class="col-sm" (click)="openLightBox(item?.imagepaths)">
-                    <div class="image-container">
+                <div class="col-sm-auto" (click)="openLightBox(item?.imagepaths)">
+                    <div class="image-container" style="width: 240px">
                         <ng-container *ngFor="let x of item?.imagepaths; let i =index">
                             <ng-container *ngIf="i ==0 ">
                                 <img src="{{x}}" class="all studio" loading="lazy" class="img-fluid" />
