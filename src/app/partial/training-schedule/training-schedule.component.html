@@ -177,8 +177,8 @@
     </div>
     <div class="col-sm-8">
         <div class="card form-card">
-            <div class="card-header">Course List</div>
-            <div class="row justify-content-end">
+            <div class="card-header pb-0">Course List</div>
+            <!-- <div class="row justify-content-end">
                 <div class="col-4 text-end">
 
                     <mat-form-field appearance="outline" class="w-100">
@@ -195,8 +195,27 @@
                     </mat-form-field>
 
                 </div>
-            </div>
+            </div> -->
             <div class="card-body">
+                <div class="row justify-content-end">
+
+                    <div class="col-4 text-end">
+                        
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Search By Course Title</mat-label>
+                        <input matInput placeholder="Enter Course Title" [formControl]="searchFilter" maxlength="20"
+                            (keypress)="vadations.noFirstSpaceAllow($event)">
+                            
+                        <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close"
+                        aria-label="tooltip" (click)="clearSearchFilter()">
+                        <span class="material-symbols-outlined">
+                            close
+                            </span>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                </div>
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>
                     <ng-container matColumnDef="srno">
                         <th mat-header-cell *matHeaderCellDef class="srno"> Sr. No. </th>
