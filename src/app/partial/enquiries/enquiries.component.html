@@ -52,16 +52,19 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button (click)="openDialog(element)" matTooltip="View">
-                                <span class="material-symbols-outlined">
-                                    visibility
-                                </span>
-                            </button>
-                            <button mat-icon-button class="text-danger"  matTooltip="Delete">
-                                <span class="material-symbols-outlined" (click)="openDeleteDialog(element)">
-                                    delete
-                                </span>
-                            </button>
+                            <div class="d-flex">
+
+                                <button mat-icon-button (click)="openDialog(element)" matTooltip="View">
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+                                </button>
+                                <button mat-icon-button class="text-danger"  matTooltip="Delete">
+                                    <span class="material-symbols-outlined" (click)="openDeleteDialog(element)">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
                         </td>
                     </ng-container>
                     <tr class="mat-row p-2 w-100" *matNoDataRow col>
