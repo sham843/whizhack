@@ -68,7 +68,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Enter Country</mat-label>
+              <mat-label>Country</mat-label>
               <input matInput placeholder="Enter Country" formControlName="country" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['country'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['country']?.errors['required']">
