@@ -19,28 +19,34 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-label">Course Title</div>
-                    <div class="form-data">{{showObj?.course_Title | titlecase}}</div>
+                    <div class="form-data">{{showObj?.course_Title}}</div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-label">Page Caption</div>
+                    <div class="form-label">Course Caption</div>
                     <div class="form-data">{{showObj?.course_Caption}}</div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="form-label">Description</div>
+                    <div class="form-label">Course Description</div>
                     <div class="form-data">{{showObj?.course_Description}}</div>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-label">Syllabus Summary</div>
                     <div class="form-data">{{showObj?.syllabus_Summary}}</div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-label">Price</div>
-                    <div class="form-data">{{showObj?.price}}</div>
+                    <div class="form-data">{{showObj?.price}} /-</div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-label">Price Terms</div>
-                    <div class="form-data">{{showObj?.price_Terms}}</div>
+               <ng-container *ngIf="showObj.exclusive_offer==1">
+                <div class="col-sm-4">
+                    <div class="form-label">Disscounted Price</div>
+                    <div class="form-data">{{showObj?.actual_price}} /-</div>
                 </div>
+               </ng-container>
+               <div class="col-sm-4">
+                <div class="form-label">Price Terms</div>
+                <div class="form-data">{{showObj?.price_Terms}} /-</div>
+            </div>
             </div>
         </div>
     </div>

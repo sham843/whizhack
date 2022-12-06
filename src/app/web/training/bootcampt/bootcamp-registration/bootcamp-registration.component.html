@@ -7,7 +7,7 @@
   </button>
 </div>
 <div class="dialog-body form-container">  
-  <mat-stepper [linear]="true" #stepper   >
+  <mat-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="personalInfoForm" class="pt-3 mt-3">
       <form [formGroup]="personalInfoForm" #formDirective="ngForm">
         <ng-template matStepLabel> Personal Information</ng-template>
@@ -19,9 +19,9 @@
                 (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['fullName'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['fullName'].errors['required']">
-                  FullName is Required.</span>
+                  Full Name is Required.</span>
                 <span class="text-danger" *ngIf="personal['fullName'].errors['pattern']">
-                  Please Enter Valid FullName Name</span>
+                  Please Enter Valid Full Name</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -31,8 +31,8 @@
               <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
               <mat-error *ngIf="personal['email'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['email'].errors['required']">
-                  EmailId is Required.</span>
-                <span class="text-danger" *ngIf="personal['email'].errors['Email']">
+                  Email ID is Required.</span>
+                <span class="text-danger" *ngIf="personal['email'].errors['email']">
                   Please Enter Valid EmailId</span>
               </mat-error>
             </mat-form-field>
@@ -54,8 +54,8 @@
             <div class="d-flex align-items-center">
                 <mat-label class="me-4">Gender :</mat-label>
               <mat-radio-group  formControlName="gender">
-                <mat-radio-button value="1" class="me-3">Male</mat-radio-button>
-                <mat-radio-button value="2">Female</mat-radio-button>
+                <mat-radio-button value="Male" class="me-3">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
               </mat-radio-group> </div>
              <div class="text-start">
               <ng-container *ngIf="genderValFlag && !this.personalInfoForm.value.gender">
@@ -68,7 +68,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Enter Country</mat-label>
+              <mat-label>Country</mat-label>
               <input matInput placeholder="Enter Country" formControlName="country" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="personal['country'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['country']?.errors['required']">
@@ -97,14 +97,14 @@
               <mat-error *ngIf="personal['mobileNo'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['mobileNo']?.errors['required']">
                   Phone Number is Required.</span>
-                 <!--  <span class="text-danger" *ngIf="personal['mobileNo'].errors['pattern']">
-                    Please Enter Valid Phone Number</span> -->
+                  <span class="text-danger" *ngIf="personal['mobileNo'].errors['pattern']">
+                    Please Enter Valid Phone Number</span> 
               </mat-error>
             </mat-form-field>
           </div>
         </div>
         <div class="d-flex align-items-center justify-content-between">
-          <!-- <button mat-button class="btn-main" (click)="clearData(formDirective)">Cancel</button> -->
+          <button mat-button class="btn-main" type="button" (click)="clearData(formDirective)">Clear</button>
           <button mat-button class="btn-main"  (click)="personalInfo()">Next</button>
         </div>
       </form>
@@ -165,15 +165,34 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-sm-12">
+          <div class="col-sm-6">
+            <mat-label class="me-4">Percentage :</mat-label>
+            <mat-radio-group formControlName="remark" (change)="onSelectPercentage($event)">
+              <mat-radio-button value="percentage" class="me-3">Percentage</mat-radio-button>
+              <mat-radio-button value="CGPA">CGPA</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-sm-6" *ngIf="this.qualificationForm.value.remark=='percentage'">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Percentage (Highet Qualification)</mat-label>
-              <input matInput placeholder="Enter Percentage/CGPA" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event)">
+              <input matInput placeholder="50.50%" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="qualification['percentage'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="qualification['percentage'].errors['required']">
                   Percentage is Required.</span>
                   <span class="text-danger" *ngIf="qualification['percentage'].errors['pattern']">
-                    Please Enter Valid Percentage</span>
+                    Please Enter Valid Percentage</span> 
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6" *ngIf="this.qualificationForm.value.remark=='CGPA'">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>CGPA (Highet Qualification)</mat-label>
+              <input matInput placeholder="5.5 CGPA" formControlName="CGPA" (keypress)="validator.noFirstSpaceAllow($event)">
+              <mat-error *ngIf="qualification['CGPA'].errors" class="mt-2">
+                <span class="text-danger" *ngIf="qualification['CGPA'].errors['required']">
+                  CGPA is Required.</span>
+                  <span class="text-danger" *ngIf="qualification['CGPA'].errors['pattern']">
+                    Please Enter Valid CGPA</span>
               </mat-error>
             </mat-form-field>
           </div>
