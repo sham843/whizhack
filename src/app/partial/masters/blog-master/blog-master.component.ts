@@ -201,7 +201,7 @@ export class BlogMasterComponent implements OnInit {
 
   fileUpload(event: any) {
     this.ngxspinner.show();
-    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jfif').subscribe({
+    this.fileUpl.uploadMultipleDocument(event, 'Upload', 'png,jpg,jfif,jpeg,hevc').subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
           let uploadedUrl = res.responseData;
