@@ -303,18 +303,22 @@
                                     {{exclusiveData.course_Caption}}
                                 </p>
 
-                                <p class="course-type mb-0">
+                                <!-- <p class="course-type mb-0">
                                     Combo Total without discount -
-                                </p>
+                                </p> -->
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <h6 class="price">Rs. {{exclusiveData.price}}/-</h6>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="btn btn-more" (click)="openDialog(exclusiveData)">
-                                            Register Now
-                                        </button>
-                                    </div>
+                                        <h4 class="price fw-bold">Rs. {{exclusiveData.price}}/-</h4>
+                                        <h6 class="my-2">Instead Off</h6>
+                                        <h4 class="price fw-bold"><del>Rs. 30000/-</del></h4>
+                                    </div>                                   
+                                </div>
+                            </div>
+                            <div class="card-footer border-0">
+                                <div>
+                                    <button type="button" class="btn btn-more" (click)="openDialog(exclusiveData)">
+                                        Register Now
+                                    </button>
                                 </div>
                             </div>
                         </div>
