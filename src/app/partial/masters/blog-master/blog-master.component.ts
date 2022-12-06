@@ -70,7 +70,7 @@ export class BlogMasterComponent implements OnInit {
   controlForm() {
     this.frm = this.fb.group({
       id: [0],
-      title: ['', Validators.required],
+      title: ['', [Validators.required,Validators.maxLength(300)]],
       description: ['', Validators.required],
       blog_categary_Id: [, Validators.required],
       author: ['', [Validators.required, Validators.pattern(this.validation.authorName)]],
