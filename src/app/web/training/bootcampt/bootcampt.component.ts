@@ -17,10 +17,11 @@ export class BootcamptComponent implements OnInit {
   openDialog(bootData: any) {
     const dialogRef = this.dialog.open(BootcampRegistrationComponent, {
       width: '1024px',
-      data: bootData
+      data: bootData,
+      disableClose:true
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe( {
+    
     });
   }
 

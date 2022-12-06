@@ -45,7 +45,7 @@ export class BootcampRegistrationComponent {
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      mobileNo: ['', [Validators.required,Validators.maxLength(16)]]
+      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('^[0-9\)\(+-\\s]{10,16}$')]]
     })
   }
   personalInfo() {
@@ -69,9 +69,11 @@ export class BootcampRegistrationComponent {
     this.qualificationForm = this.fb.group({
       qualification: ['', [Validators.required]],
       degree: ['', [Validators.required]],
-      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.()]+$')]], 
+      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.()\\s]+$')]], 
       year_of_passing: ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
-      percentage: ['', [Validators.required,Validators.pattern('^[^[ ]+|[ ][gm]+$')]],
+      percentage: [''],
+      CGPA: [''],
+      remark:['']
     })
     this.getQualificationList();
     this.getDegreeList();
@@ -107,6 +109,7 @@ export class BootcampRegistrationComponent {
     if (this.qualificationForm.invalid) {
       return
     } else {
+      this.qualificationForm.value.percentage=='0.0%'?this.qualificationForm.controls['percentage'].setValue(0):'';
       this.myStepper.next();
     }
   }
@@ -186,6 +189,7 @@ export class BootcampRegistrationComponent {
         "operating_System": "",
         "browser": "",
         "message": this.whyProgram.value.message,
+        "flag":this.qualificationForm.value.remark=='percentage'?0:1
       }
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
@@ -206,5 +210,28 @@ export class BootcampRegistrationComponent {
   }
   cancelForm(formDirective: any) {
     formDirective.resetForm();
+  }
+  clearData(formDirective: any){
+   this.getpersonal();
+   formDirective.resetForm();
+   this.genderValFlag=false;
+  }
+
+  // -------------------------------------------------------percentage validation--------------------------------------------------------
+  onSelectPercentage(event:any){
+    if(event.value=='CGPA'){
+      this.qualificationForm.get('CGPA')?.setValidators([Validators.required,Validators.pattern('^[0-9][.][0-9]\\s?[a-zA-Z]{0,4}?$')]);
+      this.qualificationForm.get('CGPA')?.updateValueAndValidity();
+      this.qualificationForm.get('percentage')?.clearValidators();
+      this.qualificationForm.get('percentage')?.updateValueAndValidity();
+      this.qualificationForm.controls['percentage'].setValue('');
+    }
+    else{
+      this.qualificationForm.get('percentage')?.setValidators([Validators.required,Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+      this.qualificationForm.get('percentage')?.updateValueAndValidity();
+      this.qualificationForm.get('CGPA')?.clearValidators();
+      this.qualificationForm.get('CGPA')?.updateValueAndValidity();
+      this.qualificationForm.controls['CGPA'].setValue('');
+    }
   }
 }
