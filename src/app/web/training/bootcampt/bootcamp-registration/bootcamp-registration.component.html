@@ -178,7 +178,7 @@
           <div class="col-sm-6" *ngIf="this.qualificationForm.value.remark=='percentage'">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Percentage (Highet Qualification)</mat-label>
-              <input matInput placeholder="50.50%" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event)">
+              <input matInput placeholder="Eg.50.50%" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event);validator.percentage($event)">
               <mat-error *ngIf="qualification['percentage'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="qualification['percentage'].errors['required']">
                   Percentage is Required.</span>

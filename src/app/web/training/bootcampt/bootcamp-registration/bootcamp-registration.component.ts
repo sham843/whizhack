@@ -71,7 +71,7 @@ export class BootcampRegistrationComponent {
     this.qualificationForm = this.fb.group({
       qualification: ['', [Validators.required]],
       degree: ['', [Validators.required]],
-      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.()\\s]+$')]],
+      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.,()\\s]+$')]],
       year_of_passing: ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
       percentage: [''],
       CGPA: [''],
@@ -79,6 +79,8 @@ export class BootcampRegistrationComponent {
     })
     this.getQualificationList();
     this.getDegreeList();
+    this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+    this.qualificationForm.get('percentage')?.updateValueAndValidity();
   }
   // get qualification list
   getQualificationList() {
