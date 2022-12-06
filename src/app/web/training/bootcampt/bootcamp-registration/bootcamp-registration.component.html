@@ -31,7 +31,7 @@
               <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
               <mat-error *ngIf="personal['email'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['email'].errors['required']">
-                  EmailId is Required.</span>
+                  Email ID is Required.</span>
                 <span class="text-danger" *ngIf="personal['email'].errors['email']">
                   Please Enter Valid EmailId</span>
               </mat-error>
