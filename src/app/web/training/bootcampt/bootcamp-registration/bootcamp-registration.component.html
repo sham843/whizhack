@@ -145,7 +145,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Enter Institute Name</mat-label>
+              <mat-label>Institute Name</mat-label>
               <input matInput placeholder="Enter Institute Name" formControlName="instituteName" (keypress)="validator.noFirstSpaceAllow($event)">
               <mat-error *ngIf="qualification['instituteName'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="qualification['instituteName'].errors['required']">
@@ -157,7 +157,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Enter Year of Passing</mat-label>
+              <mat-label>Year of Passing</mat-label>
               <input matInput placeholder="Enter Year of Passing" formControlName="year_of_passing"
               (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="4">
               <mat-error *ngIf="qualification['year_of_passing'].errors" class="mt-2">
