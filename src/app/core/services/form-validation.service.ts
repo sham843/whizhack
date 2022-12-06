@@ -186,5 +186,8 @@ export class FormValidationService {
         event.preventDefault();
     }
 }
+mobileNoValidation(){
+  
+}
 
 }
