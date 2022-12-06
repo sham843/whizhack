@@ -96,7 +96,7 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Mobile Number</mat-label>
               <input matInput placeholder="Enter Mobile Number" formControlName="mobileNo" maxlength="16"
-              (keypress)="validator.noFirstSpaceAllow($event)">
+              (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)">
               <mat-error *ngIf="personal['mobileNo'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['mobileNo']?.errors['required']">
                   Phone Number is Required.</span>
@@ -105,7 +105,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-        </div>
+        </div>                    
         <div class="d-flex align-items-center justify-content-between">
           <button mat-button class="btn-main" type="button" (click)="clearData(formDirective)">Clear</button>
           <button mat-button class="btn-main"  (click)="personalInfo()">Next</button>
