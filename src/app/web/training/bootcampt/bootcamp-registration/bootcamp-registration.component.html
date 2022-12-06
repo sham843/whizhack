@@ -32,7 +32,7 @@
               <mat-error *ngIf="personal['email'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['email'].errors['required']">
                   EmailId is Required.</span>
-                <span class="text-danger" *ngIf="personal['email'].errors['Email']">
+                <span class="text-danger" *ngIf="personal['email'].errors['email']">
                   Please Enter Valid EmailId</span>
               </mat-error>
             </mat-form-field>
