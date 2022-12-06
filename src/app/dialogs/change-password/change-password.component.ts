@@ -34,8 +34,8 @@ export class ChangePasswordComponent implements OnInit {
   defaultForm() {
     this.registerForm = this.fb.group({
       currentPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
-      newPassword: ['', [Validators.required]],
-      retypePassword: ['', [Validators.required]]
+      newPassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]],
+      retypePassword: ['', [Validators.required, Validators.pattern(this.validations.valPassword)]]
     })
   }
 
