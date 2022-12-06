@@ -75,7 +75,7 @@ export class BootcampRegistrationComponent {
       year_of_passing: ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
       percentage: [''],
       CGPA: [''],
-      remark: ['']
+      remark: ['percentage']
     })
     this.getQualificationList();
     this.getDegreeList();
