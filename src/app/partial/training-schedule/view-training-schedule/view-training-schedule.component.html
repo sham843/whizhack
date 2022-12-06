@@ -33,14 +33,20 @@
                     <div class="form-label">Syllabus Summary</div>
                     <div class="form-data">{{showObj?.syllabus_Summary}}</div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-label">Price</div>
-                    <div class="form-data">{{showObj?.price}}</div>
+                    <div class="form-data">{{showObj?.price}} /-</div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-label">Price Terms</div>
-                    <div class="form-data">{{showObj?.price_Terms}}</div>
+               <ng-container *ngIf="showObj.exclusive_offer==1">
+                <div class="col-sm-4">
+                    <div class="form-label">Disscounted Price</div>
+                    <div class="form-data">{{showObj?.actual_price}} /-</div>
                 </div>
+               </ng-container>
+               <div class="col-sm-4">
+                <div class="form-label">Price Terms</div>
+                <div class="form-data">{{showObj?.price_Terms}}</div>
+            </div>
             </div>
         </div>
     </div>
