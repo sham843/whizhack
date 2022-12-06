@@ -45,7 +45,7 @@ export class BootcampRegistrationComponent {
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[1-9][0-9\)\(+-\\s]{8,16})*[^\s]$')]]
+      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]]
     })
   }                  
   personalInfo() {
