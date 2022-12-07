@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
             }
             else{
-              this.captcha();
+              this.commonMethodService.createCaptchaCarrerPage();
               this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
