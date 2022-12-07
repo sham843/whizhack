@@ -184,7 +184,7 @@ export class BootcampRegistrationComponent {
         "instituteName": qualiData.instituteName,
         "degree": qualiData.degree,
         "year_of_passing": parseInt(qualiData.year_of_passing),
-        "percentage": parseInt(qualiData.percentage),
+        "percentage": parseFloat(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
         "courseId": this.data ? this.data.courseId : 0,
         "pageName": this.data ? this.data.pageName : '',
