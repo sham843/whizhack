@@ -92,10 +92,10 @@
                     <div class="mb-1">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <input type="file" id="real-file" (change)="fileUpload($event,'brochure')" hidden="hidden"
-                                    #uploadBrochure />
+                                <input type="file" id="real-file" (change)="fileUpload($event,'brochure')"
+                                    hidden="hidden" #uploadBrochure />
                                 <button type="button" id="fileupload-button" (click)="uploadBrochure.click()">Upload
-                                    Brochure</button>                              
+                                    Brochure</button>
                             </div>
                             <div *ngIf="brochurePath">
                                 <button type="button" mat-icon-button class="bg-primary bg-opacity-10 text-primary me-2"
@@ -118,15 +118,10 @@
 
 
                     <div class="mb-1">
-                        <mat-form-field appearance="legacy" class="w-100">
-                            <mat-label>Syllabus Summary</mat-label>
-                            <textarea matInput placeholder="Enter Syllabus Summary" rows="4"
-                                formControlName="syllabus_Summary"
-                                (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
-                            <!-- <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
-                                Syllabus Summary is Required
-                            </mat-error> -->
-                        </mat-form-field>
+                        <div class="form-label">Syllabus Summary</div>
+                        <angular-editor formControlName="syllabus_Summary" [config]="editorConfig"
+                            placeholder="Enter Syllabus Summary">
+                        </angular-editor>
                     </div>
                     <div class="mb-3">
                         <mat-checkbox [checked]="offer" class="example-margin" (change)="setOffer($event)">Exclusive
@@ -200,20 +195,20 @@
                 <div class="row justify-content-end">
 
                     <div class="col-4 text-end">
-                        
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Search By Course Title</mat-label>
-                        <input matInput placeholder="Enter Course Title" [formControl]="searchFilter" maxlength="20"
-                            (keypress)="vadations.noFirstSpaceAllow($event)">
-                            
-                        <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close"
-                        aria-label="tooltip" (click)="clearSearchFilter()">
-                        <span class="material-symbols-outlined">
-                            close
-                            </span>
-                        </button>
-                    </mat-form-field>
-                </div>
+
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Search By Course Title</mat-label>
+                            <input matInput placeholder="Enter Course Title" [formControl]="searchFilter" maxlength="20"
+                                (keypress)="vadations.noFirstSpaceAllow($event)">
+
+                            <button mat-icon-button matSuffix *ngIf="searchFilter.value" matTooltip="close"
+                                aria-label="tooltip" (click)="clearSearchFilter()">
+                                <span class="material-symbols-outlined">
+                                    close
+                                </span>
+                            </button>
+                        </mat-form-field>
+                    </div>
 
                 </div>
                 <table mat-table [dataSource]="dataSource" class="dashboard-table" matSort>

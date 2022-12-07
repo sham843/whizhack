@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.mo
 import { ViewTrainingScheduleComponent } from './view-training-schedule/view-training-schedule.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularEditorModule
   ]
 })
 export class TrainingScheduleModule { }
