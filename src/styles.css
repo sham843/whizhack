@@ -219,6 +219,7 @@ a.text-main:hover{
   background-color: var(--main-color);
   border-radius: 5px;
   cursor: pointer;
+  border: solid 1px var(--main-color);
 }
 
 #fileupload-button:hover {
