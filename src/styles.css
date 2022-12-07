@@ -258,10 +258,11 @@ a.text-main:hover{
 }
 .form-container .form-label{
   font-size:0.85rem;
-  color: #cbcbcb;
+  color: #7a7a7a;
   margin-bottom: 3px;
 }
-.form-container .form-data{
+.form-container .form-data,
+.form-container .form-data a{
   font-size:0.85rem;
   color: #fff;
 }
