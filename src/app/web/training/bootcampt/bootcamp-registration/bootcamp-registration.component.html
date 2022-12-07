@@ -7,7 +7,8 @@
   </button>
 </div>
 <div class="dialog-body form-container">  
-  <mat-stepper [linear]="true" #stepper>
+  <!-- <mat-stepper [linear]="true" #stepper> -->
+  <mat-stepper [linear]="false" #stepper>
     <mat-step [stepControl]="personalInfoForm" class="pt-3 mt-3">
       <form [formGroup]="personalInfoForm" #formDirective="ngForm">
         <ng-template matStepLabel> Personal Information</ng-template>
