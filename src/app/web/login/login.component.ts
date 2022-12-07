@@ -24,8 +24,17 @@ export class LoginComponent implements OnInit {
   }
 
   captcha() {
-    this.loginForm.controls['captcha'].setValue('');
-    this.commonMethodService.createCaptchaCarrerPage();
+    if(this.loginForm.controls['captcha'].status == 'VALID')
+    {
+      this.loginForm.controls['captcha'].clearValidators();
+      this.loginForm.controls['captcha'].updateValueAndValidity();
+      this.loginForm.controls['captcha'].setValue('');
+      this.commonMethodService.createCaptchaCarrerPage();
+    }
+    else{
+      this.loginForm.controls['captcha'].setValue('');
+      this.commonMethodService.createCaptchaCarrerPage();
+    }
   }
 
   controlLoginForm() {
