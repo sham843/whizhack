@@ -73,7 +73,7 @@ export class PostJobComponent implements OnInit {
   openDialog1(obj?: any) {
     const dialogRef = this.dialog.open(JobDetailsComponent, {
       // height: '80%',
-      width: '40vw',
+      width: '60vw',
       data: obj,
       disableClose: true
     });

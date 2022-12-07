@@ -1,5 +1,5 @@
 <div class="dialog-header">
-    <h5 class="text-main">Apply for post of <span class="text-white">{{resData?.job_Title}}</span></h5>
+    <h5 class="text-main">Apply for post of <br><span class="text-white">{{resData?.job_Title}}</span></h5>
     <button mat-icon-button mat-dialog-close>
         <span class="material-symbols-outlined">
             close
@@ -12,8 +12,8 @@
             <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter First Name" formControlName="firstName"
-                    maxlength="30" (keypress)="validation.noSpaceAllow($event)">
+                    <input matInput placeholder="Enter First Name" formControlName="firstName" maxlength="30"
+                        (keypress)="validation.noSpaceAllow($event)">
                     <mat-error *ngIf="f.firstName.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.firstName.errors?.required">
                             First Name is Required.</span>
@@ -25,8 +25,8 @@
             <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Enter Last Name" formControlName="lastName"
-                    maxlength="30" (keypress)="validation.noSpaceAllow($event)">
+                    <input matInput placeholder="Enter Last Name" formControlName="lastName" maxlength="30"
+                        (keypress)="validation.noSpaceAllow($event)">
                     <mat-error *ngIf="f.lastName.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.lastName.errors?.required">
                             Last Name is Required.</span>
@@ -38,12 +38,13 @@
             <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="emailId" (keypress)="validation.emailRegex($event)" maxlength="50">
+                    <input matInput placeholder="Enter Email ID" formControlName="emailId"
+                        (keypress)="validation.emailRegex($event)" maxlength="50">
                     <mat-error *ngIf="f.emailId.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.emailId.errors?.required">
                             Email ID is Required.</span>
-                            <span class="text-danger" *ngIf="f.emailId.errors?.email">
-                                Please Enter Valid Email ID</span>
+                        <span class="text-danger" *ngIf="f.emailId.errors?.email">
+                            Please Enter Valid Email ID</span>
                         <span class="text-danger" *ngIf="!f.emailId.errors?.email && f.emailId.errors?.pattern">
                             Please Enter Valid Email ID</span>
                     </mat-error>
@@ -53,7 +54,7 @@
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mobile No.</mat-label>
                     <input matInput placeholder="Enter Mobile No." formControlName="contactNo"
-                    (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
+                        (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
                     <mat-error *ngIf="f.contactNo.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.contactNo.errors?.required">
                             Mobile No. is Required.</span>
@@ -66,24 +67,33 @@
             <div class="col-sm-12">
                 <label for="formFile" class="form-label d-block">Upload Resume</label>
                 <div class="d-flex align-items-center justify-content-between">
-                    <input type="file" id="formFile" title="" (change)="resumeUpload($event)" accept=".doc,.docx,.pdf"
-                        formControlName="resume_Path" #fileInput>
+                    <div>
+                        <input type="file" id="formFile" (change)="resumeUpload($event)" hidden="hidden"
+                        #fileInput accept=".doc,.docx,.pdf" formControlName="resume_Path"/>
+                    <button type="button" id="fileupload-button" data-toggle="tooltip"
+                        data-placement="right">Upload
+                        Updated Resume</button>
+                    </div>
+                    <!-- <input type="file" id="formFile" title="" (change)="resumeUpload($event)" accept=".doc,.docx,.pdf"
+                        formControlName="resume_Path" #fileInput> -->
                     <div *ngIf="resumePath">
                         <a target="_blank" [href]="resumePath">
-                        <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2" matTooltip="View">
-                            <span class="material-symbols-outlined">
-                                description 
-                            </span>
-                        </button>
-                    </a>
-                        <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger" (click)="removeDocument()" matTooltip="Delete">
+                            <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
+                                matTooltip="View">
+                                <span class="material-symbols-outlined">
+                                    description
+                                </span>
+                            </button>
+                        </a>
+                        <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
+                            (click)="removeDocument()" matTooltip="Delete">
                             <span class="material-symbols-outlined">
                                 delete
                             </span>
                         </button>
                     </div>
                 </div>
-                
+
                 <div *ngIf="resumeSubmit && !resumePath" class="mt-4">
                     <div class="text-danger" style="font-size: 0.80rem;">Please Upload Resume</div>
                 </div>
