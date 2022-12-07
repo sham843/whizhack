@@ -79,7 +79,7 @@ export class BootcampRegistrationComponent {
     })
     this.getQualificationList();
     this.getDegreeList();
-    this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+    this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,2}(\\.[0-9]{1,2})?%?$')]);
     this.qualificationForm.get('percentage')?.updateValueAndValidity();
   }
   // get qualification list
@@ -184,7 +184,7 @@ export class BootcampRegistrationComponent {
         "instituteName": qualiData.instituteName,
         "degree": qualiData.degree,
         "year_of_passing": parseInt(qualiData.year_of_passing),
-        "percentage": parseInt(qualiData.percentage),
+        "percentage": parseFloat(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
         "courseId": this.data ? this.data.courseId : 0,
         "pageName": this.data ? this.data.pageName : '',
@@ -224,14 +224,14 @@ export class BootcampRegistrationComponent {
   // -------------------------------------------------------percentage validation--------------------------------------------------------
   onSelectPercentage(event: any) {
     if (event.value == 'CGPA') {
-      this.qualificationForm.get('CGPA')?.setValidators([Validators.required, Validators.pattern('^[0-9][.][0-9]\\s?[a-zA-Z]{0,4}?$')]);
+      this.qualificationForm.get('CGPA')?.setValidators([Validators.required, Validators.pattern('^[0-9][.][0-9]\\s?[a-zA-Z]{1,4}?$')]);
       this.qualificationForm.get('CGPA')?.updateValueAndValidity();
       this.qualificationForm.get('percentage')?.clearValidators();
       this.qualificationForm.get('percentage')?.updateValueAndValidity();
       this.qualificationForm.controls['percentage'].setValue('');
     }
     else {
-      this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+      this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,2}(\\.[0-9]{1,2})?%?$')]);
       this.qualificationForm.get('percentage')?.updateValueAndValidity();
       this.qualificationForm.get('CGPA')?.clearValidators();
       this.qualificationForm.get('CGPA')?.updateValueAndValidity();
