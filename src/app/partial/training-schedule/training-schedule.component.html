@@ -118,15 +118,21 @@
 
 
                     <div class="mb-1">
-                        <mat-form-field appearance="legacy" class="w-100">
+                        <!-- <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Syllabus Summary</mat-label>
                             <textarea matInput placeholder="Enter Syllabus Summary" rows="4"
                                 formControlName="syllabus_Summary"
                                 (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
-                            <!-- <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
+                             <mat-error *ngIf="formControls['syllabus_Summary'].hasError('required')">
                                 Syllabus Summary is Required
-                            </mat-error> -->
-                        </mat-form-field>
+                            </mat-error> 
+                        </mat-form-field> -->
+                        <!-- <div class="col-sm-6"> -->
+                            <div class="form-label">Roles & Responsibilities</div>
+                            <angular-editor formControlName="syllabus_Summary" [config]="editorConfig"
+                                placeholder="Enter Syllabus Summary">
+                            </angular-editor>                            
+                        <!-- </div> -->
                     </div>
                     <div class="mb-3">
                         <mat-checkbox [checked]="offer" class="example-margin" (change)="setOffer($event)">Exclusive
