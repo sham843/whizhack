@@ -420,7 +420,7 @@ a.text-main:hover {
 @media only screen and (max-width: 479px) {
 
   .page-header {
-    height: 25vh !important;
+    height: 35vh !important;
   
 }
 
@@ -429,7 +429,7 @@ a.text-main:hover {
 }
 
   .page-header h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: uppercase;
   }
   #homecarousel h3 {
@@ -446,7 +446,7 @@ a.text-main:hover {
   .about-text {
     line-height: 2.3rem;
     font-weight: 300;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
   #founders .card img {
