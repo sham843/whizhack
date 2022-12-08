@@ -37,6 +37,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   imgSrc: string = '';
   editFlag: boolean = false;
   offer: boolean = false;
+  editorConfig = this.comMethods.editorConfig;
 
   @ViewChild(MatSort) sort!: MatSort;
 

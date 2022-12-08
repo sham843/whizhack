@@ -13,7 +13,7 @@
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery Title is Required</span>
                 <span *ngIf="g['gallery_title']?.hasError('pattern')">
-                 Please Enter Valid Gallery Title</span>
+                  Please Enter Valid Gallery Title</span>
               </mat-error>
             </mat-form-field>
           </div>
@@ -22,7 +22,7 @@
               <mat-label>Gallery Description</mat-label>
               <textarea matInput placeholder="Enter Gallery Description" class="textareaheight scrollbar" rows="5"
                 formControlName="gallery_description" rows="20" (keypress)="vs.noFirstSpaceAllow($event)"></textarea>
-             <!--  <mat-error *ngIf="g['gallery_description']?.errors">
+              <!--  <mat-error *ngIf="g['gallery_description']?.errors">
                 <span *ngIf="g['gallery_description']?.hasError('required') ">
                   Gallery Description Is Required</span>
                 <span *ngIf="g['gallery_description']?.hasError('pattern') || g['gallery_description']?.hasError('maxlength')">
@@ -31,8 +31,12 @@
             </mat-form-field>
           </div>
           <div class="mb-3">
-            <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput title=""
-              (change)="mediaFileUpload($event)" />
+            <input type="file" multiple id="real-file" (change)="mediaFileUpload($event)" hidden="hidden" #uploadDocument />
+            <button type="button" id="fileupload-button" (click)="uploadDocument.click()" data-toggle="tooltip"
+              data-placement="right">Upload
+              Images</button>
+            <!-- <input id="upload" multiple type="file" accept="image/*" formControlName="uploadImages" #fileInput title=""
+              (change)="mediaFileUpload($event)" /> -->
             <mat-error *ngIf="showImagError" class="mt-2">
               <span>{{showImagError}}</span>
             </mat-error>
@@ -107,7 +111,8 @@
             <td mat-cell *matCellDef="let element">
               <div class="d-flex align-items-center">
 
-                <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos" matTooltip="View Gallery">
+                <button mat-icon-button class="text-white" (click)="openBox(element)" matTooltip="Photos"
+                  matTooltip="View Gallery">
                   <span class="material-symbols-outlined">
                     photo_library
                   </span>

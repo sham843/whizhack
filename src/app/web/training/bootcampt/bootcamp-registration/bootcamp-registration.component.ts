@@ -52,15 +52,14 @@ export class BootcampRegistrationComponent {
     if (this.personalInfoForm.invalid) {
       this.genderValFlag = true;
       return
-    } else if (this.personalInfoForm.value.mobileNo == 0) {
-      this.personalInfoForm.controls['mobileNo'].setValue('');
-      return
     } else {
       this.genderValFlag = false;
       this.myStepper.next();
     }
   }
-
+  clearMobileNo(){
+    this.personalInfoForm.value.mobileNo == 0 ?this.personalInfoForm.controls['mobileNo'].setValue(''):'';
+  }
   //------------------------------------------------------------- Qualification Form----------------------------------------------------------
   qualificationForm!: FormGroup;
   qualificationNameArr = new Array();
@@ -110,12 +109,17 @@ export class BootcampRegistrationComponent {
     })
   }
   qualificationInfo() {
-    if (this.qualificationForm.invalid) {
-      return
-    } else {
-      this.qualificationForm.value.percentage == '0.0%' ? this.qualificationForm.controls['percentage'].setValue(0) : '';
+    if (this.qualificationForm.invalid) { return} 
+    else {
       this.myStepper.next();
     }
+  }
+  clearPercentage(){
+    (this.qualificationForm.value.percentage =='0.0%' || this.qualificationForm.value.percentage =='0.0')? this.qualificationForm.controls['percentage'].setValue(''):'';
+    (this.qualificationForm.value.percentage.length > 2 && this.qualificationForm.value.percentage > 100)?this.qualificationForm.controls['percentage'].setValue(''):'';
+  }
+  clearCGPA(){
+    (this.qualificationForm.value.CGPA.length >1 && this.qualificationForm.value.CGPA > 10)?this.qualificationForm.controls['CGPA'].setValue(''):'';
   }
   //----------------------------------------------------------------Experiance Form------------------------------------------------------- 
   experianceForm!: FormGroup;
@@ -184,7 +188,7 @@ export class BootcampRegistrationComponent {
         "instituteName": qualiData.instituteName,
         "degree": qualiData.degree,
         "year_of_passing": parseInt(qualiData.year_of_passing),
-        "percentage": parseInt(qualiData.percentage),
+        "percentage": parseFloat(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
         "courseId": this.data ? this.data.courseId : 0,
         "pageName": this.data ? this.data.pageName : '',
@@ -224,7 +228,7 @@ export class BootcampRegistrationComponent {
   // -------------------------------------------------------percentage validation--------------------------------------------------------
   onSelectPercentage(event: any) {
     if (event.value == 'CGPA') {
-      this.qualificationForm.get('CGPA')?.setValidators([Validators.required, Validators.pattern('^[0-9][.][0-9]\\s?[a-zA-Z]{0,4}?$')]);
+      this.qualificationForm.get('CGPA')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,2}(\\.[0-9]{1,2})?%?$')]);
       this.qualificationForm.get('CGPA')?.updateValueAndValidity();
       this.qualificationForm.get('percentage')?.clearValidators();
       this.qualificationForm.get('percentage')?.updateValueAndValidity();
