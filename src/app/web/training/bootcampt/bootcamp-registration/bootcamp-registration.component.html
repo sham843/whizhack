@@ -96,7 +96,7 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Mobile Number</mat-label>
               <input matInput placeholder="Enter Mobile Number" formControlName="mobileNo" maxlength="16"
-              (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)">
+              (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)" (blur)="clearMobileNo()">
               <mat-error *ngIf="personal['mobileNo'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['mobileNo']?.errors['required']">
                   Phone Number is Required.</span>
@@ -178,7 +178,7 @@
           <div class="col-sm-6" *ngIf="this.qualificationForm.value.remark=='percentage'">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Percentage (Highet Qualification)</mat-label>
-              <input matInput placeholder="Eg.50.50%" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event);validator.percentage($event)">
+              <input matInput placeholder="Eg.50.50%" formControlName="percentage" (keypress)="validator.noFirstSpaceAllow($event);validator.percentage($event)"  (blur)="clearPercentage()">
               <mat-error *ngIf="qualification['percentage'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="qualification['percentage'].errors['required']">
                   Percentage is Required.</span>
@@ -190,7 +190,10 @@
           <div class="col-sm-6" *ngIf="this.qualificationForm.value.remark=='CGPA'">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>CGPA (Highet Qualification)</mat-label>
-              <input matInput placeholder="5.5 CGPA" formControlName="CGPA" (keypress)="validator.noFirstSpaceAllow($event)">
+              <input matInput placeholder="5.5 CGPA" formControlName="CGPA" (keypress)="validator.noFirstSpaceAllow($event);validator.onlydigitsWithDec($event)"  (blur)="clearCGPA()">
+              <div class="text-danger errorMsg mt-0" *ngIf="qualificationForm.value.CGPA.length >1 && qualificationForm.value.CGPA > 10 && !qualification['CGPA'].errors">
+                Please Enter Valid CGPA</div>
+
               <mat-error *ngIf="qualification['CGPA'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="qualification['CGPA'].errors['required']">
                   CGPA is Required.</span>
@@ -232,7 +235,7 @@
       <form [formGroup]="whyProgram" (ngSubmit)="submitForm(formDirective)" #formDirective="ngForm">
         <mat-form-field appearance="legacy" class="w-100 mb-3">
           <mat-label>Why do you want to join this program?</mat-label>
-          <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="message"
+          <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="message" class="textareaheight scrollbar"
           (keypress)="validator.noFirstSpaceAllow($event)"></textarea>
           <mat-error *ngIf="program['message'].errors" class="mt-2">
             <span class="text-danger" *ngIf="program['message'].errors['required']">

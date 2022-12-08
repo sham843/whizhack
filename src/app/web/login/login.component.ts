@@ -13,6 +13,8 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class LoginComponent implements OnInit {
   hide = true;
   loginForm!: FormGroup;
+  validationUsernameFlag:boolean = false;
+  validationPasswordFlag:boolean = false;
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective
   get f() { return this.loginForm.controls }
   constructor(private commonMethodService: CommonMethodService, private fb: FormBuilder,
@@ -24,17 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
   captcha() {
-    if(this.loginForm.controls['captcha'].status == 'VALID')
-    {
-      this.loginForm.controls['captcha'].clearValidators();
-      this.loginForm.controls['captcha'].updateValueAndValidity();
       this.loginForm.controls['captcha'].setValue('');
       this.commonMethodService.createCaptchaCarrerPage();
-    }
-    else{
-      this.loginForm.controls['captcha'].setValue('');
-      this.commonMethodService.createCaptchaCarrerPage();
-    }
   }
 
   controlLoginForm() {
@@ -55,6 +48,9 @@ export class LoginComponent implements OnInit {
    }
 
   onClickLogin(formDirective?:any) {
+    // console.log(this.loginForm.controls['username'].status);
+    // return;
+    
     let loginObj = {
       userName : this.loginForm.value.username,
       password : this.loginForm.value.password
@@ -75,9 +71,17 @@ export class LoginComponent implements OnInit {
               this.clearForm();
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
             }
-            else{
-              this.commonMethodService.createCaptchaCarrerPage();
+            else{ 
               this.commonMethodService.matSnackBar(res.statusMessage,1)
+              this.captcha();
+              if(res.statusMessage == 'Please Enter Valid Username')
+              {
+                this.validationUsernameFlag = true;
+                this.validationPasswordFlag = false;
+              }else if(res.statusMessage == 'Please Enter Valid Password'){
+                this.validationPasswordFlag = true;
+                this.validationUsernameFlag = false;
+              }
             }
           }
         })
@@ -87,5 +91,10 @@ export class LoginComponent implements OnInit {
         this.commonMethodService.matSnackBar('Invalid Captcha !', 1)
       }
     }
+  }
+
+  fn(){
+    this.validationUsernameFlag = false;
+    this.validationPasswordFlag = false;
   }
 }

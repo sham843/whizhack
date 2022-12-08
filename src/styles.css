@@ -3,136 +3,162 @@
 
 html,
 body {
-    height: 100%;
-    background-color: #0e0e0e;
+  height: 100%;
+  background-color: #0e0e0e;
 }
 
-body
- {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
+
 :root {
-    --main-color: #2DF611;
-    --main-dark-color: #149a02;
-    --main-light-color: #e7ffe4;
-    --card-bg-color:#0E1526;
+  --main-color: #2DF611;
+  --main-dark-color: #149a02;
+  --main-light-color: #e7ffe4;
+  --card-bg-color: #0E1526;
 }
-.text-main{
+
+.text-main {
   color: var(--main-color);
   text-decoration: none;
 }
-a.text-main:hover{
+
+a.text-main:hover {
   color: var(--main-dark-color);
 }
-.bg-main{
-  background-color:var(--main-color);
+
+.bg-main {
+  background-color: var(--main-color);
 }
-.btn-main{
+
+.btn-main {
   font-family: 'Lato', sans-serif !important;
-  background-color:var(--main-color);
+  background-color: var(--main-color);
   color: #000;
   border: 1px solid var(--main-color) !important;
 }
+
 .btn-main:active,
 .btn-main:focus,
-.btn-main:hover{
-  background-color:var(--main-dark-color);
+.btn-main:hover {
+  background-color: var(--main-dark-color);
   color: #fff !important;
   border: 1px solid var(--main-dark-color);
 }
-.btn-main-outline{
+
+.btn-main-outline {
   font-family: 'Lato', sans-serif !important;
-  background-color:transparent;
+  background-color: transparent;
   color: var(--main-color);
   border: 1px solid var(--main-color) !important;
   font-size: 0.85rem;
 }
-.btn-main-outline:hover{
-  background-color:var(--main-color);
+
+.btn-main-outline:hover {
+  background-color: var(--main-color);
   color: #000;
   border: 1px solid var(--main-color);
 }
-.about-text{
+
+.about-text {
   line-height: 2.3rem;
   font-weight: 300;
   font-size: 1.2rem;
 }
-.products .card{
+
+.products .card {
   padding: 15px;
   border-radius: 20px;
   background-color: var(--card-bg-color);
   text-decoration: none;
   color: #fff;
 }
-.products .card .card-body{
+
+.products .card .card-body {
   padding: 15px 0 0 0px;
 }
-.products .card .card-title{
+
+.products .card .card-title {
   font-size: 1.1rem;
   margin-bottom: 15px;
 }
-.products .card .card-text{
+
+.products .card .card-text {
   font-size: 0.9rem;
 }
-.testimonal .card{
+
+.testimonal .card {
   background-color: var(--card-bg-color);
   color: #fff;
 }
-.testimonal img{
+
+.testimonal img {
   width: 60px;
 }
-.testimonal h6{
+
+.testimonal h6 {
   margin-bottom: 0px;
 }
-.testimonal small{
- font-size: 0.8rem;
- font-weight: 200;
+
+.testimonal small {
+  font-size: 0.8rem;
+  font-weight: 200;
 }
-.testimonal p{
- font-size: 0.85rem;
- font-weight: 300;
- margin-bottom: 5px;
+
+.testimonal p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  margin-bottom: 5px;
 }
-.testimonal .star-rating i{
- color: #DDB32A;
- margin-right: 3px;
+
+.testimonal .star-rating i {
+  color: #DDB32A;
+  margin-right: 3px;
 }
-.page-header{
+
+.page-header {
   background-image: url('https://whizhack.mahamining.com/assets/image/Comman-Banner.png');
   height: 60vh;
   margin-top: 87px;
   color: #fff;
-  display:flex;
+  display: flex;
   align-items: center;
   background-size: cover;
 }
-.page-header h1{
+
+.page-header h1 {
   font-size: 4rem;
   text-transform: uppercase;
 }
-#blog a{
+
+#blog a {
   color: #fff;
   text-decoration: none;
 }
-#blog a:hover{
+
+#blog a:hover {
   color: var(--main-color);
 }
-#blog .main-blog-img{
+
+#blog .main-blog-img {
   border-radius: 15px;
   height: 416px;
-    object-fit: contain;
-    object-position: top;
+  object-fit: contain;
+  object-position: top;
 }
-#blog .main-blog-body{
+
+#blog .main-blog-body {
   border-radius: 15px;
   top: -30px;
   background-color: var(--card-bg-color)
 }
+
 #blog .main-blog-body .btn,
-#blog .main-blog-body p{
+#blog .main-blog-body p {
   font-size: 0.85rem;
 }
+
 .scrollbar {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -141,9 +167,14 @@ a.text-main:hover{
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
-.scrollbar:hover::-webkit-scrollbar, .scrollbar:hover::-webkit-scrollbar-thumb, .scrollbar:hover:focus::-webkit-scrollbar, .scrollbar:hover:focus::-webkit-scrollbar-thumb {
+
+.scrollbar:hover::-webkit-scrollbar,
+.scrollbar:hover::-webkit-scrollbar-thumb,
+.scrollbar:hover:focus::-webkit-scrollbar,
+.scrollbar:hover:focus::-webkit-scrollbar-thumb {
   visibility: visible;
 }
+
 .scrollbar::-webkit-scrollbar {
   appearance: none;
   -webkit-appearance: none;
@@ -152,49 +183,65 @@ a.text-main:hover{
   visibility: hidden;
   width: 0.375rem;
 }
-.scrollbar::-webkit-scrollbar-button, .scrollbar::-webkit-scrollbar-corner {
+
+.scrollbar::-webkit-scrollbar-button,
+.scrollbar::-webkit-scrollbar-corner {
   display: none;
 }
-.scrollbar::-webkit-scrollbar-button, .scrollbar::-webkit-scrollbar-corner {
+
+.scrollbar::-webkit-scrollbar-button,
+.scrollbar::-webkit-scrollbar-corner {
   display: none;
 }
-.scrollbar:hover::-webkit-scrollbar, .scrollbar:hover::-webkit-scrollbar-thumb, .scrollbar:hover:focus::-webkit-scrollbar, .scrollbar:hover:focus::-webkit-scrollbar-thumb {
+
+.scrollbar:hover::-webkit-scrollbar,
+.scrollbar:hover::-webkit-scrollbar-thumb,
+.scrollbar:hover:focus::-webkit-scrollbar,
+.scrollbar:hover:focus::-webkit-scrollbar-thumb {
   visibility: visible;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: hsla(214,7%,62%,.4);
+  background-color: hsla(214, 7%, 62%, .4);
   border-radius: 3px;
   visibility: hidden;
 }
-.courses .card{
-  background-color:#0E1526 ;
+
+.courses .card {
+  background-color: #0E1526;
   color: #fff !important;
   padding: 15px;
   border-radius: 20px;
   height: 100%;
 }
-.courses .course-name{
+
+.courses .course-name {
   font-size: 1.4rem;
-  margin-bottom:0.5rem
+  margin-bottom: 0.5rem
 }
-.courses .course-type{
+
+.courses .course-type {
   font-size: 0.85rem;
-  margin-bottom:1rem
+  margin-bottom: 1rem
 }
-.courses .duration-label{
+
+.courses .duration-label {
   font-size: 0.85rem;
   color: #aaa;
   margin-bottom: 0.5rem;
 }
-.courses .price{
+
+.courses .price {
   font-size: 1.1rem;
   margin-bottom: 0;
 }
-.courses .cut-price{
+
+.courses .cut-price {
   font-size: 1.1rem;
   text-decoration: line-through;
 }
-.courses .btn-more{
+
+.courses .btn-more {
   font-size: 0.85rem;
   background-color: transparent;
   border: solid 1px var(--main-color);
@@ -202,18 +249,21 @@ a.text-main:hover{
   color: var(--main-color);
   padding-inline: 15px;
 }
-.courses .btn-more:hover{
+
+.courses .btn-more:hover {
   background-color: var(--main-color);
   border: solid 1px var(--main-color);
   color: #000;
 }
-.form-card{
-  background-color:var(--card-bg-color);
+
+.form-card {
+  background-color: var(--card-bg-color);
   color: #fff;
   border: none;
 }
+
 #fileupload-button {
-  padding:5px 10px;
+  padding: 5px 10px;
   font-size: 0.85rem;
   color: #000;
   background-color: var(--main-color);
@@ -225,45 +275,54 @@ a.text-main:hover{
 #fileupload-button:hover {
   background-color: var(--main-dark-color);
 }
-.dashboard-table{
+
+.dashboard-table {
   width: 100%;
   font-family: 'Lato', sans-serif;
 }
-.dashboard-table .table-img{
-  width:50px;
-  height:50px;
+
+.dashboard-table .table-img {
+  width: 50px;
+  height: 50px;
   border-radius: 5px;
 }
-.dashboard-table th{
+
+.dashboard-table th {
   font-size: 0.85rem;
   font-weight: 600;
   background-color: #111;
   padding-inline: 10px !important;
 }
-.dashboard-table td{
+
+.dashboard-table td {
   font-size: 0.85rem;
   background-color: var(--card-bg-color);
   padding-block: 5px !important;
   padding-inline: 10px !important;
 }
-.dashboard-table .srno{
+
+.dashboard-table .srno {
   width: 90px;
 }
-.dashboard-table .material-symbols-outlined{
-  font-size:16px !important;
+
+.dashboard-table .material-symbols-outlined {
+  font-size: 16px !important;
 }
+
 .dashboard-table tr.mat-row,
-.dashboard-table tr.mat-header-row{
+.dashboard-table tr.mat-header-row {
   height: 40px;
 }
-.form-container .form-label{
-  font-size:0.85rem;
+
+.form-container .form-label {
+  font-size: 0.85rem;
   color: #7a7a7a;
   margin-bottom: 3px;
 }
+
 .form-container .form-data,
-.form-container .form-data a{
-  font-size:0.85rem;
+.form-container .form-data a {
+  font-size: 0.85rem;
   color: #fff;
 }
 
@@ -271,32 +330,7 @@ a.text-main:hover{
   background-image: url('assets/image/captcha_bg.jpg');
   border-radius: 0.375rem;
 }
-.NgxEditor__Content,
-.NgxEditor,
-.NgxEditor__MenuBar{
-  background-color: #000 !important;
-  color: white !important;
-  font-size: 0.85rem;
-}
-.NgxEditor__MenuItem:hover {
-  background-color: var(--card-bg-color) !important;
-}
-.NgxEditor__Popup{
-  background-color: #656565 !important;
-  color: #fff !important;
-}
-.NgxEditor__Popup input{
-  background-color: var(--card-bg-color) !important;
-  color: #fff !important;
-}
-.NgxEditor__HelpText.NgxEditor__HelpText--Error {
-  color: #2DF611;
-}
-.NgxEditor{
-  height: 30vh;
-  overflow-y: auto;
-  font-size: 0.85rem;
-}
+
 .snack-warning {
   background: #ffc107 !important;
   color: #fff !important;
@@ -317,11 +351,12 @@ a.text-main:hover{
   border-left: 5px solid #000 !important;
   border-radius: 0 !important;
 }
+
 .g-backdrop {
   background-color: rgb(0 0 0 / 95%) !important;
 }
 
-.highlightedRow td{
+.highlightedRow td {
   background: #000 !important;
 }
 
@@ -329,23 +364,59 @@ a.text-main:hover{
 .fixed-top {
   background-color: #000 !important;
 }
+
 .mat-paginator-page-size {
   display: none !important;
 }
-.textareaheight{
-  resize:none !important;
+
+.textareaheight {
+  resize: none !important;
   height: 20vh !important;
 }
-.description{
+
+.description {
   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 4; /* number of lines to show */
-           line-clamp: 4;
-   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  /* number of lines to show */
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
-.w-0{
-  width:0% !important;
+.w-0 {
+  width: 0% !important;
 }
 
+/*********** Responsive CSS  *********************/
+@media only screen and (max-width: 479px) {
+  .page-header h1 {
+    font-size: 3.8rem;
+    text-transform: uppercase;
+  }
+
+  .homepg-tabs {
+    display: block !important;
+    margin: 30px 0px;
+  }
+
+  #founders .card img {
+    object-fit: cover;
+    object-position: top;
+    border-radius: 20px;
+    margin: 0px !important;
+  }
+
+  #blog .main-blog-body {
+    border-radius: 15px;
+    top: -206px;
+    background-color: var(--card-bg-color);
+    width: 100%;
+  }
+
+  .contact-img {
+    box-shadow: 18px 18px 0px -7px #0e1526 !important;
+    border-radius: 15px;
+    width: 100%;
+  }
+}
