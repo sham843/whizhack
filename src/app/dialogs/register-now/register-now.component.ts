@@ -32,7 +32,7 @@ export class RegisterNowComponent implements OnInit {
   getFormData() {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      email: ['', [Validators.required,Validators.email, Validators.pattern(this.validator.valEmailId)]],
+      email: ['', [Validators.required,Validators.email,Validators.email]],
       mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]],
       courseId: [this.data.course_Title],
       message: ['', [Validators.required, Validators.maxLength(500)]],
