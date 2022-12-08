@@ -14,34 +14,33 @@
                     <mat-label>Full Name</mat-label>
                     <input matInput placeholder="Enter Full Name" formControlName="fullName"
                         [value]="registerForm.get('fullName')?.value | titlecase" maxlength="50"
-                        (keypress)="validator.alphabetsWithSpaces($event)" 
-                        (keyup)="validator.noFirstSpaceAllow($event)">
-                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('pattern')" class="mt-2">*Enter Valid Full Name.</mat-error>
-                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('required')" class="mt-2">*Full Name is Required.</mat-error>
+                        (keypress)="validator.alphabetsWithSpaces($event);validator.noFirstSpaceAllow($event)">
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('pattern')" class="mt-2">Enter Valid Full Name.</mat-error>
+                    <mat-error *ngIf="registerForm.controls['fullName'].hasError('required')" class="mt-2">Full Name is Required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailRegex($event)">
+                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             Email ID is Required.</span>
                     </mat-error>
-                    <mat-error class="mt-2" *ngIf="f['email'].hasError('email')">*Please Enter Valid
-                        Email Id</mat-error>
+                    <mat-error *ngIf="registerForm.controls['email'].hasError('pattern')">
+                        Please Enter Valid Email ID</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mobile No.</mat-label>
                     <input matInput placeholder="Enter Mobile No." formControlName="mobileNo" maxlength="10"
-                        (keypress)="validator.acceptedOnlyNumbers($event)" maxlength="10">
+                    (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)" (blur)="clearMobileNo()" maxlength="16">
                     <mat-error class="mt-2" *ngIf="f.mobileNo.errors">
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.required">
-                            *Mobile No is Required.</span>
-                        <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
-                            *Please Enter Valid Mobile No</span>
+                            Mobile No is Required.</span>
+                       <!--  <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
+                            *Please Enter Valid Mobile No</span> -->
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -56,7 +55,7 @@
                     <mat-label>Message</mat-label>
                     <textarea matInput placeholder="Enter Message" rows="5" maxlength="200" formControlName="message" class="textareaheight scrollbar"
                         (keypress)="validator.noFirstSpaceAllow($event)" maxlength="500"></textarea>
-                    <mat-error *ngIf="registerForm.controls['message'].hasError('required')" class="mt-2">*Message is Required.</mat-error>
+                    <mat-error *ngIf="registerForm.controls['message'].hasError('required')" class="mt-2">Message is Required.</mat-error>
                 </mat-form-field>
             </div>
             <div class="d-flex align-items-center justify-content-between p-3">

@@ -127,22 +127,22 @@
     </div>
 </section> -->
 <section>
-    <div class="container">
+    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Featured Resources</h2>
         <div class="row gx-5 products">
             <div class="col-sm-4">
-                <a class="card h-100" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine" (click)="resourceDetails()">
                     <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
                             White Papers
                         </h5>
-                        <p class="card-text">
+                        <!-- <p class="card-text">
                             An adaptable, triple-layer security system that uses industry-standard mature signature
                             technology with highly optimized machine language and deep learning-based models on live
                             traffic to detect threats in the hybrid cloud.
-                        </p>
-                        <div>
+                        </p> -->
+                        <div class="text-end">
                             <button type="button" class="btn btn-main-outline" (click)="resourceDetails()">View
                                 More</button>
                         </div>
@@ -150,18 +150,18 @@
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine"   (click)="resourceDetails()">
                     <img src="https://whizhack.mahamining.com/assets/image/home/Product2.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
                             Case Studies
                         </h5>
-                        <p class="card-text">
+                        <!-- <p class="card-text">
                             An adaptable, triple-layer security system that uses industry-standard mature signature
                             technology with highly optimized machine language and deep learning-based models on live
                             traffic to detect threats in the hybrid cloud.
-                        </p>
-                        <div>
+                        </p> -->
+                        <div class="text-end">
                             <button type="button" class="btn btn-main-outline"
                                 (click)="resourceDetails()">View More</button>
                         </div>
@@ -169,18 +169,18 @@
                 </a>
             </div>
             <div class="col-sm-4">
-                <a class="card h-100" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine">
+                <a class="card h-100" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine" (click)="resourceDetails()">
                     <img src="assets/image/home/Product3.png" alt="Product" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">
                             Blogs
                         </h5>
-                        <p class="card-text">
+                        <!-- <p class="card-text">
                             An adaptable, triple-layer security system that uses industry-standard mature signature
                             technology with highly optimized machine language and deep learning-based models on live
                             traffic to detect threats in the hybrid cloud.
-                        </p>
-                        <div>
+                        </p> -->
+                        <div class="text-end">
                             <button type="button" class="btn btn-main-outline" (click)="resourceDetails()">View
                                 More</button>
                         </div>
@@ -190,34 +190,29 @@
         </div>
     </div>
 </section>
-<section>
+<!-- <section>
     <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Case Studies</h2>
         <div class="text-center" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
             <h4 class="mb-4">Our Successful Casestudies</h4>
-            <!-- <p>
-                Lorem Ipsum is simply dummy text of the printing and <br>typesetting industry. Lorem Ipsum is simply
-                dummy
-                text of the printing and typesetting industry.
-            </p> -->
+           
         </div>
         <div class="case-studies" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
             <div class="row">
                 <div class="col-sm-4" *ngFor="let caseData of caseStudyArray">
                     <div class="card pointer-link">
-                        <img src="{{caseData.imagePath}}" class="card-img-top"
+                        <img src="{{caseData.imagePath}}" class="card-img-top rounded"
                             (click)="blogDetails(caseData.id,caseData.title)" alt="...">
                         <div class="card-overlay">
                             <h5>{{caseData.title}}</h5>
-                            <!-- <p>{{caseData.description}}</p> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<section id="blog">
+</section> -->
+<!-- <section id="blog">
     <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
         <h2 class="mb-4">Blogs</h2>
         <div class="row">
@@ -228,10 +223,10 @@
                         <div class="card card-body main-blog-body mx-3">
                             <p class="mb-2">{{blogPostArray[0]?.createdDate| date}}</p>
                             <hr>
-                            <h4>
+                            <h4 class="mb-3 text-main">
                                 {{blogPostArray[0]?.title}}
                             </h4>
-                            <small>{{blogPostArray[0]?.description}}</small>
+                            <small class="description mb-3">{{blogPostArray[0]?.description}}</small>
                             <div class="text-end">
                                 <button type="button" class="btn btn-outline-light rounded-pill"
                                     (click)="blogDetails(blogPostArray[0].id,blogPostArray[0]?.title)">Read More</button>
@@ -243,15 +238,9 @@
             <div class="col-sm-5">
                 <div class="card blogs-all">
                     <div class="card-header p-3">
-                        <!-- <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Blogs">
-                            <button class="btn" type="button" id="button-addon2">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div> -->
+                        <h5 class="mb-0">Recent Posts</h5>
                     </div>
                     <div class="card-body scrollbar blog-list" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine" >
-                        <p class="border-bottom pb-2 mb-4">Recent Posts</p>
                         <a class="d-flex blog" *ngFor="let blogData of blogPostArray" (click)="blogDetails(blogData.id,blogData.title)">
                             <div class="flex-shrink-0">
                                 <img src="{{blogData.imagePath}}" alt="..."  class="pointer-link">
@@ -266,4 +255,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->

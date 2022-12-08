@@ -24,7 +24,6 @@ export class FormValidationService {
   // valEmailId = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   valEmailId='^[a-zA-Z0-9._%+-]+@([a-z0-9.]+[.])+[a-z]{2,5}$';
   authorName = '^[a-zA-Z. ]*$'
-
   constructor() { }
 
   onlyAlphabets(event: any) {
@@ -185,6 +184,15 @@ export class FormValidationService {
     if (event.code === 'Space') {
         event.preventDefault();
     }
+}
+percentage(event: any) {
+  if (event.target.selectionStart === 0 && (event.keyCode == 46)) return false;  // starting .Dot not accept
+  if (event.currentTarget.value.split('.').length - 1 == 1 && (event.keyCode == 46)) return false;  // double .Dot not accept
+  
+  if (event.target.selectionStart === 0 && (event.keyCode == 53 + event.shift)) return false;  // starting ,semi not accept
+  
+  const maskSeperator = new RegExp('^([0-9.%])', 'g');
+  return maskSeperator.test(event.key);
 }
 
 }

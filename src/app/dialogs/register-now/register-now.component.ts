@@ -27,14 +27,13 @@ export class RegisterNowComponent implements OnInit {
   ngOnInit(): void {
     this.getFormData();
   }
-
   //#region  ------------------------------------------------FormData Method Start------------------------------------------------------
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      email: ['', [Validators.required, Validators.email]],
-      mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
+      email: ['', [Validators.required,Validators.email, Validators.pattern(this.validator.valEmailId)]],
+      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]],
       courseId: [this.data.course_Title],
       message: ['', [Validators.required, Validators.maxLength(500)]],
       "createdBy": 1,
@@ -74,4 +73,7 @@ export class RegisterNowComponent implements OnInit {
     this.getFormData();
     this.formDirective && this.formDirective.resetForm();
   }
+  clearMobileNo(){
+    this.registerForm.value.mobileNo == 0 ?this.registerForm.controls['mobileNo'].setValue(''):'';
+}
 }

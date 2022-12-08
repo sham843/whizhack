@@ -15,7 +15,7 @@ export class BootcampRegistrationComponent {
   isLinear = false;
   registerData: any;
   max = new Date();
-  genderValFlag:boolean=false;
+  genderValFlag: boolean = false;
   @ViewChild('stepper') myStepper!: MatStepper;
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   constructor(private fb: FormBuilder,
@@ -40,25 +40,26 @@ export class BootcampRegistrationComponent {
   getpersonal() {
     this.personalInfoForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(this.validation.valEmailId)]],
       date_of_Birth: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       country: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       city: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      mobileNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]]
+      mobileNo: ['', [Validators.required, Validators.maxLength(16), Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]]
     })
   }
   personalInfo() {
     if (this.personalInfoForm.invalid) {
-      this.genderValFlag=true;
+      this.genderValFlag = true;
       return
     } else {
-      this.genderValFlag=false;
+      this.genderValFlag = false;
       this.myStepper.next();
     }
   }
-
-
+  clearMobileNo(){
+    this.personalInfoForm.value.mobileNo == 0 ?this.personalInfoForm.controls['mobileNo'].setValue(''):'';
+  }
   //------------------------------------------------------------- Qualification Form----------------------------------------------------------
   qualificationForm!: FormGroup;
   qualificationNameArr = new Array();
@@ -69,12 +70,16 @@ export class BootcampRegistrationComponent {
     this.qualificationForm = this.fb.group({
       qualification: ['', [Validators.required]],
       degree: ['', [Validators.required]],
-      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
+      instituteName: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9.,()\\s]+$')]],
       year_of_passing: ['', [Validators.required, Validators.pattern('[0-9]{4}')]],
-      percentage: ['', [Validators.required]],
+      percentage: [''],
+      CGPA: [''],
+      remark: ['percentage']
     })
     this.getQualificationList();
     this.getDegreeList();
+    this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+    this.qualificationForm.get('percentage')?.updateValueAndValidity();
   }
   // get qualification list
   getQualificationList() {
@@ -104,11 +109,17 @@ export class BootcampRegistrationComponent {
     })
   }
   qualificationInfo() {
-    if (this.qualificationForm.invalid) {
-      return
-    } else {
+    if (this.qualificationForm.invalid) { return} 
+    else {
       this.myStepper.next();
     }
+  }
+  clearPercentage(){
+    (this.qualificationForm.value.percentage =='0.0%' || this.qualificationForm.value.percentage =='0.0')? this.qualificationForm.controls['percentage'].setValue(''):'';
+    (this.qualificationForm.value.percentage.length > 2 && this.qualificationForm.value.percentage > 100)?this.qualificationForm.controls['percentage'].setValue(''):'';
+  }
+  clearCGPA(){
+    (this.qualificationForm.value.CGPA.length >1 && this.qualificationForm.value.CGPA > 10)?this.qualificationForm.controls['CGPA'].setValue(''):'';
   }
   //----------------------------------------------------------------Experiance Form------------------------------------------------------- 
   experianceForm!: FormGroup;
@@ -177,15 +188,16 @@ export class BootcampRegistrationComponent {
         "instituteName": qualiData.instituteName,
         "degree": qualiData.degree,
         "year_of_passing": parseInt(qualiData.year_of_passing),
-        "percentage": parseInt(qualiData.percentage),
+        "percentage": parseFloat(qualiData.percentage),
         "total_Experience": this.experianceForm.value.total_Experience,
-        "courseId":this.data?this.data.courseId:0,
-        "pageName":this.data?this.data.pageName:'',
+        "courseId": this.data ? this.data.courseId : 0,
+        "pageName": this.data ? this.data.pageName : '',
         "desc_program": "",
         "iP_address": "",
         "operating_System": "",
         "browser": "",
         "message": this.whyProgram.value.message,
+        "flag": this.qualificationForm.value.remark == 'percentage' ? 0 : 1
       }
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
@@ -206,5 +218,28 @@ export class BootcampRegistrationComponent {
   }
   cancelForm(formDirective: any) {
     formDirective.resetForm();
+  }
+  clearData(formDirective: any) {
+    this.getpersonal();
+    formDirective.resetForm();
+    this.genderValFlag = false;
+  }
+
+  // -------------------------------------------------------percentage validation--------------------------------------------------------
+  onSelectPercentage(event: any) {
+    if (event.value == 'CGPA') {
+      this.qualificationForm.get('CGPA')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,2}(\\.[0-9]{1,2})?%?$')]);
+      this.qualificationForm.get('CGPA')?.updateValueAndValidity();
+      this.qualificationForm.get('percentage')?.clearValidators();
+      this.qualificationForm.get('percentage')?.updateValueAndValidity();
+      this.qualificationForm.controls['percentage'].setValue('');
+    }
+    else {
+      this.qualificationForm.get('percentage')?.setValidators([Validators.required, Validators.pattern('^[0-9]{1,3}(\\.[0-9]{1,2})?%?$')]);
+      this.qualificationForm.get('percentage')?.updateValueAndValidity();
+      this.qualificationForm.get('CGPA')?.clearValidators();
+      this.qualificationForm.get('CGPA')?.updateValueAndValidity();
+      this.qualificationForm.controls['CGPA'].setValue('');
+    }
   }
 }

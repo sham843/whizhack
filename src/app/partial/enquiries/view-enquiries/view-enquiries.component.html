@@ -16,7 +16,7 @@
                         <span class="form-label">Name :</span>
                     </div>
                     <div class="col-sm-9">
-                        <span class="form-data">Mr. {{viewData?.fullName || '-' | titlecase}}</span>
+                        <span class="form-data">{{viewData?.fullName || '-' | titlecase}}</span>
                     </div>
                     <div class="col-sm-3">
                         <span class="form-label">Email ID :</span>
@@ -74,8 +74,8 @@
         </div>
     </div>
     
-    <div class="d-flex align-items-center justify-content-between p-3">
-        <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button>
+    <div class="d-flex align-items-center justify-content-center p-3">
+        <!-- <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button> -->
         <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn-main">OK</button>
     </div>
 </ng-container>
@@ -92,7 +92,7 @@
         <div class="row mb-4">
             <div class="col-sm-4">
                 <div class="row gy-3">
-                    <h4 class="text-main">Personal Information</h4>
+                    <h6 class="text-main">Personal Information</h6>
                     <div class="col-sm-4">
                         <span class="form-label">Full Name : </span>
                     </div>
@@ -109,7 +109,7 @@
                         <span class="form-label">Date of Birth :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.date_of_Birth || '-'}}</span>
+                        <span class="form-data">{{(viewData?.date_of_Birth | date : 'dd-MM-yyyy') || '-'}}</span>
                     </div>   
                     <div class="col-sm-4">
                         <span class="form-label">Country :</span>
@@ -124,7 +124,7 @@
                         <span class="form-data">{{viewData?.city || '-'  | titlecase}}</span>
                     </div>   
                     <div class="col-sm-4">
-                        <span class="form-label">Phone Number :</span>
+                        <span class="form-label">Contact Number :</span>
                     </div>
                     <div class="col-sm-8">
                         <span class="form-data">{{viewData?.mobileNo || '-' }}</span>
@@ -133,13 +133,13 @@
                         <span class="form-label">Gender :</span>
                     </div>
                     <div class="col-sm-8">
-                        <span class="form-data">{{viewData?.gender==2?'Female':'Male' || '-'  | titlecase}}</span>
+                        <span class="form-data">{{viewData?.gender || '-'  | titlecase}}</span>
                     </div>                
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="row gy-3">
-                    <h4 class="text-main">Educational Information</h4>
+                    <h6 class="text-main">Educational Information</h6>
                     <div class="col-sm-5">
                         <span class="form-label">Qualification :</span>
                     </div>
@@ -168,13 +168,13 @@
                         <span class="form-label">Percentage:</span>
                     </div>
                     <div class="col-sm-7">
-                        <span class="form-data">{{viewData?.percentage || '-'}}</span>
+                        <span class="form-data">{{viewData?.percentage }}</span> <span class="ms-2">{{viewData.flag==1 ?'CGPA':' %'}}</span>
                     </div>  
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="row gy-3">
-                    <h4 class="text-main">Professional Qualification</h4>
+                <div class="row gy-3 mb-4">
+                    <h6 class="text-main">Professional Qualification</h6>
                     <div class="col-sm-7">
                         <span class="form-label">Total Years of Experience :</span>
                     </div>
@@ -182,18 +182,24 @@
                         <span class="form-data">{{viewData?.total_Experience || '-'}}</span>
                     </div>  
                 </div>
+                <div class="row">
+                    <h6 class="text-main">Why Join ?</h6>
+                    <div class="col-sm why-join-scroll scrollbar">
+                        <span class="form-data">{{viewData?.message || '-'}}</span>
+                    </div> 
+                </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <h4 class="text-main">Why Join ?</h4>
-            <div class="col-sm">
+            <div class="col-sm why-join-scroll">
                 <span class="form-data">{{viewData?.message || '-'}}</span>
             </div> 
-        </div>
+        </div> -->
     </div>
     
-    <div class="d-flex align-items-center justify-content-between p-3">
-        <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button>
+    <div class="d-flex align-items-center justify-content-center p-3">
+        <!-- <button mat-button mat-dialog-close class="btn-main-outline">Cancel</button> -->
         <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn-main">OK</button>
     </div>
 </ng-template>

@@ -11,27 +11,30 @@
                         </mat-radio-group>
                         <ng-container *ngIf="radioFlag && !this.frm.value.blogType">
                             <mat-error class="mt-2" *ngIf="f['blogType'].hasError('required')">
-                                <p>Please Select Content Type</p>
+                                <p>Content Type is Required</p>
                             </mat-error>
                         </ng-container>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Title</mat-label>
-                            <input maxlength="100" matInput placeholder="Enter Title" formControlName="title"
+                            <input matInput placeholder="Enter Title" formControlName="title"
                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Please Enter Valid Title
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('required')">Title is Required
+                            </mat-error>
+                            <mat-error class="mt-2" *ngIf="f['title'].hasError('maxlength')">Please Enter Maximum 300
+                                Character
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Description</mat-label>
-                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description" class="textareaheight scrollbar"
+                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
+                                class="textareaheight scrollbar"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Please Enter
-                                Description</mat-error>
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Description is Required</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -41,7 +44,7 @@
                                 <mat-option *ngFor="let categories of blogCategoryArray" [value]="categories.id">{{
                                     categories.categoryName }}</mat-option>
                             </mat-select>
-                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Please Select Category</mat-error>
+                            <mat-error class="mt-2" *ngIf="f['blog_categary_Id'].hasError('required')">Category is Required</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
@@ -49,7 +52,8 @@
                             <mat-label>Author Name</mat-label>
                             <input maxlength="50" matInput placeholder="Enter Author Name" formControlName="author"
                                 (keypress)="validation.noFirstSpaceAllow($event)">
-                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Please Enter Valid Author Name
+                            <mat-error class="mt-2" *ngIf="f['author'].hasError('required')">Author
+                                Name is Required
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['author'].hasError('pattern')">Invalid Author Name
                             </mat-error>
@@ -61,20 +65,21 @@
                                 <input type="file" id="real-file" (change)="fileUpload($event)" hidden="hidden"
                                     #uploadDocument />
                                 <button type="button" id="fileupload-button" (click)="uploadDocument.click()"
-                                data-toggle="tooltip" data-placement="right" title="{{imgTooltip}}">Upload Image</button>
+                                    data-toggle="tooltip" data-placement="right" title="{{imgTooltip}}">Upload
+                                    Image</button>
                                 <ng-container *ngIf="imageFlag && !this.frm.value.imagePath">
-                                    <p class="text-danger" style="font-size: 12px;">Please Upload Image!</p>
+                                    <p class="text-danger" style="font-size: 12px;">Image is Required</p>
                                 </ng-container>
                             </div>
                             <div *ngIf="imgSrc">
                                 <button mat-icon-button type="button" class="bg-primary bg-opacity-10 text-primary me-2"
-                                    (click)="viewImage()" matTooltip="View Document">
+                                    (click)="viewImage()" matTooltip="View Image">
                                     <span class="material-symbols-outlined">
                                         Description
                                     </span>
                                 </button>
                                 <button type="button" mat-icon-button class="bg-danger bg-opacity-10 text-danger"
-                                    (click)="deleteImage()" matTooltip="Delete Document">
+                                    (click)="deleteImage()" matTooltip="Delete Image">
                                     <span class="material-symbols-outlined">
                                         Delete
                                     </span>
@@ -99,25 +104,24 @@
                                     <div class="mb-3">
                                         <mat-form-field appearance="outline" class="w-100">
                                             <mat-label>Sub-Title</mat-label>
-                                            <input maxlength="100" matInput placeholder="Enter Sub-Title"
+                                            <input matInput placeholder="Enter Sub-Title"
                                                 formControlName="title"
                                                 (keyup)="validation.alphaNumericWithSpacesAndSpecChars($event)"
                                                 (keypress)="validation.noFirstSpaceAllow($event)">
                                             <mat-error class="mt-2"
                                                 *ngIf="this.blogRegisterCtr.controls[i].controls.title.status == 'INVALID'">
-                                                Please Enter Sub-Title</mat-error>
+                                                Sub-Title is Required</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
                                         <mat-form-field appearance="legacy" class="w-100">
                                             <mat-label>Sub-Description</mat-label>
-                                            <textarea matInput placeholder="Enter Sub-Description"
-                                                rows="5" formControlName="description"
+                                            <textarea matInput placeholder="Enter Sub-Description" rows="5"
+                                                formControlName="description"
                                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                             <mat-error class="mt-2"
                                                 *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">
-                                                Please
-                                                Enter Sub-Description</mat-error>
+                                                Sub-Description is Required</mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="text-end mb-2">
@@ -194,7 +198,8 @@
                     <ng-container matColumnDef="blog_categary_Id">
                         <th mat-header-cell *matHeaderCellDef> Category </th>
                         <td mat-cell *matCellDef="let element"> {{element?.blog_categary_Id == 1 ? 'Training' :
-                            'Products'}}
+                            element?.blog_categary_Id == 2 ?
+                            'Products' : 'General'}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">

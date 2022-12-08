@@ -37,6 +37,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   imgSrc: string = '';
   editFlag: boolean = false;
   offer: boolean = false;
+  editorConfig = this.comMethods.editorConfig;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -68,12 +69,12 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       pageName: ['', Validators.required],
       course_Title: ['', [Validators.required]],
       course_Caption: [''],
-      duration: ['', [Validators.required]],
+      duration: [''],
       course_Description: ['', [Validators.required]],
-      syllabus_Summary: ['', [Validators.required]],
+      syllabus_Summary: [''],
       price: ['', [Validators.required]],
       price_Terms: [''],
-      imagePath: ['', Validators.required],
+      imagePath: [''],
       actual_price: ['', [Validators.required]],
       brochurePath: ['']
     })
@@ -177,22 +178,20 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
             this.brochure.nativeElement.value = '';
             this.courseManageForm.controls['brochurePath'].setValue('');
           }
-
         }
       }),
       error: (error: any) => {
-       if(name == 'img'){
-        this.imgSrc = '';
-        this.file.nativeElement.value = '';
-        this.courseManageForm.controls['imagePath'].setValue('');
-       }else{
-        this.brochurePath = '';
-        this.brochure.nativeElement.value = '';
-        this.courseManageForm.controls['brochurePath'].setValue('');
-       }
+        if (name == 'img') {
+          this.imgSrc = '';
+          this.file.nativeElement.value = '';
+          this.courseManageForm.controls['imagePath'].setValue('');
+        } else {
+          this.brochurePath = '';
+          this.brochure.nativeElement.value = '';
+          this.courseManageForm.controls['brochurePath'].setValue('');
+        }
         this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
       }
-
     })
   }
 
@@ -206,12 +205,10 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       this.brochure.nativeElement.value = '';
       this.courseManageForm.controls['brochurePath'].setValue('');
     }
-
   }
 
-  onClickViewImage(name:string) {
-   name == 'img' ?  window.open(this.imgSrc, '_blank') : window.open(this.brochurePath, '_blank')
-   
+  onClickViewImage(name: string) {
+    name == 'img' ? window.open(this.imgSrc, '_blank') : window.open(this.brochurePath, '_blank')
   }
 
   editCourse(obj: any) {
@@ -229,7 +226,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       price: obj?.price,
       price_Terms: obj?.price_Terms,
       actual_price: obj?.actual_price,
-      brochurePath : obj?.brochurePath
+      brochurePath: obj?.brochurePath
     })
     this.getPageName();
     obj?.exclusive_offer == 1 ? this.offer = true : false;
@@ -302,10 +299,10 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
-      if (!this.imgSrc) {
-        this.imgFlag = true;
-        return;
-      }
+      // if (!this.imgSrc) {
+      //   this.imgFlag = true;
+      //   return;
+      // }
       return;
     }
     else {

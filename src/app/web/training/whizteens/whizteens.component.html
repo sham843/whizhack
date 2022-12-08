@@ -11,7 +11,58 @@
     </div>
 </div>
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-6">
+                <div class="card card-body bg-transparent border border-white" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-easing="ease-in-sine">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="949" height="534" src="https://www.youtube.com/embed/XzVEb--cTi4"
+                            title="Cyber is the new Nuclear | Cyber Security | WhizHack" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-body bg-transparent border border-white" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-easing="ease-in-sine">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="949" height="534" src="https://www.youtube.com/embed/1wgbjFF6yOQ"
+                            title="Cyber Defenders | Ethical Hacking | WhizHack" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-body bg-transparent border border-white" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-easing="ease-in-sine">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="949" height="534" src="https://www.youtube.com/embed/ZqEmdyLIXLc"
+                            title="Let's defend our cyberspace. Let's defeat our enemies." frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card card-body bg-transparent border border-white" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-easing="ease-in-sine">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="949" height="534" src="https://www.youtube.com/embed/rt6xHZTmQyE"
+                            title="Hack The Hackers | Cyber Security | WhizHack" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-1">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row py-4">
             <div class="col-sm-12 mb-4">
                 <h4 class="d-flex">
@@ -29,7 +80,7 @@
     </div>
 </section>
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">WhizTeens Program</h2>
@@ -38,13 +89,13 @@
                     the trails left behind by cybercriminals as part of a new learning experience they can take part in
                     from home.
                 </p>
-                <div class="row gx-3 courses" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                <div class="row gx-3 courses" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-sine">
                     <div class="col-sm-4 mb-3" *ngFor="let whizteen of whizteenArray">
                         <div class="card h-100">
                             <img src="{{whizteen.imagePath}}" alt="Product" class="card-img-top">
                             <div class="card-body px-0">
                                 <h5 class="course-name">
-                                    {{whizteen.course_Title}} 
+                                    {{whizteen.course_Title}}
                                 </h5>
                                 <p class="course-type fw-bold">
                                     {{whizteen.course_Caption}}
@@ -62,14 +113,16 @@
                                     Syllabus :
                                 </h6>
                                 <div class="duration mb-3">
-                                    {{whizteen.syllabus_Summary}} 
+                                    <div class="form-data" innerHTML=" {{whizteen.syllabus_Summary}}"></div>
                                 </div>
                                 <div>
                                     <h6 class="duration-label">Price:</h6>
-                                    <h6 class="price">Rs.  {{whizteen.price}}/- <br> <small>{{whizteen.price_Terms}}</small></h6>
+                                    <h6 class="price">Rs. {{whizteen.price}}/- <br>
+                                        <small>{{whizteen.price_Terms}}</small>
+                                    </h6>
                                 </div>
                             </div>
-                           <!--  <div class="card-footer p-0">
+                            <!--  <div class="card-footer p-0">
                                 <div class="d-flex align-items-center justify-content-between">
                                     
                                     <div>
@@ -81,13 +134,16 @@
                             <div class="card-footer p-0">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <button mat-stroked-button class="btn btn-main-outline rounded-pill" [ngClass]="{'d-none':!whizteen.brochurePath}" (click)="openNewWindow(whizteen.brochurePath)">
+                                        <button mat-stroked-button class="btn btn-main-outline rounded-pill"
+                                            [ngClass]="{'d-none':!whizteen.brochurePath}"
+                                            (click)="openNewWindow(whizteen.brochurePath)">
                                             <i class="fa-solid fa-file-pdf text-danger me-1"></i>
                                             Download Brochure
                                         </button>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-more" (click)="openDialog(whizteen)">Register
+                                        <button type="button" class="btn btn-more"
+                                            (click)="openDialog(whizteen)">Register
                                             Now</button>
                                     </div>
                                 </div>
@@ -258,7 +314,7 @@
 </section>
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Exclusive Offer</h2>
@@ -280,18 +336,22 @@
                                     {{exclusiveData.course_Caption}}
                                 </p>
 
-                                <p class="course-type mb-0">
+                                <!-- <p class="course-type mb-0">
                                     Combo Total without discount -
-                                </p>
+                                </p> -->
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <h6 class="price">Rs. {{exclusiveData.price}}/-</h6>
+                                        <h4 class="price fw-bold">Rs. {{exclusiveData.actual_price}}/-</h4>
+                                        <h6 class="my-2">Instead Of</h6>
+                                        <h4 class="price fw-bold"><del>Rs. {{exclusiveData.price}}/-</del></h4>
                                     </div>
-                                    <div>
-                                        <button type="button" class="btn btn-more" (click)="openDialog(exclusiveData)">
-                                            Register Now
-                                        </button>
-                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0">
+                                <div>
+                                    <button type="button" class="btn btn-more" (click)="openDialog(exclusiveData)">
+                                        Register Now
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -362,7 +422,7 @@
 </section>
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="150" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="150" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Why Choose WhizHack?</h2>
@@ -376,7 +436,8 @@
         </div>
         <div class="row whychoose">
             <div class="col-sm-7">
-                <div class="card card-body left-grad" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+                <div class="card card-body left-grad" data-aos="fade-up" data-aos-delay="100"
+                    data-aos-easing="ease-in-sine">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="left">
                             <h5>OFFICIAL TISC IIT CERTIFICATION</h5>
@@ -389,7 +450,8 @@
         </div>
         <div class="row whychoose justify-content-end">
             <div class="col-sm-7">
-                <div class="card card-body right-grad" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                <div class="card card-body right-grad" data-aos="fade-up" data-aos-delay="200"
+                    data-aos-easing="ease-in-sine">
                     <div class="d-flex align-items-center justify-content-between">
                         <img src="assets/image/training/Interactive-Live-Classes.svg">
                         <div class="text-end">
@@ -404,7 +466,8 @@
         </div>
         <div class="row whychoose">
             <div class="col-sm-7">
-                <div class="card card-body left-grad" data-aos="fade-up"   data-aos-delay="250" data-aos-easing="ease-in-sine">
+                <div class="card card-body left-grad" data-aos="fade-up" data-aos-delay="250"
+                    data-aos-easing="ease-in-sine">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="left">
                             <h5>VIRTUAL LAB</h5>
@@ -417,7 +480,8 @@
         </div>
         <div class="row whychoose justify-content-end">
             <div class="col-sm-7">
-                <div class="card card-body right-grad" data-aos="fade-up"   data-aos-delay="280" data-aos-easing="ease-in-sine">
+                <div class="card card-body right-grad" data-aos="fade-up" data-aos-delay="280"
+                    data-aos-easing="ease-in-sine">
                     <div class="d-flex align-items-center justify-content-between">
                         <img src="assets/image/training/Hacker-Community.svg">
                         <div class="text-end">
@@ -432,7 +496,8 @@
         </div>
         <div class="row whychoose">
             <div class="col-sm-7">
-                <div class="card card-body left-grad" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine">
+                <div class="card card-body left-grad" data-aos="fade-up" data-aos-delay="300"
+                    data-aos-easing="ease-in-sine">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="left me-5">
                             <h5>GAMIFIED LEARNING</h5>
@@ -498,7 +563,7 @@
 </section> -->
 
 <section class="py-5">
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-4">
                 <h3 class="mb-4">TESTIMONIALS</h3>
@@ -666,7 +731,7 @@
 </section>
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Frequently Asked Questions</h2>
