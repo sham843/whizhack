@@ -419,6 +419,11 @@ a.text-main:hover {
 
 @media only screen and (max-width: 479px) {
 
+  .page-header {
+    height: 25vh !important;
+  
+}
+
   .text-main {
     display: block !important;
 }
@@ -427,7 +432,7 @@ a.text-main:hover {
     font-size: 3rem;
     text-transform: uppercase;
   }
-  #homecarousel h3,h2 {
+  #homecarousel h3 {
     font-size: 0.95rem !important;
     color: #fff;
     font-weight: 300;
