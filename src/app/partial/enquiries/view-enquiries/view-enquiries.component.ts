@@ -46,7 +46,7 @@ export class ViewEnquiriesComponent implements OnInit {
   getdeviceIpAddress() {
     this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
       this.deviceIpAddress = res
-      let arr = JSON.stringify(this.deviceIpAddress)
+      let arr = JSON.stringify(this.deviceIpAddress);
       this.address = arr.slice(7, 22);
     })
   }
