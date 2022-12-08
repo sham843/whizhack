@@ -107,10 +107,10 @@
     <div class="container" data-aos="fade-up"   data-aos-delay="300" data-aos-easing="ease-in-sine">
         <h2 class="mb-5">Life at WhizHack</h2>
 
-        <div class="row" data-aos="fade-up"   data-aos-delay="500" data-aos-easing="ease-in-sine">
+        <div class="row justify-content-around" data-aos="fade-up"   data-aos-delay="500" data-aos-easing="ease-in-sine">
             <ng-container *ngFor="let item of this.imageArray">
                 <div class="col-sm-auto d-flex justify-content-start" (click)="openLightBox(item?.imagepaths)">
-                    <div class="image-container" style="width: 240px">
+                    <div class="image-container">
                         <ng-container *ngFor="let x of item?.imagepaths; let i =index">
                             <ng-container *ngIf="i ==0 ">
                                 <img src="{{x}}" class="all studio" loading="lazy" class="" />
