@@ -25,8 +25,11 @@ export class ApiService {
 
   getBaseurl(url: string) {
     switch (url) {
-      // case 'whizhackService': return 'https://whizhackwebapi.mahamining.com/'; break;          //Live Url
-      case 'whizhackService': return 'http://demowhizhackwebapi.mahamining.com/'; break;         //Demo Url  
+      //Live Url
+      // case 'whizhackService': return 'https://whizhackwebapi.mahamining.com/'; break;          
+
+      //Demo Url
+      case 'whizhackService': return 'http://demowhizhackwebapi.mahamining.com/'; break;           
       default: return ''; break;
     }
   }

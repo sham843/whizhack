@@ -389,16 +389,65 @@ a.text-main:hover {
 }
 
 /*********** Responsive CSS  *********************/
+
+@media only screen and (max-width: 768px) {
+
+  .homepg-tabs {
+    display: flex !important;
+    margin: 30px 0px;
+  }
+
+  #blog .main-blog-body {
+    border-radius: 15px;
+    top: -70px !important;
+    background-color: var(--card-bg-color);
+  }
+
+  .contact-img {
+    box-shadow: 20px 20px 0px 7px #0e1526;
+    border-radius: 15px;
+  }
+
+  img.contact-img {
+    width: 100%;
+    height: 300px;
+  }
+
+}
+
+
+
 @media only screen and (max-width: 479px) {
+
+  .page-header {
+    height: 35vh !important;
+  
+}
+
+  .text-main {
+    display: block !important;
+}
+
   .page-header h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: uppercase;
   }
+  #homecarousel h3 {
+    font-size: 0.95rem !important;
+    color: #fff;
+    font-weight: 300;
+}
 
   .homepg-tabs {
     display: block !important;
     margin: 30px 0px;
   }
+
+  .about-text {
+    line-height: 2.3rem;
+    font-weight: 300;
+    font-size: 0.95rem;
+}
 
   #founders .card img {
     object-fit: cover;
@@ -409,7 +458,7 @@ a.text-main:hover {
 
   #blog .main-blog-body {
     border-radius: 15px;
-    top: -206px;
+    top: -206px !important;
     background-color: var(--card-bg-color);
     width: 100%;
   }
@@ -419,10 +468,22 @@ a.text-main:hover {
     border-radius: 15px;
     width: 100%;
   }
-  .image-container img{
+
+  .image-container img {
     width: 150% !important;
-    height:200px;
+    height: 200px;
     object-fit: cover;
     cursor: pointer;
   }
+  .carousel-control-prev, .carousel-control-next {
+    position: relative;
+    background-color: #aaa;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    margin-right: 15px;
+}
 }

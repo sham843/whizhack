@@ -59,3 +59,9 @@ section {
 .carousel-control-prev:hover, .carousel-control-next:hover {
     background-color: var(--main-color);
 }
+
+#statistics .card-body{
+    padding: 50px;
+    color: #fff;
+    background-color: var(--card-bg-color);
+}
