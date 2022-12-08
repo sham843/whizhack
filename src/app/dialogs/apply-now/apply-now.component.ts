@@ -44,10 +44,13 @@ export class ApplyNowComponent implements OnInit {
       this.postApplayForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
         lastName: ['', [Validators.required, Validators.pattern('^[^\\s0-9\\[\\[`&._@#%*!+,|"\-\'\/\\]\\]{}][a-zA-Z]+$')]],
-        contactNo: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
-        emailId: ['', [Validators.required, Validators.email,Validators.pattern(this.validation.valEmailId)]],
+        contactNo: ['', [Validators.required,Validators.maxLength(16), Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]],
+        emailId: ['', [Validators.required, Validators.email, Validators.pattern(this.validation.valEmailId)]],
         resume_Path: ['']
       });
+    }
+    clearMobileNo(){
+      this.postApplayForm.value.contactNo == 0 ?this.postApplayForm.controls['contactNo'].setValue(''):'';
     }
 
     submitForm() {
