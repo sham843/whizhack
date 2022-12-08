@@ -35,7 +35,6 @@ export class BlogDetailsComponent implements OnInit {
     // let joinString =str.substring(0, str.length-1);
      this.router.navigateByUrl('blog-details/'+blogIds.toString()+'-'+joinString);
    }
-
     this.apiService.setHttp('get', "whizhack_cms/Blogregister/GetById?id="+blogIds, false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe((res: any) => {
      this.blogArray=res.responseData;
