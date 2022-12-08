@@ -22,7 +22,7 @@
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailRegex($event)">
+                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailIdRegex($event)">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             Email ID is Required.</span>
@@ -33,13 +33,15 @@
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mobile No.</mat-label>
-                    <input matInput placeholder="Enter Mobile No." formControlName="mobileNo" maxlength="10"
-                    (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)" (blur)="clearMobileNo()" maxlength="16">
+                    <input matInput placeholder="Enter Mobile No." formControlName="mobileNo" minlength="10" maxlength="16"
+                    (keypress)="validator.numericWithSpacesAndSpecChars($event);"
+                    (blur)="clearMobileNo()" >
+                    <!-- validator.onlyDigits($event) -->
                     <mat-error class="mt-2" *ngIf="f.mobileNo.errors">
                         <span class="text-danger" *ngIf="f.mobileNo.errors?.required">
                             Mobile No is Required.</span>
-                       <!--  <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
-                            *Please Enter Valid Mobile No</span> -->
+                        <span class="text-danger" *ngIf="f.mobileNo.errors?.pattern">
+                            *Please Enter Valid Mobile No</span>
                     </mat-error>
                 </mat-form-field>
             </div>

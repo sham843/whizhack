@@ -63,6 +63,17 @@ export class FormValidationService {
     return maskSeperator.test(event.key);
   }
 
+    numericWithSpacesAndSpecChars(event: any) {
+    if (!this.noSpacesAtStart(event)) {
+      return false
+    }
+    const maskSeperator = new RegExp('^([0-9 +()])', 'g');
+    return maskSeperator.test(event.key);
+  }
+
+
+  
+
   onlyDigits(event: any) {
     const maskSeperator = new RegExp('^([0-9])', 'g');
     return maskSeperator.test(event.key);
@@ -172,6 +183,17 @@ export class FormValidationService {
     if (event.target.selectionStart === 0 && (event.keyCode == 64)) return false;  // starting @ not accept
     let key = parseInt(event.key); if (event.target.selectionStart === 0 && (!isNaN(key))) return false; // starting Number not accept
     const maskSeperator = new RegExp('^([a-zA-Z0-9 .@])', 'g'); // only Accept A-Z & 0-9 & .@
+    return maskSeperator.test(event.key);
+  }
+
+  emailIdRegex(event: any) { //Email Validation not accepted capital letters
+    if (!this.noSpacesAtStart(event)) return false; // First Space not Accept
+    if (event.currentTarget.value.split('..').length - 1 == 1 && (event.keyCode == 46)) return false;  // double .Dot not accept
+    if (event.currentTarget.value.split('@').length - 1 == 1 && (event.keyCode == 64)) return false;  // double @ not accept
+    if (event.target.selectionStart === 0 && (event.keyCode == 46)) return false;  // starting .Dot not accept
+    if (event.target.selectionStart === 0 && (event.keyCode == 64)) return false;  // starting @ not accept
+    let key = parseInt(event.key); if (event.target.selectionStart === 0 && (!isNaN(key))) return false; // starting Number not accept
+    const maskSeperator = new RegExp('^([a-z0-9 .@])', 'g'); // only Accept A-Z & 0-9 & .@
     return maskSeperator.test(event.key);
   }
 

@@ -27,13 +27,16 @@ export class RegisterNowComponent implements OnInit {
   ngOnInit(): void {
     this.getFormData();
   }
+             // '^([0-9])', 'g'
+            //  ^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$
+            // ^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$
   //#region  ------------------------------------------------FormData Method Start------------------------------------------------------
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       email: ['', [Validators.required,Validators.email,Validators.email]],
-      mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]],
+      mobileNo: ['', [Validators.required,Validators.pattern('^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$')]],
       courseId: [this.data.course_Title],
       message: ['', [Validators.required, Validators.maxLength(500)]],
       "createdBy": 1,
@@ -44,6 +47,7 @@ export class RegisterNowComponent implements OnInit {
       "id": 0,
     })
   }
+  
   //#endregion----------------------------------------------FormData Method End---------------------------------------------------------
 
   //#region --------------------------------------------------Submit Form Data Method Starts----------------------------------------------
@@ -74,6 +78,8 @@ export class RegisterNowComponent implements OnInit {
     this.formDirective && this.formDirective.resetForm();
   }
   clearMobileNo(){
-    this.registerForm.value.mobileNo == 0 ?this.registerForm.controls['mobileNo'].setValue(''):'';
-}
+       // let formData=this.registerForm.value;  
+      // console.log(formData.mobileNo?.length == 0);
+      this.registerForm.value.mobileNo == 0 ?this.registerForm.controls['mobileNo'].setValue(''):'';
+  }
 }
