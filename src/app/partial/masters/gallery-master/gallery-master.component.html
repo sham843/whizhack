@@ -8,7 +8,7 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Gallery Title</mat-label>
               <input matInput placeholder="Enter Gallery Title" formControlName="gallery_title"
-                (keypress)="vs.noFirstSpaceAllow($event)">
+                (keypress)="vs.noFirstSpaceAllow($event)" (keyup)="vs.removeSpaceAtBegining($event)">
               <mat-error *ngIf="g['gallery_title']?.errors" class="mt-2">
                 <span *ngIf="g['gallery_title']?.hasError('required') ">
                   Gallery Title is Required</span>
