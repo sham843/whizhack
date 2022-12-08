@@ -475,4 +475,15 @@ a.text-main:hover {
     object-fit: cover;
     cursor: pointer;
   }
+  .carousel-control-prev, .carousel-control-next {
+    position: relative;
+    background-color: #aaa;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    margin-right: 15px;
+}
 }
