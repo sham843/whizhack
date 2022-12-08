@@ -406,10 +406,17 @@ a.text-main:hover {
     border-radius: 20px;
     margin: 0px !important;
   }
+
   #blog .main-blog-body {
     border-radius: 15px;
     top: -206px;
     background-color: var(--card-bg-color);
     width: 100%;
-}
+  }
+
+  .contact-img {
+    box-shadow: 18px 18px 0px -7px #0e1526 !important;
+    border-radius: 15px;
+    width: 100%;
+  }
 }
