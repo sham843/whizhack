@@ -35,7 +35,7 @@ export class RegisterNowComponent implements OnInit {
       email: ['', [Validators.required,Validators.email,Validators.email]],
       mobileNo: ['', [Validators.required,Validators.maxLength(16),Validators.pattern('(^[0-9\)\(+-\\s]{5,16})*[^\s]$')]],
       courseId: [this.data.course_Title],
-      message: ['', [Validators.required, Validators.maxLength(500)]],
+      message: ['', [Validators.required, Validators.maxLength(200)]],
       "createdBy": 1,
       "modifiedBy": 1,
       "createdDate": new Date(),

@@ -37,7 +37,6 @@ export class JobDetailsComponent implements OnInit {
   }
 
   getByIdPostJobs(title?:any) {
-    debugger
     if(title){
       let str=title.split(' ').join('-')
       let joinString =str.substring(0, str.length-1)
