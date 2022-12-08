@@ -86,7 +86,9 @@
         <h2 class="mb-4">Our Commitment</h2>
         <div class="row g-5 align-items-center" id="culture">
             <div class="col-sm-12">
-                To build a more secure future for India and the world.
+                <h4 class="mb-0">
+                    To build a more secure future for India and the world.
+                </h4>
             </div>
         </div>
     </div>
@@ -107,11 +109,11 @@
 
         <div class="row" data-aos="fade-up"   data-aos-delay="500" data-aos-easing="ease-in-sine">
             <ng-container *ngFor="let item of this.imageArray">
-                <div class="col-sm-auto" (click)="openLightBox(item?.imagepaths)">
+                <div class="col-sm-auto d-flex justify-content-start" (click)="openLightBox(item?.imagepaths)">
                     <div class="image-container" style="width: 240px">
                         <ng-container *ngFor="let x of item?.imagepaths; let i =index">
                             <ng-container *ngIf="i ==0 ">
-                                <img src="{{x}}" class="all studio" loading="lazy" class="img-fluid" />
+                                <img src="{{x}}" class="all studio" loading="lazy" class="" />
                             </ng-container>
                         </ng-container>
                         <div class="image-title">{{item.gallery_Title | titlecase}} </div>

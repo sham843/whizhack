@@ -419,4 +419,10 @@ a.text-main:hover {
     border-radius: 15px;
     width: 100%;
   }
+  .image-container img{
+    width: 150% !important;
+    height:200px;
+    object-fit: cover;
+    cursor: pointer;
+  }
 }
