@@ -53,8 +53,8 @@
             <div class="col-sm-12">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Mobile No.</mat-label>
-                    <input matInput placeholder="Enter Mobile No." formControlName="contactNo"
-                        (keypress)="validation.acceptedOnlyNumbers($event)" maxlength="10">
+                    <input matInput placeholder="Enter Mobile No." formControlName="contactNo" (keyup)="validation.removeSpaceAtBegining($event)" (blur)="clearMobileNo()"
+                  maxlength="16">
                     <mat-error *ngIf="f.contactNo.errors" class="mt-2">
                         <span class="text-danger" *ngIf="f.contactNo.errors?.required">
                             Mobile No. is Required.</span>
@@ -72,7 +72,7 @@
                         #fileInput accept=".doc,.docx,.pdf" formControlName="resume_Path"/>
                     <button type="button" id="fileupload-button" (click)="fileInput.click()" data-toggle="tooltip"
                         data-placement="right">Upload
-                        Updated Resume</button>
+                         Resume</button>
                     </div>
                     <!-- <input type="file" id="formFile" title="" (change)="resumeUpload($event)" accept=".doc,.docx,.pdf"
                         formControlName="resume_Path" #fileInput> -->

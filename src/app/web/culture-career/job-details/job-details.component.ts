@@ -37,10 +37,11 @@ export class JobDetailsComponent implements OnInit {
   }
 
   getByIdPostJobs(title?:any) {
+    debugger
     if(title){
       let str=title.split(' ').join('-')
       let joinString =str.substring(0, str.length-1)
-       this.router.navigateByUrl('blog-details/'+this.JobPostId.toString()+'-'+joinString);
+       this.router.navigateByUrl('job-details/'+this.JobPostId.toString()+'-'+joinString);
      }
     this.apiService.setHttp('get', 'whizhack_cms/postjobs/GetById?Id=' + this.JobPostId, false, false, false, 'whizhackService');
     this.apiService.getHttp().subscribe({
