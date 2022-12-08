@@ -31,7 +31,7 @@
             </mat-form-field>
           </div>
           <div class="mb-3">
-            <input type="file" id="real-file" (change)="mediaFileUpload($event)" hidden="hidden" #uploadDocument />
+            <input type="file" multiple id="real-file" (change)="mediaFileUpload($event)" hidden="hidden" #uploadDocument />
             <button type="button" id="fileupload-button" (click)="uploadDocument.click()" data-toggle="tooltip"
               data-placement="right">Upload
               Images</button>
