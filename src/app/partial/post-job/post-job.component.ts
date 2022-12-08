@@ -109,7 +109,7 @@ export class PostJobComponent implements OnInit {
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
-              res.statusMessage == 'Last Date is Greater Than Current Date' ? this.commonService.matSnackBar('Last Date of Application Greater Than Current Date', 1) : this.commonService.matSnackBar(res.statusMessage, 0)
+              res.statusMessage == 'Last Date is Greater Than Current Date' ? this.commonService.matSnackBar(res.statusMessage, 1) : this.commonService.matSnackBar(res.statusMessage, 0)
               this.bindTable();
             }
             else {
