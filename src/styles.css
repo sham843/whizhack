@@ -418,15 +418,31 @@ a.text-main:hover {
 
 
 @media only screen and (max-width: 479px) {
+
+  .text-main {
+    display: block !important;
+}
+
   .page-header h1 {
     font-size: 3rem;
     text-transform: uppercase;
   }
+  #homecarousel h3,h2 {
+    font-size: 0.95rem !important;
+    color: #fff;
+    font-weight: 300;
+}
 
   .homepg-tabs {
     display: block !important;
     margin: 30px 0px;
   }
+
+  .about-text {
+    line-height: 2.3rem;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
 
   #founders .card img {
     object-fit: cover;
