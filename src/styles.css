@@ -390,13 +390,18 @@ a.text-main:hover {
 
 /*********** Responsive CSS  *********************/
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 768px) {
 
   .homepg-tabs {
     display: flex !important;
     margin: 30px 0px;
   }
 
+  #blog .main-blog-body {
+    border-radius: 15px;
+    top: -70px !important;
+    background-color: var(--card-bg-color);
+  }
 
 }
 
@@ -422,7 +427,7 @@ a.text-main:hover {
 
   #blog .main-blog-body {
     border-radius: 15px;
-    top: -206px;
+    top: -206px !important;
     background-color: var(--card-bg-color);
     width: 100%;
   }
@@ -432,9 +437,10 @@ a.text-main:hover {
     border-radius: 15px;
     width: 100%;
   }
-  .image-container img{
+
+  .image-container img {
     width: 150% !important;
-    height:200px;
+    height: 200px;
     object-fit: cover;
     cursor: pointer;
   }
