@@ -22,15 +22,12 @@
             <div class="col-sm-6">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Email ID</mat-label>
-                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.noSpaceAllow($event)">
+                    <input matInput placeholder="Enter Email ID" formControlName="email" (keypress)="validator.emailRegex($event)">
                     <mat-error class="mt-2" *ngIf="f.email.errors">
                         <span class="text-danger" *ngIf="f.email.errors?.required">
                             Email ID is Required.</span>
-                            <span class="text-danger" *ngIf="f.email.errors?.email">
-                                Please Enter Valid Email ID</span>
                     </mat-error>
-                    <mat-error *ngIf="registerForm.controls['email'].hasError('pattern')">
-                        Please Enter Valid Email ID</mat-error>
+                    <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Please Enter Valid Email ID</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-sm-6">
