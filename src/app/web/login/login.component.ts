@@ -24,17 +24,17 @@ export class LoginComponent implements OnInit {
   }
 
   captcha() {
-    if(this.loginForm.controls['captcha'].status == 'VALID')
-    {
-      this.loginForm.controls['captcha'].clearValidators();
-      this.loginForm.controls['captcha'].updateValueAndValidity();
+    // if(this.loginForm.controls['captcha'].status == 'VALID')
+    // {
+    //   this.loginForm.controls['captcha'].clearValidators();
+    //   this.loginForm.controls['captcha'].updateValueAndValidity();
+    //   this.loginForm.controls['captcha'].setValue('');
+    //   this.commonMethodService.createCaptchaCarrerPage();
+    // }
+    // else{
       this.loginForm.controls['captcha'].setValue('');
       this.commonMethodService.createCaptchaCarrerPage();
-    }
-    else{
-      this.loginForm.controls['captcha'].setValue('');
-      this.commonMethodService.createCaptchaCarrerPage();
-    }
+    // }
   }
 
   controlLoginForm() {
@@ -76,7 +76,8 @@ export class LoginComponent implements OnInit {
               this.commonMethodService.matSnackBar(res.statusMessage, 0)
             }
             else{
-              this.commonMethodService.createCaptchaCarrerPage();
+              // this.commonMethodService.createCaptchaCarrerPage();
+              // this.captcha();
               this.commonMethodService.matSnackBar(res.statusMessage,1)
             }
           }
