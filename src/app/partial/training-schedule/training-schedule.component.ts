@@ -45,6 +45,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   globalObj: any;
   imgFlag: boolean = false;
   brochurePath: any;
+  showDiscountMsg: boolean=false;
 
   constructor(
     public dialog: MatDialog,
@@ -294,18 +295,16 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     this.courseManageFormData();
     this.selRow = 0;
     this.imgFlag = false;
+    this.showDiscountMsg = false;
   }
 
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
-      // if (!this.imgSrc) {
-      //   this.imgFlag = true;
-      //   return;
-      // }
       return;
-    }
-    else {
+    } else if(this.offer && this.courseManageForm.value.actual_price > this.courseManageForm.value.price){
+      this.showDiscountMsg = true 
+    } else {
       this.ngxSpinner.show();
       let submitObj = {
         ...this.webStrorage.createdByProps(),

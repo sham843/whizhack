@@ -392,9 +392,19 @@ a.text-main:hover {
 
 @media only screen and (max-width: 768px) {
 
+  .page-header {
+    height: 35vh;
+  }
+
   .homepg-tabs {
-    display: flex !important;
-    margin: 30px 0px;
+    display: inline-flex !important;
+    /* margin: 30px 0px; */
+  }
+
+  .about-text {
+    line-height: 2.3rem;
+    font-weight: 300;
+    font-size: 1.0rem !important;
   }
 
   #blog .main-blog-body {
@@ -421,22 +431,35 @@ a.text-main:hover {
 
   .page-header {
     height: 35vh !important;
-  
-}
+
+  }
+
+  #homecarousel h1 {
+    font-size: 2rem !important;
+    color: #fff;
+    font-weight: 900;
+  }
+
+  #homecarousel h2 {
+    font-size: 2rem !important;
+    color: #fff;
+    font-weight: 900;
+  }
 
   .text-main {
     display: block !important;
-}
+  }
 
   .page-header h1 {
     font-size: 2rem;
     text-transform: uppercase;
   }
+
   #homecarousel h3 {
     font-size: 0.95rem !important;
     color: #fff;
     font-weight: 300;
-}
+  }
 
   .homepg-tabs {
     display: block !important;
@@ -447,7 +470,7 @@ a.text-main:hover {
     line-height: 2.3rem;
     font-weight: 300;
     font-size: 0.95rem;
-}
+  }
 
   #founders .card img {
     object-fit: cover;
@@ -470,12 +493,18 @@ a.text-main:hover {
   }
 
   .image-container img {
-    width: 150% !important;
+    width: 190% !important;
     height: 200px;
     object-fit: cover;
     cursor: pointer;
   }
-  .carousel-control-prev, .carousel-control-next {
+
+  .image-title {
+    width: 190% !important;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
     position: relative;
     background-color: #aaa;
     border-radius: 50%;
@@ -485,5 +514,23 @@ a.text-main:hover {
     line-height: 40px;
     display: inline-flex;
     margin-right: 15px;
-}
+  }
+
+  #application .card {
+    border-radius: 20px;
+    border: none;
+    height: 100px;
+    margin-bottom: 60px;
+  }
+
+  .text-overlay {
+    padding: 0px 25px !important;
+    position: absolute;
+    bottom: -150px !important;
+    left: 0;
+    right: 0;
+    text-align: center !important;
+  }
+
+
 }

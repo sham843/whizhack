@@ -10,6 +10,7 @@ import { CommonMethodService } from 'src/app/core/services/common-method.service
 import { FormControl } from '@angular/forms';
 import { filter, debounceTime, distinctUntilChanged } from 'rxjs';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
+import { ExcelService } from 'src/app/core/services/excel.service';
 export interface PeriodicElement {
   srno: number;
   name: string;
@@ -33,10 +34,12 @@ export class EnquiriesComponent implements OnInit {
   currentPage: number = 0;
   getpage: any;
   searchFilter = new FormControl();
+  excelDataArr = new Array();
 
   @ViewChild(MatSort) sortheader!: MatSort;
   constructor(public dialog: MatDialog, private service: ApiService,
     public vadations: FormValidationService,
+    public excelService: ExcelService,
      private errorSer: ErrorHandlerService, private snack: CommonMethodService) { }
   ngOnInit(): void {
     this.getTableData();
@@ -133,6 +136,33 @@ export class EnquiriesComponent implements OnInit {
   pageChanged(event?: any) {
     this.currentPage = event.pageIndex;
     this.getTableData();
+  }
+
+  downloadExcel(){
+    this.excelDataArr = [];
+    this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?IsDownload=true', false, false, false, 'whizhackService');
+    this.service.getHttp().subscribe({
+      next: ((res: any) => {
+        if (res.statusCode == '200') {
+          this.excelDataArr = res.responseData?.responseData;
+          if(this.excelDataArr.length == 0){
+            this.snack.matSnackBar('No Data Found !!', 1)
+          }else{
+            let keyExcelHeader = ['Register ID', 'Name', 'Email ID', 'Date of Birth', 'Contact Number', 'Course Selected', 'Course', 'Gender', 'Country', 'City', 'Qualification', 'Institute Name', 'Degree', 'Year of Passing', 'Percentage', 'Total Experience', 'Message', 'IP Address', 'Operating System', 'Browser'];;
+            let apiKeys = ['registerId', 'fullName', 'email', 'date_of_Birth', 'mobileNo', 'course_Title', 'pageName', 'gender', 'country', 'city', 'qualification', 'instituteName', 'degree', 'year_of_passing', 'percentage', 'total_Experience', 'message', 'iP_address', 'operating_System', 'browser'];
+            let nameArr = [{
+              'sheet_name': 'Enquiries',
+              'excel_name': 'Enquiries_list'
+            }];
+            this.excelService.generateExcel(keyExcelHeader, apiKeys, this.excelDataArr, nameArr);
+          }       
+        }else{
+          this.excelDataArr = [];
+        }
+      }), error: (error: any) => {
+        this.errorSer.handelError(error.status);
+      }
+    })
   }
 }
 //#endregion--------------------------------------------Get Pagenation Method--------------------------------------------------
