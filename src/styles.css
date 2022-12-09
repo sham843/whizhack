@@ -392,9 +392,19 @@ a.text-main:hover {
 
 @media only screen and (max-width: 768px) {
 
+  .page-header {
+    height: 35vh;
+  }
+
   .homepg-tabs {
-    display: flex !important;
-    margin: 30px 0px;
+    display: inline-flex !important;
+    /* margin: 30px 0px; */
+  }
+
+  .about-text {
+    line-height: 2.3rem;
+    font-weight: 300;
+    font-size: 1.0rem !important;
   }
 
   #blog .main-blog-body {
@@ -488,6 +498,7 @@ a.text-main:hover {
     object-fit: cover;
     cursor: pointer;
   }
+
   .image-title {
     width: 190% !important;
   }
@@ -521,5 +532,5 @@ a.text-main:hover {
     text-align: center !important;
   }
 
-  
+
 }
