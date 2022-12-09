@@ -393,8 +393,14 @@ a.text-main:hover {
 @media only screen and (max-width: 768px) {
 
   .homepg-tabs {
-    display: flex !important;
-    margin: 30px 0px;
+    display: inline-flex !important;
+    /* margin: 30px 0px; */
+  }
+
+  .about-text {
+    line-height: 2.3rem;
+    font-weight: 300;
+    font-size: 1rem;
   }
 
   #blog .main-blog-body {
@@ -421,22 +427,23 @@ a.text-main:hover {
 
   .page-header {
     height: 35vh !important;
-  
-}
+
+  }
 
   .text-main {
     display: block !important;
-}
+  }
 
   .page-header h1 {
     font-size: 2rem;
     text-transform: uppercase;
   }
+
   #homecarousel h3 {
     font-size: 0.95rem !important;
     color: #fff;
     font-weight: 300;
-}
+  }
 
   .homepg-tabs {
     display: block !important;
@@ -447,7 +454,7 @@ a.text-main:hover {
     line-height: 2.3rem;
     font-weight: 300;
     font-size: 0.95rem;
-}
+  }
 
   #founders .card img {
     object-fit: cover;
@@ -475,7 +482,9 @@ a.text-main:hover {
     object-fit: cover;
     cursor: pointer;
   }
-  .carousel-control-prev, .carousel-control-next {
+
+  .carousel-control-prev,
+  .carousel-control-next {
     position: relative;
     background-color: #aaa;
     border-radius: 50%;
@@ -485,5 +494,5 @@ a.text-main:hover {
     line-height: 40px;
     display: inline-flex;
     margin-right: 15px;
-}
+  }
 }
