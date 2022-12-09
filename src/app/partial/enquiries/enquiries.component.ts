@@ -149,16 +149,20 @@ export class EnquiriesComponent implements OnInit {
             res.responseData?.responseData.map((x: any) =>{
               if(x.date_of_Birth){
                 x.date_of_Birth = x.date_of_Birth.split('T')[0];
+                // x.isDeleted = x.isDeleted == 1 ? 'Deleted' : '';
               }
             })
             this.excelDataArr = res.responseData?.responseData;
           }
+
+          console.log(this.excelDataArr);
+          
           
           if(this.excelDataArr.length == 0){
             this.snack.matSnackBar('No Data Found !!', 1)
           }else{
-            let keyExcelHeader = ['Register ID', 'Name', 'Email ID', 'Date of Birth', 'Contact Number', 'Course Selected', 'Course', 'Gender', 'Country', 'City', 'Qualification', 'Institute Name', 'Degree', 'Year of Passing', 'Percentage', 'Total Experience', 'Message', 'IP Address', 'Operating System', 'Browser'];;
-            let apiKeys = ['registerId', 'fullName', 'email', 'date_of_Birth', 'mobileNo', 'course_Title', 'pageName', 'gender', 'country', 'city', 'qualification', 'instituteName', 'degree', 'year_of_passing', 'percentage', 'total_Experience', 'message', 'iP_address', 'operating_System', 'browser'];
+            let keyExcelHeader = ['Register ID', 'Name', 'Email ID', 'Date of Birth', 'Contact Number', 'Course Selected', 'Course', 'Gender', 'Country', 'City', 'Qualification', 'Institute Name', 'Degree', 'Year of Passing', 'Percentage', 'Total Experience', 'Message', 'IP Address', 'Operating System', 'Browser', 'Delete'];
+            let apiKeys = ['registerId', 'fullName', 'email', 'date_of_Birth', 'mobileNo', 'course_Title', 'pageName', 'gender', 'country', 'city', 'qualification', 'instituteName', 'degree', 'year_of_passing', 'percentage', 'total_Experience', 'message', 'iP_address', 'operating_System', 'browser', 'isDeleted'];
             let nameArr = [{
               'sheet_name': 'Enquiries',
               'excel_name': 'Enquiries_list'
