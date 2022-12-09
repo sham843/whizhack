@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const myCarouselElement = document.querySelector('#homecarousel')
     const carousel = new bootstrap.Carousel(myCarouselElement, {
-      interval: 2000,
-      wrap: false
+      interval:3000,
+      wrap: true
     })
     console.log(carousel);
     
