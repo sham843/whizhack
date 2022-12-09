@@ -146,6 +146,7 @@
                             <mat-error class="mt-2" *ngIf="formControls['actual_price'].hasError('required')">
                                 Discount Price is Required
                             </mat-error>
+                            <small *ngIf="showDiscountMsg" class="text-danger" style="font-size: 12px;">Discount Price is must be less than Price</small>
                         </mat-form-field>
 
                     </div>
