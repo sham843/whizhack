@@ -8,6 +8,9 @@
                         <span>Enquiries</span>
                     </div>
                     <div class="text-end">
+                        <button type="button" class="btn-main" matTooltip="Download Excel" (click)="downloadExcel()">
+                            Download Excel
+                        </button>
                         <mat-form-field appearance="outline" class="w-100">
                             <input matInput placeholder="Search by Course Name" [formControl]="searchFilter"
                             (keypress)="vadations.noFirstSpaceAllow($event)"
