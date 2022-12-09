@@ -157,7 +157,7 @@ export class BootcampRegistrationComponent {
   get program() { return this.whyProgram.controls }
   getProgram() {
     this.whyProgram = this.fb.group({
-      message: ['', [Validators.required]]
+      message: ['', [Validators.required,Validators.maxLength(200)]]
     })
   }
 

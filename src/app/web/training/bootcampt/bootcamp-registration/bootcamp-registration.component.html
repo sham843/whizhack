@@ -236,12 +236,12 @@
         <mat-form-field appearance="legacy" class="w-100 mb-3">
           <mat-label>Why do you want to join this program?</mat-label>
           <textarea matInput placeholder="Why do you want to join this program?" rows="10" formControlName="message" class="textareaheight scrollbar"
-          (keypress)="validator.noFirstSpaceAllow($event)"></textarea>
+          (keypress)="validator.noFirstSpaceAllow($event)" maxlength="200"></textarea>
           <mat-error *ngIf="program['message'].errors" class="mt-2">
             <span class="text-danger" *ngIf="program['message'].errors['required']">
               Reason is Required.</span>
-              <span class="text-danger" *ngIf="program['message'].errors['pattern']">
-                Please Enter Valid Reason</span>
+                <span class="text-danger" *ngIf="program['message'].errors['maxlength']">
+                  Please Enter Valid Reason</span>
           </mat-error>
         </mat-form-field>
         <div>

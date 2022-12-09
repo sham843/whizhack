@@ -67,7 +67,7 @@ export class FormValidationService {
     if (!this.noSpacesAtStart(event)) {
       return false
     }
-    const maskSeperator = new RegExp('^([0-9 +()])', 'g');
+    const maskSeperator = new RegExp('^([0-9 +()-])', 'g');
     return maskSeperator.test(event.key);
   }
 
