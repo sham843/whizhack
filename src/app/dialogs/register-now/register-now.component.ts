@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FormValidationService } from 'src/app/core/services/form-validation.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-register-now',
   templateUrl: './register-now.component.html',
@@ -15,6 +16,9 @@ export class RegisterNowComponent implements OnInit {
   private formDirective!: NgForm;
   registerForm!: FormGroup | any;
   courseName:any;
+  deviceIpAddress: any;
+  deviceDataarray:any;
+  address: any
   constructor(
     public dialogRef: MatDialogRef<RegisterNowComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -22,34 +26,48 @@ export class RegisterNowComponent implements OnInit {
     private errorSer: ErrorHandlerService,
     public validator: FormValidationService,
     private snack: CommonMethodService,
+    private http: HttpClient
     ) { }
 
   ngOnInit(): void {
     this.getFormData();
+    this.getDevice();
+    this.getdeviceIpAddress();
   }
-             // '^([0-9])', 'g'
-            //  ^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$
-            // ^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$
+
   //#region  ------------------------------------------------FormData Method Start------------------------------------------------------
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
-      email: ['', [Validators.required,Validators.email,Validators.email]],
-      mobileNo: ['', [Validators.required,Validators.pattern('^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$')]],
-      courseId: [this.data.course_Title],
-      message: ['', [Validators.required, Validators.maxLength(500)]],
       "createdBy": 1,
       "modifiedBy": 1,
       "createdDate": new Date(),
       "modifiedDate": new Date(),
       "isDeleted": false,
       "id": 0,
+      fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
+      email: ['', [Validators.required,Validators.email,Validators.email]],
+      mobileNo: ['', [Validators.required,Validators.pattern('^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$')]],
+      courseId: [this.data.course_Title],
+      message: ['', [Validators.required, Validators.maxLength(500)]],
+      iP_address:[''],
+      operating_System:[''],
+      browser: [''],
     })
   }
-  
   //#endregion----------------------------------------------FormData Method End---------------------------------------------------------
-
+  getDevice() {
+    this.snack.getDeviceInfo()
+    this.deviceDataarray =this.snack;
+    console.log( this.deviceDataarray.deviceService.browser);
+  }
+  getdeviceIpAddress() {
+    this.http.get("https://api.ipify.org/?format=json").subscribe((res: any) => {
+      this.deviceIpAddress = res
+      let arr = JSON.stringify(this.deviceIpAddress);
+      this.address = arr.slice(7, 22);
+    })
+  }
   //#region --------------------------------------------------Submit Form Data Method Starts----------------------------------------------
   onSubmit() {
     if (this.registerForm.invalid) {
@@ -59,6 +77,9 @@ export class RegisterNowComponent implements OnInit {
       obj.pageName = this.data.pageName
       obj.courseId = this.data.courseId;
       obj.courseName=this.data.course_Title;
+      obj.iP_address=this.address;
+      obj.operating_System=this.deviceDataarray.deviceService.os_version;
+      obj.browser=this.deviceDataarray.deviceService.browser;
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
@@ -70,7 +91,10 @@ export class RegisterNowComponent implements OnInit {
           this.errorSer.handelError(error.status);
         }
       })
+      console.log('post',obj);
     }    
+   
+    
   }
   //#endregion-------------------------------------------------Submit Form Data Method Ends-----------------------------------------------
   clearForm() {
@@ -78,8 +102,6 @@ export class RegisterNowComponent implements OnInit {
     this.formDirective && this.formDirective.resetForm();
   }
   clearMobileNo(){
-       // let formData=this.registerForm.value;  
-      // console.log(formData.mobileNo?.length == 0);
       this.registerForm.value.mobileNo == 0 ?this.registerForm.controls['mobileNo'].setValue(''):'';
   }
 }
