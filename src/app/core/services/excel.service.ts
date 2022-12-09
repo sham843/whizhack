@@ -40,11 +40,8 @@ export class ExcelService {
 
     // Add Data
     result.map((d: any) => {
-      
-      
       worksheet.addRow(Object.values(d));
     });
-    // worksheet.addRow([]);
 
     // Generate Excel File with given name
     workbook.xlsx.writeBuffer().then((data: any) => {

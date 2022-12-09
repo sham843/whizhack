@@ -144,7 +144,16 @@ export class EnquiriesComponent implements OnInit {
     this.service.getHttp().subscribe({
       next: ((res: any) => {
         if (res.statusCode == '200') {
-          this.excelDataArr = res.responseData?.responseData;
+          // this.excelDataArr = res.responseData?.responseData;
+          if(res.responseData?.responseData.length > 0){
+            res.responseData?.responseData.map((x: any) =>{
+              if(x.date_of_Birth){
+                x.date_of_Birth = x.date_of_Birth.split('T')[0];
+              }
+            })
+            this.excelDataArr = res.responseData?.responseData;
+          }
+          
           if(this.excelDataArr.length == 0){
             this.snack.matSnackBar('No Data Found !!', 1)
           }else{
