@@ -298,48 +298,44 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
 
   onClickSubmit(clear: any) {
     this.updateValidation();
-    if (!this.courseManageForm.valid) {
-<<<<<<< HEAD
-      // if (!this.imgSrc) {
-      //   this.imgFlag = true;
-      //   return;
-      // }
-=======
-      if(this.offer && this.courseManageForm.value.actual_price > this.courseManageForm.value.price){
-        this.showDiscountMsg = true 
-      }
->>>>>>> e8cfe14c026815fc5c9913556b33eca51169884b
+    if (!this.courseManageForm.valid) {      
       return;
     }
     else {
-      this.ngxSpinner.show();
-      let submitObj = {
-        ...this.webStrorage.createdByProps(),
-        ... this.courseManageForm.value
-      }
-      submitObj.price = +submitObj.price
-      submitObj.exclusive_offer = this.offer ? 1 : 0;
-      submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : +submitObj.actual_price;
-      let url = this.editFlag ? 'Update' : 'Insert';
-      this.api.setHttp(this.editFlag ? 'put' : 'post', 'whizhack_cms/course/' + url, false, submitObj, false, 'whizhackService');
-      this.api.getHttp().subscribe({
-        next: ((res: any) => {
-          if (res.statusCode == '200') {
-            this.ngxSpinner.hide();
-            this.selRow = 0;
-            this.comMethods.matSnackBar(res.statusMessage, 0);
-            this.getAllCourseList();
-            this.clearForm(clear);
-          } else {
-            this.ngxSpinner.hide();
-            this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
-          }
-        }),
-        error: (error: any) => {
-          this.ngxSpinner.hide();
-          this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
+      if(this.offer && Number(this.courseManageForm.value.actual_price) >= Number(this.courseManageForm.value.price)){
+        // this.showDiscountMsg = true 
+        this.comMethods.matSnackBar('Discount Price is Must Be Less than Price', 1);
+      }else{
+        this.ngxSpinner.show();
+        let submitObj = {
+          ...this.webStrorage.createdByProps(),
+          ... this.courseManageForm.value
         }
-      })
+        submitObj.price = +submitObj.price
+        submitObj.exclusive_offer = this.offer ? 1 : 0;
+        submitObj.actual_price = submitObj.exclusive_offer == 0 ? 0 : +submitObj.actual_price;
+        let url = this.editFlag ? 'Update' : 'Insert';
+        this.api.setHttp(this.editFlag ? 'put' : 'post', 'whizhack_cms/course/' + url, false, submitObj, false, 'whizhackService');
+        this.api.getHttp().subscribe({
+          next: ((res: any) => {
+            if (res.statusCode == '200') {
+              this.ngxSpinner.hide();
+              this.selRow = 0;
+              this.comMethods.matSnackBar(res.statusMessage, 0);
+              this.getAllCourseList();
+              this.clearForm(clear);
+            } else {
+              this.ngxSpinner.hide();
+              this.comMethods.checkDataType(res.statusMessage) == false ? this.errorService.handelError(res.statusCode) : this.comMethods.matSnackBar(res.statusMessage, 1);
+            }
+          }),
+          error: (error: any) => {
+            this.ngxSpinner.hide();
+            this.comMethods.checkDataType(error.statusText) == false ? this.errorService.handelError(error.statusCode) : this.comMethods.matSnackBar(error.statusText, 1);
+          }
+        })
+      }
+      
     }
   }
 
