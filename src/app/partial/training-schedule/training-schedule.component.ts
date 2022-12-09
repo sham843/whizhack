@@ -301,6 +301,9 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
+      if(this.offer && this.courseManageForm.value.actual_price > this.courseManageForm.value.price){
+        this.showDiscountMsg = true 
+      }
       return;
     } else if(this.offer && this.courseManageForm.value.actual_price > this.courseManageForm.value.price){
       this.showDiscountMsg = true 
