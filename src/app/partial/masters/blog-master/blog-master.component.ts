@@ -314,7 +314,7 @@ export class BlogMasterComponent implements OnInit {
       header: 'Delete',
       title: 'Do You Want To Delete The Selected Content ?',
       cancelButton: 'Cancel',
-      okButton: 'Ok'
+      okButton: 'Delete'
     }
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '300px',
