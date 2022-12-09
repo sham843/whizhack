@@ -299,10 +299,16 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
   onClickSubmit(clear: any) {
     this.updateValidation();
     if (!this.courseManageForm.valid) {
+<<<<<<< HEAD
       // if (!this.imgSrc) {
       //   this.imgFlag = true;
       //   return;
       // }
+=======
+      if(this.offer && this.courseManageForm.value.actual_price > this.courseManageForm.value.price){
+        this.showDiscountMsg = true 
+      }
+>>>>>>> e8cfe14c026815fc5c9913556b33eca51169884b
       return;
     }
     else {
