@@ -109,7 +109,7 @@ export class PostJobComponent implements OnInit {
         this.service.getHttp().subscribe({
           next: ((res: any) => {
             if (res.statusCode === '200') {
-              res.statusMessage == 'Last Date of Application is Expired' ? this.commonService.matSnackBar(res.statusMessage, 1) : this.commonService.matSnackBar(res.statusMessage, 0)
+              res.statusMessage == 'Last Date is Greater Than Current Date' ? this.commonService.matSnackBar(res.statusMessage, 1) : this.commonService.matSnackBar(res.statusMessage, 0)
               this.bindTable();
             }
             else {
@@ -132,7 +132,7 @@ export class PostJobComponent implements OnInit {
   openDeleteDialog(id: any) {
     let dialoObj = {
       header: 'Delete',
-      title: 'Do You Want To Delete the Job ?',
+      title: 'Do you want to delete the selected course ?',
       cancelButton: 'Cancel',
       okButton: 'Delete'
     }

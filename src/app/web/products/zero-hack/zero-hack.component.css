@@ -80,8 +80,3 @@ section {
     color: #000;
     text-decoration: none;
 }
-#statistics .card-body{
-    padding: 50px;
-    color: #fff;
-    background-color: var(--card-bg-color);
-}

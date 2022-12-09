@@ -92,7 +92,7 @@ export class ApplyNowComponent implements OnInit {
             this.error.handelError(error.status);
           }
         })
-     }
+      }
     }
 
     clearForm() {

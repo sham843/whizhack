@@ -52,21 +52,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4" *ngFor="let data of this.deviceDataarray">
+            <div class="col-sm-4">
                 <div class="card form-card border border-white">
                     <div class="card-header">Additional Information</div>
                     <div class="card-body">
                         <div class="mb-3">
                             <div class="form-label">IP Address :</div>
-                            <div class="form-data">{{address || '-'}}</div>
+                            <div class="form-data">{{viewData?.iP_address || '-'}}</div>
                         </div>
                         <div class="mb-3">
                             <div class="form-label">Operating System :</div>
-                            <div class="form-data">{{data.deviceService.os_version || '-' | titlecase}}</div>
+                            <div class="form-data">{{viewData?.operating_System || '-' | titlecase}}</div>
                         </div>
                         <div class="mb-0">
                             <div class="form-label">Browser :</div>
-                            <div class="form-data">{{data.deviceService.browser || '-'  | titlecase}}</div>
+                            <div class="form-data">{{viewData?.browser || '-' | titlecase}}</div>
                         </div>
                     </div>
                 </div>
