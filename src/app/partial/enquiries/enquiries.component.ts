@@ -153,10 +153,7 @@ export class EnquiriesComponent implements OnInit {
               }
             })
             this.excelDataArr = res.responseData?.responseData;
-          }
-
-          console.log(this.excelDataArr);
-          
+          }          
           
           if(this.excelDataArr.length == 0){
             this.snack.matSnackBar('No Data Found !!', 1)
