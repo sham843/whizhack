@@ -39,16 +39,17 @@ export class RegisterNowComponent implements OnInit {
   get f() { return this.registerForm.controls }
   getFormData() {
     this.registerForm = this.fb.group({
+      "createdBy": 1,
       "modifiedBy": 1,
+      "createdDate": new Date(),
       "modifiedDate": new Date(),
       "isDeleted": false,
+      "id": 0,
       fullName: ['', [Validators.required, Validators.maxLength(50),Validators.pattern('^[a-zA-Z][a-zA-Z\\s]+$')]],
       email: ['', [Validators.required,Validators.email,Validators.email]],
+      mobileNo: ['', [Validators.required,Validators.pattern('^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$')]],
       courseId: [this.data.course_Title],
       message: ['', [Validators.required, Validators.maxLength(500)]],
-      iP_address:[''],
-      operating_System:[''],
-      browser: [''],
     })
   }
   //#endregion----------------------------------------------FormData Method End---------------------------------------------------------
