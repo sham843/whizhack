@@ -32,7 +32,7 @@ export class ExcelService {
     });
 
     
-    var headerSize = [12, 30, 40, 15, 20, 60, 20, 10, 10, 15, 20, 20, 20, 10, 10, 10, 60, 15, 15, 15];
+    var headerSize = [12, 30, 40, 15, 20, 60, 20, 10, 10, 15, 20, 20, 20, 10, 10, 10, 60, 15, 15, 15, 15];
 
     for(var i = 0; i < headerSize.length; i++){      
       worksheet.getColumn(i+1).width = headerSize[i];
