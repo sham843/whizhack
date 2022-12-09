@@ -3,15 +3,9 @@
         <div class="card form-card">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div>
-
-                        <span>Enquiries</span>
-                    </div>
-                    <div class="text-end">
-                        <button type="button" class="btn-main" matTooltip="Download Excel" (click)="downloadExcel()">
-                            Download Excel
-                        </button>
-                        <mat-form-field appearance="outline" class="w-100">
+                    <span>Enquiries</span>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <mat-form-field appearance="outline" class="w-100 me-3">
                             <input matInput placeholder="Search by Course Name" [formControl]="searchFilter"
                             (keypress)="vadations.noFirstSpaceAllow($event)"
                             maxlength="50">
@@ -23,6 +17,9 @@
                                 </span>
                             </button>
                         </mat-form-field>
+                        <button type="button" class="btn btn-main" matTooltip="Download Excel" (click)="downloadExcel()">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </button>
                     </div>
                 </div>
             </div>
