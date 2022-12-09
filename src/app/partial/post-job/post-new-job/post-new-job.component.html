@@ -46,7 +46,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Last Date of Application</mat-label>
                             <input matInput  [matDatepicker]="picker1" formControlName="date_of_Application"  
-                                [readonly]="true" [min]="min" placeholder="Enter Last Date of Application Here" (click)="picker1.open()">
+                                [readonly]="true" [min]="min" placeholder="Enter Last Date of Application Here..." (click)="picker1.open()">
                             <mat-datepicker-toggle matIconSuffix [for]="picker1" class="pickdate"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                             <mat-error class="mt-2"
