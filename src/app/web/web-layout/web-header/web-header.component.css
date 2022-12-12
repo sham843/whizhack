@@ -33,8 +33,9 @@
 	display: block; /* Display block instead of inline */
 	transition: 0.3s; /* Transition effects on hover (color) */
   }
+  .overlay a:active, .overlay a.active,
   .overlay a:hover, .overlay a:focus {
-	color: #f1f1f1;
+	color: var(--main-color);
   }
   .overlay .closebtn {
 	position: absolute;
