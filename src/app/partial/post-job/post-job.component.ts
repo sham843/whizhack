@@ -132,7 +132,7 @@ export class PostJobComponent implements OnInit {
   openDeleteDialog(id: any) {
     let dialoObj = {
       header: 'Delete',
-      title: 'Do you want to delete the selected course ?',
+      title: 'Are you sure, you want to Delete Job Post ?',
       cancelButton: 'Cancel',
       okButton: 'Delete'
     }
