@@ -160,8 +160,9 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
         this.imagepath = res.responseData;
         if (this.imageArray.length) {
           let flag = this.imagepath.includes(',')
-          flag ? this.imageArray.push(this.imagepath.split(',')) : this.imageArray.push(this.imagepath);
-
+          let tempArr = this.imagepath.split(',');
+          // flag ? this.imageArray.push(this.imagepath.split(',')) : this.imageArray.push(this.imagepath);
+          flag ? tempArr.map((x: any) => { this.imageArray.push(x) }) : this.imageArray.push(this.imagepath);
         } else {
           this.imageArray = this.imagepath.split(',');
         }
@@ -173,6 +174,7 @@ export class GalleryMasterComponent implements OnInit, AfterViewInit {
         this.imageArray = [];
       }
     })
+    
   }
   //#endregion
 
