@@ -12,7 +12,7 @@
     </div>
 </div>
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row py-4">
             <div class="col-sm-12 mb-4">
                 <h4 class="d-flex">
@@ -31,7 +31,7 @@
 
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Bootcamp Program</h2>
@@ -48,45 +48,49 @@
                     format with both on campus learning and online self-paced activities.
                 </p>
                 <div class="row courses mb-5">
-                   <div class="col-sm-4 col-lg-4 col-md mb-3" *ngFor="let bootData of bootCamptArray">
+                    <div class="col-sm-12 col-lg-12 col-md mb-3" *ngFor="let bootData of bootCamptArray">
                         <div class="card">
-                            <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top">
-                            <div class="card-body px-0">
-                                <h5 class="course-name mb-3">{{bootData.course_Title}}</h5>
-                                <h6 class="duration">Duration:</h6>
-                                <p class="duration">{{bootData.duration}}</p>
-                                <h6 class="price mb-3">
-                                    {{bootData.course_Description}}
-                                </h6>
-                                <h6 class="price mb-3">
-                                    {{bootData.course_Caption}}
-                                </h6>
-                                <h6 class="duration-label">Price:</h6>
-                                <div class="price mb-3">
-                                    INR <strong>{{bootData.price}}</strong> + GST<br>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="{{bootData.imagePath}}" alt="Product" class="card-img-top">
                                 </div>
-                                <h6 class="duration-label" *ngIf="bootData?.exclusive_offer == 1">
-                                    {{bootData.actual_price}}/-({{bootData.price_Terms}})</h6>
+                                <div class="col-sm-9">
+                                    <div class="card-body px-0">
+                                        <h5 class="course-name mb-3">{{bootData.course_Title}}</h5>
+                                        <h6 class="duration">Duration:</h6>
+                                        <p class="duration">{{bootData.duration}}</p>
+                                        <h6 class="price mb-3">
+                                            {{bootData.course_Description}}
+                                        </h6>
+                                        <h6 class="price mb-3">
+                                            {{bootData.course_Caption}}
+                                        </h6>
+                                        <h6 class="duration-label">Price:</h6>
+                                        <div class="price">
+                                            INR <strong>{{bootData.price}}</strong> + GST<br>
+                                        </div>
+                                        <h6 class="duration-label" *ngIf="bootData?.exclusive_offer == 1">
+                                            {{bootData.actual_price}}/-({{bootData.price_Terms}})</h6>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer p-0">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <button mat-stroked-button class="btn btn-main-outline rounded-pill" [ngClass]="{'d-none':!bootData.brochurePath}" (click)="openNewWindow(bootData.brochurePath)">
-                                            <i class="fa-solid fa-file-pdf text-danger me-1"></i>
-                                            Download Brochure
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-main-outline rounded-pill px-4"
+                                    <button mat-stroked-button class="btn btn-main-outline rounded-pill"
+                                        [ngClass]="{'d-none':!bootData.brochurePath}"
+                                        (click)="openNewWindow(bootData.brochurePath)">
+                                        <i class="fa-solid fa-file-pdf text-danger me-1"></i>
+                                        Download Brochure
+                                    </button>
+                                    <button class="btn btn-main-outline rounded-pill px-4"
                                         (click)="openDialog(bootData)">Register
-                                            Now</button>
-                                    </div>
+                                        Now</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                   <!--  <div class="col-sm-4 mb-3">
+                    <!--  <div class="col-sm-4 mb-3">
                         <div class="card" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
                             <img src="http://whizhack.mahamining.com//UploadDocuments/Upload/file_20221202122639713.png"
                                 alt="Product" class="card-img-top">
@@ -215,10 +219,11 @@
                         </div>
                     </div> -->
                 </div>
-                <h2 class="mb-4" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">Curriculum</h2>
+                <h2 class="mb-4" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">Curriculum</h2>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="accordion" id="accordionExample" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <div class="accordion" id="accordionExample" data-aos="fade-up" data-aos-delay="200"
+                            data-aos-easing="ease-in-sine">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="accordion-item">
@@ -486,7 +491,7 @@
 </section>
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Who should choose this course?</h2>
@@ -512,7 +517,7 @@
 </section>
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">What you can expect from the course?</h2>
@@ -522,41 +527,55 @@
                     projects and
                     simulated scenarios.
                 </p>
-                <div class="row courses gy-3 gy-lg-0">
-                    <div class="col-sm-4 col-lg-4 col-md d-flex align-items-strech">
-                        <div class="card p-3" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
-                            <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png" alt="Product"
-                                class="card-img-top w-100">
-                            <div class="card-body mb-3">
-                                <h5 class="course-name">During Bootcamp</h5>
-                                <ul>
-                                    <!-- <li>Self-paced and flexible learning with instant feedback</li> -->
-                                    <li>Live Mentoring by IIT Jodhpur Professors in
-                                        Virtual Mode for better conceptual understanding.</li>
-                                    <li>Curriculum based on National Initiative for Cybersecurity Education (NICE).</li>
-                                    <li> Access to faculties and industry experts.</li>
-                                    <li> Guidance on job searching and resume building.</li>
-                                </ul>
+                <div class="row courses g-3">
+                    <div class="col-sm-12 col-lg-12 col-md-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png"
+                                            alt="Product" class="card-img-top w-100">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h5 class="course-name">During Bootcamp</h5>
+                                        <ul>
+                                            <!-- <li>Self-paced and flexible learning with instant feedback</li> -->
+                                            <li>Live Mentoring by IIT Jodhpur Professors in
+                                                Virtual Mode for better conceptual understanding.</li>
+                                            <li>Curriculum based on National Initiative for Cybersecurity Education
+                                                (NICE).</li>
+                                            <li> Access to faculties and industry experts.</li>
+                                            <li> Guidance on job searching and resume building.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-lg-4 col-md d-flex align-items-strech">
-                        <div class="card p-3" data-aos="fade-up"   data-aos-delay="200" data-aos-easing="ease-in-sine">
+                    <div class="col-sm-12 col-lg-12 col-md-12">
+                        <div class="card" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-sine">
                             <!-- <img src="https://whizhack.mahamining.com/assets/image/home/Product1.png" alt="Product"
                                 class="card-img-top w-100"> -->
-                            <img src="https://whizhack.mahamining.com/assets/image/after-bootcamp.jpg" alt="Product"
-                                class="card-img-top w-100">
                             <div class="card-body">
-                                <h5 class="course-name mb-3">After Bootcamp</h5>
-                                <ul>
-                                    <li>12 months of continued access to online learning platform.</li>
-                                    <li>Connection to our alumni and career network.</li>
-                                    <li>Start your career as Cyber Forensics Analyst, Network Operations Specialist,
-                                        Cyber
-                                        Analyst, Cyber Incident Responder,
-                                        Cyber Infrastructure Support Specialist & many more.</li>
-
-                                </ul>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://whizhack.mahamining.com/assets/image/after-bootcamp.jpg"
+                                            alt="Product" class="card-img-top w-100">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h5 class="course-name mb-3">After Bootcamp</h5>
+                                        <ul>
+                                            <li>12 months of continued access to online learning platform.</li>
+                                            <li>Connection to our alumni and career network.</li>
+                                            <li>Start your career as Cyber Forensics Analyst, Network Operations
+                                                Specialist,
+                                                Cyber
+                                                Analyst, Cyber Incident Responder,
+                                                Cyber Infrastructure Support Specialist & many more.</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -833,7 +852,7 @@
 </section> -->
 
 <section>
-    <div class="container" data-aos="fade-up"   data-aos-delay="100" data-aos-easing="ease-in-sine">
+    <div class="container" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-sine">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="mb-4">Frequently Asked Questions</h2>

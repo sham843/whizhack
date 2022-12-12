@@ -46,7 +46,7 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Last Date of Application</mat-label>
                             <input matInput  [matDatepicker]="picker1" formControlName="date_of_Application"  
-                                [readonly]="true" [min]="min" placeholder="Enter Last Date of Application Here" (click)="picker1.open()">
+                                [readonly]="true" [min]="min" placeholder="Enter Last Date of Application Here..." (click)="picker1.open()">
                             <mat-datepicker-toggle matIconSuffix [for]="picker1" class="pickdate"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                             <mat-error class="mt-2"
@@ -58,13 +58,13 @@
                     <div class="mb-3">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Job Description</mat-label>
-                            <textarea matInput placeholder="Enter Job Description Here" rows="15" 
+                            <textarea matInput placeholder="Enter Job Description Here..." rows="15" 
                                 formControlName="job_Description"
                                 (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
                                 <!-- maxlength="500" -->
                             <mat-error class="mt-2"
                                 *ngIf="(f['job_Description'].hasError('required') || f['job_Description'].hasError('touched'))">
-                                Description is Required
+                               Job Description is Required
                             </mat-error>
                             <mat-error class="mt-2" *ngIf="f['job_Description'].hasError('maxlength')">
                                 Please Enter Maximum 500 Character
