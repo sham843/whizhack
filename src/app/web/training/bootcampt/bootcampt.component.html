@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="card-footer p-0">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div [class]="bootData.brochurePath ? 'd-flex justify-content-between align-items-center' : 'd-flex justify-content-end align-items-center'">
                                     <button mat-stroked-button class="btn btn-main-outline rounded-pill"
                                         [ngClass]="{'d-none':!bootData.brochurePath}"
                                         (click)="openNewWindow(bootData.brochurePath)">
