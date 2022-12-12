@@ -9,6 +9,7 @@ import { ErrorHandlerService } from './error-handler.service';
   providedIn: 'root'
 })
 export class FileUploadService {
+  sizeFlag : boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -75,6 +76,7 @@ export class FileUploadService {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
           if (event.target.files[i].size > size) {
+            this.sizeFlag = true;
             obj.error("Required file size should be less than " + (docExt1 == 'pdf'? 500 : 10 )+ " MB.");
             this.commonService.matSnackBar("Required file size should be less than " +(docExt1 == 'pdf'? 500 : 10 ) + " MB.", 1);
             docTypeCheckFlag = false;
@@ -84,6 +86,7 @@ export class FileUploadService {
             const selResult = nameText.split('.');
             const docExt = selResult.pop();
             const docExtLowerCase = docExt.toLowerCase();
+            this.sizeFlag = false;
             if (allowedDocTypes.match(docExtLowerCase)) { }
             else {
               docTypeCheckFlag = false;
@@ -114,7 +117,11 @@ export class FileUploadService {
       else {
         this.spinner.hide();
         obj.error("Only " + allowedDocTypes + " file format allowed.");
-        this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.", 1);
+        if(this.sizeFlag){
+          this.commonService.matSnackBar("Required file size should be less than " +(docExt1 == 'pdf'? 500 : 10 ) + " MB.", 1)  
+        }else{
+          this.commonService.matSnackBar("Only " + allowedDocTypes + " file format allowed.", 1);
+        }
       }
     })
   }
