@@ -99,7 +99,7 @@ export class EnquiriesComponent implements OnInit {
   //#region-----------------------------------------------Delete Enquiry Data Method---------------------------------------------
   openDeleteDialog(id: any) {
     let dialoObj = {
-      title: 'Are you sure, you want to delete the selected course ?',
+      title: 'Are You Sure, You Want To Delete The Selected Enquiries ?',
       cancelButton: 'Cancel',
       okButton: 'Delete'
     }
