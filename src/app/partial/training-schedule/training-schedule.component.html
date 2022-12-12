@@ -51,7 +51,7 @@
                     <div class="mb-1">
                         <mat-form-field appearance="legacy" class="w-100">
                             <mat-label>Course Description</mat-label>
-                            <textarea matInput placeholder="Enter Course Description" rows="4"
+                            <textarea matInput placeholder="Enter Course Description" rows="4" class="textareaheight scrollbar"
                                 formControlName="course_Description"
                                 (keypress)="vadations.noFirstSpaceAllow($event)"></textarea>
                             <mat-error *ngIf="formControls['course_Description'].hasError('required')">
