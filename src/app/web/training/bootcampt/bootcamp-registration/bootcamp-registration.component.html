@@ -99,9 +99,9 @@
               (keypress)="validator.noFirstSpaceAllow($event)" (keyup)="validator.removeSpaceAtBegining($event)" (blur)="clearMobileNo()">
               <mat-error *ngIf="personal['mobileNo'].errors" class="mt-2">
                 <span class="text-danger" *ngIf="personal['mobileNo']?.errors['required']">
-                  Phone Number is Required.</span>
+                  Mobile Number is Required.</span>
                   <span class="text-danger" *ngIf="personal['mobileNo'].errors['pattern']">
-                    Please Enter Valid Phone Number</span> 
+                    Please Enter Valid Mobile Number</span> 
               </mat-error>
             </mat-form-field>
           </div>
