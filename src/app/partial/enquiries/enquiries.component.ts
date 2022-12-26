@@ -143,15 +143,8 @@ export class EnquiriesComponent implements OnInit {
     this.service.setHttp('get', 'whizhack_cms/register/GetAllByPagination?IsDownload=true', false, false, false, 'whizhackService');
     this.service.getHttp().subscribe({
       next: ((res: any) => {
-        if (res.statusCode == '200') {
-          // this.excelDataArr = res.responseData?.responseData;
+        if (res.statusCode == 200) {
           if(res.responseData?.responseData.length > 0){
-            res.responseData?.responseData.map((x: any) =>{
-              if(x.date_of_Birth){
-                x.date_of_Birth = x.date_of_Birth.split('T')[0];
-                // x.isDeleted = x.isDeleted == 1 ? 'Deleted' : '';
-              }
-            })
             this.excelDataArr = res.responseData?.responseData;
           }          
           
