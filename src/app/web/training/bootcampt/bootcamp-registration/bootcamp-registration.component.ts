@@ -179,7 +179,7 @@ export class BootcampRegistrationComponent {
         "id": 0,
         "fullName": perInfoData.fullName,
         "email": perInfoData.email,
-        "date_of_Birth": new Date(perInfoData.date_of_Birth).toISOString().split('T')[0],
+        "date_of_Birth": perInfoData.date_of_Birth.toLocaleDateString(),
         "gender": perInfoData.gender,
         "country": perInfoData.country,
         "city": perInfoData.city,
