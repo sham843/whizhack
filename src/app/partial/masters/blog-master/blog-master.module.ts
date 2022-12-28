@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.mo
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule
   ]
 })
 export class BlogMasterModule { }

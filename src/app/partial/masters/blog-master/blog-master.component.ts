@@ -37,6 +37,8 @@ export class BlogMasterComponent implements OnInit {
   selRow: number = 0;
   imgTooltip!:any;
   get f() { return this.frm.controls }
+  editorConfig = this.commonMethod.editorConfig;
+  submited: boolean = false;
 
   get itemsForm(): FormArray {
     return this.frm.get('blogRegisterDetailsModel') as FormArray;
@@ -197,6 +199,7 @@ export class BlogMasterComponent implements OnInit {
     this.radioFlag = false;
     this.imageFlag = false;
     this.imgTooltip = '';
+    this.submited = false;
   }
 
   fileUpload(event: any) {
@@ -230,6 +233,7 @@ export class BlogMasterComponent implements OnInit {
 
   onClickSubmit(formDirective?: any) {
       this.radioFlag = true;
+  this.submited = true;
    if (this.frm.value.imagePath == '') {
       // this.commonMethod.matSnackBar('Please Upload Image !', 1)
       this.imageFlag = true;
@@ -240,7 +244,7 @@ export class BlogMasterComponent implements OnInit {
       }
       return;
     } else {
-
+      this.submited = false;
       this.ngxspinner.show();
       let postObj = this.frm.value;
       postObj.title = this.frm.value.title.replace(/  +/g, ' ');

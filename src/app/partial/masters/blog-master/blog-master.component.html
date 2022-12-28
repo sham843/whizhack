@@ -29,13 +29,16 @@
                         </mat-form-field>
                     </div>
                     <div class="mb-3">
-                        <mat-form-field appearance="legacy" class="w-100">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
+                        <!-- <mat-form-field appearance="legacy" class="w-100"> -->
+                            <!-- <mat-label>Description</mat-label> -->
+                            <!-- <textarea matInput placeholder="Enter Description" rows="5" formControlName="description"
                                 class="textareaheight scrollbar"
-                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
-                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required')">Description is Required</mat-error>
-                        </mat-form-field>
+                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea> -->
+                            <div class="form-label">Description</div>
+                            <angular-editor formControlName="description" [config]="editorConfig" placeholder="Enter Description">
+                            </angular-editor>
+                            <mat-error class="mt-1" *ngIf="f['description'].hasError('required') && submited">Description is Required</mat-error>
+                        <!-- </mat-form-field> -->
                     </div>
                     <div class="mb-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -114,15 +117,18 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="mb-3">
-                                        <mat-form-field appearance="legacy" class="w-100">
-                                            <mat-label>Sub-Description</mat-label>
+                                        <!-- <mat-form-field appearance="legacy" class="w-100"> -->
+                                            <!-- <mat-label>Sub-Description</mat-label>
                                             <textarea matInput placeholder="Enter Sub-Description" rows="5"
                                                 formControlName="description"
-                                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea>
+                                                (keypress)="validation.noFirstSpaceAllow($event)"></textarea> -->
+                                            <div class="form-label">Sub-Description</div>
+                                            <angular-editor formControlName="description" [config]="editorConfig" placeholder="Enter Sub-Description">
+                                            </angular-editor>
                                             <mat-error class="mt-2"
-                                                *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID'">
+                                                *ngIf="this.blogRegisterCtr.controls[i].controls.description.status == 'INVALID' && submited">
                                                 Sub-Description is Required</mat-error>
-                                        </mat-form-field>
+                                        <!-- </mat-form-field> -->
                                     </div>
                                     <div class="text-end mb-2">
                                         <span class="ms-2" *ngIf="frm.value.blogRegisterDetailsModel.length > 1">
