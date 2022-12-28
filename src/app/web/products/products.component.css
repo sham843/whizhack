@@ -87,7 +87,14 @@ section {
     overflow-y: auto;
     line-height: 1.8;
 }
-
+.blog-list a{
+    color: #fff !important;
+    text-decoration: none !important;
+ }
+ .blog-list a:hover{
+     color: var(--main-color) !important;
+     text-decoration: none !important;
+  }
 .pointer-link {
     cursor: pointer;
 }
