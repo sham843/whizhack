@@ -41,9 +41,7 @@
                         <p class="mb-2">{{blogPostArray[0]?.createdDate| date}}</p>
                         <hr>
                         <h5>{{blogPostArray[0]?.title}}</h5>
-                        <p class="description">
-                            {{blogPostArray[0]?.description}}
-                        </p>
+                        <p class="description" innerHTML="{{blogPostArray[0]?.description}}"></p>
                         <div class="text-end">
                             <button type="button" class="btn btn-outline-light rounded-pill"
                                 (click)="blogDetails(blogPostArray[0].id,blogPostArray[0]?.title)">Read More</button>

@@ -107,7 +107,14 @@ section {
     height: 89vh;
     overflow-y: auto;
 }
-
+.blog-list a{
+    color: #fff !important;
+    text-decoration: none !important;
+ }
+ .blog-list a:hover{
+     color: var(--main-color) !important;
+     text-decoration: none !important;
+  }
 #social-media .card {
     border-radius: 15px;
     border: none;

@@ -23,14 +23,10 @@
                     </div>
                 </div>
                 <img src="{{blogArray?.imagePath}}" class="img-fluid rounded">
-                <p class="about-text" style="white-space: pre-wrap;">
-                    {{blogArray?.description}}
-                </p>
+                <p class="about-text" style="white-space: pre-wrap;" innerHTML="{{blogArray?.description}}"></p>
                <div *ngFor="let data of blogArray?.blogRegisterDetailsModel">
                 <h5 class="text-main">{{data.title}}</h5>
-                <p class="about-text" style="white-space: pre-wrap;">
-                   {{data.description}}
-                </p>
+                <p class="about-text" style="white-space: pre-wrap;" innerHTML="{{data.description}}"></p>
                </div>
             </div>
             <div class="col-sm-4">

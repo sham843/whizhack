@@ -133,12 +133,11 @@ a.text-main:hover {
 }
 
 #blog a {
-  color: #fff;
-  text-decoration: none;
+  color: var(--main-color);
 }
 
 #blog a:hover {
-  color: var(--main-color);
+  color: #fff;
 }
 
 #blog .main-blog-img {

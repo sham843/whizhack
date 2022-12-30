@@ -15,10 +15,10 @@
         </div>
         <div class="col-sm-9">
             <div class="blog-height scrollbar">
-                <p style="white-space: pre-wrap;">{{ resValues?.description }}</p>
+                <p style="white-space: pre-wrap;" innerHTML="{{ resValues?.description }}"></p>
                 <div *ngFor="let nums of resValues.blogRegisterDetailsModel;let i = index">
                     <h6 class="text-main">{{ nums?.title }}</h6>
-                    <p style="white-space: pre-wrap;">{{ nums?.description }}</p>
+                    <p style="white-space: pre-wrap;" innerHTML="{{ nums?.description }}"></p>
                 </div>
             </div>
         </div>

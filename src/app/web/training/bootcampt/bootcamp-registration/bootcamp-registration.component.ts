@@ -164,12 +164,12 @@ export class BootcampRegistrationComponent {
 
 
   submitForm(formDirective: any) {
+    
     if (this.personalInfoForm.invalid || this.qualificationForm.invalid || this.experianceForm.invalid || this.whyProgram.invalid) {
       return
     } else {
       let perInfoData = this.personalInfoForm.value;
       let qualiData = this.qualificationForm.value;
-
       let obj = {
         "createdBy": 0,
         "modifiedBy": 0,
@@ -179,7 +179,7 @@ export class BootcampRegistrationComponent {
         "id": 0,
         "fullName": perInfoData.fullName,
         "email": perInfoData.email,
-        "date_of_Birth": perInfoData.date_of_Birth,
+        "date_of_Birth": perInfoData.date_of_Birth.toLocaleDateString(),
         "gender": perInfoData.gender,
         "country": perInfoData.country,
         "city": perInfoData.city,
@@ -199,6 +199,7 @@ export class BootcampRegistrationComponent {
         "message": this.whyProgram.value.message,
         "flag": this.qualificationForm.value.remark == 'percentage' ? 0 : 1
       }
+      
       this.service.setHttp('post', 'whizhack_cms/register/Register', false, obj, false, 'whizhackService');
       this.service.getHttp().subscribe({
         next: ((res: any) => {
