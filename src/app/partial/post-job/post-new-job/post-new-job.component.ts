@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Editor } from 'ngx-editor';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommonMethodService } from 'src/app/core/services/common-method.service';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -43,6 +44,7 @@ export class PostNewJobComponent implements OnInit {
     private error: ErrorHandlerService,
     private commonService: CommonMethodService,
     private webStorageService: WebStorageService,
+    private ngxSpinner: NgxSpinnerService,
     private dialogRef: MatDialogRef<PostNewJobComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
@@ -78,11 +80,11 @@ export class PostNewJobComponent implements OnInit {
     if (!this.postNewJobFrm.valid) {
       return;
     } else {
+      this.ngxSpinner.show();
       let data = this.postNewJobFrm.value;
       data.date_of_Posting = new Date(); 
       this.editFlag ? '' : data.id = 0;
       data.date_of_Application = this.commonService.setDate(data.date_of_Application);
-
       let obj = {
         "createdBy": this.webStorageService.getUserId(),
         "modifiedBy": this.webStorageService.getUserId(),
@@ -98,15 +100,18 @@ export class PostNewJobComponent implements OnInit {
       this.service.getHttp().subscribe({
         next: ((res: any) => {
           if (res.statusCode === '200') {
+            this.ngxSpinner.hide();
             this.commonService.matSnackBar(res.statusMessage, 0);
             this.dialogRef.close('Yes');
             this.clearForm();
             this.editFlag = false;
           } else {
+            this.ngxSpinner.hide();
             this.commonService.matSnackBar(res.statusMessage, 1);
           }
         }),
         error: (error: any) => {
+          this.ngxSpinner.hide();
           this.error.handelError(error.status);
         }
       })
