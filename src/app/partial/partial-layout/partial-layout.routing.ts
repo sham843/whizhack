@@ -9,4 +9,5 @@ export const PartialLayoutRoutes: Routes = [
   { path: 'bootcamp-enquiries', loadChildren: () => import('../../partial/bootcamp-enquiries/bootcamp-enquiries.module').then(m => m.BootcampEnquiriesModule), data: { title: 'Enquiries' } },
   { path: 'training-schedule', loadChildren: () => import('../../partial/training-schedule/training-schedule.module').then(m => m.TrainingScheduleModule), data: { title: 'Training Schedule' } },
   { path: 'post-job', loadChildren: () => import('../../partial/post-job/post-job.module').then(m => m.PostJobModule), data: { title: 'Post Job' } },
+  { path: 'manage-meta-tags', loadChildren: () => import('../../partial/manage-meta-tags/manage-meta-tags.module').then(m => m.ManageMetaTagsModule), data: { title: 'Manage Meta Tags' } },
 ];

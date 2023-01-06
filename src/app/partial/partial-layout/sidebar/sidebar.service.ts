@@ -59,6 +59,13 @@ export class SidebarService {
       type: 'simple',
       url:'./post-job'
     },
+    {
+      title: 'Manage Meta Tags',
+      icon: 'fa-solid fa-hashtag',
+      active: false,
+      type: 'simple',
+      url:'./manage-meta-tags'
+    },
     // {
     //   title: 'Masters',
     //   icon: 'fa fa-tachometer-alt',
