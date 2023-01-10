@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManageMetaTagsRoutingModule } from './manage-meta-tags-routing.module';
 import { ManageMetaTagsComponent } from './manage-meta-tags.component';
 import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MaterialModule } from 'src/app/shared/angularMaterialModule/material.mo
   imports: [
     CommonModule,
     ManageMetaTagsRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class ManageMetaTagsModule { }

@@ -2,40 +2,63 @@
     <div class="col-sm-4">
         <div class="card form-card">
             <div class="card-header">Manage Meta Tags</div>
+            <form [formGroup]="metaTagForm" #formDirective="ngForm">
             <div class="card-body">
                 <div class="mb-3">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Page Name</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{food.viewValue}}
-                            </mat-option>
-                        </mat-select>
+                            <mat-select formControlName="pageNameId">
+                                <mat-option *ngFor="let page_Name of allPageNameArray" [value]="page_Name.id">{{
+                                    page_Name.pageName }}</mat-option>
+                            </mat-select>
+                        <mat-error *ngIf="f.pageNameId.errors" class="mt-2">
+                            <span class="text-danger" *ngIf="f.pageNameId.errors?.required">
+                                Page Name is Required.</span>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
                     <mat-form-field appearance="legacy" class="w-100">
                         <mat-label>Keywords</mat-label>
-                        <textarea matInput placeholder="Keywords" rows="5"></textarea>
+                        <textarea matInput placeholder="Keywords" rows="5" formControlName='keyWords' (keypress)="validation.noSpaceAllow($event)"></textarea>
+                        <mat-error *ngIf="f.keyWords.errors" class="mt-2">
+                            <span class="text-danger" *ngIf="f.keyWords.errors?.required">
+                                Keywords is Required.</span>
+                            <span class="text-danger" *ngIf="f.keyWords.errors?.pattern">
+                                Please Enter Valid Keywords</span>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
                     <mat-form-field appearance="legacy" class="w-100">
                         <mat-label>Meta Title</mat-label>
-                        <textarea matInput placeholder="Meta Title" rows="5"></textarea>
+                        <textarea matInput placeholder="Meta Title" rows="5" formControlName='metaTitle' (keypress)="validation.noSpaceAllow($event)"></textarea>
+                        <mat-error *ngIf="f.metaTitle.errors" class="mt-2">
+                            <span class="text-danger" *ngIf="f.metaTitle.errors?.required">
+                                Meta Title is Required.</span>
+                            <span class="text-danger" *ngIf="f.metaTitle.errors?.pattern">
+                                Please Enter Valid Meta Title</span>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="mb-3">
                     <mat-form-field appearance="legacy" class="w-100">
                         <mat-label>Meta Description</mat-label>
-                        <textarea matInput placeholder="Meta Description" rows="8"></textarea>
+                        <textarea matInput placeholder="Meta Description" rows="8" formControlName='metadescription' (keypress)="validation.noSpaceAllow($event)"></textarea>
+                        <mat-error *ngIf="f.metadescription.errors" class="mt-2">
+                            <span class="text-danger" *ngIf="f.metadescription.errors?.required">
+                                Meta Description is Required.</span>
+                            <span class="text-danger" *ngIf="f.metadescription.errors?.pattern">
+                                Please Enter Valid Meta Description</span>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
-                    <button type="button" mat-stroked-button class="btn-main-outline">Cancel</button>
-                    <button type="submit" mat-stroked-button class="btn-main">Submit</button>
+                    <button type="button" mat-stroked-button class="btn-main-outline" (click)="clearForm()">Clear</button>
+                    <button type="submit" mat-stroked-button class="btn-main" (click)="submitForm()">{{btnText}}</button>
                 </div>
             </div>
+        </form>
         </div>
     </div>
     <div class="col-sm-8">
@@ -43,43 +66,54 @@
             <div class="card-header pb-0">Tags List</div>
             <div class="card-body">
                 <table mat-table [dataSource]="dataSource" class="dashboard-table">
-                    <ng-container matColumnDef="position">
+                    <ng-container matColumnDef="srNo">
                       <th mat-header-cell *matHeaderCellDef> Sr. No. </th>
-                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                      <td mat-cell *matCellDef="let element; let i = index" class="srno"> {{((currentPage + 1) * 10 + i + 1)-20}}</td>
                     </ng-container>
-                    <ng-container matColumnDef="name">
+                    <ng-container matColumnDef="pageName">
                       <th mat-header-cell *matHeaderCellDef> Page Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.pageName}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="weight">
+                    <ng-container matColumnDef="metaTitle">
                       <th mat-header-cell *matHeaderCellDef> Meta Title </th>
-                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.metaTitle}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="symbol">
+                    <ng-container matColumnDef="metadescription">
                       <th mat-header-cell *matHeaderCellDef> Meta Description </th>
-                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                      <td mat-cell *matCellDef="let element"> {{element.metadescription}} </td>
                     </ng-container>
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
                             <div class="d-flex align-items-center">
-                                <button type="button" mat-icon-button class="text-warning" matTooltip="Edit">
+                                <button type="button" mat-icon-button class="text-warning" matTooltip="Edit" (click)="editMetaTagFormData(element)">
                                     <span class="material-symbols-outlined">
                                         edit
                                     </span>
                                 </button>
-                                <button type="button" mat-icon-button class="text-danger" matTooltip="Delete">
+                                <button type="button" mat-icon-button class="text-danger" matTooltip="Delete" (click)="onClickDelete(element?.id)">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
                                 </button>
                             </div>
-
                         </td>
                     </ng-container>
+                    <tr class="mat-row p-2 w-100" *matNoDataRow col>
+                        <td class="alert alert-danger text-center m-2 mt-2" colspan="12">No Data Found !</td>
+                    </tr>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
+                  <!-- <ng-container *ngIf="totalCount > 10">
+                    <mat-paginator [length]="totalCount" [pageSize]="10" [pageIndex]="currentPage" showFirstLastButtons
+                        (page)="onClickPaginatior($event)" aria-label="Select page of GitHub search results">
+                    </mat-paginator>
+                </ng-container> -->
+                <ng-container *ngIf="totalCount>10">
+                    <mat-paginator [pageSizeOptions]="[10]" [length]="totalCount" showFirstLastButtons (page)="onClickPaginatior($event)">
+                    </mat-paginator>
+                </ng-container>
             </div>
         </div>
     </div>
